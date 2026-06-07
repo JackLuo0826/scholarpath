@@ -1,8 +1,9 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 import type { User, ChatMessage } from './types'
 import { MOCK_MESSAGES } from './mockData'
 import type { GoalPlan } from './pages/GoalWizard'
 import type { UniversityPath } from './pages/UniversityPathPlanner'
+import { supabase, isSupabaseConfigured } from './lib/supabase'
 
 interface AppState {
   user: User | null
@@ -11,7 +12,10 @@ interface AppState {
   model: string
   goalPlan: GoalPlan | null
   universityPath: UniversityPath | null
+  childId: string | null          // Supabase child row id
+  isLoadingSession: boolean
   setUser: (u: User | null) => void
+  logout: () => Promise<void>
   addMessage: (m: ChatMessage) => void
   setApiKey: (key: string) => void
   setModel: (model: string) => void
@@ -21,44 +25,193 @@ interface AppState {
 
 const AppContext = createContext<AppState | null>(null)
 
+function ls<T>(key: string, fallback: T): T {
+  try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : fallback } catch { return fallback }
+}
+function lsSet(key: string, value: unknown) {
+  try { if (value == null) localStorage.removeItem(key); else localStorage.setItem(key, JSON.stringify(value)) } catch {}
+}
+
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [messages, setMessages] = useState<ChatMessage[]>(MOCK_MESSAGES)
+  const [user, setUserState] = useState<User | null>(() => ls('sp_user', null))
+  const [messages, setMessages] = useState<ChatMessage[]>(() => ls('sp_messages', MOCK_MESSAGES))
   const [apiKey, setApiKeyState] = useState<string>(() => localStorage.getItem('sp_api_key') || '')
   const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-opus-4-6')
-  const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => {
-    try { const s = localStorage.getItem('sp_goal_plan'); return s ? JSON.parse(s) : null } catch { return null }
-  })
-  const [universityPath, setUniversityPathState] = useState<UniversityPath | null>(() => {
-    try { const s = localStorage.getItem('sp_university_path'); return s ? JSON.parse(s) : null } catch { return null }
-  })
+  const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => ls('sp_goal_plan', null))
+  const [universityPath, setUniversityPathState] = useState<UniversityPath | null>(() => ls('sp_university_path', null))
+  const [childId, setChildId] = useState<string | null>(() => localStorage.getItem('sp_child_id'))
+  const [isLoadingSession, setIsLoadingSession] = useState(isSupabaseConfigured)
 
-  const addMessage = (m: ChatMessage) => setMessages(prev => [...prev, m])
+  // ── Supabase session restore ─────────────────────────────────────────────
+  useEffect(() => {
+    if (!isSupabaseConfigured) return
 
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session?.user) {
+        await loadUserFromSession(session.user.id, session.user.email ?? '')
+      }
+      setIsLoadingSession(false)
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        await loadUserFromSession(session.user.id, session.user.email ?? '')
+      } else {
+        setUserState(null)
+        lsSet('sp_user', null)
+      }
+    })
+    return () => subscription.unsubscribe()
+  }, [])
+
+  const loadUserFromSession = async (authId: string, email: string) => {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', authId)
+      .single()
+
+    if (!profile) return
+
+    const u: User = { id: authId, name: profile.name, email, role: profile.role }
+    setUserState(u)
+    lsSet('sp_user', u)
+
+    if (profile.role === 'parent') {
+      // Load first child
+      const { data: children } = await supabase
+        .from('children')
+        .select('id')
+        .eq('parent_id', authId)
+        .limit(1)
+
+      const cid = children?.[0]?.id ?? null
+      setChildId(cid)
+      if (cid) localStorage.setItem('sp_child_id', cid)
+
+      if (cid) {
+        // Load chat messages
+        const { data: msgs } = await supabase
+          .from('chat_messages')
+          .select('*')
+          .eq('child_id', cid)
+          .order('created_at', { ascending: true })
+          .limit(200)
+
+        if (msgs && msgs.length > 0) {
+          setMessages(msgs.map(m => ({
+            id: m.id,
+            sender: m.sender,
+            content: m.content,
+            subject: m.subject ?? undefined,
+            timestamp: m.created_at,
+          })))
+        }
+
+        // Load goal plan
+        const { data: gp } = await supabase
+          .from('goal_plans')
+          .select('plan_json')
+          .eq('child_id', cid)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single()
+        if (gp) { setGoalPlanState(gp.plan_json); lsSet('sp_goal_plan', gp.plan_json) }
+
+        // Load university path
+        const { data: up } = await supabase
+          .from('university_paths')
+          .select('path_json')
+          .eq('child_id', cid)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single()
+        if (up) { setUniversityPathState(up.path_json); lsSet('sp_university_path', up.path_json) }
+
+        // Load model setting
+        const { data: settings } = await supabase
+          .from('settings')
+          .select('claude_model')
+          .eq('parent_id', authId)
+          .single()
+        if (settings?.claude_model) {
+          setModelState(settings.claude_model)
+          localStorage.setItem('sp_model', settings.claude_model)
+        }
+      }
+    }
+  }
+
+  // ── Auth ─────────────────────────────────────────────────────────────────
+  const setUser = (u: User | null) => {
+    setUserState(u)
+    lsSet('sp_user', u)
+  }
+
+  const logout = async () => {
+    if (isSupabaseConfigured) await supabase.auth.signOut()
+    setUserState(null)
+    lsSet('sp_user', null)
+    setMessages(MOCK_MESSAGES)
+    lsSet('sp_messages', null)
+  }
+
+  // ── Messages ─────────────────────────────────────────────────────────────
+  const addMessage = async (m: ChatMessage) => {
+    setMessages(prev => {
+      const next = [...prev, m]
+      lsSet('sp_messages', next)
+      return next
+    })
+
+    if (isSupabaseConfigured && childId && user?.role === 'parent') {
+      await supabase.from('chat_messages').insert({
+        id: m.id,
+        child_id: childId,
+        sender: m.sender,
+        content: m.content,
+        subject: m.subject ?? null,
+        created_at: m.timestamp,
+      })
+    }
+  }
+
+  // ── Settings ─────────────────────────────────────────────────────────────
   const setApiKey = (key: string) => {
     localStorage.setItem('sp_api_key', key)
     setApiKeyState(key)
   }
 
-  const setModel = (m: string) => {
+  const setModel = async (m: string) => {
     localStorage.setItem('sp_model', m)
     setModelState(m)
+    if (isSupabaseConfigured && user) {
+      await supabase.from('settings').upsert({ parent_id: user.id, claude_model: m, updated_at: new Date().toISOString() })
+    }
   }
 
-  const setGoalPlan = (plan: GoalPlan | null) => {
-    if (plan) localStorage.setItem('sp_goal_plan', JSON.stringify(plan))
-    else localStorage.removeItem('sp_goal_plan')
+  // ── Plans ─────────────────────────────────────────────────────────────────
+  const setGoalPlan = async (plan: GoalPlan | null) => {
+    lsSet('sp_goal_plan', plan)
     setGoalPlanState(plan)
+    if (isSupabaseConfigured && childId && plan) {
+      await supabase.from('goal_plans').insert({ child_id: childId, plan_json: plan })
+    }
   }
 
-  const setUniversityPath = (path: UniversityPath | null) => {
-    if (path) localStorage.setItem('sp_university_path', JSON.stringify(path))
-    else localStorage.removeItem('sp_university_path')
+  const setUniversityPath = async (path: UniversityPath | null) => {
+    lsSet('sp_university_path', path)
     setUniversityPathState(path)
+    if (isSupabaseConfigured && childId && path) {
+      await supabase.from('university_paths').insert({ child_id: childId, path_json: path })
+    }
   }
 
   return (
-    <AppContext.Provider value={{ user, messages, apiKey, model, goalPlan, universityPath, setUser, addMessage, setApiKey, setModel, setGoalPlan, setUniversityPath }}>
+    <AppContext.Provider value={{
+      user, messages, apiKey, model, goalPlan, universityPath, childId, isLoadingSession,
+      setUser, logout, addMessage, setApiKey, setModel, setGoalPlan, setUniversityPath,
+    }}>
       {children}
     </AppContext.Provider>
   )
