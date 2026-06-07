@@ -60,7 +60,18 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
   )
 }
 
-type Tab = 'today' | 'chat' | 'progress'
+type Tab = 'today' | 'chat' | 'knowledge' | 'progress'
+
+interface KnowledgeItem {
+  id: string
+  subject: string
+  topic: string
+  concept: string
+  summary: string
+  mastery: 'beginner' | 'developing' | 'confident'
+  evidence: string
+  suggestedExercise: string
+}
 
 export default function StudentApp() {
   const { messages, addMessage, setUser, apiKey, model } = useApp()
