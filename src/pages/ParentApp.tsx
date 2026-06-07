@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   GraduationCap, BarChart2, MessageSquare, Map, Settings,
-  LogOut, Flame, Clock, TrendingUp, CheckCircle, Circle,
-  AlertCircle, ChevronDown, Shield, Bell, Lock, Eye, Brain, Key, Target
+  LogOut, Flame, Clock, TrendingUp, CheckCircle,
+  ChevronDown, Shield, Bell, Lock, Eye, Brain, Key, Target
 } from 'lucide-react'
 import { useApp } from '../AppContext'
 import GoalWizard from './GoalWizard'
