@@ -9,14 +9,20 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false)
   const [showStudentPass, setShowStudentPass] = useState(false)
   const [tab, setTab] = useState<'parent' | 'student'>('parent')
+  const [parentEmail, setParentEmail] = useState('sarah@example.com')
+  const [parentPassword, setParentPassword] = useState('password')
   const [studentEmail, setStudentEmail] = useState('emma@example.com')
   const [studentPassword, setStudentPassword] = useState('student123')
+  const [error, setError] = useState('')
 
   const loginAs = (role: 'parent' | 'student') => {
+    setError('')
     if (role === 'parent') {
-      setUser({ id: 'parent1', name: 'Sarah Chen', email: 'sarah@example.com', role: 'parent' })
+      if (!parentEmail.trim() || !parentPassword.trim()) { setError('Please enter email and password.'); return }
+      setUser({ id: 'parent1', name: 'Sarah Chen', email: parentEmail, role: 'parent' })
       navigate('/parent')
     } else {
+      if (!studentEmail.trim() || !studentPassword.trim()) { setError('Please enter email and password.'); return }
       setUser({ id: 'child1', name: 'Emma', email: studentEmail, role: 'student' })
       navigate('/student')
     }
