@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   BookOpen, Brain, Send, CheckCircle2, Circle, Flame, Trophy,
-  GraduationCap, LogOut, ChevronRight, Loader2, Lock
+  GraduationCap, LogOut, ChevronRight, Loader2, Lock, BookMarked,
+  Sparkles, ChevronDown, ChevronUp, AlertCircle
 } from 'lucide-react'
 import { useApp } from '../AppContext'
 import { MOCK_CHILD, MOCK_DAILY_TASKS } from '../mockData'
