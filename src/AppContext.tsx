@@ -6,9 +6,11 @@ interface AppState {
   user: User | null
   messages: ChatMessage[]
   apiKey: string
+  model: string
   setUser: (u: User | null) => void
   addMessage: (m: ChatMessage) => void
   setApiKey: (key: string) => void
+  setModel: (model: string) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
