@@ -202,6 +202,85 @@ export default function StudentApp() {
   const toggleTask = (id: string) =>
     setTasks(prev => prev.map(t => t.id === id ? { ...t, completed: !t.completed } : t))
 
+  const loadKnowledge = async () => {
+    if (!apiKey) { setKnowledgeError('No API key — ask a parent to add one in Settings.'); return }
+    setKnowledgeLoading(true)
+    setKnowledgeError('')
+    try {
+      const res = await fetch('/api/knowledge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages, apiKey, model }),
+      })
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+      setKnowledgeItems(data.topics || [])
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Unknown error')
+      setKnowledgeError(error.message)
+    } finally {
+      setKnowledgeLoading(false)
+    }
+  }
+
+  const generateExercise = async (item: KnowledgeItem) => {
+    if (!apiKey) return
+    setExerciseLoading(item.id)
+    setExerciseContent(prev => ({ ...prev, [item.id]: '' }))
+    try {
+      const res = await fetch('/api/exercise', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: item.topic,
+          concept: item.concept,
+          mastery: item.mastery,
+          apiKey,
+          model,
+          studentGoal: MOCK_CHILD.goal,
+        }),
+      })
+      if (!res.ok) throw new Error('Exercise generation failed')
+      const reader = res.body!.getReader()
+      const decoder = new TextDecoder()
+      let full = ''
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        const lines = decoder.decode(value).split('\n')
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6)
+            if (data === '[DONE]') break
+            try {
+              const parsed = JSON.parse(data)
+              if (parsed.text) { full += parsed.text; setExerciseContent(prev => ({ ...prev, [item.id]: full })) }
+            } catch {}
+          }
+        }
+      }
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Unknown error')
+      setExerciseContent(prev => ({ ...prev, [item.id]: `⚠️ ${error.message}` }))
+    } finally {
+      setExerciseLoading(null)
+    }
+  }
+
+  const practiceInChat = (item: KnowledgeItem) => {
+    const exercise = exerciseContent[item.id]
+    if (!exercise) return
+    setActiveTab('chat')
+    const msg: import('../types').ChatMessage = {
+      id: Date.now().toString(),
+      sender: 'ai',
+      content: exercise,
+      timestamp: new Date().toISOString(),
+      subject: item.subject,
+    }
+    addMessage(msg)
+  }
+
   const logout = () => { setUser(null); navigate('/') }
 
   return (
