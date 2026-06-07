@@ -19,6 +19,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>(MOCK_MESSAGES)
   const [apiKey, setApiKeyState] = useState<string>(() => localStorage.getItem('sp_api_key') || '')
+  const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-opus-4-6')
 
   const addMessage = (m: ChatMessage) => setMessages(prev => [...prev, m])
 
@@ -27,8 +28,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setApiKeyState(key)
   }
 
+  const setModel = (m: string) => {
+    localStorage.setItem('sp_model', m)
+    setModelState(m)
+  }
+
   return (
-    <AppContext.Provider value={{ user, messages, apiKey, setUser, addMessage, setApiKey }}>
+    <AppContext.Provider value={{ user, messages, apiKey, model, setUser, addMessage, setApiKey, setModel }}>
       {children}
     </AppContext.Provider>
   )
