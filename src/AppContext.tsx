@@ -53,8 +53,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setGoalPlanState(plan)
   }
 
+  const setUniversityPath = (path: UniversityPath | null) => {
+    if (path) localStorage.setItem('sp_university_path', JSON.stringify(path))
+    else localStorage.removeItem('sp_university_path')
+    setUniversityPathState(path)
+  }
+
   return (
-    <AppContext.Provider value={{ user, messages, apiKey, model, goalPlan, setUser, addMessage, setApiKey, setModel, setGoalPlan }}>
+    <AppContext.Provider value={{ user, messages, apiKey, model, goalPlan, universityPath, setUser, addMessage, setApiKey, setModel, setGoalPlan, setUniversityPath }}>
       {children}
     </AppContext.Provider>
   )
