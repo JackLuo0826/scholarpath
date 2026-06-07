@@ -116,6 +116,7 @@ export default function StudentApp() {
         body: JSON.stringify({
           messages: allMessages,
           apiKey,
+          model,
           subject: 'Mathematics',
           skill: 'Quadratic Equations',
           goal: MOCK_CHILD.goal,
