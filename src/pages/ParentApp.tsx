@@ -27,7 +27,8 @@ const STATUS_DOT: Record<Milestone['status'], string> = {
 }
 
 export default function ParentApp() {
-  const { messages, setUser, apiKey, setApiKey, model, setModel } = useApp()
+  const { messages, setUser, apiKey, setApiKey, model, setModel, goalPlan, setGoalPlan } = useApp()
+  const [showGoalWizard, setShowGoalWizard] = useState(false)
   const [keyInput, setKeyInput] = useState(apiKey)
   const [keyVisible, setKeyVisible] = useState(false)
   const [keySaved, setKeySaved] = useState(false)
