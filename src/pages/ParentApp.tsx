@@ -351,6 +351,8 @@ export default function ParentApp() {
                   )
                 })}
               </div>
+                </>
+              )}
             </div>
           )}
 
