@@ -22,21 +22,8 @@ function Toggle({ on }: { on: boolean }) {
   )
 }
 import { MOCK_CHILD } from '../mockData'
-import type { Milestone } from '../types'
 
 type Tab = 'overview' | 'roadmap' | 'chat' | 'settings'
-
-const CATEGORY_COLORS: Record<Milestone['category'], string> = {
-  academic:       'bg-blue-100 text-blue-700 border-blue-200',
-  test:           'bg-red-100 text-red-700 border-red-200',
-  extracurricular:'bg-green-100 text-green-700 border-green-200',
-  application:    'bg-purple-100 text-purple-700 border-purple-200',
-}
-const STATUS_DOT: Record<Milestone['status'], string> = {
-  completed:   'bg-green-500',
-  in_progress: 'bg-brand-500 animate-pulse',
-  upcoming:    'bg-gray-300',
-}
 
 export default function ParentApp() {
   const { messages, setUser, apiKey, setApiKey, model, setModel, goalPlan, setGoalPlan, universityPath, setUniversityPath } = useApp()
