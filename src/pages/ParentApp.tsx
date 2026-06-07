@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   GraduationCap, BarChart2, MessageSquare, Map, Settings,
   LogOut, Flame, Clock, TrendingUp, CheckCircle, Circle,
-  AlertCircle, ChevronDown, Shield, Bell, Lock, Eye
+  AlertCircle, ChevronDown, Shield, Bell, Lock, Eye, Brain
 } from 'lucide-react'
 import { useApp } from '../AppContext'
 import { MOCK_CHILD } from '../mockData'
