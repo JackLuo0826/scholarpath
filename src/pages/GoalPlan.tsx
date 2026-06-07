@@ -78,8 +78,7 @@ export default function GoalPlan({ plan, onReset }: Props) {
         <div className="divide-y divide-gray-50">
           {plan.roadmap.map((yr, yi) => {
             const isExpanded = expandedYear === yr.year
-            const progressPct = ((yr.year - plan.currentYear + 1) / plan.yearsToGoal) * 100
-            return (
+return (
               <div key={yr.year}>
                 <button
                   onClick={() => setExpandedYear(isExpanded ? null : yr.year)}
