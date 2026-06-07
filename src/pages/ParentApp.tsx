@@ -249,41 +249,71 @@ export default function ParentApp() {
 
           {/* ROADMAP */}
           {activeTab === 'roadmap' && (
-            <div className="space-y-5">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900">Academic Roadmap</h2>
-                  <p className="text-sm text-gray-500 mt-0.5">
-                    {goalPlan ? goalPlan.goalStatement : `Goal: ${MOCK_CHILD.goal} · Target: Class of ${MOCK_CHILD.targetYear}`}
-                  </p>
-                </div>
+            <div className="space-y-4">
+              {/* Tab switcher */}
+              <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
                 <button
-                  onClick={() => setShowGoalWizard(true)}
-                  className="flex items-center gap-1.5 bg-brand-600 text-white text-xs font-semibold px-3 py-2 rounded-xl hover:bg-brand-700 transition-colors flex-shrink-0 shadow"
+                  onClick={() => setRoadmapView('university')}
+                  className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${roadmapView === 'university' ? 'bg-white text-brand-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                 >
-                  <Target className="w-3.5 h-3.5" />
-                  {goalPlan ? 'Update Goal' : 'Set Goal with AI'}
+                  🎓 University Path
+                </button>
+                <button
+                  onClick={() => setRoadmapView('goal')}
+                  className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${roadmapView === 'goal' ? 'bg-white text-brand-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                  🎯 Goal Plan
                 </button>
               </div>
 
-              {/* AI-generated plan if exists */}
-              {goalPlan && (
-                <GoalPlan plan={goalPlan} onReset={() => setGoalPlan(null)} />
+              {/* University Path Planner */}
+              {roadmapView === 'university' && (
+                <UniversityPathPlanner
+                  apiKey={apiKey}
+                  model={model}
+                  path={universityPath}
+                  onPathGenerated={setUniversityPath}
+                  onPathCleared={() => setUniversityPath(null)}
+                />
               )}
 
-              {/* Default mock roadmap if no AI plan yet */}
-              {!goalPlan && (
-                <>
-                  {/* No plan prompt */}
-                  <div className="bg-gradient-to-r from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-5 flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center flex-shrink-0">
-                      <Target className="w-5 h-5 text-brand-600" />
+              {/* Goal Plan (WOOP wizard) */}
+              {roadmapView === 'goal' && (
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h2 className="text-lg font-bold text-gray-900">Personal Goal Plan</h2>
+                      <p className="text-xs text-gray-500 mt-0.5">Science-based goal setting using WOOP, SDT & implementation intentions</p>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-semibold text-gray-900">Generate a personalised AI roadmap</p>
-                      <p className="text-xs text-gray-600 mt-1 leading-relaxed">Tap "Set Goal with AI" to start a 7-question session. Claude will apply WOOP, SMART goal theory, and self-determination science to build a year-by-year plan with milestones, obstacle strategies, and weekly habits.</p>
-                    </div>
+                    <button
+                      onClick={() => setShowGoalWizard(true)}
+                      className="flex items-center gap-1.5 bg-brand-600 text-white text-xs font-semibold px-3 py-2 rounded-xl hover:bg-brand-700 transition-colors flex-shrink-0 shadow"
+                    >
+                      <Target className="w-3.5 h-3.5" />
+                      {goalPlan ? 'Update' : 'Start Session'}
+                    </button>
                   </div>
+                  {goalPlan
+                    ? <GoalPlan plan={goalPlan} onReset={() => setGoalPlan(null)} />
+                    : (
+                      <div className="bg-gradient-to-r from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-5 flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center flex-shrink-0">
+                          <Target className="w-5 h-5 text-brand-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900">Set a personal goal with AI coaching</p>
+                          <p className="text-xs text-gray-600 mt-1 leading-relaxed">A 7-question session that builds a WOOP-based roadmap with obstacle strategies and weekly habits tailored to your child's motivation and challenges.</p>
+                        </div>
+                      </div>
+                    )
+                  }
+                </div>
+              )}
+
+              {/* Keep legacy milestones hidden under goal plan for now */}
+              {roadmapView === 'goal' && !goalPlan && (
+                <>
+                  {/* placeholder */}
 
               <div className="bg-gradient-to-r from-brand-600 to-purple-600 rounded-2xl p-5 text-white">
                 <div className="flex items-center justify-between">
