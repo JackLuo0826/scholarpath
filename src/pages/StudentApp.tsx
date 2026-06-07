@@ -221,7 +221,7 @@ export default function StudentApp() {
   }
 
 
-  const logout = () => { setUser(null); navigate('/') }
+  const logout = async () => { await logoutFn(); navigate('/') }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
