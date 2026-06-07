@@ -354,3 +354,126 @@ export default function StudentApp() {
             </div>
 
             
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto scrollbar-hide pb-2">
+              {messages.map(m => <ChatBubble key={m.id} msg={m} />)}
+              {isThinking && !streamingContent && <TypingIndicator />}
+              {streamingContent && (
+                <ChatBubble msg={{ id: 'streaming', sender: 'ai', content: streamingContent, timestamp: new Date().toISOString() }} />
+              )}
+              <div ref={bottomRef} />
+            </div>
+
+            {/* Input */}
+            <div className="bg-white rounded-2xl border border-gray-200 flex items-end gap-2 p-2 mt-2">
+              <textarea
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() } }}
+                placeholder="Ask your tutor anything about today's topic…"
+                rows={1}
+                className="flex-1 resize-none text-sm outline-none px-2 py-1.5 text-gray-800 placeholder:text-gray-400 max-h-28"
+              />
+              <button
+                onClick={sendMessage}
+                disabled={!input.trim() || isThinking}
+                className="w-8 h-8 rounded-xl bg-brand-600 flex items-center justify-center text-white disabled:opacity-40 hover:bg-brand-700 transition-colors flex-shrink-0"
+              >
+                {isThinking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* KNOWLEDGE BASE — infinite canvas */}
+        {activeTab === 'knowledge' && (
+          <KnowledgeCanvas
+            items={knowledgeItems}
+            loading={knowledgeLoading}
+            error={knowledgeError}
+            apiKey={apiKey}
+            model={model}
+            studentGoal={MOCK_CHILD.goal}
+            onAnalyse={loadKnowledge}
+            onPracticeInChat={(item, exercise) => {
+              setActiveTab('chat')
+              const msg: import('../types').ChatMessage = {
+                id: Date.now().toString(),
+                sender: 'ai',
+                content: exercise,
+                timestamp: new Date().toISOString(),
+                subject: item.subject,
+              }
+              addMessage(msg)
+            }}
+          />
+        )}
+
+        {/* PROGRESS */}
+        {activeTab === 'progress' && (
+          <div className="space-y-5">
+            {/* Weekly chart */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <h3 className="font-semibold text-gray-900 mb-4">This Week</h3>
+              <div className="flex items-end gap-2 h-24">
+                {MOCK_CHILD.weeklyStats.map(d => {
+                  const maxMin = Math.max(...MOCK_CHILD.weeklyStats.map(x => x.minutes), 1)
+                  const h = d.minutes > 0 ? Math.max((d.minutes / maxMin) * 80, 8) : 4
+                  const today = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date().getDay()]
+                  return (
+                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
+                      <div
+                        className={`w-full rounded-lg transition-all ${
+                          d.day === today ? 'bg-brand-500' : d.minutes > 0 ? 'bg-brand-200' : 'bg-gray-100'
+                        }`}
+                        style={{ height: `${h}px` }}
+                      />
+                      <span className={`text-[10px] font-medium ${d.day === today ? 'text-brand-600' : 'text-gray-400'}`}>{d.day}</span>
+                    </div>
+                  )
+                })}
+              </div>
+              <p className="text-xs text-gray-500 mt-3">
+                {MOCK_CHILD.totalMinutesThisWeek} min studied this week
+                <span className="ml-2 text-green-600 font-semibold">+18% vs last week 🎉</span>
+              </p>
+            </div>
+
+            {/* Subject levels */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <h3 className="font-semibold text-gray-900 mb-4">Subject Levels</h3>
+              <div className="space-y-4">
+                {MOCK_CHILD.subjects.map(s => (
+                  <div key={s.id}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
+                        {s.icon} {s.name}
+                      </span>
+                      <span className="text-xs font-bold text-gray-500">Level {s.currentLevel}/10</span>
+                    </div>
+                    <div className="w-full bg-gray-100 rounded-full h-2.5">
+                      <div
+                        className="h-2.5 rounded-full transition-all"
+                        style={{ width: `${s.progressPercent}%`, backgroundColor: s.color }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Goal reminder */}
+            <div className="bg-gradient-to-r from-brand-600 to-purple-600 rounded-2xl p-5 text-white">
+              <p className="text-brand-200 text-xs font-semibold uppercase tracking-wide mb-1">Your Goal</p>
+              <h3 className="font-bold text-xl mb-1">{MOCK_CHILD.goal}</h3>
+              <p className="text-brand-100 text-sm">
+                Class of {MOCK_CHILD.targetYear} ·{' '}
+                {MOCK_CHILD.targetYear - new Date().getFullYear()} years to go · Keep it up! 🚀
+              </p>
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
+  )
+}
