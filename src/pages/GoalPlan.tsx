@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Target, ChevronDown, ChevronUp, BookOpen, Zap, Shield, Calendar, Heart, BarChart2, RefreshCw } from 'lucide-react'
-// Note: ChevronRight removed as unused
+
 import type { GoalPlan } from './GoalWizard'
 
 interface Props {
