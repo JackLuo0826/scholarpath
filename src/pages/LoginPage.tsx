@@ -60,13 +60,17 @@ export default function LoginPage() {
           </div>
 
           <div className="p-6">
+            {error && (
+              <div className="mb-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-xl px-3.5 py-2.5">{error}</div>
+            )}
             {tab === 'parent' ? (
               <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1.5">Email</label>
                   <input
                     type="email"
-                    defaultValue="sarah@example.com"
+                    value={parentEmail}
+                    onChange={e => setParentEmail(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                     placeholder="your@email.com"
                   />
@@ -76,7 +80,8 @@ export default function LoginPage() {
                   <div className="relative">
                     <input
                       type={showPass ? 'text' : 'password'}
-                      defaultValue="password"
+                      value={parentPassword}
+                      onChange={e => setParentPassword(e.target.value)}
                       className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent pr-10"
                       placeholder="••••••••"
                     />
