@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   const loginAs = (role: 'parent' | 'student') => {
     if (role === 'parent') {
-      setUser({ id: 'parent1', name: 'Sarah Chen', email: parentEmail, role: 'parent' })
+      setUser({ id: 'parent1', name: 'Sarah Chen', email: 'sarah@example.com', role: 'parent' })
       navigate('/parent')
     } else {
       setUser({ id: 'child1', name: 'Emma', email: studentEmail, role: 'student' })
