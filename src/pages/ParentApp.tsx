@@ -26,7 +26,7 @@ import { MOCK_CHILD } from '../mockData'
 type Tab = 'overview' | 'roadmap' | 'chat' | 'settings'
 
 export default function ParentApp() {
-  const { messages, setUser, apiKey, setApiKey, model, setModel, goalPlan, setGoalPlan, universityPath, setUniversityPath } = useApp()
+  const { messages, setUser, logout: logoutFn, apiKey, setApiKey, model, setModel, goalPlan, setGoalPlan, universityPath, setUniversityPath } = useApp()
   const [showGoalWizard, setShowGoalWizard] = useState(false)
   const [roadmapView, setRoadmapView] = useState<'university' | 'goal'>('university')
   const [keyInput, setKeyInput] = useState(apiKey)
