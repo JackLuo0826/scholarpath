@@ -383,6 +383,18 @@ export default function ParentApp() {
                     ScholarPath uses your own Claude API key to power the AI tutor. Your key is stored locally and never shared.{' '}
                     <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">Get a key →</a>
                   </p>
+                  <div>
+                    <label className="text-xs font-medium text-gray-700 block mb-1.5">Model</label>
+                    <select
+                      value={model}
+                      onChange={e => setModel(e.target.value)}
+                      className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                    >
+                      <option value="claude-opus-4-6">Claude Opus 4 — Most capable (default)</option>
+                      <option value="claude-sonnet-4-6">Claude Sonnet 4 — Balanced</option>
+                      <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5 — Fastest</option>
+                    </select>
+                  </div>
                   <div className="flex gap-2">
                     <div className="relative flex-1">
                       <input
