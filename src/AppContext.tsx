@@ -30,6 +30,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem('sp_goal_plan')
     return stored ? JSON.parse(stored) : null
   })
+  const [universityPath, setUniversityPathState] = useState<UniversityPath | null>(() => {
+    const stored = localStorage.getItem('sp_university_path')
+    return stored ? JSON.parse(stored) : null
+  })
 
   const addMessage = (m: ChatMessage) => setMessages(prev => [...prev, m])
 
