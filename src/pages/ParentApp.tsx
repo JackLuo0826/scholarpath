@@ -9,6 +9,7 @@ import { useApp } from '../AppContext'
 import GoalWizard from './GoalWizard'
 import GoalPlan from './GoalPlan'
 import type { GoalPlan as GoalPlanType } from './GoalWizard'
+import UniversityPathPlanner from './UniversityPathPlanner'
 import { MOCK_CHILD } from '../mockData'
 import type { Milestone } from '../types'
 
