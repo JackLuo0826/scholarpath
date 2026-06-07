@@ -318,6 +318,9 @@ export default function StudentApp() {
             <div className="flex-1 overflow-y-auto scrollbar-hide pb-2">
               {messages.map(m => <ChatBubble key={m.id} msg={m} />)}
               {isThinking && <TypingIndicator />}
+              {streamingContent && (
+                <ChatBubble msg={{ id: 'streaming', sender: 'ai', content: streamingContent, timestamp: new Date().toISOString() }} />
+              )}
               <div ref={bottomRef} />
             </div>
 
