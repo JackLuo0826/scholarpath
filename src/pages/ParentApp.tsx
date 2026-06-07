@@ -248,12 +248,40 @@ export default function ParentApp() {
           {/* ROADMAP */}
           {activeTab === 'roadmap' && (
             <div className="space-y-5">
-              <div>
-                <h2 className="text-xl font-bold text-gray-900">Emma's Academic Roadmap</h2>
-                <p className="text-sm text-gray-500 mt-0.5">
-                  Goal: <strong>{MOCK_CHILD.goal}</strong> · Target: Class of {MOCK_CHILD.targetYear}
-                </p>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">Academic Roadmap</h2>
+                  <p className="text-sm text-gray-500 mt-0.5">
+                    {goalPlan ? goalPlan.goalStatement : `Goal: ${MOCK_CHILD.goal} · Target: Class of ${MOCK_CHILD.targetYear}`}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowGoalWizard(true)}
+                  className="flex items-center gap-1.5 bg-brand-600 text-white text-xs font-semibold px-3 py-2 rounded-xl hover:bg-brand-700 transition-colors flex-shrink-0 shadow"
+                >
+                  <Target className="w-3.5 h-3.5" />
+                  {goalPlan ? 'Update Goal' : 'Set Goal with AI'}
+                </button>
               </div>
+
+              {/* AI-generated plan if exists */}
+              {goalPlan && (
+                <GoalPlan plan={goalPlan} onReset={() => setGoalPlan(null)} />
+              )}
+
+              {/* Default mock roadmap if no AI plan yet */}
+              {!goalPlan && (
+                <>
+                  {/* No plan prompt */}
+                  <div className="bg-gradient-to-r from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-5 flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center flex-shrink-0">
+                      <Target className="w-5 h-5 text-brand-600" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-gray-900">Generate a personalised AI roadmap</p>
+                      <p className="text-xs text-gray-600 mt-1 leading-relaxed">Tap "Set Goal with AI" to start a 7-question session. Claude will apply WOOP, SMART goal theory, and self-determination science to build a year-by-year plan with milestones, obstacle strategies, and weekly habits.</p>
+                    </div>
+                  </div>
 
               <div className="bg-gradient-to-r from-brand-600 to-purple-600 rounded-2xl p-5 text-white">
                 <div className="flex items-center justify-between">
