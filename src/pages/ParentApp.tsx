@@ -369,6 +369,51 @@ export default function ParentApp() {
                 <p className="text-sm text-gray-500 mt-0.5">Manage Emma's learning environment and safety settings.</p>
               </div>
 
+              {/* Claude API Key */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
+                  <Key className="w-4 h-4 text-gray-400" />
+                  <h3 className="font-semibold text-gray-900 text-sm">Claude API Key</h3>
+                  {apiKey && (
+                    <span className="ml-auto text-xs text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded-full">✓ Connected</span>
+                  )}
+                </div>
+                <div className="px-5 py-4 space-y-3">
+                  <p className="text-xs text-gray-500">
+                    ScholarPath uses your own Claude API key to power the AI tutor. Your key is stored locally and never shared.{' '}
+                    <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">Get a key →</a>
+                  </p>
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <input
+                        type={keyVisible ? 'text' : 'password'}
+                        value={keyInput}
+                        onChange={e => setKeyInput(e.target.value)}
+                        placeholder="sk-ant-..."
+                        className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent pr-10 font-mono"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setKeyVisible(v => !v)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                      >
+                        {keyVisible ? <Eye className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    <button
+                      onClick={saveApiKey}
+                      className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                        keySaved
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-brand-600 text-white hover:bg-brand-700'
+                      }`}
+                    >
+                      {keySaved ? '✓ Saved' : 'Save'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               {[
                 {
                   section: 'Study Time',
