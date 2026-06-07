@@ -62,17 +62,18 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
 type Tab = 'today' | 'chat' | 'progress'
 
 export default function StudentApp() {
-  const { messages, addMessage, setUser } = useApp()
+  const { messages, addMessage, setUser, apiKey } = useApp()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('today')
   const [input, setInput] = useState('')
   const [isThinking, setIsThinking] = useState(false)
   const [tasks, setTasks] = useState(MOCK_DAILY_TASKS)
+  const [streamingContent, setStreamingContent] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, isThinking])
+  }, [messages, isThinking, streamingContent])
 
   const completedCount = tasks.filter(t => t.completed).length
   const totalMin = tasks.reduce((s, t) => s + t.durationMin, 0)
@@ -92,26 +93,91 @@ export default function StudentApp() {
     }
     addMessage(userMsg)
     setIsThinking(true)
+    setStreamingContent('')
 
-    // Simulate AI response (replace with real Claude API call)
-    await new Promise(r => setTimeout(r, 1500 + Math.random() * 1000))
-
-    const RESPONSES = [
-      "Good thinking! Before I give you the answer, let's work through it step by step. What's the first thing you notice about this problem?",
-      "You're on the right track! Can you explain your reasoning? Understanding *why* is more important than the answer itself.",
-      "Interesting approach! Let me ask you this — what would happen if you tried factoring first? Give it a go.",
-      "Almost there! Check your signs carefully — a small sign error is the most common mistake here. Try again?",
-      "Excellent work! You've just demonstrated mastery of this concept. Ready for a harder challenge?",
-    ]
-    const aiMsg: ChatMessage = {
-      id: (Date.now() + 1).toString(),
-      sender: 'ai',
-      content: RESPONSES[Math.floor(Math.random() * RESPONSES.length)],
-      timestamp: new Date().toISOString(),
-      subject: 'Mathematics',
+    if (!apiKey) {
+      const aiMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        content: '⚠️ No API key configured. A parent needs to add a Claude API key in Settings to enable the AI tutor.',
+        timestamp: new Date().toISOString(),
+        subject: 'Mathematics',
+      }
+      addMessage(aiMsg)
+      setIsThinking(false)
+      return
     }
-    addMessage(aiMsg)
-    setIsThinking(false)
+
+    try {
+      const allMessages = [...messages, userMsg]
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: allMessages,
+          apiKey,
+          subject: 'Mathematics',
+          skill: 'Quadratic Equations',
+          goal: MOCK_CHILD.goal,
+        }),
+      })
+
+      if (!response.ok) {
+        const err = await response.json()
+        throw new Error(err.error || 'API error')
+      }
+
+      const reader = response.body!.getReader()
+      const decoder = new TextDecoder()
+      let fullContent = ''
+
+      setIsThinking(false)
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value)
+        const lines = chunk.split('\n')
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6)
+            if (data === '[DONE]') break
+            try {
+              const parsed = JSON.parse(data)
+              if (parsed.text) {
+                fullContent += parsed.text
+                setStreamingContent(fullContent)
+              }
+              if (parsed.error) throw new Error(parsed.error)
+            } catch {}
+          }
+        }
+      }
+
+      const aiMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        content: fullContent,
+        timestamp: new Date().toISOString(),
+        subject: 'Mathematics',
+      }
+      addMessage(aiMsg)
+      setStreamingContent('')
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Unknown error')
+      const aiMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        content: `⚠️ Error: ${error.message}. Please check the API key in Settings.`,
+        timestamp: new Date().toISOString(),
+        subject: 'Mathematics',
+      }
+      addMessage(aiMsg)
+      setStreamingContent('')
+      setIsThinking(false)
+    }
   }
 
   const toggleTask = (id: string) =>
