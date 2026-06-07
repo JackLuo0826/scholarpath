@@ -8,8 +8,19 @@ import {
 import { useApp } from '../AppContext'
 import GoalWizard from './GoalWizard'
 import GoalPlan from './GoalPlan'
-import type { GoalPlan as GoalPlanType } from './GoalWizard'
 import UniversityPathPlanner from './UniversityPathPlanner'
+
+function Toggle({ on }: { on: boolean }) {
+  const [active, setActive] = useState(on)
+  return (
+    <button
+      onClick={() => setActive(v => !v)}
+      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors flex-shrink-0 ${active ? 'bg-brand-600' : 'bg-gray-200'}`}
+    >
+      <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${active ? 'translate-x-4.5' : 'translate-x-0.5'}`} />
+    </button>
+  )
+}
 import { MOCK_CHILD } from '../mockData'
 import type { Milestone } from '../types'
 
