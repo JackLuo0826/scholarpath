@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import {
   GraduationCap, BarChart2, MessageSquare, Map, Settings,
   LogOut, Flame, Clock, TrendingUp, CheckCircle, Circle,
-  AlertCircle, ChevronDown, Shield, Bell, Lock, Eye, Brain, Key
+  AlertCircle, ChevronDown, Shield, Bell, Lock, Eye, Brain, Key, Target
 } from 'lucide-react'
 import { useApp } from '../AppContext'
+import GoalWizard from './GoalWizard'
+import GoalPlan from './GoalPlan'
+import type { GoalPlan as GoalPlanType } from './GoalWizard'
 import { MOCK_CHILD } from '../mockData'
 import type { Milestone } from '../types'
 
