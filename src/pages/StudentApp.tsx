@@ -81,6 +81,12 @@ export default function StudentApp() {
   const [isThinking, setIsThinking] = useState(false)
   const [tasks, setTasks] = useState(MOCK_DAILY_TASKS)
   const [streamingContent, setStreamingContent] = useState('')
+  const [knowledgeItems, setKnowledgeItems] = useState<KnowledgeItem[]>([])
+  const [knowledgeLoading, setKnowledgeLoading] = useState(false)
+  const [knowledgeError, setKnowledgeError] = useState('')
+  const [expandedItem, setExpandedItem] = useState<string | null>(null)
+  const [exerciseContent, setExerciseContent] = useState<Record<string, string>>({})
+  const [exerciseLoading, setExerciseLoading] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
