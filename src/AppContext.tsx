@@ -23,6 +23,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<ChatMessage[]>(MOCK_MESSAGES)
   const [apiKey, setApiKeyState] = useState<string>(() => localStorage.getItem('sp_api_key') || '')
   const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-opus-4-6')
+  const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => {
+    const stored = localStorage.getItem('sp_goal_plan')
+    return stored ? JSON.parse(stored) : null
+  })
 
   const addMessage = (m: ChatMessage) => setMessages(prev => [...prev, m])
 
