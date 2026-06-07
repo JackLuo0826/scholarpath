@@ -1,0 +1,176 @@
+-- ============================================================
+-- ScholarPath — Supabase Schema
+-- Run this in the Supabase SQL Editor (Project → SQL Editor → New query)
+-- ============================================================
+
+-- Enable UUID extension
+create extension if not exists "uuid-ossp";
+
+-- ── Parent accounts (managed by Supabase Auth) ───────────────
+-- Supabase Auth handles the auth.users table automatically.
+-- We extend it with a profiles table.
+
+create table if not exists public.profiles (
+  id          uuid primary key references auth.users(id) on delete cascade,
+  name        text not null default '',
+  role        text not null check (role in ('parent', 'student')),
+  created_at  timestamptz not null default now()
+);
+
+-- ── Children (owned by a parent) ────────────────────────────
+create table if not exists public.children (
+  id            uuid primary key default uuid_generate_v4(),
+  parent_id     uuid not null references public.profiles(id) on delete cascade,
+  name          text not null,
+  age           int,
+  grade         text,
+  goal          text,
+  target_year   int,
+  avatar_color  text default '#6366f1',
+  streak        int default 0,
+  created_at    timestamptz not null default now()
+);
+
+-- ── Chat messages ────────────────────────────────────────────
+-- Immutable log — no DELETE permission for child role
+create table if not exists public.chat_messages (
+  id          uuid primary key default uuid_generate_v4(),
+  child_id    uuid not null references public.children(id) on delete cascade,
+  sender      text not null check (sender in ('student', 'ai')),
+  content     text not null,
+  subject     text,
+  created_at  timestamptz not null default now()
+);
+
+-- ── Daily tasks ──────────────────────────────────────────────
+create table if not exists public.daily_tasks (
+  id            uuid primary key default uuid_generate_v4(),
+  child_id      uuid not null references public.children(id) on delete cascade,
+  subject       text not null,
+  subject_color text default '#6366f1',
+  title         text not null,
+  duration_min  int default 20,
+  completed     boolean default false,
+  type          text check (type in ('lesson', 'exercise', 'test', 'review')),
+  scheduled_for date not null default current_date,
+  created_at    timestamptz not null default now()
+);
+
+-- ── Knowledge items ──────────────────────────────────────────
+create table if not exists public.knowledge_items (
+  id          uuid primary key default uuid_generate_v4(),
+  child_id    uuid not null references public.children(id) on delete cascade,
+  subject     text not null,
+  topic       text not null,
+  concept     text not null,
+  summary     text,
+  mastery     text check (mastery in ('beginner', 'developing', 'confident')) default 'beginner',
+  evidence    text,
+  suggested_exercise text,
+  analysed_at timestamptz not null default now()
+);
+
+-- ── Goal plan (WOOP) ────────────────────────────────────────
+create table if not exists public.goal_plans (
+  id          uuid primary key default uuid_generate_v4(),
+  child_id    uuid not null references public.children(id) on delete cascade,
+  plan_json   jsonb not null,
+  created_at  timestamptz not null default now()
+);
+
+-- ── University path ──────────────────────────────────────────
+create table if not exists public.university_paths (
+  id          uuid primary key default uuid_generate_v4(),
+  child_id    uuid not null references public.children(id) on delete cascade,
+  path_json   jsonb not null,
+  created_at  timestamptz not null default now()
+);
+
+-- ── Settings (per parent) ────────────────────────────────────
+create table if not exists public.settings (
+  parent_id   uuid primary key references public.profiles(id) on delete cascade,
+  claude_model text default 'claude-opus-4-6',
+  updated_at  timestamptz not null default now()
+);
+
+-- ============================================================
+-- Row Level Security
+-- ============================================================
+
+alter table public.profiles        enable row level security;
+alter table public.children        enable row level security;
+alter table public.chat_messages   enable row level security;
+alter table public.daily_tasks     enable row level security;
+alter table public.knowledge_items enable row level security;
+alter table public.goal_plans      enable row level security;
+alter table public.university_paths enable row level security;
+alter table public.settings        enable row level security;
+
+-- Profiles: users can read/write their own profile
+create policy "Own profile" on public.profiles
+  for all using (auth.uid() = id);
+
+-- Children: parent can manage their own children
+create policy "Parent owns children" on public.children
+  for all using (parent_id = auth.uid());
+
+-- Chat messages: parent can read all messages for their children
+-- Student (child) can read their own messages but NOT delete
+create policy "Parent reads child messages" on public.chat_messages
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+create policy "Insert chat messages" on public.chat_messages
+  for insert with check (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+-- No DELETE policy — intentionally omitted for COPPA compliance
+
+-- Daily tasks: parent manages, student reads
+create policy "Parent manages tasks" on public.daily_tasks
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+-- Knowledge items: parent owns
+create policy "Parent owns knowledge" on public.knowledge_items
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+-- Goal plans
+create policy "Parent owns goal plans" on public.goal_plans
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+-- University paths
+create policy "Parent owns university paths" on public.university_paths
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+-- Settings
+create policy "Own settings" on public.settings
+  for all using (parent_id = auth.uid());
+
+-- ============================================================
+-- Trigger: auto-create profile on signup
+-- ============================================================
+create or replace function public.handle_new_user()
+returns trigger language plpgsql security definer as $$
+begin
+  insert into public.profiles (id, name, role)
+  values (
+    new.id,
+    coalesce(new.raw_user_meta_data->>'name', split_part(new.email, '@', 1)),
+    coalesce(new.raw_user_meta_data->>'role', 'parent')
+  );
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
