@@ -97,7 +97,7 @@ export default function KnowledgeCanvas({
   const [selectedNode, setSelectedNode] = useState<Node | null>(null)
   const [exerciseContent, setExerciseContent] = useState<Record<string, string>>({})
   const [exerciseLoading, setExerciseLoading] = useState<string | null>(null)
-  const lastTouches = useRef<React.TouchList | null>(null)
+  const lastTouches = useRef<TouchList | null>(null)
 
   const { nodes, edges } = layoutNodes(items)
 
