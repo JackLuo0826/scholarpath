@@ -2,6 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from 'react'
 import type { User, ChatMessage } from './types'
 import { MOCK_MESSAGES } from './mockData'
 import type { GoalPlan } from './pages/GoalWizard'
+import type { UniversityPath } from './pages/UniversityPathPlanner'
 
 interface AppState {
   user: User | null
