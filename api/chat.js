@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { messages, apiKey, subject, skill, goal } = req.body
+  const { messages, apiKey, subject, skill, goal, model } = req.body
 
   if (!apiKey) {
     return res.status(400).json({ error: 'No API key provided' })
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     res.setHeader('Connection', 'keep-alive')
 
     const stream = await client.messages.stream({
-      model: 'claude-haiku-4-5-20251001',
+      model: model || 'claude-opus-4-6',
       max_tokens: 1024,
       system: buildSystemPrompt(subject, skill, goal),
       messages: messages.map(m => ({
