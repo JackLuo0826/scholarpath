@@ -40,7 +40,7 @@ export default function ParentApp() {
   }
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('overview')
-  const logout = () => { setUser(null); navigate('/') }
+  const logout = async () => { await logoutFn(); navigate('/') }
 
   return (
     <div className="min-h-screen bg-gray-50 flex font-sans">
