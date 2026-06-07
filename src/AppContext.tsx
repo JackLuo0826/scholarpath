@@ -40,8 +40,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setModelState(m)
   }
 
+  const setGoalPlan = (plan: GoalPlan | null) => {
+    if (plan) localStorage.setItem('sp_goal_plan', JSON.stringify(plan))
+    else localStorage.removeItem('sp_goal_plan')
+    setGoalPlanState(plan)
+  }
+
   return (
-    <AppContext.Provider value={{ user, messages, apiKey, model, setUser, addMessage, setApiKey, setModel }}>
+    <AppContext.Provider value={{ user, messages, apiKey, model, goalPlan, setUser, addMessage, setApiKey, setModel, setGoalPlan }}>
       {children}
     </AppContext.Provider>
   )
