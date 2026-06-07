@@ -10,11 +10,13 @@ interface AppState {
   apiKey: string
   model: string
   goalPlan: GoalPlan | null
+  universityPath: UniversityPath | null
   setUser: (u: User | null) => void
   addMessage: (m: ChatMessage) => void
   setApiKey: (key: string) => void
   setModel: (model: string) => void
   setGoalPlan: (plan: GoalPlan | null) => void
+  setUniversityPath: (path: UniversityPath | null) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
