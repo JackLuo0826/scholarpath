@@ -27,12 +27,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [apiKey, setApiKeyState] = useState<string>(() => localStorage.getItem('sp_api_key') || '')
   const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-opus-4-6')
   const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => {
-    const stored = localStorage.getItem('sp_goal_plan')
-    return stored ? JSON.parse(stored) : null
+    try { const s = localStorage.getItem('sp_goal_plan'); return s ? JSON.parse(s) : null } catch { return null }
   })
   const [universityPath, setUniversityPathState] = useState<UniversityPath | null>(() => {
-    const stored = localStorage.getItem('sp_university_path')
-    return stored ? JSON.parse(stored) : null
+    try { const s = localStorage.getItem('sp_university_path'); return s ? JSON.parse(s) : null } catch { return null }
   })
 
   const addMessage = (m: ChatMessage) => setMessages(prev => [...prev, m])
