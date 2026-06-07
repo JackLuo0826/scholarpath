@@ -24,7 +24,16 @@ const STATUS_DOT: Record<Milestone['status'], string> = {
 }
 
 export default function ParentApp() {
-  const { messages, setUser } = useApp()
+  const { messages, setUser, apiKey, setApiKey } = useApp()
+  const [keyInput, setKeyInput] = useState(apiKey)
+  const [keyVisible, setKeyVisible] = useState(false)
+  const [keySaved, setKeySaved] = useState(false)
+
+  const saveApiKey = () => {
+    setApiKey(keyInput.trim())
+    setKeySaved(true)
+    setTimeout(() => setKeySaved(false), 2000)
+  }
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('overview')
   const [expandedYear, setExpandedYear] = useState<number | null>(2026)
