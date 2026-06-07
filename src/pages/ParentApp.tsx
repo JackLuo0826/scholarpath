@@ -40,11 +40,7 @@ export default function ParentApp() {
   }
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('overview')
-  const [expandedYear, setExpandedYear] = useState<number | null>(2026)
-
   const logout = () => { setUser(null); navigate('/') }
-
-  const years = [...new Set(MOCK_CHILD.milestones.map(m => m.year))].sort()
 
   return (
     <div className="min-h-screen bg-gray-50 flex font-sans">
