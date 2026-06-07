@@ -444,113 +444,28 @@ export default function StudentApp() {
           </div>
         )}
 
-        {/* KNOWLEDGE BASE */}
+        {/* KNOWLEDGE BASE — infinite canvas */}
         {activeTab === 'knowledge' && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-bold text-gray-900">Knowledge Base</h2>
-                <p className="text-xs text-gray-500 mt-0.5">Topics extracted from your chat sessions</p>
-              </div>
-              <button
-                onClick={loadKnowledge}
-                disabled={knowledgeLoading}
-                className="flex items-center gap-1.5 bg-brand-600 text-white text-xs font-semibold px-3 py-2 rounded-xl hover:bg-brand-700 disabled:opacity-50 transition-colors"
-              >
-                {knowledgeLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
-                {knowledgeLoading ? 'Analysing…' : 'Analyse Chats'}
-              </button>
-            </div>
-
-            {knowledgeError && (
-              <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700">
-                <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                {knowledgeError}
-              </div>
-            )}
-
-            {!knowledgeLoading && knowledgeItems.length === 0 && !knowledgeError && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
-                <BookMarked className="w-10 h-10 text-gray-200 mx-auto mb-3" />
-                <p className="text-sm font-medium text-gray-500">No knowledge items yet</p>
-                <p className="text-xs text-gray-400 mt-1">Chat with your tutor, then tap "Analyse Chats" to build your knowledge base.</p>
-              </div>
-            )}
-
-            {knowledgeItems.map(item => {
-              const masteryColors = {
-                beginner:   { bg: 'bg-red-50',    badge: 'bg-red-100 text-red-700',    dot: 'bg-red-400' },
-                developing: { bg: 'bg-amber-50',  badge: 'bg-amber-100 text-amber-700', dot: 'bg-amber-400' },
-                confident:  { bg: 'bg-green-50',  badge: 'bg-green-100 text-green-700', dot: 'bg-green-500' },
+          <KnowledgeCanvas
+            items={knowledgeItems}
+            loading={knowledgeLoading}
+            error={knowledgeError}
+            apiKey={apiKey}
+            model={model}
+            studentGoal={MOCK_CHILD.goal}
+            onAnalyse={loadKnowledge}
+            onPracticeInChat={(item, exercise) => {
+              setActiveTab('chat')
+              const msg: import('../types').ChatMessage = {
+                id: Date.now().toString(),
+                sender: 'ai',
+                content: exercise,
+                timestamp: new Date().toISOString(),
+                subject: item.subject,
               }
-              const colors = masteryColors[item.mastery] || masteryColors.developing
-              const isExpanded = expandedItem === item.id
-              const exercise = exerciseContent[item.id]
-              const isGenerating = exerciseLoading === item.id
-
-              return (
-                <div key={item.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                  <button
-                    onClick={() => setExpandedItem(isExpanded ? null : item.id)}
-                    className="w-full text-left px-5 py-4 flex items-start gap-3"
-                  >
-                    <div className={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${colors.dot}`} />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-semibold text-gray-900">{item.concept}</span>
-                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full capitalize ${colors.badge}`}>
-                          {item.mastery}
-                        </span>
-                      </div>
-                      <p className="text-xs text-gray-500 mt-0.5">{item.topic} · {item.subject}</p>
-                      <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">{item.summary}</p>
-                    </div>
-                    {isExpanded ? <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0 mt-1" /> : <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0 mt-1" />}
-                  </button>
-
-                  {isExpanded && (
-                    <div className="px-5 pb-4 space-y-3 border-t border-gray-50 pt-3">
-                      {item.evidence && (
-                        <div className="bg-gray-50 rounded-xl p-3">
-                          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">From your chat</p>
-                          <p className="text-xs text-gray-600 italic">"{item.evidence}"</p>
-                        </div>
-                      )}
-
-                      {item.suggestedExercise && (
-                        <div className="bg-brand-50 rounded-xl p-3">
-                          <p className="text-[10px] font-semibold text-brand-400 uppercase tracking-wide mb-1">Suggested practice</p>
-                          <p className="text-xs text-brand-800">{item.suggestedExercise}</p>
-                        </div>
-                      )}
-
-                      {exercise && (
-                        <div className="bg-purple-50 rounded-xl p-4">
-                          <p className="text-[10px] font-semibold text-purple-400 uppercase tracking-wide mb-2">Generated Exercise</p>
-                          <p className="text-xs text-purple-900 leading-relaxed whitespace-pre-wrap">{exercise}</p>
-                          <button
-                            onClick={() => practiceInChat(item)}
-                            className="mt-3 w-full bg-brand-600 text-white text-xs font-semibold py-2 rounded-xl hover:bg-brand-700 transition-colors flex items-center justify-center gap-1.5"
-                          >
-                            <Brain className="w-3.5 h-3.5" /> Practice this in Chat
-                          </button>
-                        </div>
-                      )}
-
-                      <button
-                        onClick={() => generateExercise(item)}
-                        disabled={isGenerating}
-                        className="w-full flex items-center justify-center gap-1.5 border border-brand-200 text-brand-600 text-xs font-semibold py-2.5 rounded-xl hover:bg-brand-50 disabled:opacity-50 transition-colors"
-                      >
-                        {isGenerating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
-                        {isGenerating ? 'Generating…' : exercise ? 'Regenerate Exercise' : 'Generate Exercise'}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
+              addMessage(msg)
+            }}
+          />
         )}
 
         {/* PROGRESS */}
