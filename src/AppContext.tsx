@@ -1,16 +1,19 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
 import type { User, ChatMessage } from './types'
 import { MOCK_MESSAGES } from './mockData'
+import type { GoalPlan } from './pages/GoalWizard'
 
 interface AppState {
   user: User | null
   messages: ChatMessage[]
   apiKey: string
   model: string
+  goalPlan: GoalPlan | null
   setUser: (u: User | null) => void
   addMessage: (m: ChatMessage) => void
   setApiKey: (key: string) => void
   setModel: (model: string) => void
+  setGoalPlan: (plan: GoalPlan | null) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
