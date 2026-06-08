@@ -46,19 +46,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isSupabaseConfigured) return
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (session?.user) {
-        await loadUserFromSession(session.user.id, session.user.email ?? '')
-      }
-      setIsLoadingSession(false)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    // onAuthStateChange fires INITIAL_SESSION on mount — no need for a separate getSession() call
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         await loadUserFromSession(session.user.id, session.user.email ?? '')
       } else {
         setUserState(null)
         lsSet('sp_user', null)
+      }
+      if (event === 'INITIAL_SESSION') {
+        setIsLoadingSession(false)
       }
     })
     return () => subscription.unsubscribe()
