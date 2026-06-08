@@ -398,7 +398,7 @@ export default function StudentApp() {
             onPracticeInChat={(item, exercise) => {
               setActiveTab('chat')
               const msg: import('../types').ChatMessage = {
-                id: Date.now().toString(),
+                id: crypto.randomUUID(),
                 sender: 'ai',
                 content: exercise,
                 timestamp: new Date().toISOString(),
