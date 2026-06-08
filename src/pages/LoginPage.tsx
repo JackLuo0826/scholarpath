@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false)
   const [showStudentPass, setShowStudentPass] = useState(false)
   const [tab, setTab] = useState<'parent' | 'student'>('parent')
+  const [parentName, setParentName] = useState('')
   const [parentEmail, setParentEmail] = useState('')
   const [parentPassword, setParentPassword] = useState('')
   const [studentEmail, setStudentEmail] = useState('')
