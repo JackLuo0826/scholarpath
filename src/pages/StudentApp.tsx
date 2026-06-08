@@ -173,7 +173,7 @@ export default function StudentApp() {
       }
 
       const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID(),
         sender: 'ai',
         content: fullContent,
         timestamp: new Date().toISOString(),
