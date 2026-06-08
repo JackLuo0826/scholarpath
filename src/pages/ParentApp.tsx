@@ -99,15 +99,8 @@ export default function ParentApp() {
 
         <div className="p-3 border-t border-gray-100">
           <button
-            onClick={() => navigate('/student')}
-            className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-gray-700 rounded-xl hover:bg-gray-50"
-          >
-            <Eye className="w-4 h-4" />
-            View as Student
-          </button>
-          <button
             onClick={logout}
-            className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-red-600 rounded-xl hover:bg-red-50 mt-0.5"
+            className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-red-600 rounded-xl hover:bg-red-50"
           >
             <LogOut className="w-4 h-4" />
             Log out
