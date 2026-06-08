@@ -26,10 +26,11 @@ export default function LoginPage() {
 
     if (isSupabaseConfigured) {
       if (mode === 'signup') {
+        if (!parentName.trim()) { setError('Please enter your name.'); setLoading(false); return }
         const { error: signUpError } = await supabase.auth.signUp({
           email: parentEmail,
           password: parentPassword,
-          options: { data: { name: 'Parent', role: 'parent' } },
+          options: { data: { name: parentName.trim(), role: 'parent' } },
         })
         if (signUpError) { setError(signUpError.message); setLoading(false); return }
         setError('')
