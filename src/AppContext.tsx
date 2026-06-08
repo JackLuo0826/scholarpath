@@ -69,7 +69,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       .from('profiles')
       .select('*')
       .eq('id', authId)
-      .single()
+      .maybeSingle()
 
     if (!profile) return
 
@@ -79,67 +79,86 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     if (profile.role === 'parent') {
       // Load first child
-      const { data: children } = await supabase
+      const { data: childrenRows } = await supabase
         .from('children')
         .select('id')
         .eq('parent_id', authId)
         .limit(1)
 
-      const cid = children?.[0]?.id ?? null
+      const cid = childrenRows?.[0]?.id ?? null
       setChildId(cid)
       if (cid) localStorage.setItem('sp_child_id', cid)
 
       if (cid) {
-        // Load chat messages
-        const { data: msgs } = await supabase
-          .from('chat_messages')
-          .select('*')
-          .eq('child_id', cid)
-          .order('created_at', { ascending: true })
-          .limit(200)
+        await loadChildData(cid)
 
-        if (msgs && msgs.length > 0) {
-          setMessages(msgs.map(m => ({
-            id: m.id,
-            sender: m.sender,
-            content: m.content,
-            subject: m.subject ?? undefined,
-            timestamp: m.created_at,
-          })))
-        }
-
-        // Load goal plan
-        const { data: gp } = await supabase
-          .from('goal_plans')
-          .select('plan_json')
-          .eq('child_id', cid)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single()
-        if (gp) { setGoalPlanState(gp.plan_json); lsSet('sp_goal_plan', gp.plan_json) }
-
-        // Load university path
-        const { data: up } = await supabase
-          .from('university_paths')
-          .select('path_json')
-          .eq('child_id', cid)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single()
-        if (up) { setUniversityPathState(up.path_json); lsSet('sp_university_path', up.path_json) }
-
-        // Load model setting
+        // Load model setting (parent-only)
         const { data: settings } = await supabase
           .from('settings')
           .select('claude_model')
           .eq('parent_id', authId)
-          .single()
+          .maybeSingle()
         if (settings?.claude_model) {
           setModelState(settings.claude_model)
           localStorage.setItem('sp_model', settings.claude_model)
         }
       }
+    } else if (profile.role === 'student') {
+      // Resolve child row by auth_id
+      const { data: childRow } = await supabase
+        .from('children')
+        .select('id')
+        .eq('auth_id', authId)
+        .maybeSingle()
+
+      const cid = childRow?.id ?? null
+      setChildId(cid)
+      if (cid) localStorage.setItem('sp_child_id', cid)
+
+      if (cid) {
+        await loadChildData(cid)
+      }
     }
+  }
+
+  const loadChildData = async (cid: string) => {
+    // Load chat messages
+    const { data: msgs } = await supabase
+      .from('chat_messages')
+      .select('*')
+      .eq('child_id', cid)
+      .order('created_at', { ascending: true })
+      .limit(200)
+
+    if (msgs && msgs.length > 0) {
+      setMessages(msgs.map(m => ({
+        id: m.id,
+        sender: m.sender,
+        content: m.content,
+        subject: m.subject ?? undefined,
+        timestamp: m.created_at,
+      })))
+    }
+
+    // Load goal plan
+    const { data: gp } = await supabase
+      .from('goal_plans')
+      .select('plan_json')
+      .eq('child_id', cid)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (gp) { setGoalPlanState(gp.plan_json); lsSet('sp_goal_plan', gp.plan_json) }
+
+    // Load university path
+    const { data: up } = await supabase
+      .from('university_paths')
+      .select('path_json')
+      .eq('child_id', cid)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (up) { setUniversityPathState(up.path_json); lsSet('sp_university_path', up.path_json) }
   }
 
   // ── Auth ─────────────────────────────────────────────────────────────────
@@ -151,9 +170,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const logout = async () => {
     if (isSupabaseConfigured) await supabase.auth.signOut()
     setUserState(null)
+    setChildId(null)
     lsSet('sp_user', null)
-    setMessages(MOCK_MESSAGES)
     lsSet('sp_messages', null)
+    localStorage.removeItem('sp_child_id')
+    setMessages(MOCK_MESSAGES)
   }
 
   // ── Messages ─────────────────────────────────────────────────────────────
@@ -164,7 +185,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return next
     })
 
-    if (isSupabaseConfigured && childId && user?.role === 'parent') {
+    if (isSupabaseConfigured && childId) {
       await supabase.from('chat_messages').insert({
         id: m.id,
         child_id: childId,

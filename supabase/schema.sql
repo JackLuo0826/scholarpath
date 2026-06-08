@@ -21,6 +21,8 @@ create table if not exists public.profiles (
 create table if not exists public.children (
   id            uuid primary key default uuid_generate_v4(),
   parent_id     uuid not null references public.profiles(id) on delete cascade,
+  -- auth_id links to the student's own Supabase Auth account (nullable: set when student account is created)
+  auth_id       uuid unique references auth.users(id) on delete set null,
   name          text not null,
   age           int,
   grade         text,
@@ -31,8 +33,11 @@ create table if not exists public.children (
   created_at    timestamptz not null default now()
 );
 
+-- Migration helper: run this if the table already exists without auth_id
+-- alter table public.children add column if not exists auth_id uuid unique references auth.users(id) on delete set null;
+
 -- ── Chat messages ────────────────────────────────────────────
--- Immutable log — no DELETE permission for child role
+-- Immutable log — no DELETE permission for any role
 create table if not exists public.chat_messages (
   id          uuid primary key default uuid_generate_v4(),
   child_id    uuid not null references public.children(id) on delete cascade,
@@ -114,22 +119,45 @@ create policy "Own profile" on public.profiles
 create policy "Parent owns children" on public.children
   for all using (parent_id = auth.uid());
 
+-- Children: student can read their own row (needed to resolve childId on login)
+create policy "Student reads own row" on public.children
+  for select using (auth_id = auth.uid());
+
 -- Chat messages: parent can read all messages for their children
--- Student (child) can read their own messages but NOT delete
 create policy "Parent reads child messages" on public.chat_messages
   for select using (
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
   );
-create policy "Insert chat messages" on public.chat_messages
+
+-- Chat messages: parent can insert messages for their children
+create policy "Parent inserts child messages" on public.chat_messages
   for insert with check (
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
   );
--- No DELETE policy — intentionally omitted for COPPA compliance
+
+-- Chat messages: student can read their own messages
+create policy "Student reads own messages" on public.chat_messages
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+-- Chat messages: student can insert their own messages
+create policy "Student inserts own messages" on public.chat_messages
+  for insert with check (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+-- No DELETE policy on chat_messages — intentionally omitted for COPPA compliance
 
 -- Daily tasks: parent manages, student reads
 create policy "Parent manages tasks" on public.daily_tasks
   for all using (
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+create policy "Student reads own tasks" on public.daily_tasks
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
   );
 
 -- Knowledge items: parent owns
@@ -138,16 +166,26 @@ create policy "Parent owns knowledge" on public.knowledge_items
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
   );
 
--- Goal plans
+-- Goal plans: parent owns; student can read their own
 create policy "Parent owns goal plans" on public.goal_plans
   for all using (
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
   );
 
--- University paths
+create policy "Student reads own goal plan" on public.goal_plans
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+-- University paths: parent owns; student can read their own
 create policy "Parent owns university paths" on public.university_paths
   for all using (
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+create policy "Student reads own university path" on public.university_paths
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
   );
 
 -- Settings
