@@ -156,7 +156,7 @@ export default function LoginPage() {
                 </button>
                 <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-700">
                   <Shield className="w-4 h-4 flex-shrink-0" />
-                  Parent accounts require 2FA on first login. Keep your children's data safe.
+                  Keep your password safe — all child chat logs are linked to your account.
                 </div>
               </div>
             ) : (
