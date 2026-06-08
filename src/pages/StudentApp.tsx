@@ -184,7 +184,7 @@ export default function StudentApp() {
     } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error('Unknown error')
       const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID(),
         sender: 'ai',
         content: `⚠️ Error: ${error.message}. Please check the API key in Settings.`,
         timestamp: new Date().toISOString(),
