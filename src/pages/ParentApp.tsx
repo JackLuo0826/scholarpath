@@ -485,7 +485,6 @@ function Toggle({ on }: { on: boolean }) {
     </button>
   )
 }
-                      <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5 — Fastest</option>
                     </select>
                   </div>
                   <div className="flex gap-2">
