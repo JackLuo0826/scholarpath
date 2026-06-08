@@ -99,6 +99,26 @@ create table if not exists public.settings (
 );
 
 -- ============================================================
+-- Drop old/renamed policies before recreating (idempotent re-runs)
+-- ============================================================
+drop policy if exists "Insert chat messages"       on public.chat_messages;
+drop policy if exists "Parent reads child messages" on public.chat_messages;
+drop policy if exists "Parent inserts child messages" on public.chat_messages;
+drop policy if exists "Student reads own messages"  on public.chat_messages;
+drop policy if exists "Student inserts own messages" on public.chat_messages;
+drop policy if exists "Own profile"                on public.profiles;
+drop policy if exists "Parent owns children"       on public.children;
+drop policy if exists "Student reads own row"      on public.children;
+drop policy if exists "Parent manages tasks"       on public.daily_tasks;
+drop policy if exists "Student reads own tasks"    on public.daily_tasks;
+drop policy if exists "Parent owns knowledge"      on public.knowledge_items;
+drop policy if exists "Parent owns goal plans"     on public.goal_plans;
+drop policy if exists "Student reads own goal plan" on public.goal_plans;
+drop policy if exists "Parent owns university paths" on public.university_paths;
+drop policy if exists "Student reads own university path" on public.university_paths;
+drop policy if exists "Own settings"               on public.settings;
+
+-- ============================================================
 -- Row Level Security
 -- ============================================================
 
