@@ -100,7 +100,7 @@ export default function StudentApp() {
     setInput('')
 
     const userMsg: ChatMessage = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       sender: 'student',
       content: text,
       timestamp: new Date().toISOString(),
