@@ -112,7 +112,7 @@ export default function StudentApp() {
 
     if (!apiKey) {
       const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID(),
         sender: 'ai',
         content: '⚠️ No API key configured. A parent needs to add a Claude API key in Settings to enable the AI tutor.',
         timestamp: new Date().toISOString(),
