@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   GraduationCap, BarChart2, MessageSquare, Map, Settings,
-  LogOut, Flame, Clock, TrendingUp, CheckCircle,
+  LogOut, Flame, Clock, TrendingUp, CheckCircle, AlertCircle,
   ChevronDown, Shield, Bell, Lock, Eye, Brain, Key, Target
 } from 'lucide-react'
 import { useApp } from '../AppContext'
