@@ -96,10 +96,6 @@ export default function StudentApp() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isThinking, streamingContent])
 
-  const completedCount = tasks.filter(t => t.completed).length
-  const totalMin = tasks.reduce((s, t) => s + t.durationMin, 0)
-  const doneMin = tasks.filter(t => t.completed).reduce((s, t) => s + t.durationMin, 0)
-
   const sendMessage = async () => {
     const text = input.trim()
     if (!text || isThinking) return
