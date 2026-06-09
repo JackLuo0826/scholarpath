@@ -8,8 +8,9 @@ import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
 import GoalSummary from './GoalSummary'
 import WeeklyActivities from './WeeklyActivities'
+import ExerciseSheet from './ExerciseSheet'
 import { useApp } from '../AppContext'
-import type { ChatMessage } from '../types'
+import type { ChatMessage, WeeklyActivity } from '../types'
 
 function TypingIndicator() {
   return (
