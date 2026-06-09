@@ -198,9 +198,6 @@ export default function StudentApp() {
     }
   }
 
-  const toggleTask = (id: string) =>
-    setTasks(prev => prev.map(t => t.id === id ? { ...t, completed: !t.completed } : t))
-
   const loadKnowledge = async () => {
     if (!apiKey) { setKnowledgeError('No API key — ask a parent to add one in Settings.'); return }
     setKnowledgeLoading(true)
