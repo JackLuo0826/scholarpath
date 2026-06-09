@@ -392,13 +392,7 @@ export default function StudentApp() {
           <WeeklyRoadmap
             goalPlan={goalPlan}
             onPracticeInChat={(prompt) => {
-              const msg: ChatMessage = {
-                id: crypto.randomUUID(),
-                sender: 'ai',
-                content: prompt,
-                timestamp: new Date().toISOString(),
-              }
-              addMessage(msg)
+              setInput(prompt)
               setActiveTab('chat')
             }}
             onViewKnowledgeMap={() => setActiveTab('knowledge')}
