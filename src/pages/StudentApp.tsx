@@ -61,7 +61,7 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
   )
 }
 
-type Tab = 'today' | 'chat' | 'knowledge' | 'progress'
+type Tab = 'today' | 'chat' | 'knowledge' | 'progress' | 'roadmap'
 
 interface KnowledgeItem {
   id: string
