@@ -1,9 +1,18 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
-import type { User, ChatMessage } from './types'
+import type { User, ChatMessage, ChildInfo, WeeklyActivity, ActivityCompletion } from './types'
 import { MOCK_MESSAGES } from './mockData'
 import type { GoalPlan } from './pages/GoalWizard'
 import type { UniversityPath } from './pages/UniversityPathPlanner'
 import { supabase, isSupabaseConfigured } from './lib/supabase'
+
+/** Returns the ISO date string (YYYY-MM-DD) of the Monday of the current week */
+function getWeekStart(): string {
+  const d = new Date()
+  const day = d.getDay()
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1)
+  d.setDate(diff)
+  return d.toISOString().slice(0, 10)
+}
 
 interface AppState {
   user: User | null
@@ -12,7 +21,13 @@ interface AppState {
   model: string
   goalPlan: GoalPlan | null
   universityPath: UniversityPath | null
-  childId: string | null          // Supabase child row id
+  childId: string | null
+  childInfo: ChildInfo | null
+  weeklyActivities: WeeklyActivity[]
+  weeklyTheme: string
+  activityCompletions: ActivityCompletion[]
+  weekStart: string
+  isGeneratingActivities: boolean
   isLoadingSession: boolean
   setUser: (u: User | null) => void
   logout: () => Promise<void>
@@ -21,6 +36,8 @@ interface AppState {
   setModel: (model: string) => void
   setGoalPlan: (plan: GoalPlan | null) => void
   setUniversityPath: (path: UniversityPath | null) => void
+  generateWeeklyActivities: () => Promise<void>
+  submitActivityAnswer: (completion: ActivityCompletion) => Promise<void>
 }
 
 const AppContext = createContext<AppState | null>(null)
