@@ -238,23 +238,30 @@ export default function ParentApp() {
           {/* ROADMAP */}
           {activeTab === 'roadmap' && (
             <div className="space-y-4">
-              {/* Tab switcher */}
+
+              {/* 3-way switcher */}
               <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
                 <button
                   onClick={() => setRoadmapView('university')}
                   className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${roadmapView === 'university' ? 'bg-white text-brand-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                 >
-                  🎓 University Path
+                  🎓 Uni Path
                 </button>
                 <button
-                  onClick={() => setRoadmapView('goal')}
-                  className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${roadmapView === 'goal' ? 'bg-white text-brand-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                  onClick={() => setRoadmapView('goals')}
+                  className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${roadmapView === 'goals' ? 'bg-white text-brand-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                 >
-                  🎯 Goal Plan
+                  🎯 Goals
+                </button>
+                <button
+                  onClick={() => setRoadmapView('study')}
+                  className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${roadmapView === 'study' ? 'bg-white text-brand-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                  📚 Study Plan
                 </button>
               </div>
 
-              {/* University Path Planner */}
+              {/* University Path */}
               {roadmapView === 'university' && (
                 <UniversityPathPlanner
                   apiKey={apiKey}
@@ -265,13 +272,13 @@ export default function ParentApp() {
                 />
               )}
 
-              {/* Goal Plan (WOOP wizard) */}
-              {roadmapView === 'goal' && (
+              {/* Goals — motivational layer (WOOP, why, habits, obstacles) */}
+              {roadmapView === 'goals' && (
                 <div className="space-y-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h2 className="text-lg font-bold text-gray-900">Personal Goal Plan</h2>
-                      <p className="text-xs text-gray-500 mt-0.5">Science-based goal setting using WOOP, SDT & implementation intentions</p>
+                      <h2 className="text-lg font-bold text-gray-900">Goals</h2>
+                      <p className="text-xs text-gray-500 mt-0.5">Motivation, habits & obstacle strategies (WOOP + SDT)</p>
                     </div>
                     <button
                       onClick={() => setShowGoalWizard(true)}
@@ -282,15 +289,50 @@ export default function ParentApp() {
                     </button>
                   </div>
                   {goalPlan
-                    ? <GoalPlan plan={goalPlan} onReset={() => setGoalPlan(null)} />
+                    ? <GoalSummary plan={goalPlan} onReset={() => setGoalPlan(null)} />
                     : (
                       <div className="bg-gradient-to-r from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-5 flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center flex-shrink-0">
                           <Target className="w-5 h-5 text-brand-600" />
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-gray-900">Set a personal goal with AI coaching</p>
-                          <p className="text-xs text-gray-600 mt-1 leading-relaxed">A 7-question session that builds a WOOP-based roadmap with obstacle strategies and weekly habits tailored to your child's motivation and challenges.</p>
+                          <p className="text-sm font-semibold text-gray-900">Set a goal with AI coaching</p>
+                          <p className="text-xs text-gray-600 mt-1 leading-relaxed">A 7-question session that surfaces your child's intrinsic motivation, obstacle strategies, and weekly habits using WOOP and Self-Determination Theory.</p>
+                        </div>
+                      </div>
+                    )
+                  }
+                </div>
+              )}
+
+              {/* Study Plan — academic execution layer (roadmap, subjects, key dates) */}
+              {roadmapView === 'study' && (
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h2 className="text-lg font-bold text-gray-900">Long-Term Study Plan</h2>
+                      <p className="text-xs text-gray-500 mt-0.5">Year-by-year milestones, subject targets & key dates</p>
+                    </div>
+                    {!goalPlan && (
+                      <button
+                        onClick={() => { setRoadmapView('goals'); setShowGoalWizard(true) }}
+                        className="flex items-center gap-1.5 bg-brand-600 text-white text-xs font-semibold px-3 py-2 rounded-xl hover:bg-brand-700 transition-colors flex-shrink-0 shadow"
+                      >
+                        <Target className="w-3.5 h-3.5" />
+                        Start Session
+                      </button>
+                    )}
+                  </div>
+                  {goalPlan
+                    ? <GoalPlan plan={goalPlan} />
+                    : (
+                      <div className="bg-gradient-to-r from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-5 flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center flex-shrink-0">
+                          <Target className="w-5 h-5 text-brand-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900">No study plan yet</p>
+                          <p className="text-xs text-gray-600 mt-1 leading-relaxed">Complete the Goal Setting Session (under Goals) to generate a year-by-year academic roadmap with quarterly milestones and subject targets.</p>
                         </div>
                       </div>
                     )
