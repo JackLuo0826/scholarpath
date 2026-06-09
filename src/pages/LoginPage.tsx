@@ -183,6 +183,13 @@ export default function LoginPage() {
               </div>
             ) : (
               <div className="space-y-4">
+                <button
+                  type="button"
+                  onClick={() => { setStudentEmail('student@test.com'); setStudentPassword('Test1234!') }}
+                  className="w-full text-xs font-semibold text-brand-600 bg-brand-50 border border-brand-200 rounded-xl py-2 hover:bg-brand-100 transition-colors"
+                >
+                  Use test account (student@test.com)
+                </button>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1.5">Email</label>
                   <input
