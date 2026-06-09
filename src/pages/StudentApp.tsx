@@ -10,14 +10,7 @@ import GoalSummary from './GoalSummary'
 import WeeklyActivities from './WeeklyActivities'
 import { useApp } from '../AppContext'
 import { MOCK_CHILD } from '../mockData'
-import type { ChatMessage, DailyTask } from '../types'
-
-const TASK_TYPE_COLORS: Record<DailyTask['type'], string> = {
-  lesson:   'bg-blue-100 text-blue-700',
-  exercise: 'bg-purple-100 text-purple-700',
-  test:     'bg-red-100 text-red-700',
-  review:   'bg-amber-100 text-amber-700',
-}
+import type { ChatMessage } from '../types'
 
 function TypingIndicator() {
   return (
