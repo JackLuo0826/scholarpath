@@ -25,14 +25,10 @@ const TYPE_STYLES = {
 const DIFF_LABEL = { foundation: '🟢', developing: '🟡', advanced: '🔴' }
 
 export default function WeeklyActivities({
-  activities, completions, weekStart, weekTheme,
-  isGenerating, canGenerate,
-  childAge, childGrade, childName,
-  apiKey, model,
-  onGenerate, onCompleted,
+  activities, completions, weekTheme,
+  isGenerating, canStart, canGenerate,
+  onGenerate, onCompleted, onStartActivity,
 }: Props) {
-  const [activeActivity, setActiveActivity] = useState<WeeklyActivity | null>(null)
-
   const completedIds = new Set(completions.map(c => c.activityId))
   const completedCount = completions.length
   const total = activities.length
