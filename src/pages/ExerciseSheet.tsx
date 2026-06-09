@@ -313,6 +313,3 @@ export default function ExerciseSheet({
     document.body
   )
 }
-
-// Suppress the unused variable warning — inputMode is intentionally replaced by inputModeState
-void inputMode
