@@ -273,68 +273,23 @@ export default function StudentApp() {
 
       {/* Content */}
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 py-6">
-        {/* TODAY'S PLAN */}
+        {/* TODAY — Weekly activities */}
         {activeTab === 'today' && (
-          <div>
-            <div className="bg-gradient-to-r from-brand-600 to-purple-600 rounded-2xl p-5 text-white mb-6">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <h2 className="font-bold text-lg">Today's Goals</h2>
-                  <p className="text-brand-100 text-sm">Monday · {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-extrabold">{completedCount}/{tasks.length}</div>
-                  <div className="text-brand-200 text-xs">tasks done</div>
-                </div>
-              </div>
-              <div className="w-full bg-white/20 rounded-full h-2">
-                <div
-                  className="bg-white rounded-full h-2 transition-all"
-                  style={{ width: `${(doneMin / totalMin) * 100}%` }}
-                />
-              </div>
-              <div className="flex justify-between mt-1">
-                <span className="text-xs text-brand-200">{doneMin} min done</span>
-                <span className="text-xs text-brand-200">{totalMin} min total</span>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              {tasks.map(task => (
-                <div
-                  key={task.id}
-                  className={`bg-white rounded-2xl border p-4 flex items-start gap-3 transition-all ${
-                    task.completed ? 'opacity-60 border-gray-100' : 'border-gray-200 shadow-sm'
-                  }`}
-                >
-                  <button onClick={() => toggleTask(task.id)} className="mt-0.5 flex-shrink-0">
-                    {task.completed
-                      ? <CheckCircle2 className="w-5 h-5 text-green-500" />
-                      : <Circle className="w-5 h-5 text-gray-300" />
-                    }
-                  </button>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="text-xs font-semibold" style={{ color: task.subjectColor }}>{task.subject}</span>
-                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full capitalize ${TASK_TYPE_COLORS[task.type]}`}>
-                        {task.type}
-                      </span>
-                    </div>
-                    <p className={`text-sm font-medium text-gray-900 ${task.completed ? 'line-through' : ''}`}>{task.title}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{task.durationMin} min</p>
-                  </div>
-                  {!task.completed && (
-                    <button
-                      onClick={() => setActiveTab('chat')}
-                      className="flex-shrink-0 flex items-center gap-1 text-xs font-semibold text-brand-600 bg-brand-50 px-2.5 py-1.5 rounded-lg hover:bg-brand-100 transition-colors"
-                    >
-                      Start <ChevronRight className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          <WeeklyActivities
+            activities={weeklyActivities}
+            completions={activityCompletions}
+            weekStart={weekStart}
+            weekTheme={weeklyTheme}
+            isGenerating={isGeneratingActivities}
+            canGenerate={!!apiKey && !!goalPlan}
+            childAge={childInfo?.age ?? null}
+            childGrade={childInfo?.grade ?? null}
+            childName={childInfo?.name ?? ''}
+            apiKey={apiKey}
+            model={model}
+            onGenerate={generateWeeklyActivities}
+            onCompleted={submitActivityAnswer}
+          />
         )}
 
         {/* AI CHAT */}
