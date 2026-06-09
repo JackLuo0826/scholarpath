@@ -38,6 +38,7 @@ interface AppState {
   setUniversityPath: (path: UniversityPath | null) => void
   generateWeeklyActivities: () => Promise<void>
   submitActivityAnswer: (completion: ActivityCompletion) => Promise<void>
+  updateChildProfile: (update: { age?: number; grade?: string; name?: string }) => Promise<void>
 }
 
 const AppContext = createContext<AppState | null>(null)
