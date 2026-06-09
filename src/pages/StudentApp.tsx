@@ -389,7 +389,27 @@ export default function StudentApp() {
           </div>
         )}
 
-        {/* WEEKLY ROADMAP */}
+        {/* GOALS */}
+        {activeTab === 'goals' && (
+          <div className="space-y-5">
+            {goalPlan
+              ? <GoalSummary plan={goalPlan} showReset={false} />
+              : (
+                <div className="bg-gradient-to-br from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-6 text-center">
+                  <div className="w-12 h-12 rounded-2xl bg-brand-100 flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-6 h-6 text-brand-600" />
+                  </div>
+                  <h2 className="text-base font-bold text-gray-900 mb-1">No goal set yet</h2>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    Ask a parent to run the <span className="font-semibold text-brand-600">Goal Setting Session</span> — it takes 5 minutes and builds a personalised plan with your why, habits, and obstacle strategies.
+                  </p>
+                </div>
+              )
+            }
+          </div>
+        )}
+
+        {/* STUDY PLAN (weekly roadmap) */}
         {activeTab === 'roadmap' && (
           <WeeklyRoadmap
             goalPlan={goalPlan}
