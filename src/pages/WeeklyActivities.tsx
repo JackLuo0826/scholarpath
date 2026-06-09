@@ -11,7 +11,6 @@ interface Props {
   /** True when apiKey AND goalPlan are present — controls Generate / Regenerate buttons */
   canGenerate: boolean
   onGenerate: () => void
-  onCompleted: (completion: ActivityCompletion) => void
   onStartActivity: (activity: WeeklyActivity) => void
 }
 
@@ -27,7 +26,7 @@ const DIFF_LABEL = { foundation: '🟢', developing: '🟡', advanced: '🔴' }
 export default function WeeklyActivities({
   activities, completions, weekTheme,
   isGenerating, canStart, canGenerate,
-  onGenerate, onCompleted, onStartActivity,
+  onGenerate, onStartActivity,
 }: Props) {
   const completedIds = new Set(completions.map(c => c.activityId))
   const completedCount = completions.length
