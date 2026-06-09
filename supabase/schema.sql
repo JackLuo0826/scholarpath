@@ -93,10 +93,13 @@ create table if not exists public.university_paths (
 
 -- ── Settings (per parent) ────────────────────────────────────
 create table if not exists public.settings (
-  parent_id   uuid primary key references public.profiles(id) on delete cascade,
-  claude_model text default 'claude-opus-4-6',
-  updated_at  timestamptz not null default now()
+  parent_id      uuid primary key references public.profiles(id) on delete cascade,
+  claude_model   text default 'claude-opus-4-6',
+  claude_api_key text,
+  updated_at     timestamptz not null default now()
 );
+-- Migration: add claude_api_key if upgrading an existing DB
+alter table public.settings add column if not exists claude_api_key text;
 
 -- ── Weekly generated activity sets ──────────────────────────────────────────
 create table if not exists public.weekly_activities (
@@ -145,6 +148,7 @@ drop policy if exists "Student reads own goal plan" on public.goal_plans;
 drop policy if exists "Parent owns university paths" on public.university_paths;
 drop policy if exists "Student reads own university path" on public.university_paths;
 drop policy if exists "Own settings"               on public.settings;
+drop policy if exists "Student reads parent settings" on public.settings;
 
 -- ============================================================
 -- Row Level Security
@@ -236,9 +240,19 @@ create policy "Student reads own university path" on public.university_paths
     exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
   );
 
--- Settings
+-- Settings: parent full control
 create policy "Own settings" on public.settings
   for all using (parent_id = auth.uid());
+
+-- Settings: student can read their parent's settings (to get claude_api_key)
+create policy "Student reads parent settings" on public.settings
+  for select using (
+    exists (
+      select 1 from public.children c
+      where c.parent_id = settings.parent_id
+        and c.auth_id = auth.uid()
+    )
+  );
 
 -- ── Drop new policies before creating (idempotent) ──────────────────────────
 drop policy if exists "Parent manages weekly activities"  on public.weekly_activities;

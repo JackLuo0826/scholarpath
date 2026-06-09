@@ -288,9 +288,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   // ── Settings ─────────────────────────────────────────────────────────────
-  const setApiKey = (key: string) => {
+  const setApiKey = async (key: string) => {
     localStorage.setItem('sp_api_key', key)
     setApiKeyState(key)
+    // Persist to Supabase so students on any device can load it
+    if (isSupabaseConfigured && user) {
+      await supabase.from('settings').upsert({
+        parent_id: user.id,
+        claude_api_key: key,
+        updated_at: new Date().toISOString(),
+      })
+    }
   }
 
   const setModel = async (m: string) => {
