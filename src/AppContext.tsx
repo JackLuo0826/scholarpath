@@ -57,6 +57,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => ls('sp_goal_plan', null))
   const [universityPath, setUniversityPathState] = useState<UniversityPath | null>(() => ls('sp_university_path', null))
   const [childId, setChildId] = useState<string | null>(() => localStorage.getItem('sp_child_id'))
+  const [childInfo, setChildInfo] = useState<ChildInfo | null>(() => ls('sp_child_info', null))
+  const [weeklyActivities, setWeeklyActivities] = useState<WeeklyActivity[]>(() => ls('sp_weekly_acts', []))
+  const [weeklyTheme, setWeeklyTheme] = useState<string>(() => localStorage.getItem('sp_weekly_theme') || '')
+  const [activityCompletions, setActivityCompletions] = useState<ActivityCompletion[]>(() => ls('sp_act_completions', []))
+  const [weekStart] = useState<string>(getWeekStart)
+  const [isGeneratingActivities, setIsGeneratingActivities] = useState(false)
   const [isLoadingSession, setIsLoadingSession] = useState(isSupabaseConfigured)
 
   // ── Supabase session restore ─────────────────────────────────────────────
