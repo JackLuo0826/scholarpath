@@ -123,15 +123,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (cid) {
         await loadChildData(cid)
 
-        // Load model setting (parent-only)
+        // Load model + api key settings (parent-only)
         const { data: settings } = await supabase
           .from('settings')
-          .select('claude_model')
+          .select('claude_model, claude_api_key')
           .eq('parent_id', authId)
           .maybeSingle()
         if (settings?.claude_model) {
           setModelState(settings.claude_model)
           localStorage.setItem('sp_model', settings.claude_model)
+        }
+        if (settings?.claude_api_key) {
+          setApiKeyState(settings.claude_api_key)
+          localStorage.setItem('sp_api_key', settings.claude_api_key)
         }
       }
     } else if (profile.role === 'student') {
