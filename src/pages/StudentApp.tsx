@@ -2,14 +2,13 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   BookOpen, Brain, Send, Flame, Trophy,
-  GraduationCap, LogOut, Loader2, Lock, BookMarked, Map, Target,
+  GraduationCap, LogOut, Loader2, Lock, BookMarked, Map, Target, CheckCircle2,
 } from 'lucide-react'
 import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
 import GoalSummary from './GoalSummary'
 import WeeklyActivities from './WeeklyActivities'
 import { useApp } from '../AppContext'
-import { MOCK_CHILD } from '../mockData'
 import type { ChatMessage } from '../types'
 
 function TypingIndicator() {
@@ -40,7 +39,8 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
       )}
       {!isAI && (
         <div className="w-7 h-7 rounded-full bg-brand-600 flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
-          E
+          {/* first letter of name, filled in below */}
+          S
         </div>
       )}
       <div
@@ -69,6 +69,8 @@ interface KnowledgeItem {
   suggestedExercise: string
 }
 
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
 export default function StudentApp() {
   const {
     messages, addMessage, logout: logoutFn, apiKey, model, goalPlan,
@@ -89,6 +91,19 @@ export default function StudentApp() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isThinking, streamingContent])
 
+  // Derive context from real data
+  const childName = childInfo?.name ?? 'there'
+  const childGoal = childInfo?.goal ?? goalPlan?.goalStatement ?? 'Academic excellence'
+  const childStreak = childInfo?.streak ?? 0
+  const targetYear = childInfo?.targetYear ?? goalPlan?.targetYear ?? null
+  const nameInitial = childName.charAt(0).toUpperCase()
+
+  // Derive the primary subject from the goal plan's subject targets
+  const primarySubject = goalPlan?.subjectTargets?.[0]?.subject ?? 'your subjects'
+  const primarySkill = goalPlan?.subjectTargets?.[0]?.currentLevel
+    ? `improving from ${goalPlan.subjectTargets[0].currentLevel} to ${goalPlan.subjectTargets[0].targetLevel}`
+    : 'reaching your goals'
+
   const sendMessage = async () => {
     const text = input.trim()
     if (!text || isThinking) return
@@ -99,7 +114,7 @@ export default function StudentApp() {
       sender: 'student',
       content: text,
       timestamp: new Date().toISOString(),
-      subject: 'Mathematics',
+      subject: primarySubject,
     }
     addMessage(userMsg)
     setIsThinking(true)
@@ -111,7 +126,7 @@ export default function StudentApp() {
         sender: 'ai',
         content: '⚠️ No API key configured. A parent needs to add a Claude API key in Settings to enable the AI tutor.',
         timestamp: new Date().toISOString(),
-        subject: 'Mathematics',
+        subject: primarySubject,
       }
       addMessage(aiMsg)
       setIsThinking(false)
@@ -127,9 +142,9 @@ export default function StudentApp() {
           messages: allMessages,
           apiKey,
           model,
-          subject: 'Mathematics',
-          skill: 'Quadratic Equations',
-          goal: MOCK_CHILD.goal,
+          subject: primarySubject,
+          skill: primarySkill,
+          goal: childGoal,
         }),
       })
 
@@ -172,7 +187,7 @@ export default function StudentApp() {
         sender: 'ai',
         content: fullContent,
         timestamp: new Date().toISOString(),
-        subject: 'Mathematics',
+        subject: primarySubject,
       }
       addMessage(aiMsg)
       setStreamingContent('')
@@ -183,7 +198,7 @@ export default function StudentApp() {
         sender: 'ai',
         content: `⚠️ Error: ${error.message}. Please check the API key in Settings.`,
         timestamp: new Date().toISOString(),
-        subject: 'Mathematics',
+        subject: primarySubject,
       }
       addMessage(aiMsg)
       setStreamingContent('')
@@ -212,8 +227,38 @@ export default function StudentApp() {
     }
   }
 
-
   const logout = async () => { await logoutFn(); navigate('/') }
+
+  // ── Progress tab — compute from real activityCompletions ─────────────────
+  const todayDay = DAYS[new Date().getDay()]
+  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+  // Count completions per weekday from activityCompletions
+  const completionsByDay: Record<string, number> = {}
+  weekDays.forEach(d => { completionsByDay[d] = 0 })
+  activityCompletions.forEach(c => {
+    const d = new Date(c.completedAt)
+    const dayLabel = DAYS[d.getDay()]
+    if (completionsByDay[dayLabel] !== undefined) {
+      completionsByDay[dayLabel]++
+    }
+  })
+  const maxCompletions = Math.max(...Object.values(completionsByDay), 1)
+
+  // Subject breakdown from activityCompletions
+  const subjectMap: Record<string, { correct: number; total: number; color: string }> = {}
+  weeklyActivities.forEach(act => {
+    if (!subjectMap[act.subject]) {
+      subjectMap[act.subject] = { correct: 0, total: 0, color: act.subjectColor }
+    }
+    subjectMap[act.subject].total++
+    const comp = activityCompletions.find(c => c.activityId === act.id)
+    if (comp?.isCorrect) subjectMap[act.subject].correct++
+  })
+  const subjectEntries = Object.entries(subjectMap)
+
+  const totalDone = activityCompletions.length
+  const totalActivities = weeklyActivities.length
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -225,14 +270,16 @@ export default function StudentApp() {
           </div>
           <div>
             <span className="font-bold text-gray-900 text-sm">ScholarPath</span>
-            <p className="text-xs text-gray-400 leading-none">Hi Emma! 👋</p>
+            <p className="text-xs text-gray-400 leading-none">Hi {childName}! 👋</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 bg-orange-50 px-2.5 py-1 rounded-full">
-            <Flame className="w-3.5 h-3.5 text-orange-500" />
-            <span className="text-xs font-bold text-orange-600">{MOCK_CHILD.streak} day streak</span>
-          </div>
+          {childStreak > 0 && (
+            <div className="flex items-center gap-1 bg-orange-50 px-2.5 py-1 rounded-full">
+              <Flame className="w-3.5 h-3.5 text-orange-500" />
+              <span className="text-xs font-bold text-orange-600">{childStreak} day streak</span>
+            </div>
+          )}
           <button onClick={logout} className="text-gray-400 hover:text-gray-600">
             <LogOut className="w-4 h-4" />
           </button>
@@ -240,7 +287,7 @@ export default function StudentApp() {
       </header>
 
       {/* Tab nav */}
-      <nav className="bg-white border-b border-gray-100 flex px-2 sticky top-[57px] z-20">
+      <nav className="bg-white border-b border-gray-100 flex px-2 sticky top-[57px] z-20 overflow-x-auto">
         {([
           { key: 'today',    label: 'Today',      icon: BookOpen },
           { key: 'goals',    label: 'Goals',      icon: Target },
@@ -252,7 +299,7 @@ export default function StudentApp() {
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className={`flex items-center gap-1.5 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+            className={`flex items-center gap-1.5 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap flex-shrink-0 ${
               activeTab === key
                 ? 'border-brand-600 text-brand-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -277,7 +324,7 @@ export default function StudentApp() {
             canGenerate={!!apiKey && !!goalPlan}
             childAge={childInfo?.age ?? null}
             childGrade={childInfo?.grade ?? null}
-            childName={childInfo?.name ?? ''}
+            childName={childName}
             apiKey={apiKey}
             model={model}
             onGenerate={generateWeeklyActivities}
@@ -294,7 +341,11 @@ export default function StudentApp() {
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-900">ScholarPath AI Tutor</p>
-                <p className="text-xs text-gray-400">Currently: Mathematics • Quadratic Equations</p>
+                <p className="text-xs text-gray-400">
+                  {primarySubject !== 'your subjects'
+                    ? `Focused on ${primarySubject} • Goal: ${childGoal}`
+                    : 'Ask me anything about your studies'}
+                </p>
               </div>
               <div className="ml-auto flex items-center gap-1.5">
                 <Lock className="w-3 h-3 text-gray-300" />
@@ -302,10 +353,29 @@ export default function StudentApp() {
               </div>
             </div>
 
-            
             {/* Messages */}
             <div className="flex-1 overflow-y-auto scrollbar-hide pb-2">
-              {messages.map(m => <ChatBubble key={m.id} msg={m} />)}
+              {messages.map(m => (
+                <div key={m.id} className={`flex items-end gap-2 mb-3 ${m.sender !== 'ai' ? 'flex-row-reverse' : ''}`}>
+                  {m.sender === 'ai' && (
+                    <div className="w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0">
+                      <Brain className="w-4 h-4 text-brand-600" />
+                    </div>
+                  )}
+                  {m.sender !== 'ai' && (
+                    <div className="w-7 h-7 rounded-full bg-brand-600 flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
+                      {nameInitial}
+                    </div>
+                  )}
+                  <div className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                    m.sender === 'ai'
+                      ? 'bg-gray-100 text-gray-800 rounded-bl-sm'
+                      : 'bg-brand-600 text-white rounded-br-sm'
+                  }`}>
+                    {m.content}
+                  </div>
+                </div>
+              ))}
               {isThinking && !streamingContent && <TypingIndicator />}
               {streamingContent && (
                 <ChatBubble msg={{ id: 'streaming', sender: 'ai', content: streamingContent, timestamp: new Date().toISOString() }} />
@@ -319,7 +389,7 @@ export default function StudentApp() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() } }}
-                placeholder="Ask your tutor anything about today's topic…"
+                placeholder="Ask your tutor anything…"
                 rows={1}
                 className="flex-1 resize-none text-sm outline-none px-2 py-1.5 text-gray-800 placeholder:text-gray-400 max-h-28"
               />
@@ -374,7 +444,7 @@ export default function StudentApp() {
             error={knowledgeError}
             apiKey={apiKey}
             model={model}
-            studentGoal={MOCK_CHILD.goal}
+            studentGoal={childGoal}
             onAnalyse={loadKnowledge}
             onPracticeInChat={(item, exercise) => {
               setActiveTab('chat')
@@ -393,64 +463,86 @@ export default function StudentApp() {
         {/* PROGRESS */}
         {activeTab === 'progress' && (
           <div className="space-y-5">
-            {/* Weekly chart */}
+            {/* Weekly activity chart */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-              <h3 className="font-semibold text-gray-900 mb-4">This Week</h3>
-              <div className="flex items-end gap-2 h-24">
-                {MOCK_CHILD.weeklyStats.map(d => {
-                  const maxMin = Math.max(...MOCK_CHILD.weeklyStats.map(x => x.minutes), 1)
-                  const h = d.minutes > 0 ? Math.max((d.minutes / maxMin) * 80, 8) : 4
-                  const today = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date().getDay()]
+              <h3 className="font-semibold text-gray-900 mb-1">This Week's Activities</h3>
+              <p className="text-xs text-gray-400 mb-4">{totalDone} of {totalActivities} completed</p>
+              <div className="flex items-end gap-2 h-20">
+                {weekDays.map(d => {
+                  const count = completionsByDay[d] ?? 0
+                  const h = count > 0 ? Math.max((count / maxCompletions) * 64, 10) : 4
+                  const isToday = d === todayDay
                   return (
-                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
+                    <div key={d} className="flex-1 flex flex-col items-center gap-1">
                       <div
                         className={`w-full rounded-lg transition-all ${
-                          d.day === today ? 'bg-brand-500' : d.minutes > 0 ? 'bg-brand-200' : 'bg-gray-100'
+                          isToday ? 'bg-brand-500' : count > 0 ? 'bg-brand-200' : 'bg-gray-100'
                         }`}
                         style={{ height: `${h}px` }}
                       />
-                      <span className={`text-[10px] font-medium ${d.day === today ? 'text-brand-600' : 'text-gray-400'}`}>{d.day}</span>
+                      <span className={`text-[10px] font-medium ${isToday ? 'text-brand-600' : 'text-gray-400'}`}>{d}</span>
                     </div>
                   )
                 })}
               </div>
-              <p className="text-xs text-gray-500 mt-3">
-                {MOCK_CHILD.totalMinutesThisWeek} min studied this week
-                <span className="ml-2 text-green-600 font-semibold">+18% vs last week 🎉</span>
-              </p>
             </div>
 
-            {/* Subject levels */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-              <h3 className="font-semibold text-gray-900 mb-4">Subject Levels</h3>
-              <div className="space-y-4">
-                {MOCK_CHILD.subjects.map(s => (
-                  <div key={s.id}>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                        {s.icon} {s.name}
-                      </span>
-                      <span className="text-xs font-bold text-gray-500">Level {s.currentLevel}/10</span>
-                    </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2.5">
-                      <div
-                        className="h-2.5 rounded-full transition-all"
-                        style={{ width: `${s.progressPercent}%`, backgroundColor: s.color }}
-                      />
-                    </div>
-                  </div>
-                ))}
+            {/* Subject breakdown */}
+            {subjectEntries.length > 0 && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <h3 className="font-semibold text-gray-900 mb-4">Subject Accuracy This Week</h3>
+                <div className="space-y-3">
+                  {subjectEntries.map(([subject, data]) => {
+                    const pct = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0
+                    return (
+                      <div key={subject}>
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm font-medium text-gray-700">{subject}</span>
+                          <span className="text-xs font-bold text-gray-500">{data.correct}/{data.total} correct</span>
+                        </div>
+                        <div className="w-full bg-gray-100 rounded-full h-2">
+                          <div
+                            className="h-2 rounded-full transition-all"
+                            style={{ width: `${pct}%`, backgroundColor: data.color }}
+                          />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Recent completions */}
+            {activityCompletions.length > 0 && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <h3 className="font-semibold text-gray-900 mb-3">Recent Completions</h3>
+                <div className="space-y-2">
+                  {[...activityCompletions].reverse().slice(0, 5).map(c => {
+                    const act = weeklyActivities.find(a => a.id === c.activityId)
+                    return (
+                      <div key={c.activityId} className="flex items-center gap-3 py-1">
+                        <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${c.isCorrect ? 'text-green-500' : 'text-amber-500'}`} />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-gray-800 truncate">{act?.title ?? 'Activity'}</p>
+                          <p className="text-xs text-gray-400">{c.score}/100 · {act?.subject ?? ''}</p>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Goal reminder */}
             <div className="bg-gradient-to-r from-brand-600 to-purple-600 rounded-2xl p-5 text-white">
               <p className="text-brand-200 text-xs font-semibold uppercase tracking-wide mb-1">Your Goal</p>
-              <h3 className="font-bold text-xl mb-1">{MOCK_CHILD.goal}</h3>
-              <p className="text-brand-100 text-sm">
-                Class of {MOCK_CHILD.targetYear} ·{' '}
-                {MOCK_CHILD.targetYear - new Date().getFullYear()} years to go · Keep it up! 🚀
-              </p>
+              <h3 className="font-bold text-xl mb-1">{childGoal}</h3>
+              {targetYear && (
+                <p className="text-brand-100 text-sm">
+                  Class of {targetYear} · {targetYear - new Date().getFullYear()} years to go · Keep it up! 🚀
+                </p>
+              )}
             </div>
           </div>
         )}
