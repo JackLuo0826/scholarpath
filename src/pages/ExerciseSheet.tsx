@@ -21,7 +21,6 @@ type Phase = 'answering' | 'checking' | 'feedback'
 export default function ExerciseSheet({
   activity, childAge, childGrade, apiKey, model, weekStart, onClose, onSubmitted,
 }: Props) {
-  const [inputMode] = useState<InputMode>('type')
   const [typedAnswer, setTypedAnswer] = useState('')
   const [drawnBase64, setDrawnBase64] = useState('')
   const [showHint, setShowHint] = useState(false)
