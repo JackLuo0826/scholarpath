@@ -80,6 +80,7 @@ export default function StudentApp() {
   } = useApp()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('today')
+  const [activeActivity, setActiveActivity] = useState<WeeklyActivity | null>(null)
   const [input, setInput] = useState('')
   const [isThinking, setIsThinking] = useState(false)
   const [streamingContent, setStreamingContent] = useState('')
