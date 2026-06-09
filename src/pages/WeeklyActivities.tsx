@@ -1,22 +1,18 @@
-import { useState } from 'react'
 import { Loader2, RefreshCw, CheckCircle2, Lock, Sparkles, Clock, Target } from 'lucide-react'
 import type { WeeklyActivity, ActivityCompletion } from '../types'
-import ExerciseSheet from './ExerciseSheet'
 
 interface Props {
   activities: WeeklyActivity[]
   completions: ActivityCompletion[]
-  weekStart: string
   weekTheme: string
   isGenerating: boolean
+  /** True when apiKey is present — controls whether "Start Activity" button is shown */
+  canStart: boolean
+  /** True when apiKey AND goalPlan are present — controls Generate / Regenerate buttons */
   canGenerate: boolean
-  childAge: number | null
-  childGrade: string | null
-  childName: string
-  apiKey: string
-  model: string
   onGenerate: () => void
   onCompleted: (completion: ActivityCompletion) => void
+  onStartActivity: (activity: WeeklyActivity) => void
 }
 
 const TYPE_STYLES = {
