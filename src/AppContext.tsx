@@ -172,6 +172,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     lsSet('sp_messages', null)
     localStorage.removeItem('sp_child_id')
     setMessages(MOCK_MESSAGES)
+    setGoalPlanState(null)
+    lsSet('sp_goal_plan', null)
+    setUniversityPathState(null)
+    lsSet('sp_university_path', null)
   }
 
   // ── Messages ─────────────────────────────────────────────────────────────
