@@ -325,7 +325,6 @@ export default function StudentApp() {
             canStart={!!apiKey}
             canGenerate={!!apiKey && !!goalPlan}
             onGenerate={generateWeeklyActivities}
-            onCompleted={submitActivityAnswer}
             onStartActivity={setActiveActivity}
           />
         )}
