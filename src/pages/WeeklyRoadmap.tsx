@@ -214,36 +214,6 @@ export default function WeeklyRoadmap({ goalPlan, onPracticeInChat, onViewKnowle
         </div>
       )}
 
-      {/* ── Weekly habits ─────────────────────────────────────────────────── */}
-      {goalPlan.weeklyHabits?.length > 0 && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-400" />
-            <h3 className="font-semibold text-gray-900 text-sm">Weekly Habits</h3>
-          </div>
-          <div className="divide-y divide-gray-50">
-            {goalPlan.weeklyHabits.map((h, i) => (
-              <div key={i} className="px-5 py-3.5 flex items-start gap-3">
-                <span className="text-lg flex-shrink-0 leading-none mt-0.5">⚡</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900">{h.habit}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    <span className="font-medium text-brand-600">{h.frequency}</span>
-                    {h.rationale && ` · ${h.rationale}`}
-                  </p>
-                </div>
-                <button
-                  onClick={() => onPracticeInChat(`I want to work on this weekly habit: "${h.habit}" (${h.frequency}). Can you give me a practical starting exercise or accountability challenge for this week?`)}
-                  className="flex-shrink-0 flex items-center gap-1 text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1.5 rounded-lg hover:bg-teal-100 transition-colors"
-                >
-                  Start <ChevronRight className="w-3 h-3" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* ── Subject targets ───────────────────────────────────────────────── */}
       {goalPlan.subjectTargets?.length > 0 && (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
