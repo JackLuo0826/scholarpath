@@ -86,7 +86,6 @@ export default function StudentApp() {
   const [activeTab, setActiveTab] = useState<Tab>('today')
   const [input, setInput] = useState('')
   const [isThinking, setIsThinking] = useState(false)
-  const [tasks, setTasks] = useState(MOCK_DAILY_TASKS)
   const [streamingContent, setStreamingContent] = useState('')
   const [knowledgeItems, setKnowledgeItems] = useState<KnowledgeItem[]>([])
   const [knowledgeLoading, setKnowledgeLoading] = useState(false)
