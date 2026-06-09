@@ -110,7 +110,7 @@ export default function ExerciseSheet({
   // Render via portal so the modal escapes any parent stacking contexts
   return createPortal(
     <div
-      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}
+      style={{ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, zIndex: 9999, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div
