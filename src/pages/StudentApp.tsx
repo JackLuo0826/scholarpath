@@ -5,6 +5,7 @@ import {
   GraduationCap, LogOut, ChevronRight, Loader2, Lock, BookMarked,
 } from 'lucide-react'
 import KnowledgeCanvas from './KnowledgeCanvas'
+import WeeklyRoadmap from './WeeklyRoadmap'
 import { useApp } from '../AppContext'
 import { MOCK_CHILD, MOCK_DAILY_TASKS } from '../mockData'
 import type { ChatMessage, DailyTask } from '../types'
