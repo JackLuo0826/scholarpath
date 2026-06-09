@@ -405,6 +405,61 @@ export default function ParentApp() {
                 <p className="text-sm text-gray-500 mt-0.5">Manage Emma's learning environment and safety settings.</p>
               </div>
 
+              {/* Child Profile */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-gray-400" />
+                  <h3 className="font-semibold text-gray-900 text-sm">Child Profile</h3>
+                  <span className="ml-auto text-xs text-gray-400">Used to personalise activities &amp; AI content</span>
+                </div>
+                <div className="px-5 py-4 space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="text-xs font-medium text-gray-700 block mb-1.5">Child's Name</label>
+                      <input
+                        type="text"
+                        value={profileName}
+                        onChange={e => setProfileName(e.target.value)}
+                        placeholder="Emma"
+                        className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-700 block mb-1.5">Age</label>
+                      <input
+                        type="number"
+                        min={5}
+                        max={21}
+                        value={profileAge}
+                        onChange={e => setProfileAge(e.target.value)}
+                        placeholder="13"
+                        className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-700 block mb-1.5">Grade / Year</label>
+                      <input
+                        type="text"
+                        value={profileGrade}
+                        onChange={e => setProfileGrade(e.target.value)}
+                        placeholder="Year 9 / Grade 8"
+                        className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    onClick={saveProfile}
+                    className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                      profileSaved
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-brand-600 text-white hover:bg-brand-700'
+                    }`}
+                  >
+                    {profileSaved ? '✓ Saved' : 'Save Profile'}
+                  </button>
+                </div>
+              </div>
+
               {/* Claude API Key */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-2">
