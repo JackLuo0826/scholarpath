@@ -320,17 +320,13 @@ export default function StudentApp() {
           <WeeklyActivities
             activities={weeklyActivities}
             completions={activityCompletions}
-            weekStart={weekStart}
             weekTheme={weeklyTheme}
             isGenerating={isGeneratingActivities}
+            canStart={!!apiKey}
             canGenerate={!!apiKey && !!goalPlan}
-            childAge={childInfo?.age ?? null}
-            childGrade={childInfo?.grade ?? null}
-            childName={childName}
-            apiKey={apiKey}
-            model={model}
             onGenerate={generateWeeklyActivities}
             onCompleted={submitActivityAnswer}
+            onStartActivity={setActiveActivity}
           />
         )}
 
