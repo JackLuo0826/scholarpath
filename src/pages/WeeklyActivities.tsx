@@ -169,7 +169,8 @@ export default function WeeklyActivities({
                   </div>
                 ) : (
                   <button
-                    onClick={() => setActiveActivity(act)}
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setActiveActivity(act) }}
                     className="flex items-center gap-1.5 text-xs font-semibold bg-brand-600 text-white px-4 py-2 rounded-xl hover:bg-brand-700 transition-colors shadow-sm"
                   >
                     Start Activity →
