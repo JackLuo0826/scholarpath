@@ -115,6 +115,13 @@ export default function LoginPage() {
 
             {tab === 'parent' ? (
               <div className="space-y-4">
+                <button
+                  type="button"
+                  onClick={() => { setParentEmail('parent@test.com'); setParentPassword('Test1234!'); setMode('signin') }}
+                  className="w-full text-xs font-semibold text-brand-600 bg-brand-50 border border-brand-200 rounded-xl py-2 hover:bg-brand-100 transition-colors"
+                >
+                  Use test account (parent@test.com)
+                </button>
                 {isSupabaseConfigured && (
                   <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-2">
                     <button onClick={() => setMode('signin')} className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-colors ${mode === 'signin' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500'}`}>Sign in</button>
