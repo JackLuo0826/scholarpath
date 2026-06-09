@@ -30,7 +30,7 @@ const CATEGORY_ICONS = {
   test:            Swords,
   extracurricular: Heart,
   application:     CheckCircle2,
-  habit:           Zap,
+  habit:           CheckCircle2,
 }
 
 function practicePrompt(milestone: { title: string; description: string; category: string }, subject?: string): string {

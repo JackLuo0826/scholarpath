@@ -98,6 +98,34 @@ create table if not exists public.settings (
   updated_at  timestamptz not null default now()
 );
 
+-- ── Weekly generated activity sets ──────────────────────────────────────────
+create table if not exists public.weekly_activities (
+  id           uuid primary key default uuid_generate_v4(),
+  child_id     uuid not null references public.children(id) on delete cascade,
+  week_start   date not null,
+  week_theme   text not null default '',
+  activities   jsonb not null,
+  generated_at timestamptz not null default now(),
+  unique(child_id, week_start)
+);
+
+-- ── Activity completions (student answers + AI feedback) ────────────────────
+create table if not exists public.activity_completions (
+  id            uuid primary key default uuid_generate_v4(),
+  child_id      uuid not null references public.children(id) on delete cascade,
+  activity_id   text not null,
+  week_start    date not null,
+  answer_text   text,
+  answer_image  text,
+  is_correct    boolean not null,
+  score         int not null default 0,
+  feedback      text not null default '',
+  explanation   text not null default '',
+  encouragement text not null default '',
+  completed_at  timestamptz not null default now(),
+  unique(child_id, activity_id, week_start)
+);
+
 -- ============================================================
 -- Drop old/renamed policies before recreating (idempotent re-runs)
 -- ============================================================
@@ -211,6 +239,43 @@ create policy "Student reads own university path" on public.university_paths
 -- Settings
 create policy "Own settings" on public.settings
   for all using (parent_id = auth.uid());
+
+-- ── Drop new policies before creating (idempotent) ──────────────────────────
+drop policy if exists "Parent manages weekly activities"  on public.weekly_activities;
+drop policy if exists "Student reads own weekly activities" on public.weekly_activities;
+drop policy if exists "Student inserts own weekly activities" on public.weekly_activities;
+drop policy if exists "Parent reads child completions"   on public.activity_completions;
+drop policy if exists "Student manages own completions"  on public.activity_completions;
+
+-- Weekly activities: parent full control; student can read + insert
+alter table public.weekly_activities      enable row level security;
+alter table public.activity_completions   enable row level security;
+
+create policy "Parent manages weekly activities" on public.weekly_activities
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+create policy "Student reads own weekly activities" on public.weekly_activities
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+create policy "Student inserts own weekly activities" on public.weekly_activities
+  for insert with check (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+-- Activity completions: student owns; parent can read
+create policy "Student manages own completions" on public.activity_completions
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+create policy "Parent reads child completions" on public.activity_completions
+  for select using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
 
 -- ============================================================
 -- Trigger: auto-create profile on signup
