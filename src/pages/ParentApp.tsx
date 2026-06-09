@@ -463,6 +463,16 @@ export default function ParentApp() {
           )}
         </main>
       </div>
+
+      {/* Goal Wizard modal */}
+      {showGoalWizard && (
+        <GoalWizard
+          apiKey={apiKey}
+          model={model}
+          onClose={() => setShowGoalWizard(false)}
+          onPlanReady={(_conversation, plan) => { setGoalPlan(plan); setShowGoalWizard(false) }}
+        />
+      )}
     </div>
   )
 }
