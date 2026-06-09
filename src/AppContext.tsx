@@ -32,7 +32,7 @@ interface AppState {
   setUser: (u: User | null) => void
   logout: () => Promise<void>
   addMessage: (m: ChatMessage) => void
-  setApiKey: (key: string) => void
+  setApiKey: (key: string) => Promise<void> | void
   setModel: (model: string) => void
   setGoalPlan: (plan: GoalPlan | null) => void
   setUniversityPath: (path: UniversityPath | null) => void
