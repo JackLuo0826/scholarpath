@@ -139,10 +139,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         }
       }
     } else if (profile.role === 'student') {
-      // Resolve child row by auth_id
+      // Resolve child row by auth_id (include parent_id to load their settings)
       const { data: childRow } = await supabase
         .from('children')
-        .select('id, name, age, grade, goal, target_year, avatar_color, streak')
+        .select('id, parent_id, name, age, grade, goal, target_year, avatar_color, streak')
         .eq('auth_id', authId)
         .maybeSingle()
 
@@ -157,6 +157,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
           avatarColor: childRow.avatar_color ?? '#6366f1', streak: childRow.streak ?? 0,
         }
         setChildInfo(ci); lsSet('sp_child_info', ci)
+
+        // Load parent's api_key + model so student can generate/submit activities
+        if (childRow.parent_id) {
+          const { data: parentSettings } = await supabase
+            .from('settings')
+            .select('claude_model, claude_api_key')
+            .eq('parent_id', childRow.parent_id)
+            .maybeSingle()
+          if (parentSettings?.claude_api_key) {
+            setApiKeyState(parentSettings.claude_api_key)
+            localStorage.setItem('sp_api_key', parentSettings.claude_api_key)
+          }
+          if (parentSettings?.claude_model) {
+            setModelState(parentSettings.claude_model)
+            localStorage.setItem('sp_model', parentSettings.claude_model)
+          }
+        }
       }
 
       if (cid) {
