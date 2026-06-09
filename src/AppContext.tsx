@@ -365,6 +365,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const updateChildProfile = async (update: { age?: number; grade?: string; name?: string }) => {
+    if (!childId) return
+    const updated: ChildInfo = {
+      ...(childInfo ?? { id: childId, name: '', age: null, grade: null, goal: null, targetYear: null, avatarColor: '#6366f1', streak: 0 }),
+      ...update,
+    }
+    setChildInfo(updated)
+    lsSet('sp_child_info', updated)
+    if (isSupabaseConfigured) {
+      const patch: Record<string, unknown> = {}
+      if (update.age !== undefined) patch.age = update.age
+      if (update.grade !== undefined) patch.grade = update.grade
+      if (update.name !== undefined) patch.name = update.name
+      await supabase.from('children').update(patch).eq('id', childId)
+    }
+  }
+
   const submitActivityAnswer = async (completion: ActivityCompletion) => {
     // Optimistic update
     setActivityCompletions(prev => {
