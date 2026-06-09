@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
+import GoalSummary from './GoalSummary'
 import { useApp } from '../AppContext'
 import { MOCK_CHILD, MOCK_DAILY_TASKS } from '../mockData'
 import type { ChatMessage, DailyTask } from '../types'
