@@ -198,6 +198,44 @@ export function AppProvider({ children }: { children: ReactNode }) {
       .limit(1)
       .maybeSingle()
     if (up) { setUniversityPathState(up.path_json); lsSet('sp_university_path', up.path_json) }
+
+    // Load this week's activities
+    const currentWeekStart = getWeekStart()
+    const { data: wa } = await supabase
+      .from('weekly_activities')
+      .select('activities, week_theme')
+      .eq('child_id', cid)
+      .eq('week_start', currentWeekStart)
+      .maybeSingle()
+    if (wa) {
+      setWeeklyActivities(wa.activities ?? [])
+      setWeeklyTheme(wa.week_theme ?? '')
+      lsSet('sp_weekly_acts', wa.activities ?? [])
+      localStorage.setItem('sp_weekly_theme', wa.week_theme ?? '')
+    }
+
+    // Load this week's completions
+    const { data: ac } = await supabase
+      .from('activity_completions')
+      .select('*')
+      .eq('child_id', cid)
+      .eq('week_start', currentWeekStart)
+    if (ac && ac.length > 0) {
+      const completions: ActivityCompletion[] = ac.map(r => ({
+        activityId: r.activity_id,
+        weekStart: r.week_start,
+        answerText: r.answer_text ?? undefined,
+        answerImageBase64: r.answer_image ?? undefined,
+        isCorrect: r.is_correct,
+        score: r.score,
+        feedback: r.feedback,
+        explanation: r.explanation,
+        encouragement: r.encouragement,
+        completedAt: r.completed_at,
+      }))
+      setActivityCompletions(completions)
+      lsSet('sp_act_completions', completions)
+    }
   }
 
   // ── Auth ─────────────────────────────────────────────────────────────────
