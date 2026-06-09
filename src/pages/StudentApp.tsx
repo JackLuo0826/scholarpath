@@ -7,8 +7,9 @@ import {
 import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
 import GoalSummary from './GoalSummary'
+import WeeklyActivities from './WeeklyActivities'
 import { useApp } from '../AppContext'
-import { MOCK_CHILD, MOCK_DAILY_TASKS } from '../mockData'
+import { MOCK_CHILD } from '../mockData'
 import type { ChatMessage, DailyTask } from '../types'
 
 const TASK_TYPE_COLORS: Record<DailyTask['type'], string> = {
