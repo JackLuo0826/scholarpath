@@ -1,4 +1,4 @@
-import { Target, Calendar, BookMarked, ChevronRight, MapPin, CheckCircle2, BookOpen, FlaskConical, Swords, Heart, Zap } from 'lucide-react'
+import { Target, Calendar, BookMarked, ChevronRight, MapPin, CheckCircle2, BookOpen, FlaskConical, Swords, Heart } from 'lucide-react'
 import type { GoalPlan } from './GoalWizard'
 
 interface Props {
