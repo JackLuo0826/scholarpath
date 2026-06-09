@@ -248,14 +248,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (isSupabaseConfigured) await supabase.auth.signOut()
     setUserState(null)
     setChildId(null)
+    setChildInfo(null)
     lsSet('sp_user', null)
     lsSet('sp_messages', null)
+    lsSet('sp_child_info', null)
     localStorage.removeItem('sp_child_id')
     setMessages(MOCK_MESSAGES)
     setGoalPlanState(null)
     lsSet('sp_goal_plan', null)
     setUniversityPathState(null)
     lsSet('sp_university_path', null)
+    setWeeklyActivities([])
+    setWeeklyTheme('')
+    setActivityCompletions([])
+    lsSet('sp_weekly_acts', null)
+    lsSet('sp_act_completions', null)
+    localStorage.removeItem('sp_weekly_theme')
   }
 
   // ── Messages ─────────────────────────────────────────────────────────────
