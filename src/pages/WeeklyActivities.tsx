@@ -154,15 +154,15 @@ export default function WeeklyActivities({
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     Completed
                   </div>
-                ) : !canGenerate ? (
+                ) : !canStart ? (
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400">
                     <Lock className="w-3.5 h-3.5" />
-                    Needs API key
+                    Ask a parent to add an API key in Settings
                   </div>
                 ) : (
                   <button
                     type="button"
-                    onClick={(e) => { e.stopPropagation(); setActiveActivity(act) }}
+                    onClick={(e) => { e.stopPropagation(); e.preventDefault(); onStartActivity(act) }}
                     className="flex items-center gap-1.5 text-xs font-semibold bg-brand-600 text-white px-4 py-2 rounded-xl hover:bg-brand-700 transition-colors shadow-sm"
                   >
                     Start Activity →
