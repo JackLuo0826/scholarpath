@@ -8,6 +8,7 @@ import {
 import { useApp } from '../AppContext'
 import GoalWizard from './GoalWizard'
 import GoalPlan from './GoalPlan'
+import GoalSummary from './GoalSummary'
 import UniversityPathPlanner from './UniversityPathPlanner'
 
 function Toggle({ on }: { on: boolean }) {
