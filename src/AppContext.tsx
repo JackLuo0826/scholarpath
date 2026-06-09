@@ -392,8 +392,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   return (
     <AppContext.Provider value={{
-      user, messages, apiKey, model, goalPlan, universityPath, childId, isLoadingSession,
+      user, messages, apiKey, model, goalPlan, universityPath,
+      childId, childInfo, weeklyActivities, weeklyTheme, activityCompletions, weekStart,
+      isGeneratingActivities, isLoadingSession,
       setUser, logout, addMessage, setApiKey, setModel, setGoalPlan, setUniversityPath,
+      generateWeeklyActivities, submitActivityAnswer,
     }}>
       {children}
     </AppContext.Provider>
