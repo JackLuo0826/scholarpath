@@ -188,23 +188,6 @@ export default function WeeklyActivities({
         </button>
       )}
 
-      {/* Exercise modal */}
-      {activeActivity && (
-        <ExerciseSheet
-          activity={activeActivity}
-          childAge={childAge}
-          childGrade={childGrade}
-          apiKey={apiKey}
-          model={model}
-          weekStart={weekStart}
-          onClose={() => setActiveActivity(null)}
-          onSubmitted={(comp) => {
-            onCompleted(comp)
-            setActiveActivity(null)
-          }}
-        />
-      )}
-
       <div className="pb-4" />
     </div>
   )
