@@ -545,6 +545,23 @@ export default function StudentApp() {
           </div>
         )}
       </main>
+
+      {/* Exercise modal — rendered at StudentApp root so portal has no stacking-context ancestors */}
+      {activeActivity && (
+        <ExerciseSheet
+          activity={activeActivity}
+          childAge={childInfo?.age ?? null}
+          childGrade={childInfo?.grade ?? null}
+          apiKey={apiKey}
+          model={model}
+          weekStart={weekStart}
+          onClose={() => setActiveActivity(null)}
+          onSubmitted={(comp) => {
+            submitActivityAnswer(comp)
+            setActiveActivity(null)
+          }}
+        />
+      )}
     </div>
   )
 }
