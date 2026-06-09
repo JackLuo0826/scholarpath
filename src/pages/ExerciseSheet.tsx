@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { X, Lightbulb, PenLine, Type, CheckCircle2, XCircle, Loader2, Send } from 'lucide-react'
 import type { WeeklyActivity, ActivityCompletion } from '../types'
 import DrawingCanvas from '../components/DrawingCanvas'
@@ -20,18 +21,33 @@ type Phase = 'answering' | 'checking' | 'feedback'
 export default function ExerciseSheet({
   activity, childAge, childGrade, apiKey, model, weekStart, onClose, onSubmitted,
 }: Props) {
-  const [inputMode, setInputMode] = useState<InputMode>(
-    activity.type === 'todo' || activity.type === 'reading' ? 'type' : 'type'
-  )
+  const [inputMode] = useState<InputMode>('type')
   const [typedAnswer, setTypedAnswer] = useState('')
   const [drawnBase64, setDrawnBase64] = useState('')
   const [showHint, setShowHint] = useState(false)
   const [phase, setPhase] = useState<Phase>('answering')
   const [completion, setCompletion] = useState<ActivityCompletion | null>(null)
   const [error, setError] = useState('')
+  const [inputModeState, setInputModeState] = useState<InputMode>('type')
+  const [drawWidth, setDrawWidth] = useState(560)
+
+  // Lock body scroll while modal is open; also capture window width for canvas
+  useEffect(() => {
+    setDrawWidth(Math.min(560, window.innerWidth - 40))
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [])
+
+  // Close on Escape key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [onClose])
 
   const canDraw = activity.type === 'exercise' || activity.type === 'quiz'
-  const hasAnswer = inputMode === 'type' ? typedAnswer.trim().length > 0 : drawnBase64.length > 0
+  const hasAnswer = inputModeState === 'type' ? typedAnswer.trim().length > 0 : drawnBase64.length > 0
 
   const difficultyColor = {
     foundation: 'text-green-600 bg-green-50',
@@ -56,7 +72,7 @@ export default function ExerciseSheet({
       apiKey,
       model,
     }
-    if (inputMode === 'type') {
+    if (inputModeState === 'type') {
       body.answerText = typedAnswer
     } else {
       body.answerImageBase64 = drawnBase64
@@ -74,8 +90,8 @@ export default function ExerciseSheet({
       const completionRecord: ActivityCompletion = {
         activityId: activity.id,
         weekStart,
-        answerText: inputMode === 'type' ? typedAnswer : undefined,
-        answerImageBase64: inputMode === 'draw' ? drawnBase64 : undefined,
+        answerText: inputModeState === 'type' ? typedAnswer : undefined,
+        answerImageBase64: inputModeState === 'draw' ? drawnBase64 : undefined,
         isCorrect: data.isCorrect,
         score: data.score,
         feedback: data.feedback,
@@ -92,17 +108,25 @@ export default function ExerciseSheet({
     }
   }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm p-0 sm:p-4">
-      <div className="relative w-full max-w-2xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl max-h-[95dvh] overflow-y-auto">
+  // Render via portal so the modal escapes any parent stacking contexts
+  return createPortal(
+    <div
+      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+    >
+      <div
+        style={{ position: 'relative', width: '100%', maxWidth: '672px', backgroundColor: '#fff', borderRadius: '24px 24px 0 0', maxHeight: '95vh', overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}
+        onClick={(e) => e.stopPropagation()}
+      >
 
         {/* Header */}
-        <div className="sticky top-0 bg-white z-10 border-b border-gray-100 px-5 pt-5 pb-4 rounded-t-3xl sm:rounded-t-none">
+        <div style={{ position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 10, borderBottom: '1px solid #f3f4f6', padding: '20px 20px 16px', borderRadius: '24px 24px 0 0' }}>
           <button
+            type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+            style={{ position: 'absolute', top: 16, right: 16, width: 32, height: 32, borderRadius: '50%', backgroundColor: '#f3f4f6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <X className="w-4 h-4" />
+            <X style={{ width: 16, height: 16, color: '#6b7280' }} />
           </button>
           <div className="flex items-center gap-2 mb-1 pr-10 flex-wrap">
             <span className="text-xs font-semibold text-gray-500">{typeLabel[activity.type]}</span>
@@ -134,6 +158,7 @@ export default function ExerciseSheet({
             <div>
               {!showHint ? (
                 <button
+                  type="button"
                   onClick={() => setShowHint(true)}
                   className="flex items-center gap-1.5 text-xs font-semibold text-amber-600 hover:text-amber-700 transition-colors"
                 >
@@ -156,9 +181,10 @@ export default function ExerciseSheet({
               {canDraw && (
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setInputMode('type')}
+                    type="button"
+                    onClick={() => setInputModeState('type')}
                     className={`flex items-center gap-1.5 flex-1 justify-center py-2 rounded-xl text-sm font-semibold transition-colors ${
-                      inputMode === 'type'
+                      inputModeState === 'type'
                         ? 'bg-brand-600 text-white shadow-sm'
                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                     }`}
@@ -167,9 +193,10 @@ export default function ExerciseSheet({
                     Type
                   </button>
                   <button
-                    onClick={() => setInputMode('draw')}
+                    type="button"
+                    onClick={() => setInputModeState('draw')}
                     className={`flex items-center gap-1.5 flex-1 justify-center py-2 rounded-xl text-sm font-semibold transition-colors ${
-                      inputMode === 'draw'
+                      inputModeState === 'draw'
                         ? 'bg-brand-600 text-white shadow-sm'
                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                     }`}
@@ -180,18 +207,17 @@ export default function ExerciseSheet({
                 </div>
               )}
 
-              {inputMode === 'type' ? (
+              {inputModeState === 'type' ? (
                 <textarea
                   className="w-full border border-gray-200 rounded-2xl p-4 text-sm text-gray-900 placeholder-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent leading-relaxed"
                   rows={5}
                   placeholder="Write your answer here…"
                   value={typedAnswer}
                   onChange={e => setTypedAnswer(e.target.value)}
-                  autoFocus
                 />
               ) : (
                 <DrawingCanvas
-                  width={Math.min(560, window.innerWidth - 40)}
+                  width={drawWidth}
                   height={300}
                   onExport={setDrawnBase64}
                   className="w-full"
@@ -205,6 +231,7 @@ export default function ExerciseSheet({
               )}
 
               <button
+                type="button"
                 onClick={submit}
                 disabled={!hasAnswer}
                 className="w-full flex items-center justify-center gap-2 bg-brand-600 text-white font-semibold py-3.5 rounded-2xl hover:bg-brand-700 transition-colors disabled:opacity-40 shadow-sm"
@@ -257,7 +284,7 @@ export default function ExerciseSheet({
                 </div>
               </div>
 
-              {/* Explanation (shown when not fully correct) */}
+              {/* Explanation */}
               {completion.explanation && (
                 <div className="bg-blue-50 border border-blue-100 rounded-2xl px-4 py-4">
                   <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wide mb-1.5">Here's the idea</p>
@@ -271,6 +298,7 @@ export default function ExerciseSheet({
               </div>
 
               <button
+                type="button"
                 onClick={onClose}
                 className="w-full bg-brand-600 text-white font-semibold py-3.5 rounded-2xl hover:bg-brand-700 transition-colors shadow-sm"
               >
@@ -280,8 +308,12 @@ export default function ExerciseSheet({
           )}
         </div>
 
-        <div className="pb-6" />
+        <div className="pb-8" />
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
+
+// Suppress the unused variable warning — inputMode is intentionally replaced by inputModeState
+void inputMode
