@@ -75,7 +75,7 @@ interface KnowledgeItem {
 }
 
 export default function StudentApp() {
-  const { messages, addMessage, logout: logoutFn, apiKey, model } = useApp()
+  const { messages, addMessage, logout: logoutFn, apiKey, model, goalPlan } = useApp()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('today')
   const [input, setInput] = useState('')
