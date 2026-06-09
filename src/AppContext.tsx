@@ -317,6 +317,79 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // ── Weekly activities ──────────────────────────────────────────────────────
+  const generateWeeklyActivities = async () => {
+    if (!apiKey || !goalPlan) return
+    setIsGeneratingActivities(true)
+    try {
+      const resp = await fetch('/api/generate-weekly', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          childAge: childInfo?.age ?? null,
+          childGrade: childInfo?.grade ?? null,
+          childName: childInfo?.name ?? '',
+          goalPlan,
+          apiKey,
+          model,
+        }),
+      })
+      if (!resp.ok) throw new Error(await resp.text())
+      const data = await resp.json()
+      const acts: WeeklyActivity[] = data.activities ?? []
+      const theme: string = data.weekTheme ?? ''
+
+      setWeeklyActivities(acts)
+      setWeeklyTheme(theme)
+      // Reset completions for the new set
+      setActivityCompletions([])
+      lsSet('sp_weekly_acts', acts)
+      lsSet('sp_act_completions', [])
+      localStorage.setItem('sp_weekly_theme', theme)
+
+      // Persist to Supabase (upsert so regenerating replaces the existing row)
+      if (isSupabaseConfigured && childId) {
+        await supabase.from('weekly_activities').upsert({
+          child_id: childId,
+          week_start: weekStart,
+          week_theme: theme,
+          activities: acts,
+          generated_at: new Date().toISOString(),
+        })
+      }
+    } catch (e) {
+      console.error('generateWeeklyActivities error:', e)
+    } finally {
+      setIsGeneratingActivities(false)
+    }
+  }
+
+  const submitActivityAnswer = async (completion: ActivityCompletion) => {
+    // Optimistic update
+    setActivityCompletions(prev => {
+      const filtered = prev.filter(c => c.activityId !== completion.activityId)
+      const next = [...filtered, completion]
+      lsSet('sp_act_completions', next)
+      return next
+    })
+
+    if (isSupabaseConfigured && childId) {
+      await supabase.from('activity_completions').upsert({
+        child_id: childId,
+        activity_id: completion.activityId,
+        week_start: completion.weekStart,
+        answer_text: completion.answerText ?? null,
+        answer_image: completion.answerImageBase64 ?? null,
+        is_correct: completion.isCorrect,
+        score: completion.score,
+        feedback: completion.feedback,
+        explanation: completion.explanation,
+        encouragement: completion.encouragement,
+        completed_at: completion.completedAt,
+      })
+    }
+  }
+
   return (
     <AppContext.Provider value={{
       user, messages, apiKey, model, goalPlan, universityPath, childId, isLoadingSession,
