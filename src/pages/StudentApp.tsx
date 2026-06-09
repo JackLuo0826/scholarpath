@@ -387,6 +387,24 @@ export default function StudentApp() {
           </div>
         )}
 
+        {/* WEEKLY ROADMAP */}
+        {activeTab === 'roadmap' && (
+          <WeeklyRoadmap
+            goalPlan={goalPlan}
+            onPracticeInChat={(prompt) => {
+              const msg: ChatMessage = {
+                id: crypto.randomUUID(),
+                sender: 'ai',
+                content: prompt,
+                timestamp: new Date().toISOString(),
+              }
+              addMessage(msg)
+              setActiveTab('chat')
+            }}
+            onViewKnowledgeMap={() => setActiveTab('knowledge')}
+          />
+        )}
+
         {/* KNOWLEDGE BASE — infinite canvas */}
         {activeTab === 'knowledge' && (
           <KnowledgeCanvas
