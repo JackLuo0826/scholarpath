@@ -101,13 +101,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
       // Load first child
       const { data: childrenRows } = await supabase
         .from('children')
-        .select('id')
+        .select('id, name, age, grade, goal, target_year, avatar_color, streak')
         .eq('parent_id', authId)
         .limit(1)
 
-      const cid = childrenRows?.[0]?.id ?? null
+      const childRow = childrenRows?.[0] ?? null
+      const cid = childRow?.id ?? null
       setChildId(cid)
       if (cid) localStorage.setItem('sp_child_id', cid)
+
+      if (childRow) {
+        const ci: ChildInfo = {
+          id: childRow.id, name: childRow.name, age: childRow.age,
+          grade: childRow.grade, goal: childRow.goal, targetYear: childRow.target_year,
+          avatarColor: childRow.avatar_color ?? '#6366f1', streak: childRow.streak ?? 0,
+        }
+        setChildInfo(ci); lsSet('sp_child_info', ci)
+      }
 
       if (cid) {
         await loadChildData(cid)
@@ -127,13 +137,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
       // Resolve child row by auth_id
       const { data: childRow } = await supabase
         .from('children')
-        .select('id')
+        .select('id, name, age, grade, goal, target_year, avatar_color, streak')
         .eq('auth_id', authId)
         .maybeSingle()
 
       const cid = childRow?.id ?? null
       setChildId(cid)
       if (cid) localStorage.setItem('sp_child_id', cid)
+
+      if (childRow) {
+        const ci: ChildInfo = {
+          id: childRow.id, name: childRow.name, age: childRow.age,
+          grade: childRow.grade, goal: childRow.goal, targetYear: childRow.target_year,
+          avatarColor: childRow.avatar_color ?? '#6366f1', streak: childRow.streak ?? 0,
+        }
+        setChildInfo(ci); lsSet('sp_child_info', ci)
+      }
 
       if (cid) {
         await loadChildData(cid)
