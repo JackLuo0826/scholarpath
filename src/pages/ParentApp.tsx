@@ -29,7 +29,7 @@ type Tab = 'overview' | 'roadmap' | 'chat' | 'settings'
 export default function ParentApp() {
   const { messages, logout: logoutFn, apiKey, setApiKey, model, setModel, goalPlan, setGoalPlan, universityPath, setUniversityPath } = useApp()
   const [showGoalWizard, setShowGoalWizard] = useState(false)
-  const [roadmapView, setRoadmapView] = useState<'university' | 'goal'>('university')
+  const [roadmapView, setRoadmapView] = useState<'university' | 'goals' | 'study'>('university')
   const [keyInput, setKeyInput] = useState(apiKey)
   const [keyVisible, setKeyVisible] = useState(false)
   const [keySaved, setKeySaved] = useState(false)
