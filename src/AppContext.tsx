@@ -414,7 +414,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       childId, childInfo, weeklyActivities, weeklyTheme, activityCompletions, weekStart,
       isGeneratingActivities, isLoadingSession,
       setUser, logout, addMessage, setApiKey, setModel, setGoalPlan, setUniversityPath,
-      generateWeeklyActivities, submitActivityAnswer,
+      generateWeeklyActivities, submitActivityAnswer, updateChildProfile,
     }}>
       {children}
     </AppContext.Provider>
