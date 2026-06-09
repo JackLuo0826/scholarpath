@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  BookOpen, Brain, Send, CheckCircle2, Circle, Flame, Trophy,
-  GraduationCap, LogOut, ChevronRight, Loader2, Lock, BookMarked, Map, Target,
+  BookOpen, Brain, Send, Flame, Trophy,
+  GraduationCap, LogOut, Loader2, Lock, BookMarked, Map, Target,
 } from 'lucide-react'
 import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
