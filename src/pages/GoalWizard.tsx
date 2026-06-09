@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Send, Loader2, X, Brain, Target, ChevronRight } from 'lucide-react'
+import { Send, Loader2, X, Brain, Target } from 'lucide-react'
 
 interface Message {
   role: 'user' | 'assistant'

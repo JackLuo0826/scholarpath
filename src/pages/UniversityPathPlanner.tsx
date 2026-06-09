@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   GraduationCap, ChevronRight, ChevronDown, ChevronUp,
   Loader2, AlertTriangle, CheckCircle2, Star, Briefcase,
-  BookOpen, Calendar, Users, RefreshCw, Globe, Target,
+  BookOpen, Calendar, Users, RefreshCw, Target,
   TrendingUp, Clock, AlertCircle, Sparkles
 } from 'lucide-react'
 
