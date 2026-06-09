@@ -252,11 +252,12 @@ export default function StudentApp() {
       {/* Tab nav */}
       <nav className="bg-white border-b border-gray-100 flex px-2 sticky top-[57px] z-20">
         {([
-          { key: 'today',    label: 'Today',     icon: BookOpen },
-          { key: 'roadmap',  label: 'Roadmap',   icon: Map },
-          { key: 'chat',     label: 'AI Tutor',  icon: Brain },
-          { key: 'knowledge',label: 'Knowledge', icon: BookMarked },
-          { key: 'progress', label: 'Progress',  icon: Trophy },
+          { key: 'today',    label: 'Today',      icon: BookOpen },
+          { key: 'goals',    label: 'Goals',      icon: Target },
+          { key: 'roadmap',  label: 'Study Plan', icon: Map },
+          { key: 'chat',     label: 'AI Tutor',   icon: Brain },
+          { key: 'knowledge',label: 'Knowledge',  icon: BookMarked },
+          { key: 'progress', label: 'Progress',   icon: Trophy },
         ] as const).map(({ key, label, icon: Icon }) => (
           <button
             key={key}
