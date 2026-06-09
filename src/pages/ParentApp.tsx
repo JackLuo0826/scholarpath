@@ -33,6 +33,21 @@ export default function ParentApp() {
   const [keyInput, setKeyInput] = useState(apiKey)
   const [keyVisible, setKeyVisible] = useState(false)
   const [keySaved, setKeySaved] = useState(false)
+  const [profileAge, setProfileAge] = useState<string>(childInfo?.age?.toString() ?? '')
+  const [profileGrade, setProfileGrade] = useState<string>(childInfo?.grade ?? '')
+  const [profileName, setProfileName] = useState<string>(childInfo?.name ?? '')
+  const [profileSaved, setProfileSaved] = useState(false)
+
+  const saveProfile = async () => {
+    const update: { age?: number; grade?: string; name?: string } = {}
+    if (profileName.trim()) update.name = profileName.trim()
+    if (profileGrade.trim()) update.grade = profileGrade.trim()
+    const ageNum = parseInt(profileAge)
+    if (!isNaN(ageNum) && ageNum > 0) update.age = ageNum
+    await updateChildProfile(update)
+    setProfileSaved(true)
+    setTimeout(() => setProfileSaved(false), 2000)
+  }
 
   const saveApiKey = () => {
     setApiKey(keyInput.trim())
