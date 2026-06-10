@@ -365,7 +365,7 @@ export default function ParentApp() {
                 <h2 className="text-xl font-bold text-gray-900">Chat History</h2>
                 <p className="text-sm text-gray-500 mt-0.5 flex items-center gap-1.5">
                   <Lock className="w-3.5 h-3.5" />
-                  All AI–student conversations are permanently logged. Emma cannot delete these.
+                  All AI–student conversations are permanently logged. {childInfo?.name ?? 'Your child'} cannot delete these.
                 </p>
               </div>
 
