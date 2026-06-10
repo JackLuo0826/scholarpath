@@ -52,7 +52,7 @@ function lsSet(key: string, value: unknown) {
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUserState] = useState<User | null>(() => ls('sp_user', null))
-  const [messages, setMessages] = useState<ChatMessage[]>(() => ls('sp_messages', MOCK_MESSAGES))
+  const [messages, setMessages] = useState<ChatMessage[]>(() => ls('sp_messages', isSupabaseConfigured ? [] : MOCK_MESSAGES))
   const [apiKey, setApiKeyState] = useState<string>(() => localStorage.getItem('sp_api_key') || '')
   const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-opus-4-6')
   const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => ls('sp_goal_plan', null))
