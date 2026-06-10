@@ -549,8 +549,8 @@ export default function ParentApp() {
                   icon: Shield,
                   items: [
                     { label: 'Chat logging', desc: 'All conversations permanently stored', control: <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-lg">Always on</span> },
-                    { label: 'Child can delete history', desc: 'Allow Emma to delete messages', control: <Toggle on={false} /> },
-                    { label: 'Data export', desc: 'Download all of Emma\'s data', control: <button className="text-xs text-brand-600 font-semibold hover:underline">Export</button> },
+                    { label: 'Child can delete history', desc: `Allow ${childInfo?.name ?? "your child"} to delete messages`, control: <Toggle on={false} /> },
+                    { label: 'Data export', desc: `Download all of ${childInfo?.name ?? "your child"}'s data`, control: <button className="text-xs text-brand-600 font-semibold hover:underline">Export</button> },
                   ]
                 },
               ].map(group => (
