@@ -244,7 +244,7 @@ export default function ParentApp() {
                 <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-semibold text-amber-800">SAT Prep needs attention</p>
-                  <p className="text-xs text-amber-700 mt-0.5">Emma is at Level 4 in SAT Prep — 6 months behind the recommended pace for a 1550+ target. Consider adding 2 extra sessions per week.</p>
+                  <p className="text-xs text-amber-700 mt-0.5">{childInfo?.name ?? 'Your child'} is at Level 4 in SAT Prep — 6 months behind the recommended pace for a 1550+ target. Consider adding 2 extra sessions per week.</p>
                 </div>
               </div>
             </div>
