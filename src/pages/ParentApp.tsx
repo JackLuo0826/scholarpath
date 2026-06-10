@@ -402,7 +402,7 @@ export default function ParentApp() {
             <div className="space-y-5">
               <div>
                 <h2 className="text-xl font-bold text-gray-900">Parental Controls</h2>
-                <p className="text-sm text-gray-500 mt-0.5">Manage Emma's learning environment and safety settings.</p>
+                <p className="text-sm text-gray-500 mt-0.5">Manage {childInfo?.name ?? "your child"}'s learning environment and safety settings.</p>
               </div>
 
               {/* Child Profile */}
