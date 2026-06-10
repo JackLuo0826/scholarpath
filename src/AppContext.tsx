@@ -191,15 +191,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       .order('created_at', { ascending: true })
       .limit(200)
 
-    if (msgs && msgs.length > 0) {
-      setMessages(msgs.map(m => ({
-        id: m.id,
-        sender: m.sender,
-        content: m.content,
-        subject: m.subject ?? undefined,
-        timestamp: m.created_at,
-      })))
-    }
+    const mapped = (msgs ?? []).map(m => ({
+      id: m.id,
+      sender: m.sender,
+      content: m.content,
+      subject: m.subject ?? undefined,
+      timestamp: m.created_at,
+    }))
+    setMessages(mapped)
+    lsSet('sp_messages', mapped)
 
     // Load goal plan
     const { data: gp } = await supabase
