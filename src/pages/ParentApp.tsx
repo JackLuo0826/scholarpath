@@ -164,8 +164,8 @@ export default function ParentApp() {
           {activeTab === 'overview' && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-xl font-bold text-gray-900">Good morning, Sarah 👋</h2>
-                <p className="text-sm text-gray-500 mt-0.5">Emma has been on a {MOCK_CHILD.streak}-day study streak. Keep it going!</p>
+                <h2 className="text-xl font-bold text-gray-900">Good morning, {user?.name ?? 'Parent'} 👋</h2>
+                <p className="text-sm text-gray-500 mt-0.5">{childInfo?.name ?? 'Your child'} has been on a {childInfo?.streak ?? 0}-day study streak. Keep it going!</p>
               </div>
 
               {/* Stat cards */}
