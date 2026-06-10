@@ -275,7 +275,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     lsSet('sp_messages', null)
     lsSet('sp_child_info', null)
     localStorage.removeItem('sp_child_id')
-    setMessages(MOCK_MESSAGES)
+    setMessages(isSupabaseConfigured ? [] : MOCK_MESSAGES)
     setGoalPlanState(null)
     lsSet('sp_goal_plan', null)
     setUniversityPathState(null)
