@@ -79,13 +79,13 @@ export default function ParentApp() {
           <button className="w-full flex items-center gap-2.5 bg-brand-50 rounded-xl px-3 py-2.5 hover:bg-brand-100 transition-colors">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
-              style={{ backgroundColor: MOCK_CHILD.avatarColor }}
+              style={{ backgroundColor: childInfo?.avatarColor ?? '#6366f1' }}
             >
-              {MOCK_CHILD.name[0]}
+              {(childInfo?.name ?? '?')[0]}
             </div>
             <div className="flex-1 text-left">
-              <p className="text-sm font-semibold text-gray-900">{MOCK_CHILD.name}</p>
-              <p className="text-xs text-gray-500">{MOCK_CHILD.grade}</p>
+              <p className="text-sm font-semibold text-gray-900">{childInfo?.name ?? 'Child'}</p>
+              <p className="text-xs text-gray-500">{childInfo?.grade ?? ''}</p>
             </div>
             <ChevronDown className="w-3 h-3 text-gray-400" />
           </button>
