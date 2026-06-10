@@ -539,9 +539,9 @@ export default function ParentApp() {
                   section: 'Notifications',
                   icon: Bell,
                   items: [
-                    { label: 'Weekly digest email', desc: 'Summary of Emma\'s progress', control: <Toggle on /> },
-                    { label: 'Milestone alerts', desc: 'When Emma hits a milestone', control: <Toggle on /> },
-                    { label: 'Off-track warnings', desc: 'If Emma falls behind plan', control: <Toggle on /> },
+                    { label: 'Weekly digest email', desc: `Summary of ${childInfo?.name ?? "your child"}'s progress`, control: <Toggle on /> },
+                    { label: 'Milestone alerts', desc: `When ${childInfo?.name ?? "your child"} hits a milestone`, control: <Toggle on /> },
+                    { label: 'Off-track warnings', desc: `If ${childInfo?.name ?? "your child"} falls behind plan`, control: <Toggle on /> },
                   ]
                 },
                 {
