@@ -171,7 +171,7 @@ export default function ParentApp() {
               {/* Stat cards */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
-                  { label: 'Study Streak', value: `${MOCK_CHILD.streak}d`, icon: Flame, color: 'text-orange-500 bg-orange-50' },
+                  { label: 'Study Streak', value: `${childInfo?.streak ?? 0}d`, icon: Flame, color: 'text-orange-500 bg-orange-50' },
                   { label: 'This Week', value: `${MOCK_CHILD.totalMinutesThisWeek}m`, icon: Clock, color: 'text-blue-500 bg-blue-50' },
                   { label: 'Goal Progress', value: '72%', icon: TrendingUp, color: 'text-green-500 bg-green-50' },
                   { label: 'Milestones Hit', value: '1/10', icon: CheckCircle, color: 'text-purple-500 bg-purple-50' },
