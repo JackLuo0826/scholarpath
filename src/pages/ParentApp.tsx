@@ -383,7 +383,7 @@ export default function ParentApp() {
                       <div className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${
                         msg.sender === 'ai' ? 'bg-brand-100 text-brand-600' : 'bg-gray-200 text-gray-600'
                       }`}>
-                        {msg.sender === 'ai' ? 'AI' : 'E'}
+                        {msg.sender === 'ai' ? 'AI' : (childInfo?.name ?? 'S')[0]}
                       </div>
                       <div className={`max-w-[80%] rounded-xl px-3 py-2 text-sm whitespace-pre-wrap ${
                         msg.sender === 'ai' ? 'bg-gray-50 text-gray-700' : 'bg-brand-50 text-brand-900'
