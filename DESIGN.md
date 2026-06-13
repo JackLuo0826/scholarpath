@@ -49,56 +49,115 @@ Frontend
 ├── React Router v6 (navigation)
 └── Capacitor (iOS/Android/macOS/Windows wrapper — Phase 2)
 
-Backend (Phase 2)
-├── Node.js + Fastify (REST API)
-├── PostgreSQL (primary database)
-├── Redis (session cache, real-time mastery state)
-├── Pinecone (vector DB for curriculum RAG)
-└── AWS S3 (content/logs storage)
+Backend
+├── Supabase (auth, PostgreSQL database, row-level security)
+│   ├── Auth: email/password via Supabase Auth (parent & child accounts)
+│   ├── Database: PostgreSQL with RLS policies per role
+│   └── Fallback: localStorage-only mode when Supabase env vars absent
+├── API routes (Vite dev server / Vercel serverless functions)
+│   ├── /api/goal-intake       — streaming GoalWizard conversation
+│   ├── /api/goal-plan         — generate full GoalPlan JSON from conversation
+│   ├── /api/generate-weekly   — generate WeeklyActivity[] from GoalPlan
+│   ├── /api/check-answer      — score and give feedback on exercise answer
+│   └── /api/analyze-performance — (planned) weak-spot analysis query
+└── No Redis, no Pinecone, no AWS in current implementation
 
 AI
 ├── Anthropic Claude API
 │   ├── claude-haiku-4-5 → validation, scope detection, quick replies (cost)
 │   └── claude-sonnet-4-6 → Socratic reasoning, detailed explanations (quality)
-├── Model routing: Haiku for 80% of requests, Sonnet for complex tutoring
+├── Default model: claude-sonnet-4-6 (configurable per parent in settings)
+├── Model routing: Haiku for lightweight calls (answer-checking, scope detection), Sonnet for tutoring/planning
 └── Prompt caching: reduces input token cost by ~50%
 
 Deployment
-├── Vercel (web PWA)
-├── AWS Lambda + API Gateway (backend)
-├── AWS RDS (PostgreSQL)
-└── Cloudflare CDN (assets)
+├── Vercel (web PWA + serverless API routes)
+└── Supabase cloud (database + auth)
 ```
 
-### Database Schema (Core Tables)
+### Database Schema (Actual tables in use)
 
 ```sql
--- Parent accounts
-users (id, email, password_hash, role, 2fa_enabled, created_at)
+-- Auth handled by Supabase Auth; profiles mirrors auth.users
+profiles (id, name, role ['parent'|'student'], created_at)
 
 -- Child profiles (owned by parent)
-children (id, parent_id, name, age, grade, goal, target_year, avatar_color)
+children (
+  id, parent_id, auth_id,   -- auth_id links a student Supabase account to child row
+  name, age, grade, goal, target_year,
+  avatar_color, streak
+)
 
--- Per-child subject mastery (Bayesian Knowledge Tracing)
-skill_state (id, child_id, skill_id, mastery_probability, guess_rate,
-             slip_rate, learning_rate, attempts, last_updated)
+-- Parent configuration (API key, model preference)
+settings (parent_id PK, claude_api_key, claude_model, updated_at)
 
 -- Immutable AI–child conversation log
-chat_messages (id, child_id, session_id, sender, content,
-               subject, created_at, is_flagged)
--- NOTE: No DELETE permission on chat_messages for child role
+chat_messages (id, child_id, sender ['student'|'ai'], content,
+               subject, created_at)
+-- NOTE: child role has no DELETE permission on this table
 
--- Learning sessions
-sessions (id, child_id, subject, started_at, ended_at,
-          duration_min, engagement_score)
+-- Multi-year goal plan produced by GoalWizard (stored as JSON blob)
+goal_plans (id, child_id, plan_json, created_at)
 
--- N-year roadmap milestones
-milestones (id, child_id, year, month, title, description,
-            category, status, created_by_ai)
+-- University path produced by UniversityPathPlanner (JSON blob)
+university_paths (id, child_id, path_json, created_at)
 
--- AI-generated content queue
-content_queue (id, child_id, subject, difficulty, type,
-               content_json, generated_at, scheduled_for, status)
+-- AI-generated weekly activity set
+weekly_activities (
+  id, child_id, week_start,   -- week_start = Monday ISO date YYYY-MM-DD
+  week_theme, activities,     -- activities = WeeklyActivity[] JSON array
+  generated_at
+)
+
+-- Per-activity completion records (persisted for weak-spot analysis)
+activity_completions (
+  id, child_id, activity_id, week_start,
+  answer_text, answer_image,  -- one of text or base64 PNG
+  is_correct, score,          -- score 0-100
+  feedback, explanation, encouragement,
+  completed_at
+)
+
+-- Planned: per-subject BKT mastery state (not yet implemented)
+-- skill_state (id, child_id, subject, mastery_probability,
+--              guess_rate, slip_rate, learning_rate, attempts, last_updated)
+```
+
+### Core Data Types (TypeScript)
+
+Key types in `src/types.ts` and page-level files:
+
+```typescript
+// GoalPlan — produced by GoalWizard after 7-step AI coaching session
+GoalPlan {
+  goalStatement, targetYear, currentYear, intrinsicWhy,
+  wishOutcome, yearsToGoal,
+  roadmap: { year, label, theme, milestones: { quarter, title, category, metric }[] }[]
+  subjectTargets: { subject, currentLevel, targetLevel, keyActions[] }[]
+  obstaclePlans: { obstacle, type, implementationIntention, contingency }[]
+  weeklyHabits: { habit, frequency, rationale }[]
+  keyDates: { date, event, importance }[]
+  sdtCheck: { autonomy, competence, relatedness }
+  coachNote
+}
+
+// WeeklyActivity — one card in the generated weekly plan
+WeeklyActivity {
+  id, type: 'exercise'|'quiz'|'todo'|'reading',
+  subject, subjectColor, title, description,
+  question, hint, durationMin,
+  difficulty: 'foundation'|'developing'|'advanced',
+  milestoneRef
+}
+
+// ActivityCompletion — result record after submitting an exercise
+ActivityCompletion {
+  activityId, weekStart,
+  answerText?, answerImageBase64?,
+  isCorrect, score,           // score 0-100
+  feedback, explanation, encouragement,
+  completedAt
+}
 ```
 
 ### AI Tutor System Prompt Architecture
@@ -130,7 +189,51 @@ SYSTEM PROMPT LAYERS (applied in order):
    "Remember: your tutor chats are always visible to your parent."
 ```
 
+### GoalWizard Flow
+
+The GoalWizard is a 7-step AI coaching session that builds the child's `GoalPlan`:
+
+```
+Step 1: Your Dream      — open-ended "think big" prompt
+Step 2: Specific Goal   — narrow to a concrete university/career target
+Step 3: Timeline        — target year
+Step 4: Current Level   — self-assessed subject strengths/weaknesses
+Step 5: Your Why        — intrinsic motivation (WOOP Wish/Outcome)
+Step 6: Obstacles       — anticipated blockers + implementation intentions
+Step 7: Your Strengths  — build on existing assets
+
+On step 7 completion:
+  → /api/goal-intake returns planReady: true
+  → /api/goal-plan called with full conversation
+  → Returns structured GoalPlan JSON
+  → Saved to goal_plans table + localStorage
+```
+
+The plan structure applies: **WOOP** (Wish/Outcome/Obstacle/Plan), **SMART milestones**, **Self-Determination Theory** (autonomy/competence/relatedness check), and **implementation intentions**.
+
+### Weekly Activities System
+
+```
+Generate flow:
+  Parent or student triggers generateWeeklyActivities()
+  → /api/generate-weekly POST { childAge, childGrade, childName, goalPlan, apiKey, model }
+  → Claude generates WeeklyActivity[] + weekTheme string
+  → Saved to weekly_activities table (upsert — regenerating replaces the row)
+  → Completions reset for new set
+
+Submit flow:
+  Student opens ExerciseSheet (bottom-sheet modal with portal)
+  → Types answer OR draws on DrawingCanvas (base64 PNG export)
+  → /api/check-answer POST { question, subject, activityType, childAge, childGrade,
+                              answerText | answerImageBase64, apiKey, model }
+  → Returns { isCorrect, score, feedback, explanation, encouragement }
+  → ActivityCompletion saved via submitActivityAnswer()
+  → Upserted to activity_completions table
+```
+
 ### Adaptive Difficulty (Bayesian Knowledge Tracing)
+
+Planned — not yet implemented in code. Will use BKT to replace simple threshold logic in weak-spot detection:
 
 ```
 For each interaction:
@@ -147,6 +250,63 @@ Hint trigger conditions:
   - 3+ consecutive incorrect answers
   - Student self-rates confidence ≤ 2/5
 ```
+
+---
+
+## Weak Spot Analysis & Adaptive Study Plan
+
+This feature analyses `activity_completions` history to detect subject weaknesses and automatically adjust the weekly activity plan to focus remediation effort where it's needed most.
+
+### Build Order
+
+1. **Completions already persist** — `activity_completions` table is live; `submitActivityAnswer()` upserts on every exercise. ✅ Done.
+2. **Analytics API** — `/api/analyze-performance` queries completions per child, groups by subject.
+3. **Adaptive generation** — inject weak-spot data into `/api/generate-weekly` prompt.
+4. **BKT** — replace simple threshold with Bayesian update (see BKT section above).
+5. **UI** — student "Focus areas" banner + parent analytics panel.
+
+### Analytics API (`/api/analyze-performance`)
+
+Input: `{ childId, weeksBack? }`
+
+Queries `activity_completions` grouped by `subject` and returns:
+
+```typescript
+interface SubjectPerformance {
+  subject: string
+  avgScore: number          // 0-100
+  accuracy: number          // 0-1 fraction correct
+  attemptCount: number
+  trend: 'improving' | 'declining' | 'stable'
+  isWeak: boolean           // avgScore < 65 OR accuracy < 0.60, min 3 attempts
+}
+```
+
+**Weak threshold:** avg score < 65% or accuracy < 60%, with at least 3 attempts (avoids false positives from single unlucky tries).
+
+### Adaptive Plan Generation
+
+`/api/generate-weekly` prompt updated to receive `weakSpots: SubjectPerformance[]` and apply:
+
+- Allocate more activities to weak subjects (e.g. if Math is weak, ~40% of week targets Math instead of balanced split)
+- Set `difficulty: 'foundation'` for weak subjects — remediate before advancing
+- Include concept-focused short exercises for weak areas rather than full problem sets
+- Note weak spots in `weekTheme` so student sees the focus rationale
+
+### UI Surfaces
+
+**Student view** — "Focus areas" chip above the weekly plan:
+> "This week we're focusing on: Fractions · Grammar"
+Motivational framing, not alarming. Tap to see why.
+
+**Parent dashboard** — `PerformanceAnalytics` panel:
+- Per-subject bar chart (avg score over time)
+- Weak spots list with trend arrows
+- Note: "Study plan adjusted — 3 extra Maths exercises added this week"
+
+### Data Model Addition
+
+`activity_completions` needs `subject` and `difficulty` columns added (or joined via `activity_id → weekly_activities.activities[]`) for grouping. Simplest approach: denormalise `subject` and `difficulty` into the completion row at insert time.
 
 ---
 
@@ -206,28 +366,36 @@ Hint trigger conditions:
 
 ## Phased Roadmap
 
-### Phase 1 — MVP (Months 1-4)
-- Single subject: Mathematics (K-8)
-- Web PWA only
-- Claude Haiku for AI tutoring
-- Simplified parent dashboard (weekly digest)
-- COPPA compliant (parental consent, data minimisation)
-- Pricing: $19/mo Starter only
+### Phase 1 — Prototype (Complete)
+- React + TypeScript + Vite + TailwindCSS frontend
+- Supabase auth + database (replaces planned Node.js/AWS backend)
+- Landing page, login (parent + child accounts via Supabase Auth)
+- GoalWizard: 7-step AI coaching → GoalPlan JSON
+- GoalSummary, WeeklyRoadmap, GoalPlan pages
+- UniversityPathPlanner
+- KnowledgeCanvas (concept mapping)
+- StudentApp: AI chat tutor, WeeklyActivities tab
+- Weekly Activities: AI-generated exercise cards + ExerciseSheet submit modal
+- ExerciseSheet: typed or drawn (DrawingCanvas) answers, /api/check-answer scoring
+- ParentApp: dashboard overview, roadmap, chat history, controls
+- localStorage fallback mode (works without Supabase env vars)
 
-### Phase 2 — Core Product (Months 5-9)
+### Phase 2 — Adaptive Intelligence (Next)
+- Weak spot analysis: /api/analyze-performance + adaptive /api/generate-weekly
+- Bayesian Knowledge Tracing (replace simple threshold)
+- Denormalise subject/difficulty into activity_completions for fast grouping
+- Parent PerformanceAnalytics panel (charts, trend arrows)
+- Student "Focus areas" banner in weekly plan
+- Streak persistence + real engagement metrics
+- Full COPPA compliance implementation
+
+### Phase 3 — Mobile + Scale
 - iOS/Android via Capacitor
-- Two subjects: Math + English
-- Full N-year college roadmap
-- Bayesian Knowledge Tracing (adaptive difficulty)
-- All 3 pricing tiers live
-- Full COPPA + audit logging
-
-### Phase 3 — Scale (Months 10-18)
-- All core subjects (Science, History, SAT/ACT Prep)
 - Offline-first PWA (Service Worker + IndexedDB)
+- All core subjects (Science, History, SAT/ACT Prep)
+- Push notifications (study reminders)
 - Teacher/school portal (B2B2C)
 - International (GDPR-K, Australian PPSA)
-- Advanced gamification + AI personalisation
 
 ---
 
@@ -236,17 +404,15 @@ Hint trigger conditions:
 | Item | Monthly Cost |
 |---|---|
 | Claude API (Haiku 80% / Sonnet 20%) | $2,000–$4,000 |
-| Backend hosting (Lambda + RDS) | $500–$1,000 |
-| Vector DB (curriculum RAG) | $100–$300 |
-| CDN + static hosting | $100–$200 |
-| Monitoring (Sentry, analytics) | $200–$400 |
-| **Total** | **~$3,000–$5,900** |
+| Supabase (Pro plan) | $25–$200 |
+| Vercel (serverless + hosting) | $20–$400 |
+| **Total** | **~$2,100–$4,600** |
 
 **Revenue at 10K users (Family plan avg $35):** $350,000/mo → healthy margins.
 
 **Cost optimisations:**
 - Prompt caching (50% reduction on input tokens)
-- Model routing (Haiku for 80% of interactions)
+- Model routing (Haiku for answer-checking and simple calls)
 - Batch API for async exercise generation (50% discount)
 - Pre-generate content during off-peak hours
 

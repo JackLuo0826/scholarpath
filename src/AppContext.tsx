@@ -54,7 +54,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUserState] = useState<User | null>(() => ls('sp_user', null))
   const [messages, setMessages] = useState<ChatMessage[]>(() => ls('sp_messages', isSupabaseConfigured ? [] : MOCK_MESSAGES))
   const [apiKey, setApiKeyState] = useState<string>(() => localStorage.getItem('sp_api_key') || '')
-  const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-opus-4-6')
+  const [model, setModelState] = useState<string>(() => localStorage.getItem('sp_model') || 'claude-sonnet-4-6')
   const [goalPlan, setGoalPlanState] = useState<GoalPlan | null>(() => ls('sp_goal_plan', null))
   const [universityPath, setUniversityPathState] = useState<UniversityPath | null>(() => ls('sp_university_path', null))
   const [childId, setChildId] = useState<string | null>(() => localStorage.getItem('sp_child_id'))
