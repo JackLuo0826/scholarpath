@@ -89,7 +89,7 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
 
     const response = await client.messages.create({
       model: model || 'claude-opus-4-6',
-      max_tokens: 4096,
+      max_tokens: 16000,
       system: systemPrompt,
       messages: [
         {
@@ -100,7 +100,8 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
     })
 
     const text = response.content[0].text.trim()
-    const parsed = JSON.parse(text)
+    const jsonText = text.replace(/^```json?\n?/, '').replace(/\n?```$/, '').trim()
+    const parsed = JSON.parse(jsonText)
     res.json(parsed)
   } catch (err) {
     console.error('Goal plan error:', err)

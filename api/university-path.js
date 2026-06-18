@@ -110,7 +110,7 @@ Create a detailed, honest, system-specific year-by-year plan. Be concrete with s
 
     const response = await client.messages.create({
       model: model || 'claude-opus-4-6',
-      max_tokens: 6000,
+      max_tokens: 16000,
       system: systemPrompt,
       messages: [{ role: 'user', content: userMessage }],
     })
