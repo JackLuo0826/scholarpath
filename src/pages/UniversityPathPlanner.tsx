@@ -276,6 +276,17 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
           )}
         </div>
 
+        {/* Reliability disclaimer */}
+        <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3">
+          <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-xs font-semibold text-amber-800">AI-generated — verify before acting</p>
+            <p className="text-xs text-amber-700 mt-0.5 leading-relaxed">
+              Subject prerequisites, score thresholds, and deadlines are based on Claude's training data (cutoff Aug 2025) and may be outdated. Always confirm requirements directly with your target university's official admissions page before making course or career decisions.
+            </p>
+          </div>
+        </div>
+
         {/* Prerequisites */}
         <Section title="Subject Prerequisites" icon={BookOpen} defaultOpen badge={`${prerequisites.essential.length} essential`}>
           <div className="px-5 py-4 space-y-3">
