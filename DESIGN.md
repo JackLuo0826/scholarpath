@@ -413,6 +413,10 @@ Motivational framing, not alarming. Tap to see why.
 - Push notifications (study reminders)
 - Teacher/school portal (B2B2C)
 - International (GDPR-K, Australian PPSA)
+- **RAG for university admissions data**: embed official admissions pages (NZQA,
+  UAC, UCAS, per-university requirements PDFs) in a vector DB; retrieve relevant
+  chunks at plan-generation time to ground prerequisite subjects and score thresholds
+  in verified, up-to-date source material rather than Claude's training data alone
 
 ---
 
