@@ -1,10 +1,15 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { getCurrentDate, getCurrentYear } from './_utils.js'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const { conversation, apiKey, model } = req.body
   if (!apiKey) return res.status(400).json({ error: 'No API key provided' })
+
+  const currentDate = getCurrentDate()
+  const currentYear = getCurrentYear()
+  const targetYearExample = currentYear + 3
 
   const transcript = conversation
     .filter(m => !m.content.includes('[PLAN_READY]'))
@@ -25,14 +30,14 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
 
 {
   "goalStatement": "A single inspiring, SMART goal statement",
-  "targetYear": 2028,
-  "currentYear": 2025,
+  "targetYear": ${targetYearExample},
+  "currentYear": ${currentYear},
   "intrinsicWhy": "The deep personal reason this matters (from SDT — autonomy/competence/meaning)",
   "wishOutcome": "Vivid description of the desired future state",
   "yearsToGoal": 3,
   "roadmap": [
     {
-      "year": 2025,
+      "year": ${currentYear},
       "label": "Foundation Year",
       "theme": "One-line theme for this year",
       "milestones": [
@@ -94,7 +99,7 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
       messages: [
         {
           role: 'user',
-          content: `Here is the goal-setting conversation transcript. Generate the comprehensive plan:\n\n${transcript}`,
+          content: `Today's date: ${currentDate}\n\nHere is the goal-setting conversation transcript. Generate the comprehensive plan:\n\n${transcript}`,
         },
       ],
     })

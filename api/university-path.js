@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { getCurrentDate, getCurrentYear, getSchoolTermContext, getYearsToUniversity } from './_utils.js'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
@@ -6,9 +7,24 @@ export default async function handler(req, res) {
   const { profile, apiKey, model } = req.body
   if (!apiKey) return res.status(400).json({ error: 'No API key' })
 
-  // profile = { system, field, universityTier, specificUniversity, currentYear, currentGrade, studentName, strengths, weaknesses }
+  const currentDate = getCurrentDate()
+  const currentYear = getCurrentYear()
+  const termContext = getSchoolTermContext(profile.system, currentYear)
+  const yearsRemaining = getYearsToUniversity(profile.currentYear)
 
-  const systemPrompt = `You are a world-class university admissions strategist and academic planner with deep knowledge of admissions requirements for the US, UK, Australian, and international university systems.
+  // For students with > 3 years to go: generate full detail for the first 2 years only,
+  // high-level summaries for the rest. The parent/student can expand each year on demand.
+  const usePhased = yearsRemaining > 3
+  const phasedInstruction = usePhased ? `
+IMPORTANT — PHASED PLAN FORMAT (this student has ${yearsRemaining} years until university):
+- yearlyPlan: generate FULL detail (subjects, milestones, warningFlags, parentActions) for the FIRST 2 years only.
+- For ALL remaining years, generate a high-level summary with ONLY these fields:
+    yearLabel, calendarYear, theme, focus, keyFocus (array of 3–4 one-sentence priorities), isHighLevel: true
+  Do NOT include subjects[], milestones[], warningFlags[], or parentActions[] for high-level years.
+  The user will tap a "Generate Full Detail" button to expand each year individually.
+` : ''
+
+  const systemPrompt = `You are a world-class university admissions strategist and academic planner with deep knowledge of admissions requirements for the US, UK, Australian, New Zealand, and international university systems.
 
 Generate a highly specific, actionable, year-by-year university preparation plan based on the student profile provided.
 
@@ -18,6 +34,7 @@ Your plan must be:
 3. **Career-connected** — every subject and activity must be explicitly linked to the target career/field
 4. **Realistic and honest** — include the hard truths about what competitive applications require
 5. **System-specific** — use the correct grading system, tests, and curriculum for the specified education system
+6. **Date-accurate** — use the supplied current date and school term dates for all scheduling
 
 Return ONLY valid JSON with this exact structure:
 
@@ -52,9 +69,11 @@ Return ONLY valid JSON with this exact structure:
   "yearlyPlan": [
     {
       "yearLabel": "Year 9 / Grade 9",
-      "calendarYear": 2025,
+      "calendarYear": 2026,
       "theme": "Foundation Building",
       "focus": "One-sentence focus for this year",
+      "isHighLevel": false,
+      "keyFocus": [],
       "subjects": [
         { "subject": "Mathematics Advanced", "priority": "critical|high|medium", "target": "90%+", "rationale": "Why this subject this year" }
       ],
@@ -95,6 +114,8 @@ Return ONLY valid JSON with this exact structure:
 
     const userMessage = `Generate a comprehensive university preparation plan for this student:
 
+**Today's date:** ${currentDate}
+${termContext ? `**School terms:** ${termContext}` : ''}
 **Education System:** ${profile.system}
 **Student Name:** ${profile.studentName || 'the student'}
 **Current Year/Grade:** ${profile.currentYear}
@@ -105,12 +126,15 @@ Return ONLY valid JSON with this exact structure:
 **Academic Strengths:** ${profile.strengths || 'Not provided'}
 **Academic Weaknesses:** ${profile.weaknesses || 'Not provided'}
 **Additional Context:** ${profile.additionalContext || 'None'}
-
+${phasedInstruction}
 Create a detailed, honest, system-specific year-by-year plan. Be concrete with scores, tests, and requirements. Do not be vague.`
+
+    // More years = more content in phased mode; cap at 32K for very long spans
+    const maxTokens = yearsRemaining <= 3 ? 16000 : yearsRemaining <= 6 ? 24000 : 32000
 
     const response = await client.messages.create({
       model: model || 'claude-opus-4-6',
-      max_tokens: 16000,
+      max_tokens: maxTokens,
       system: systemPrompt,
       messages: [{ role: 'user', content: userMessage }],
     })

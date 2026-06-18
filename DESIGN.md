@@ -54,12 +54,18 @@ Backend
 │   ├── Auth: email/password via Supabase Auth (parent & child accounts)
 │   ├── Database: PostgreSQL with RLS policies per role
 │   └── Fallback: localStorage-only mode when Supabase env vars absent
-├── API routes (Vite dev server / Vercel serverless functions)
-│   ├── /api/goal-intake       — streaming GoalWizard conversation
+├── API routes (Vercel serverless functions in api/)
+│   ├── /api/goal-intake       — streaming GoalWizard conversation (SSE)
 │   ├── /api/goal-plan         — generate full GoalPlan JSON from conversation
 │   ├── /api/generate-weekly   — generate WeeklyActivity[] from GoalPlan
 │   ├── /api/check-answer      — score and give feedback on exercise answer
+│   ├── /api/chat              — streaming Socratic tutor (SSE)
+│   ├── /api/exercise          — streaming exercise generation (SSE)
+│   ├── /api/knowledge         — extract knowledge canvas topics from chat
+│   ├── /api/university-path   — generate year-by-year university prep plan (phased)
+│   ├── /api/expand-year       — expand a high-level year summary into full detail
 │   └── /api/analyze-performance — (planned) weak-spot analysis query
+├── api/_utils.js              — shared helpers (date, NZ/AU term dates, grade → years calc)
 └── No Redis, no Pinecone, no AWS in current implementation
 
 AI
@@ -68,7 +74,12 @@ AI
 │   └── claude-sonnet-4-6 → Socratic reasoning, detailed explanations (quality)
 ├── Default model: claude-sonnet-4-6 (configurable per parent in settings)
 ├── Model routing: Haiku for lightweight calls (answer-checking, scope detection), Sonnet for tutoring/planning
-└── Prompt caching: reduces input token cost by ~50%
+├── Prompt caching: reduces input token cost by ~50%
+├── max_tokens: scaled per endpoint (chat 1024, exercise 1024, knowledge 2048,
+│              check-answer 1024, goal-intake 512, goal-plan 16000,
+│              university-path 16000–32000 based on years remaining)
+└── JSON parsing: robust indexOf('{') / lastIndexOf('}') extraction across all
+    JSON-returning endpoints — tolerates trailing text/code fences from any model
 
 Deployment
 ├── Vercel (web PWA + serverless API routes)
@@ -372,7 +383,13 @@ Motivational framing, not alarming. Tap to see why.
 - Landing page, login (parent + child accounts via Supabase Auth)
 - GoalWizard: 7-step AI coaching → GoalPlan JSON
 - GoalSummary, WeeklyRoadmap, GoalPlan pages
-- UniversityPathPlanner
+- UniversityPathPlanner with phased year generation:
+  - Students ≤ 3 years from university: full detail for all years
+  - Students > 3 years from university: full detail for first 2 years, high-level
+    summaries for remaining years with a "Generate Full Detail" button per year
+  - /api/expand-year endpoint expands any high-level year on demand
+- Date-aware planning: current date + NZ/AU school term dates injected into all
+  planning prompts (university-path, goal-plan, expand-year)
 - KnowledgeCanvas (concept mapping)
 - StudentApp: AI chat tutor, WeeklyActivities tab
 - Weekly Activities: AI-generated exercise cards + ExerciseSheet submit modal

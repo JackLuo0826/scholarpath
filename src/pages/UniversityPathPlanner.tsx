@@ -7,6 +7,21 @@ import {
 } from 'lucide-react'
 
 // ── Types ─────────────────────────────────────────────────────────────────
+export interface YearlyPlanEntry {
+  yearLabel: string
+  calendarYear: number
+  theme: string
+  focus: string
+  /** True for years generated as high-level summaries; false once fully expanded */
+  isHighLevel?: boolean
+  /** Key priorities shown on the collapsed high-level card */
+  keyFocus?: string[]
+  subjects?: { subject: string; priority: string; target: string; rationale: string }[]
+  milestones?: { quarter: string; action: string; category: string; metric: string }[]
+  warningFlags?: string[]
+  parentActions?: string[]
+}
+
 export interface UniversityPath {
   summary: {
     studentName: string
@@ -27,16 +42,7 @@ export interface UniversityPath {
     standardisedTests: { test: string; targetScore: string; whenToTake: string; notes: string }[]
     extracurriculars: { activity: string; why: string; startBy: string }[]
   }
-  yearlyPlan: {
-    yearLabel: string
-    calendarYear: number
-    theme: string
-    focus: string
-    subjects: { subject: string; priority: string; target: string; rationale: string }[]
-    milestones: { quarter: string; action: string; category: string; metric: string }[]
-    warningFlags: string[]
-    parentActions: string[]
-  }[]
+  yearlyPlan: YearlyPlanEntry[]
   applicationTimeline: { timeframe: string; action: string; category: string }[]
   subjectDeepDives: {
     subject: string
@@ -146,6 +152,8 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
 
   // Plan view state
   const [expandedYear, setExpandedYear] = useState<number | null>(null)
+  const [expandingYear, setExpandingYear] = useState<number | null>(null)
+  const [expandError, setExpandError] = useState<string>('')
 
   const generate = async () => {
     if (!apiKey) { setError('No API key — go to Settings and add your Claude API key.'); return }
@@ -178,6 +186,44 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
       const e = err instanceof Error ? err : new Error('Unknown error')
       setError(e.message)
       setStep('details')
+    }
+  }
+
+  const expandYear = async (yr: YearlyPlanEntry) => {
+    if (!apiKey || expandingYear !== null || !path) return
+    setExpandingYear(yr.calendarYear)
+    setExpandError('')
+    try {
+      const planContext = {
+        studentName: path.summary.studentName,
+        targetField: path.summary.targetField,
+        targetCareer: path.summary.targetCareer,
+        targetUniversityTier: path.summary.targetUniversityTier,
+        applicationYear: path.summary.applicationYear,
+        overallATARorEquivalent: path.summary.overallATARorEquivalent,
+        educationSystem: path.summary.educationSystem,
+        currentYear: path.summary.currentYear,
+      }
+      const res = await fetch('/api/expand-year', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ yearEntry: yr, planContext, apiKey, model }),
+      })
+      const expanded = await res.json()
+      if (expanded.error) throw new Error(expanded.error)
+      const updatedPath: UniversityPath = {
+        ...path,
+        yearlyPlan: path.yearlyPlan.map(y =>
+          y.calendarYear === yr.calendarYear ? { ...expanded, isHighLevel: false } : y
+        ),
+      }
+      onPathGenerated(updatedPath)
+      setExpandedYear(yr.calendarYear)
+    } catch (err: unknown) {
+      const e = err instanceof Error ? err : new Error('Unknown error')
+      setExpandError(e.message)
+    } finally {
+      setExpandingYear(null)
     }
   }
 
@@ -309,9 +355,50 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
 
         {/* Year-by-year plan */}
         <Section title="Year-by-Year Plan" icon={Calendar} defaultOpen badge={`${yearlyPlan.length} years`}>
+          {expandError && (
+            <div className="mx-5 mt-3 bg-red-50 border border-red-200 rounded-xl px-3 py-2 text-xs text-red-700">{expandError}</div>
+          )}
           <div className="divide-y divide-gray-50">
             {yearlyPlan.map((yr) => {
               const isExpanded = expandedYear === yr.calendarYear
+              const isThisExpanding = expandingYear === yr.calendarYear
+
+              // ── High-level summary card ──────────────────────────────────
+              if (yr.isHighLevel) {
+                return (
+                  <div key={yr.calendarYear} className="px-5 py-4 flex items-start gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gray-100 flex flex-col items-center justify-center flex-shrink-0">
+                      <span className="text-gray-500 font-extrabold text-sm leading-none">{yr.calendarYear}</span>
+                      <span className="text-gray-400 text-[9px] leading-none mt-0.5">{yr.yearLabel.split('/')[0].trim()}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-gray-600">{yr.theme}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{yr.focus}</p>
+                      {yr.keyFocus && yr.keyFocus.length > 0 && (
+                        <ul className="mt-2 space-y-0.5">
+                          {yr.keyFocus.map((k, i) => (
+                            <li key={i} className="text-[11px] text-gray-400 flex gap-1.5">
+                              <span className="text-gray-300 flex-shrink-0">·</span>{k}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => expandYear(yr)}
+                      disabled={expandingYear !== null}
+                      className="flex-shrink-0 flex items-center gap-1.5 text-[11px] font-semibold text-brand-600 bg-brand-50 border border-brand-200 rounded-xl px-3 py-2 hover:bg-brand-100 disabled:opacity-50 transition-colors"
+                    >
+                      {isThisExpanding
+                        ? <><Loader2 className="w-3 h-3 animate-spin" /> Generating…</>
+                        : <><Sparkles className="w-3 h-3" /> Full Detail</>
+                      }
+                    </button>
+                  </div>
+                )
+              }
+
+              // ── Fully detailed card ──────────────────────────────────────
               return (
                 <div key={yr.calendarYear}>
                   <button
@@ -327,8 +414,8 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
                       <p className="text-xs text-gray-500 mt-0.5 truncate">{yr.focus}</p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
-                      {yr.warningFlags?.length > 0 && <AlertTriangle className="w-4 h-4 text-amber-400" />}
-                      <span className="text-xs text-gray-400">{yr.milestones?.length} tasks</span>
+                      {yr.warningFlags && yr.warningFlags.length > 0 && <AlertTriangle className="w-4 h-4 text-amber-400" />}
+                      <span className="text-xs text-gray-400">{yr.milestones?.length ?? 0} tasks</span>
                       {isExpanded ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
                     </div>
                   </button>
@@ -336,7 +423,7 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
                   {isExpanded && (
                     <div className="px-5 pb-5 space-y-4 bg-gray-50/50">
                       {/* Subjects */}
-                      {yr.subjects?.length > 0 && (
+                      {yr.subjects && yr.subjects.length > 0 && (
                         <div>
                           <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Subject Focus</p>
                           <div className="flex flex-wrap gap-2">
@@ -355,7 +442,7 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
                       )}
 
                       {/* Milestones */}
-                      {yr.milestones?.length > 0 && (
+                      {yr.milestones && yr.milestones.length > 0 && (
                         <div>
                           <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Milestones</p>
                           <div className="space-y-2">
@@ -382,7 +469,7 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
                       )}
 
                       {/* Warning flags */}
-                      {yr.warningFlags?.length > 0 && (
+                      {yr.warningFlags && yr.warningFlags.length > 0 && (
                         <div className="bg-amber-50 border border-amber-100 rounded-xl p-3">
                           <p className="text-[10px] font-semibold text-amber-600 uppercase tracking-wide mb-2">⚠️ Watch out for</p>
                           {yr.warningFlags.map((w, i) => (
@@ -392,7 +479,7 @@ export default function UniversityPathPlanner({ apiKey, model, path, onPathGener
                       )}
 
                       {/* Parent actions */}
-                      {yr.parentActions?.length > 0 && (
+                      {yr.parentActions && yr.parentActions.length > 0 && (
                         <div className="bg-blue-50 border border-blue-100 rounded-xl p-3">
                           <p className="text-[10px] font-semibold text-blue-600 uppercase tracking-wide mb-2">👨‍👩‍👧 Parent actions this year</p>
                           {yr.parentActions.map((a, i) => (
