@@ -86,7 +86,7 @@ const UNI_TIERS = [
   { id: 'specific', label: 'Specific University', detail: 'I have a particular university in mind', color: 'bg-amber-100 text-amber-800 border-amber-200' },
 ]
 
-const GRADES = ['Year 7', 'Year 8', 'Year 9', 'Year 10', 'Year 11', 'Year 12', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
+const GRADES = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6', 'Year 7', 'Year 8', 'Year 9', 'Year 10', 'Year 11', 'Year 12', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
 
 const URGENCY_STYLES: Record<string, string> = {
   critical:    'bg-red-100 text-red-700 border-red-200',
