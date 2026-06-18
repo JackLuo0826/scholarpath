@@ -116,8 +116,9 @@ Create a detailed, honest, system-specific year-by-year plan. Be concrete with s
     })
 
     const text = response.content[0].text.trim()
-    // Strip markdown code fences if present
-    const jsonText = text.replace(/^```json?\n?/, '').replace(/\n?```$/, '').trim()
+    const start = text.indexOf('{')
+    const end = text.lastIndexOf('}')
+    const jsonText = (start !== -1 && end !== -1) ? text.slice(start, end + 1) : text
     const parsed = JSON.parse(jsonText)
     res.json(parsed)
   } catch (err) {

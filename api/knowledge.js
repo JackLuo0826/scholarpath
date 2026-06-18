@@ -52,7 +52,10 @@ If the chat is too short or off-topic, return { "topics": [] }.`,
     })
 
     const text = response.content[0].text.trim()
-    const parsed = JSON.parse(text)
+    const start = text.indexOf('{')
+    const end = text.lastIndexOf('}')
+    const jsonText = (start !== -1 && end !== -1) ? text.slice(start, end + 1) : text
+    const parsed = JSON.parse(jsonText)
     res.json(parsed)
   } catch (err) {
     console.error('Knowledge extraction error:', err)

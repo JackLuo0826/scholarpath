@@ -114,8 +114,9 @@ Subject colours: Mathematics #6366f1, English/Reading #10b981, Science #f59e0b, 
     })
 
     const raw = response.content[0].text.trim()
-    // Strip markdown code fences if the model wraps the JSON
-    const json = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')
+    const start = raw.indexOf('{')
+    const end = raw.lastIndexOf('}')
+    const json = (start !== -1 && end !== -1) ? raw.slice(start, end + 1) : raw
     const parsed = JSON.parse(json)
     res.json(parsed)
   } catch (err) {

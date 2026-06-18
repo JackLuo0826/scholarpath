@@ -100,7 +100,9 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
     })
 
     const text = response.content[0].text.trim()
-    const jsonText = text.replace(/^```json?\n?/, '').replace(/\n?```$/, '').trim()
+    const start = text.indexOf('{')
+    const end = text.lastIndexOf('}')
+    const jsonText = (start !== -1 && end !== -1) ? text.slice(start, end + 1) : text
     const parsed = JSON.parse(jsonText)
     res.json(parsed)
   } catch (err) {

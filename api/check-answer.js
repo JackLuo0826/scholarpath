@@ -103,7 +103,9 @@ ${answerText}`
     })
 
     const raw = response.content[0].text.trim()
-    const json = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')
+    const start = raw.indexOf('{')
+    const end = raw.lastIndexOf('}')
+    const json = (start !== -1 && end !== -1) ? raw.slice(start, end + 1) : raw
     const result = JSON.parse(json)
 
     // Normalise: ensure all fields are present
