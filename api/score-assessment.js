@@ -30,29 +30,57 @@ export default async function handler(req, res) {
   const grade = childGrade || 'school age'
   const name = childName || 'Student'
 
-  const systemPrompt = `You are an expert educational assessor marking a diagnostic ${subject} assessment.
+  const systemPrompt = `You are an expert NZC educational assessor marking a diagnostic ${subject} assessment.
 
 Student: ${name}, ${age} years old, ${grade}.
 
-Evaluate each question-answer pair and compute an overall level placement.
+This diagnostic has 7 questions in three tiers:
+- Q1-Q2: FOUNDATION (prerequisite knowledge, 1-2 year levels below expected)
+- Q3-Q5: DEVELOPING (at expected year level)
+- Q6-Q7: ADVANCED (1-2 year levels above expected)
 
-Scoring rules:
-- Award partial credit generously — partial understanding is still learning
-- For unanswered questions, score 0 with feedback "No answer provided"
-- Drawing/handwriting answers: evaluate the content shown in the image
-- Multiple-choice: correct = 100, wrong = 0 (no partial credit)
+━━━ SCORING EACH QUESTION ━━━
+Score each answer 0-100:
+- Multiple-choice: 100 if correct, 0 if wrong (no partial credit)
+- Open-ended: use these anchors strictly:
+  • 0:  No answer, "I don't know", completely irrelevant, or blank
+  • 20: Vague mention of a related topic without demonstrating actual knowledge
+  • 40: Shows partial understanding but significant gaps or errors
+  • 60: Mostly correct with minor gaps or imprecision
+  • 80: Correct and clear, minor omissions only
+  • 100: Fully correct, complete, well-explained
+- DO NOT be lenient: vague or approximate answers that don't demonstrate specific knowledge score ≤30
+- A student who shows they attempted but clearly doesn't know the concept scores 10-20, NOT 40-60
+- "isCorrect" = true only if score ≥ 70
 
-Level placement thresholds (based on weighted score across difficulty tiers):
-- "expert":     85–100% overall — consistently demonstrates above-level mastery
-- "advanced":   65–84%  overall — solid at-level work, some above-level success
-- "developing": 40–64%  overall — mostly at-level with some gaps; needs targeted support
-- "foundation": 0–39%   overall — significant gaps; foundational support needed
+━━━ LEVEL PLACEMENT — USE THIS EXACT LOGIC ━━━
+Step 1: Compute tier averages from the scores above:
+  foundationAvg = average score of the 2 foundation questions (Q1-Q2)
+  developingAvg = average score of the 3 developing questions (Q3-Q5)
+  advancedAvg   = average score of the 2 advanced questions (Q6-Q7)
 
-Level label format examples:
-- "Year 4 Mathematics — Foundation"
-- "Year 8 Science — Developing"
-- "Year 10 English — Advanced"
-- "Year 7 French — Expert"
+Step 2: Determine level using TIER PERFORMANCE, not just overall average:
+  "foundation": foundationAvg < 60 OR developingAvg < 30
+    → Student has gaps in prerequisite knowledge; needs foundational support
+  "developing": foundationAvg ≥ 60 AND developingAvg 30-69 AND advancedAvg < 50
+    → Student is working at or approaching the expected year level
+  "advanced":   foundationAvg ≥ 70 AND developingAvg ≥ 70 AND advancedAvg 30-79
+    → Student is solid at-level and shows above-level capability
+  "expert":     foundationAvg ≥ 85 AND developingAvg ≥ 85 AND advancedAvg ≥ 70
+    → Student consistently exceeds expectations; working above year level
+
+Step 3: Compute overallScore as a WEIGHTED average that reflects the tier logic:
+  overallScore = (foundationAvg × 0.20) + (developingAvg × 0.50) + (advancedAvg × 0.30)
+  Round to the nearest whole number.
+
+IMPORTANT: The level MUST match the tier logic above. Do not override the tier logic with overall score gut-feel.
+
+━━━ LABELS AND FEEDBACK ━━━
+Level label format: "${grade} ${subject} — [Level]"
+Examples: "Year 4 Mathematics — Foundation" / "Year 8 Science — Advanced"
+
+Feedback: 2-3 sentences. Be specific about which topics were strong and which need work.
+SubjectReport: 2-3 sentences on what this level means for the student's next learning steps.
 
 Return ONLY valid JSON with no markdown fences:
 {
@@ -61,14 +89,14 @@ Return ONLY valid JSON with no markdown fences:
       "questionId": "q1",
       "score": 85,
       "isCorrect": true,
-      "feedback": "Good — you correctly identified... [specific to their answer]"
+      "feedback": "Specific feedback on their actual answer — what was right or wrong and why."
     }
   ],
-  "overallScore": 72,
-  "level": "advanced",
-  "levelLabel": "Year 8 Mathematics — Advanced",
-  "feedback": "Strong understanding of [topics]. Areas to develop: [specific gaps].",
-  "subjectReport": "2-3 sentences on what this level means for the student's learning journey and next steps."
+  "overallScore": 62,
+  "level": "developing",
+  "levelLabel": "${grade} ${subject} — Developing",
+  "feedback": "Strong on [specific topics]. Needs to develop [specific gaps].",
+  "subjectReport": "This result means... Next steps are..."
 }`
 
   // Build the Q&A pairs for the prompt
