@@ -217,10 +217,10 @@ export default function StudentApp() {
     setKnowledgeLoading(true)
     setKnowledgeError('')
     try {
-      const res = await fetch('/api/knowledge', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages, apiKey, model }),
+        body: JSON.stringify({ messages, apiKey, model, type: 'knowledge' }),
       })
       const data = await res.json()
       if (data.error) throw new Error(data.error)
