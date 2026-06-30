@@ -59,17 +59,19 @@ CALIBRATION RULES — strictly follow these:
 
 Question type guidelines:
 - "multiple-choice": 4 options (label them "A. ...", "B. ...", "C. ...", "D. ..."); one clearly correct, three plausible distractors based on common errors
-- "short-answer": 1-2 sentence response — good for vocabulary, definitions, inference
-- "long-answer": multi-step explanation, extended writing, or analysis — good for problem-solving and persuasive writing
-- "drawing": diagram, labelled sketch, or SHOW YOUR WORKING (maths/science) — mark what the student writes
+- "short-answer": 1-2 sentence response — good for vocabulary, definitions, calculations, inference
+- "long-answer": multi-step explanation, extended writing, or analysis — good for essays, experimental design, evaluation
+- "drawing": diagram, labelled sketch, or SHOW YOUR WORKING — mark what the student writes or draws
 
-Variety rules:
-- Use at least 3 different question types across the 7 questions
-- For Mathematics: at least 1 drawing (show working), at least 1 MC, at least 1 short-answer
-- For Sciences: at least 1 MC (factual recall), at least 1 short-answer (explain/describe), at least 1 long-answer or drawing
-- For English: at least 1 MC or short-answer (language feature), at least 1 long-answer (writing task)
-- For French: at least 1 MC (vocabulary/grammar), at least 1 short-answer, at least 1 writing task
-- Each question must have a "topic" field (e.g. "Fractions", "Living World", "Narrative Writing")
+Variety rules (use at least 3 different question types across the 7 questions):
+- Mathematics: ≥1 drawing (show working), ≥1 MC, ≥1 short-answer
+- Sciences (Science, Biology, Chemistry, Physics): ≥1 MC (factual recall), ≥1 short-answer (explain/describe), ≥1 drawing or long-answer
+- English: ≥1 MC or short-answer (language feature identification), ≥1 long-answer (writing task)
+- Social Sciences (History, Geography, Economics): ≥1 MC (factual recall), ≥1 short-answer (explain), ≥1 long-answer (analysis/essay)
+- Languages (French, Spanish, Te Reo Māori): ≥1 MC (vocab/grammar), ≥1 short-answer (translation), ≥1 writing task
+- Computing: ≥1 MC (concept/theory), ≥1 short-answer (explain algorithm or write code snippet), ≥1 drawing (flowchart or trace)
+- Music: ≥1 MC (notation/theory), ≥1 short-answer (describe musical elements), ≥1 drawing (write rhythm or notation)
+- Each question must have a "topic" field (e.g. "Fractions", "Genetics", "Narrative Writing", "Supply and Demand")
 - Each question must have a gentle "hint" that guides thinking without revealing the answer
 
 Return ONLY valid JSON with no markdown fences:
@@ -204,15 +206,27 @@ function buildSubjectGuidance(subject, nzcLevel) {
     }
     if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC MATHEMATICS LEVEL 3 CALIBRATION:
-- FOUNDATION (Year 3-4 skills): 3-digit addition/subtraction; multiplication by 2s, 5s, 10s; simple fractions; standard measurement units; time to the quarter-hour
-- DEVELOPING (Year 5-6 skills): All multiplication/division basic facts to 10×10 fluently; written algorithms for multi-digit multiplication and division; fractions, decimals (tenths, hundredths) and simple percentages; equivalent fractions; area and perimeter using formulae; metric conversions; identifying and describing transformations (reflection, rotation, translation); tables, graphs, and patterns; probability as fractions
-- ADVANCED (Year 7-8 skills): Integers and directed numbers; multi-step problems with fractions/decimals/percentages; introduction to algebra (simple equations); scale drawings; ratio and proportion`
+- FOUNDATION (Year 3-4 skills): 3-digit addition/subtraction; multiplication by 2s/5s/10s; simple fractions; standard measurement units; time to the quarter-hour
+- DEVELOPING (Year 5-6 skills): All ×/÷ facts to 10×10 fluently; multi-digit multiplication/division algorithms; fractions, decimals (tenths, hundredths), simple percentages; equivalent fractions; area and perimeter formulae; metric conversions; transformations (reflection, rotation, translation); tables, graphs, and patterns; probability as fractions
+- ADVANCED (Year 7-8 skills): Integers; multi-step ratio/proportion; introduction to algebra (solve for x); scale; Pythagoras theorem; statistical mean/median/mode`
     }
     if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
       return `NZC MATHEMATICS LEVEL 4 CALIBRATION:
-- FOUNDATION (Year 5-6 skills): All basic facts; fractions, decimals, percentages; area/perimeter; metric conversions; transformations; probability as fractions
-- DEVELOPING (Year 7-8 skills): Integers; multi-step ratio/proportion problems; linear algebra (solve for x); geometric proofs (angles, parallel lines); Pythagoras theorem; statistical investigations with mean/median/mode; probability with complementary events; number properties (prime, composite, factors)
+- FOUNDATION (Year 5-6 skills): ×/÷ basic facts; fractions, decimals, percentages; area/perimeter; metric conversions; transformations; probability as fractions
+- DEVELOPING (Year 7-8 skills): Integers; multi-step ratio/proportion; linear algebra (solve equations with one variable); geometric properties (angles in parallel lines, properties of polygons); Pythagoras theorem; statistical investigations with mean/median/mode/range; complementary probability; index notation and number properties (prime factorisation)
 - ADVANCED (Year 9-10 skills): Quadratic equations; index laws; simultaneous equations; trigonometry (SOH CAH TOA); statistical inference; probability trees`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC MATHEMATICS LEVEL 5 CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Linear equations; Pythagoras theorem; ratio/proportion; geometric angles; statistical measures; complementary probability
+- DEVELOPING (Year 9-10 skills): Quadratic equations (factorising, formula); index laws (including negative and fractional indices); simultaneous equations (substitution/elimination); trigonometry (SOH CAH TOA in right triangles); statistical inference with box plots and histograms; probability trees and conditional probability; coordinate geometry (gradient, midpoint, distance)
+- ADVANCED (NCEA Level 1 skills): Sequences and series; logarithms; circle theorems; two-way tables for probability; bivariate data and linear regression`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA MATHEMATICS LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): Quadratic equations; simultaneous equations; trigonometry in right triangles; statistical measures; probability trees
+- DEVELOPING (NCEA Level 1 skills): Algebra (quadratics, exponentials, logarithms); trigonometry (including non-right triangles using sine and cosine rules); geometric reasoning (circle theorems); statistical investigations and inference; network diagrams; sequences and series
+- ADVANCED (NCEA Level 2 skills): Calculus concepts (rates of change, gradient functions); complex algebraic manipulation; statistical literacy (design and analysis of statistical studies)`
     }
     return `Use appropriate NZC mathematics content for ${nzcLevel}, calibrating foundation 1-2 year levels below, developing at level, and advanced 1-2 year levels above.`
   }
@@ -237,6 +251,18 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - DEVELOPING (Year 5-6 skills): Reading longer texts and identifying author purpose, bias, and point of view; writing extended paragraphs with evidence and elaboration; persuasive essays with structured arguments (PEEL); correct apostrophes, colons, varied punctuation; figurative language (personification, hyperbole, symbolism); vocabulary in context; audience and register awareness; synthesising information from two sources
 - ADVANCED (Year 7-8 skills): Critical literary analysis; sustained multi-paragraph essays with thesis statements; genre manipulation; complex grammatical structures; independent evaluation of texts for bias and purpose`
     }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC ENGLISH LEVEL 4 CALIBRATION:
+- FOUNDATION (Year 5-6 skills): PEEL paragraphs; identifying author purpose and bias; figurative language (personification, hyperbole, symbolism); colons and apostrophes; synthesising two sources
+- DEVELOPING (Year 7-8 skills): Sustained multi-paragraph essays with clear thesis and evidence; critical analysis of literary techniques (irony, foreshadowing, motif, extended metaphor); evaluating texts for bias, perspective, and audience; complex sentence structures (subordinate clauses, relative clauses); vocabulary precision; writing for specific audiences and purposes; formal and informal register distinction; analysing visual and multimodal texts
+- ADVANCED (Year 9-10 skills): Independent literary criticism with sustained argument; analysis of narrative voice and unreliable narrator; comparing texts across time periods; genre hybrid texts; nuanced evaluation of propaganda and rhetorical devices`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC ENGLISH LEVEL 5 CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Multi-paragraph essays; literary techniques (irony, motif, extended metaphor); evaluating texts for bias; complex sentence structures
+- DEVELOPING (Year 9-10 skills): Independent literary criticism with sustained argument; analysis of narrative voice, unreliable narrator, and structural choices; comparing texts for purpose, audience, and context; analysis of propaganda and rhetorical devices (ethos, pathos, logos); writing across diverse genres; independent editing for style, voice, and impact; close reading of unseen texts; semiotics (how images and layout create meaning)
+- ADVANCED (NCEA Level 1 skills): Formal literary essay structure with close textual analysis; evaluation of authorial intent and cultural/historical context; sophisticated vocabulary and syntactic variety`
+    }
     return `Use appropriate NZC English content for ${nzcLevel}.`
   }
 
@@ -251,10 +277,280 @@ function buildSubjectGuidance(subject, nzcLevel) {
     if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC SCIENCE LEVEL 3 CALIBRATION:
 - FOUNDATION (Year 3-4 skills): Life cycles; basic adaptation; push/pull forces; states of matter; food chains; properties of materials; simple scientific method
-- DEVELOPING (Year 5-6 skills): Life processes common to all living things (respiration, reproduction, growth, nutrition, excretion); ecosystems and interdependence; food webs; water cycle and effects on climate; classification of living things into groups; Earth's layers; solar system; how light, sound, and electricity behave; fair testing (controlling variables, identifying dependent/independent variables); forming explanations with evidence
-- ADVANCED (Year 7-8 skills): Cell theory and cell structure; chemical reactions and particle theory; genetics (variation and inheritance); forces including gravity, friction, balanced/unbalanced; energy transfer and transformation; designing multi-variable experiments`
+- DEVELOPING (Year 5-6 skills): Life processes common to all living things (respiration, reproduction, growth, nutrition); ecosystems and food webs; water cycle; classification of living things; Earth's layers; solar system; properties of light and sound; series and parallel circuits; fair testing (controlling variables, identifying IV/DV); forming evidence-based explanations
+- ADVANCED (Year 7-8 skills): Basic cell structure (nucleus, cell membrane, chloroplast, mitochondria); particle theory of matter; basic genetics (variation and inherited traits); balanced/unbalanced forces; energy transfer and transformation; designing multi-variable investigations`
+    }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC SCIENCE LEVEL 4 CALIBRATION:
+- FOUNDATION (Year 5-6 skills): Ecosystems and food webs; classification; Earth's layers; basic circuits; fair testing with IV/DV/controlled variables
+- DEVELOPING (Year 7-8 skills): Cell biology (plant vs animal cell structure, function of organelles); photosynthesis and cellular respiration equations; basic genetics (Mendelian inheritance, dominant/recessive alleles, Punnett squares); Newton's three laws of motion; wave properties (frequency, amplitude, wavelength); acid/base reactions; particle theory and physical vs chemical change; ecological relationships (competition, predation, symbiosis); rock cycle and plate tectonics
+- ADVANCED (Year 9-10 skills): DNA structure and gene expression; evolution by natural selection; Newton's law of gravitation; Ohm's law and circuit calculations; stoichiometry; atomic structure and periodic table trends`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC SCIENCE LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Cell structure; photosynthesis/respiration; Mendelian genetics; Newton's laws; wave properties; acid/base; particle theory; plate tectonics
+- DEVELOPING (Year 9-10 skills): DNA structure (double helix, base pairing, replication); gene expression (transcription and translation in outline); evolution by natural selection with evidence; Newton's law of gravitation and orbital motion; electromagnetic spectrum; Ohm's law (V=IR) and power calculations; atomic structure (protons, neutrons, electrons, electron shells); periodic table trends; types of chemical reactions (synthesis, decomposition, combustion, neutralisation); stoichiometry (balancing equations, mole concept)
+- ADVANCED (NCEA Level 1 skills): Cell biology (mitosis/meiosis); genetics (codominance, incomplete dominance); mechanics (work, energy, power); waves (interference, diffraction); organic chemistry (hydrocarbons)`
     }
     return `Use appropriate NZC Science content for ${nzcLevel}, covering Living World, Physical World, Material World, and Planet Earth and Beyond strands.`
+  }
+
+  // Biology (separate subject for senior students, NZC Level 4+)
+  if (s === 'biology') {
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC BIOLOGY LEVEL 4 CALIBRATION (Living World strand):
+- FOUNDATION (Year 5-6 skills): Life processes common to all living things; ecosystems and food webs; classification of living things; plant/animal cell comparison
+- DEVELOPING (Year 7-8 skills): Cell structure and organelle functions (nucleus, mitochondria, chloroplast, cell membrane, vacuole); photosynthesis (word equation, inputs/outputs, role of chlorophyll); cellular respiration (word equation, aerobic vs anaerobic); Mendelian inheritance (dominant/recessive, Punnett squares, phenotype vs genotype); ecological relationships (predation, competition, mutualism, parasitism); adaptation — structural/behavioural/physiological features for survival
+- ADVANCED (Year 9-10 skills): DNA structure, replication, and protein synthesis; evolution by natural selection; mitosis and cell cycle; biodiversity and classification (domains, kingdoms, phyla)`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC BIOLOGY LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Cell organelles; photosynthesis/respiration word equations; Mendelian genetics; ecological relationships; adaptation
+- DEVELOPING (Year 9-10 skills): DNA structure (double helix, antiparallel strands, base pairing A-T, G-C); semi-conservative replication; transcription and translation (mRNA, codons, amino acids); mitosis (PMAT stages and outcome); evolution by natural selection (variation, heritability, selective pressure, differential survival); evidence for evolution (fossil record, homologous structures, DNA comparisons); classification (domains, kingdoms, phyla); nitrogen cycle; enzyme action (lock and key model, enzyme-substrate complex, effect of pH and temperature)
+- ADVANCED (NCEA Level 1 skills): Meiosis; genetic variation (crossing over, independent assortment); population ecology (logistic growth, carrying capacity); speciation`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA BIOLOGY LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): DNA structure and replication; transcription and translation; mitosis; natural selection; classification; enzyme action
+- DEVELOPING (NCEA Level 1 skills): Life processes of plants (photosynthesis in detail — light-dependent and light-independent reactions at outline level; transpiration, translocation); life processes of animals (nutrition, digestion, gas exchange, circulation); genetic inheritance patterns (including codominance, sex-linkage, incomplete dominance); ecological investigation methods (quadrats, transects); identifying controlled/independent/dependent variables; interpreting biological data
+- ADVANCED (NCEA Level 2 skills): Cell biology (organelle ultrastructure; DNA structure and function at molecular level); genetics (molecular basis of gene expression); population ecology`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA BIOLOGY LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Photosynthesis/respiration; inheritance patterns; ecological investigation; life processes of plants/animals
+- DEVELOPING (NCEA Level 2 skills): Cellular biology in depth (organelles at ultrastructure level, cell membranes — fluid mosaic model, active/passive transport, osmosis); cellular respiration (glycolysis, Krebs cycle, electron transport chain in outline); molecular genetics (DNA replication, transcription, translation, mutations, gene regulation); plant adaptation to environment; animal physiology (thermoregulation, osmoregulation, gas exchange in mammals, fish, insects); gene mutation and evolution; population genetics (Hardy-Weinberg)
+- ADVANCED (NCEA Level 3 skills): Human evolution; homeostasis mechanisms; genetic engineering applications; ecological modelling`
+    }
+    return `Use appropriate NZC/NCEA Biology content for ${nzcLevel}, covering cell biology, genetics, ecology, and evolution.`
+  }
+
+  // Physics (separate subject for senior students, NZC Level 4+)
+  if (s === 'physics') {
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC PHYSICS LEVEL 4 CALIBRATION (Physical World strand):
+- FOUNDATION (Year 5-6 skills): Push/pull forces change motion; properties of light and sound; simple circuits; energy as a concept
+- DEVELOPING (Year 7-8 skills): Newton's three laws of motion (inertia, F=ma, action/reaction); wave properties (frequency, wavelength, amplitude, speed; longitudinal vs transverse); reflection and refraction of light; series and parallel circuits (current, voltage); work = force × distance; energy transformations (kinetic, potential, thermal, electrical); levers, pulleys, and simple machines; magnets and magnetic fields
+- ADVANCED (Year 9-10 skills): Kinematics (speed, velocity, acceleration, distance-time and velocity-time graphs); Ohm's law V=IR; power P=IV; gravitational potential energy; electromagnetic induction (generators and transformers concept)`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC PHYSICS LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Newton's three laws; wave properties; circuits; energy transformations; work = force × distance
+- DEVELOPING (Year 9-10 skills): Kinematics (speed, velocity, acceleration; d-t and v-t graphs; equations of motion); Ohm's law (V = IR) and circuit calculations; power (P = IV = I²R); energy calculations (Ek = ½mv², Ep = mgh); gravitational potential and kinetic energy conservation; wave behaviour (reflection, refraction, diffraction, interference); electromagnetic spectrum (types and uses); basic nuclear physics (radioactive decay, half-life); pressure (P = F/A)
+- ADVANCED (NCEA Level 1 skills): Newton's law of universal gravitation; electric field concept; electromagnetic induction; AC vs DC; nuclear fission/fusion`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA PHYSICS LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): Kinematics; Ohm's law and circuit calculations; energy conservation; wave behaviour; electromagnetic spectrum; nuclear decay
+- DEVELOPING (NCEA Level 1 skills): Waves in depth (wave speed = frequency × wavelength; standing waves; resonance; sound intensity); nuclear physics (radioactive decay types — alpha, beta, gamma; half-life calculations; fission and fusion); mechanics (Newton's laws applied to multi-body systems; momentum = mv; impulse; static equilibrium); electrical systems (resistors in series/parallel; power calculations; charging and discharging capacitors at outline level)
+- ADVANCED (NCEA Level 2 skills): Circular motion; projectile motion; rotational mechanics (torque); electromagnetism (Faraday's law)`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA PHYSICS LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Wave properties and calculations; nuclear physics; Newton's laws; momentum; series/parallel circuits
+- DEVELOPING (NCEA Level 2 skills): Mechanics in depth (circular motion — centripetal force F=mv²/r; projectile motion; angular momentum; torque and rotational equilibrium); electromagnetism (Faraday's law of induction; transformers; DC generator and motor; magnetic force on current-carrying conductor F=BIL); atomic and nuclear physics (Rutherford model; photoelectric effect; energy levels and emission spectra; E=hf; binding energy and mass-energy equivalence E=mc²); electricity (capacitance; RC circuits; internal resistance)
+- ADVANCED (NCEA Level 3 skills): Mechanical systems (SHM, resonance); electrical systems (AC circuits, impedance); modern physics (special relativity concepts)`
+    }
+    return `Use appropriate NZC/NCEA Physics content for ${nzcLevel}, covering mechanics, waves, electricity, and modern physics.`
+  }
+
+  // Chemistry (separate subject for senior students, NZC Level 4+)
+  if (s === 'chemistry') {
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC CHEMISTRY LEVEL 4 CALIBRATION (Material World strand):
+- FOUNDATION (Year 5-6 skills): States of matter (solid/liquid/gas) and phase changes; properties of common materials; mixtures vs pure substances
+- DEVELOPING (Year 7-8 skills): Particle theory of matter (solids, liquids, gases in terms of particle arrangement and movement); physical vs chemical change (examples and evidence); properties of acids and bases (litmus, pH scale, indicators); neutralisation (acid + base → salt + water); combustion (fuel + oxygen → CO₂ + H₂O); metals and non-metals; solutions and solubility; separating mixtures (filtration, evaporation, distillation, chromatography)
+- ADVANCED (Year 9-10 skills): Atomic structure (protons, neutrons, electrons, electron shells, atomic number, mass number); periodic table (periods, groups, trends); ionic and covalent bonding; chemical formulae and simple equations`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC CHEMISTRY LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Particle theory; physical vs chemical changes; acids/bases/neutralisation; combustion; separating mixtures
+- DEVELOPING (Year 9-10 skills): Atomic structure (proton, neutron, electron; atomic number, mass number; isotopes; electron shell configurations for first 20 elements); periodic table (periods and groups; metals/metalloids/non-metals; reactivity trends; properties of groups 1, 7, 0/18); chemical bonding (ionic bonding — transfer of electrons, formation of ions, lattice structure; covalent bonding — sharing electrons, molecular vs network structures); writing and balancing chemical equations; types of reactions (synthesis, decomposition, displacement, combustion, precipitation); acids and bases (strong vs weak, pH, titration concept)
+- ADVANCED (NCEA Level 1 skills): Mole concept and stoichiometry; limiting reactants; electrochemistry (oxidation/reduction); organic chemistry basics (hydrocarbons, functional groups)`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA CHEMISTRY LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): Atomic structure; periodic table trends; ionic and covalent bonding; balancing equations; types of reactions; acids and bases
+- DEVELOPING (NCEA Level 1 skills): Acids and bases in depth (Brønsted-Lowry model; conjugate acid-base pairs; Ka, Kb concept; buffer solutions at outline level; titration calculations); quantitative chemistry (mole calculations; concentration = moles/volume; stoichiometry with molar masses); redox reactions (oxidation states, oxidising/reducing agents, half-equations); electrochemistry (electrolytic cells; galvanic cells; standard electrode potentials)
+- ADVANCED (NCEA Level 2 skills): Organic chemistry (naming and reactions of alkanes, alkenes, alcohols, carboxylic acids, esters); thermochemistry (enthalpy, Hess's law); chemical equilibrium (Le Chatelier's principle)`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA CHEMISTRY LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Acids/bases; mole calculations; redox; electrochemistry
+- DEVELOPING (NCEA Level 2 skills): Organic chemistry (structure and naming of alkanes, alkenes, alkynes, alcohols, aldehydes, ketones, carboxylic acids, esters, amines; reactions including addition, substitution, oxidation, esterification; structural and optical isomerism); thermochemistry (enthalpy changes, Hess's law, bond enthalpies; standard enthalpy of formation); chemical equilibrium (equilibrium expression Kc; Le Chatelier's principle; effect of temperature, pressure, concentration); bonding and structure in depth (VSEPR, polarity, intermolecular forces)
+- ADVANCED (NCEA Level 3 skills): Spectroscopy (IR, mass spec, NMR interpretation); kinetics (rate laws, Arrhenius equation); nuclear chemistry`
+    }
+    return `Use appropriate NZC/NCEA Chemistry content for ${nzcLevel}, covering atomic structure, bonding, reactions, and quantitative chemistry.`
+  }
+
+  // History (NZC Social Sciences — Continuity and Change strand)
+  if (s === 'history') {
+    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+      return `NZC HISTORY LEVEL 2 CALIBRATION (Year 3-4):
+- FOUNDATION (Year 1-2 skills): Family history; recognising old vs new objects; sequencing events (before/after/then); simple timelines
+- DEVELOPING (Year 3-4 skills): How and why things change over time in a community (technology, transport, buildings); how people in the past lived differently; significant events and people in local/NZ history; simple cause-and-effect (why did this change happen?); using photographs, artefacts, and oral histories as evidence; the role of Māori and settlers in early NZ history at a simple level; Treaty of Waitangi — who signed it and why (at a basic level)
+- ADVANCED (Year 5-6 skills): Colonisation of NZ and its impacts; why NZ became a British colony; significant NZ historical events (gold rush, early Parliament); comparing different perspectives on historical events`
+    }
+    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+      return `NZC HISTORY LEVEL 3 CALIBRATION (Year 5-6):
+- FOUNDATION (Year 3-4 skills): Local/community historical changes; basic cause-and-effect; Treaty of Waitangi basics; using historical evidence
+- DEVELOPING (Year 5-6 skills): Colonisation of NZ — timeline, key events, causes and consequences for Māori and Pākehā; Treaty of Waitangi — key principles, significance, breaches and renegotiation; significant events in NZ history (NZ Wars, women's suffrage 1893, Gold Rush, early immigration); historical perspectives — understanding that people in the past had different viewpoints; use of primary and secondary sources; migration stories to NZ (European, Pacific, Chinese); World Wars — NZ's participation and impact at home
+- ADVANCED (Year 7-8 skills): NZ Wars in depth; causes of WWI; impacts of the Great Depression on NZ; how historical narratives can be contested`
+    }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC HISTORY LEVEL 4 CALIBRATION (Year 7-8):
+- FOUNDATION (Year 5-6 skills): NZ colonisation; Treaty of Waitangi; NZ women's suffrage; WWI NZ involvement; primary vs secondary sources
+- DEVELOPING (Year 7-8 skills): NZ Wars — causes, key events (Gate Pā, Ōrākau), land confiscations (raupatu), impacts; Treaty of Waitangi — principles (partnership, participation, protection), Treaty settlements; WWI causes (MAIN — militarism, alliances, imperialism, nationalism) and NZ's role (Gallipoli, Western Front); WWII — causes (rise of fascism, appeasement), key events, NZ's home front and overseas contribution; the Great Depression and its impact; how historians use evidence to construct arguments; multiple perspectives on events
+- ADVANCED (Year 9-10 skills): Cold War origins and key events; decolonisation movements; Holocaust — causes, events, consequences; NZ's role in the Pacific`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC HISTORY LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): NZ Wars; WWI causes; WWII overview; Treaty of Waitangi; historical source analysis
+- DEVELOPING (Year 9-10 skills): WWI in depth (causes — assassination of Franz Ferdinand, system of alliances; trench warfare; key battles; armistice; Treaty of Versailles and its consequences); WWII in depth (rise of Hitler and Nazi Germany; Holocaust; Pacific War; atomic bomb; post-war order); Cold War (origins, key events — Berlin Wall, Cuban Missile Crisis, Korean War, Vietnam War; nuclear arms race; détente and collapse of Soviet Union); decolonisation (independence movements in Africa and Asia; methods — peaceful and armed struggle); NZ in the 20th century (nuclear-free policy, Springbok Tour, Māori renaissance, Treaty settlements)
+- ADVANCED (NCEA Level 1 skills): Writing analytical historical essays; evaluating the reliability and usefulness of historical sources; causation and consequence at a conceptual level`
+    }
+    return `Use appropriate NZC/NCEA History content for ${nzcLevel}, focusing on NZ and world history, historical thinking, and source analysis.`
+  }
+
+  // Geography (NZC Social Sciences — Place and Environment strand)
+  if (s === 'geography') {
+    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+      return `NZC GEOGRAPHY LEVEL 2 CALIBRATION (Year 3-4):
+- FOUNDATION (Year 1-2 skills): Immediate local environment; directions (north/south/east/west); simple maps of classroom or school
+- DEVELOPING (Year 3-4 skills): Reading and making simple maps (key/legend, compass rose, scale concept); how people use their local environment; weather patterns and seasons; how the environment affects how people live; basic landforms (mountain, river, coast, plain, hill, valley); how people change the environment (farming, building, deforestation); NZ's location in the Pacific; difference between a town, city, region, and country
+- ADVANCED (Year 5-6 skills): NZ's physical regions; how rivers and coasts are shaped; comparing NZ environments to those of other countries; basic economic geography (primary/secondary/tertiary industries)`
+    }
+    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+      return `NZC GEOGRAPHY LEVEL 3 CALIBRATION (Year 5-6):
+- FOUNDATION (Year 3-4 skills): Map reading (legend, scale, compass); landforms; how people change environments; NZ's Pacific location
+- DEVELOPING (Year 5-6 skills): NZ's physical geography — landforms, major rivers, mountains, volcanic plateau, Southern Alps; how volcanic and tectonic activity shapes NZ (Ring of Fire, plate tectonics at basic level); NZ climate zones and how they vary; natural disasters in NZ (earthquakes, volcanoes, tsunamis, floods) and how people respond; comparing NZ environments to Pacific Island nations; primary, secondary, and tertiary industries in NZ; how migration shapes communities; sustainability — how people affect and protect environments
+- ADVANCED (Year 7-8 skills): Plate tectonics in depth; urbanisation and its effects; globalisation and trade; climate change causes and effects`
+    }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC GEOGRAPHY LEVEL 4 CALIBRATION (Year 7-8):
+- FOUNDATION (Year 5-6 skills): NZ physical geography; plate tectonics basics; natural disasters; NZ climate; sustainability
+- DEVELOPING (Year 7-8 skills): Plate tectonics in depth (convergent, divergent, transform boundaries; subduction; formation of mountains, volcanoes, trenches); geomorphic processes (weathering — physical/chemical/biological; erosion and deposition; river processes — erosion, transport, deposition, features like meanders, deltas); urbanisation (growth of cities, urban vs rural, urban issues such as traffic, housing, pollution); climate change (greenhouse effect, causes, evidence, consequences for NZ and Pacific); globalisation (trade, supply chains, TNC, impacts on developing countries); geographic skills (topographic maps, grid references, cross-sections, GIS concept)
+- ADVANCED (Year 9-10 skills): Hydrological cycle in detail; population dynamics (birth/death rates, demographic transition model); economic development (HDI, sustainable development goals)`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC GEOGRAPHY LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Plate tectonics; geomorphic processes; urbanisation; climate change causes; globalisation; topographic maps
+- DEVELOPING (Year 9-10 skills): Population geography (population pyramids; birth/death/natural increase rates; demographic transition model — 4 stages; push and pull factors; migration flows); economic development (GDP vs GNI vs HDI; development gap; fair trade and ethical consumption; role of TNCs in developing world); hydrological cycle in detail (infiltration, surface runoff, water table, drainage basins); coastal processes (erosion types — hydraulic action, corrasion, attrition; coastal landforms — cliffs, wave-cut platforms, headlands, bays, spits, tombolos; coastal management strategies); geographic inquiry (developing research questions, collecting and presenting data, evaluating sources)
+- ADVANCED (NCEA Level 1 skills): Statistical analysis of geographic data; geographic concepts (place, space, environment, interconnection, sustainability, scale); applying geographic concepts to case studies`
+    }
+    return `Use appropriate NZC/NCEA Geography content for ${nzcLevel}, covering physical and human geography, geographic processes, and geographic skills.`
+  }
+
+  // Economics (NZC Social Sciences — The Economic World strand)
+  if (s === 'economics') {
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC ECONOMICS LEVEL 4 CALIBRATION (Year 7-8):
+- FOUNDATION (Year 5-6 skills): Needs vs wants; producers and consumers; goods and services; money and exchange; simple budgeting
+- DEVELOPING (Year 7-8 skills): Scarcity — unlimited wants vs limited resources; opportunity cost — the next best alternative foregone; economic decision-making (individuals, businesses, government); specialisation and trade; market — buyers and sellers; price as a signal; types of businesses (sole trader, partnership, company); role of banks and money; NZ's main trading partners and exports (dairy, meat, tourism, tech); government revenue (taxes) and spending (public services); economic roles (producer/consumer/government)
+- ADVANCED (Year 9-10 skills): Supply and demand — the law of demand/supply; market equilibrium; price mechanism; elasticity concept; inflation and its effects; unemployment`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC ECONOMICS LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Scarcity; opportunity cost; market and price; specialisation; NZ trading partners; government role in economy
+- DEVELOPING (Year 9-10 skills): Supply and demand (law of demand — inverse relationship; law of supply — direct relationship; shift factors for both supply and demand; market equilibrium — where supply meets demand; surplus and shortage; how markets clear); price elasticity of demand (elastic vs inelastic; calculating PED; factors affecting PED); market structures (perfect competition, monopoly, oligopoly — characteristics); macroeconomics (GDP — what it measures; inflation — causes, CPI, effects; unemployment — types and rates; business cycle — expansion, peak, contraction, trough); government economic policies (fiscal policy — taxes and spending; monetary policy — interest rates); international trade (comparative advantage; free trade vs protectionism; NZ's current account)
+- ADVANCED (NCEA Level 1 skills): Welfare analysis (consumer and producer surplus); market failure (externalities, public goods); evaluating government intervention`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA ECONOMICS LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): Supply and demand; price elasticity; macroeconomic indicators; government fiscal and monetary policy; international trade
+- DEVELOPING (NCEA Level 1 skills): Microeconomics in depth (supply and demand analysis — shifts and movements along curves; consumer and producer surplus; price floors and ceilings and their effects; elasticity — price, income, cross-elasticity; market structures — profit maximisation, barriers to entry); macroeconomics (aggregate demand and supply; economic growth and its measurement; inflation — demand-pull vs cost-push, consequences; unemployment — cyclical, structural, frictional; balance of payments); New Zealand economic context (role of RBNZ; exchange rate effects on exports and imports)
+- ADVANCED (NCEA Level 2 skills): Market failure in depth (externalities, merit goods, public goods, information asymmetry); evaluation of policies (cost-benefit analysis, trade-offs)`
+    }
+    return `Use appropriate NZC/NCEA Economics content for ${nzcLevel}, covering microeconomics, macroeconomics, and the NZ economic context.`
+  }
+
+  // Computing / Digital Technology
+  if (s.includes('computing') || s.includes('computer') || s.includes('digital tech') || s.includes('coding') || s.includes('programming')) {
+    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+      return `NZC DIGITAL TECHNOLOGY LEVEL 2 CALIBRATION (Year 3-4):
+- FOUNDATION (Year 1-2 skills): Using a mouse and keyboard; recognising common devices; taking photos or making simple digital art
+- DEVELOPING (Year 3-4 skills): Algorithms as step-by-step instructions (recipe, directions); creating simple sequences in Scratch or similar block-based tools (move, turn, repeat, wait); understanding loops (repeat a set of instructions); debugging simple errors; binary concept — computers use 1s and 0s; input-output-process model; online safety (personal information, trusted adults, cyberbullying); creating simple digital media (presentation, document, simple animation)
+- ADVANCED (Year 5-6 skills): Conditional statements (if/else); variables; more complex Scratch programs; basic binary counting (0-7 in 3 bits); data and its types (number, text, Boolean)`
+    }
+    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+      return `NZC DIGITAL TECHNOLOGY LEVEL 3 CALIBRATION (Year 5-6):
+- FOUNDATION (Year 3-4 skills): Sequences and loops in block coding; input/output model; binary concept; online safety; digital media creation
+- DEVELOPING (Year 5-6 skills): Algorithms with conditionals (if/else) and repetition (while/for loops); variables (storing and updating values); decomposition — breaking problems into smaller parts; tracing through an algorithm manually (dry run); binary numbers (converting between binary and decimal, 0-255); representing data — how text is encoded (ASCII concept); flowcharts as visual algorithm representation; creating interactive programs in Scratch (event handlers, user input); data collection and simple spreadsheet use; cybersecurity basics (strong passwords, phishing, safe browsing)
+- ADVANCED (Year 7-8 skills): Introduction to text-based programming (Python basics — print, input, variables, if/else); functions as reusable procedures; basic data structures (lists); network basics (how the internet works at a conceptual level)`
+    }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC DIGITAL TECHNOLOGY LEVEL 4 CALIBRATION (Year 7-8):
+- FOUNDATION (Year 5-6 skills): Conditionals; loops; variables; decomposition; binary conversion; flowcharts; Scratch programs; cybersecurity basics
+- DEVELOPING (Year 7-8 skills): Python programming — variables, data types (int, float, string, bool), input/output, arithmetic operators, comparison operators, if/elif/else, while loops, for loops, lists (indexing, appending, iterating), defining and calling functions; binary and hexadecimal (converting between bases, use in computing); number representation (two's complement for negative numbers); data representation (image as pixels, ASCII/Unicode for text); networks — components (router, switch, server, client), protocols (HTTP, TCP/IP), IP addresses, DNS; cybersecurity — encryption (symmetric/asymmetric concept), HTTPS, firewalls, common attacks (SQL injection, phishing); database concepts (tables, fields, records, primary key, simple SQL SELECT)
+- ADVANCED (Year 9-10 skills): Object-oriented programming concepts (classes, objects, attributes, methods); recursive algorithms; sorting algorithms (bubble sort, merge sort); 2D lists and nested loops`
+    }
+    if (nzcLevel.includes('Level 5') || nzcLevel.includes('Year 9') || nzcLevel.includes('Year 10')) {
+      return `NZC DIGITAL TECHNOLOGY LEVEL 5 (Year 9-10) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Python basics; binary/hexadecimal; data representation; network components; SQL SELECT; cybersecurity concepts
+- DEVELOPING (Year 9-10 skills): Object-oriented programming (classes and objects, attributes, constructors, methods, encapsulation, inheritance); sorting and searching algorithms (bubble sort, insertion sort, selection sort, linear search, binary search — implementing and comparing efficiency); Big O notation (O(n), O(n²), O(log n)); recursive algorithms (factorial, Fibonacci, towers of Hanoi); 2D arrays and their manipulation; SQL (SELECT with WHERE, ORDER BY, GROUP BY; INSERT; UPDATE; JOIN concept); web development (HTML structure — head/body/headings/paragraphs/links/images; CSS selectors, properties — colour, font, margin, padding, flexbox basics; JavaScript variables, events, DOM manipulation); OSI and TCP/IP network models; public key encryption; hashing; ethical and social implications of AI and data collection
+- ADVANCED (NCEA Level 1 skills): Complex algorithm design; database design (normalisation to 2NF); cybersecurity threats and countermeasures; programming with complex data structures`
+    }
+    return `Use appropriate NZC/NCEA Digital Technology content for ${nzcLevel}, covering programming, data representation, networks, and cybersecurity.`
+  }
+
+  // Music (NZC The Arts — Music strand)
+  if (s === 'music') {
+    if (nzcLevel.includes('Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
+      return `NZC MUSIC LEVEL 1 CALIBRATION (Year 1-2):
+- FOUNDATION (pre-school): Responding to music (fast/slow, loud/soft); clapping a simple beat; recognising familiar songs
+- DEVELOPING (Year 1-2 skills): Musical elements — beat (steady pulse), rhythm (pattern of long/short sounds), tempo (fast/slow), dynamics (loud/soft — forte/piano), pitch (high/low); performing simple songs and chants; distinguishing between instruments by sound; creating simple soundscapes; ta (crotchet) and ti-ti (quaver pair) rhythm notation in basic form; call and response patterns
+- ADVANCED (Year 3-4 skills): Treble clef note names on lines and spaces (EGBDF, FACE); time signatures (4/4 meaning); quarter rests; naming common instrument families`
+    }
+    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+      return `NZC MUSIC LEVEL 2 CALIBRATION (Year 3-4):
+- FOUNDATION (Year 1-2 skills): Beat, rhythm, tempo, dynamics, pitch; simple rhythm notation (ta, ti-ti); performing songs; instrument families
+- DEVELOPING (Year 3-4 skills): Musical elements in practice — duration (note values: semibreve=4, minim=2, crotchet=1, quaver=½); time signature 4/4 (4 beats per bar); treble clef note reading (lines: EGBDF, spaces: FACE); simple C major scale; dynamics markings (p, mp, mf, f, ff, pp); tempo markings (allegro, andante, adagio); timbre — identifying instruments by sound; texture (thin/thick; melody and accompaniment); creating simple 4-bar rhythmic or melodic patterns; responding to music — describing mood, style, and character; recognising AB and ABA musical form
+- ADVANCED (Year 5-6 skills): Bass clef note reading; major and minor scales; sharp/flat/natural signs; chord recognition (I, IV, V); musical periods (Baroque, Classical, Romantic) at a basic level`
+    }
+    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+      return `NZC MUSIC LEVEL 3 CALIBRATION (Year 5-6):
+- FOUNDATION (Year 3-4 skills): Note values; 4/4 time signature; treble clef reading; dynamics and tempo markings; AB/ABA form; instrument timbres
+- DEVELOPING (Year 5-6 skills): Staff notation — treble and bass clef reading; major scales (C, G, D, F); key signatures (up to 2 sharps/flats); time signatures (2/4, 3/4, 4/4); note values including dotted notes and ties; musical form (binary AB, ternary ABA, rondo ABACA, theme and variations); harmonic concepts (major vs minor; tonic, dominant, subdominant chords); musical periods (Baroque, Classical, Romantic — key composers and characteristics); musical devices (sequence, ostinato, syncopation, imitation); analysing music for style, structure, and expressive techniques; composing an 8-bar melody with accompaniment
+- ADVANCED (Year 7-8 skills): Modes and pentatonic scales; extended harmonies (7th chords); more complex rhythmic patterns (triplets, syncopation); musical analysis using subject-specific vocabulary; 20th century music styles`
+    }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC MUSIC LEVEL 4 CALIBRATION (Year 7-8):
+- FOUNDATION (Year 5-6 skills): Treble/bass clef; major scales and key signatures; time signatures; musical form; major/minor; chord I/IV/V; musical periods and composers
+- DEVELOPING (Year 7-8 skills): Modes (Dorian, Mixolydian, Aeolian/natural minor); pentatonic scale; extended harmonies (7th chords — dominant 7th, major 7th); chord progressions (I-IV-V-I, ii-V-I in jazz); complex rhythms (triplets, syncopation, polyrhythm); musical texture (monophony, homophony, polyphony, heterophony); musical analysis — identifying compositional devices (canon, fugue subject/answer, augmentation, diminution, inversion); comparing music across world cultures; 20th century styles (jazz, blues, rock, electronic — characteristics and context); composing for different instruments with attention to playability; performing with technical accuracy and expression
+- ADVANCED (NCEA Level 1 skills): Advanced harmony; modulation; composing in a specific style with analytical commentary; music history in depth (specific periods and composers)`
+    }
+    return `Use appropriate NZC Music content for ${nzcLevel}, covering musical elements (pitch, rhythm, dynamics, timbre, texture), notation, theory, performance, composition, and musical history/styles.`
+  }
+
+  // Spanish (NZC Learning Languages)
+  if (s.includes('spanish') || s.includes('español')) {
+    return `NZC SPANISH (LEARNING LANGUAGES) CALIBRATION:
+NOTE: Spanish in NZ is proficiency-based (Novice → Intermediate → Advanced). Assess based on years of study, not just year group.
+- FOUNDATION (zero/minimal Spanish): Cannot produce any Spanish; may recognise a few cognates (hotel, chocolate, animal, musica); no knowledge of grammar
+- DEVELOPING (Novice 1-2, typical 1-3 years of study): Greetings and farewells (Hola, Buenos días/tardes/noches, Adiós, Hasta luego, ¿Cómo estás?/¿Cómo te llamas?); self-introduction (Me llamo..., Tengo ... años, Soy de...); numbers 0-100 (uno, dos, tres... veinte, treinta...); colours (rojo, azul, verde, amarillo, negro, blanco, anaranjado); days of the week (lunes, martes... domingo) and months; family members (madre/mamá, padre/papá, hermano/a, abuelo/a); expressing likes and dislikes (Me gusta / No me gusta + noun/infinitive; Me encanta; Odio); basic classroom objects and instructions; present tense of SER (soy, eres, es, somos, sois, son) and TENER (tengo, tienes, tiene...); present tense of regular -AR verbs (hablar, gustar, escuchar); describing self (alto/a, bajo/a, rubio/a, moreno/a; simpático/a, divertido/a)
+- ADVANCED (Emergent, 3-4 years): Writing 4-6 sentences in correct Spanish; present tense of regular -ER/-IR verbs; adjective agreement (gender and number — un perro negro, una gata negra, unos perros negros); SER vs ESTAR distinction; ir + a + infinitive for near future; reflexive verbs (me llamo, me despierto); negation; basic question formation`
+  }
+
+  // Te Reo Māori (NZC — Learning Languages and curriculum context)
+  if (s.includes('te reo') || s.includes('maori') || s.includes('māori') || s.includes('reo')) {
+    if (nzcLevel.includes('Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
+      return `NZC TE REO MĀORI LEVEL 1 CALIBRATION (Year 1-2):
+- FOUNDATION: No te reo knowledge; cannot recognise any Māori words
+- DEVELOPING (Year 1-2 skills): Basic greetings (Kia ora, Tēnā koe, Mōrena); farewell (Ka kite anō, Haere rā); numbers 1-10 (tahi, rua, toru, whā, rima, ono, whitu, waru, iwa, tekau); colours (whero-red, kākāriki-green, kōwhai-yellow, mā-white, pango-black, kikorangi-blue); simple body parts (māhunga-head, ringa-hand, waewae-foot, kanohi-face); responding to simple instructions (tū ake — stand up; noho iho — sit down; āe — yes; kāo — no)
+- ADVANCED (Year 3-4 skills): Self-introduction using ko/nō sentence structures; numbers to 20; days of the week (Rāhina-Monday through Rātapu-Sunday); simple descriptive sentences; whanau words`
+    }
+    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+      return `NZC TE REO MĀORI LEVEL 2 CALIBRATION (Year 3-4):
+- FOUNDATION (Year 1-2 skills): Basic greetings; numbers 1-10; colours; body parts; simple classroom instructions
+- DEVELOPING (Year 3-4 skills): Ko-sentences for identity (Ko [name] tōku ingoa; Ko [tribe] tōku iwi; Ko [mountain] tōku maunga; Ko [river] tōku awa); Nō-sentences for origin (Nō Tāmaki Mākorau ahau); numbers to 100 (tekau mā tahi...); days of week and months; whanau vocabulary (māmā, pāpā, tuakana, teina, tungāne, tuahine, koro, kui, mokopuna); colour adjectives; simple present tense statements (E... ana ahau — I am...ing; Kei te... ahau — I am...); describing weather; responding to and giving simple instructions; common nouns for food, animals, and places in NZ
+- ADVANCED (Year 5-6 skills): Verb-subject-object sentence structure (basic Māori grammar — VSO order); possessive pronouns (tōku, tōu, tōna); past and future tense markers (I...; Ka...); question words (He aha? He wai? Kei hea?)`
+    }
+    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+      return `NZC TE REO MĀORI LEVEL 3 CALIBRATION (Year 5-6):
+- FOUNDATION (Year 3-4 skills): Ko/Nō sentences; numbers to 100; days and months; whanau vocabulary; present tense E...ana; basic nouns
+- DEVELOPING (Year 5-6 skills): Māori sentence structure (VSO — verb first: Ka kai ahau; Kei te mahi ia); past tense (I — I haere ahau ki te kura); future tense (Ka — Ka hoki āpōpō); locative sentences (Kei hea? — where is?; Kei [place] a [person/thing]); possessives — a-class and o-class (tōku/tāku distinction at a basic level); directions (ki te raro, ki runga, ki roto, ki waho); describing people and things with adjectives; question formation (He aha...? He wai...? Nō wai...? Kei hea...? He mea aha...?); numbers with people and things (tekau ngā tamariki); Māori concepts (kaitiakitanga, manaakitanga, whanaungatanga — meaning and use); reading and responding to a short simple te reo passage
+- ADVANCED (Year 7-8 skills): Subordinate clauses; dual and plural pronouns; passive voice (e...ia); writing a personal paragraph in te reo Māori using correct grammar`
+    }
+    return `Use appropriate NZC Te Reo Māori content for ${nzcLevel}, covering greetings, self-introduction, basic grammar structures, and key vocabulary in cultural context.`
   }
 
   // French

@@ -26,17 +26,20 @@ interface SubjectOption {
 }
 
 const SUBJECTS: SubjectOption[] = [
-  { name: 'Mathematics', icon: '📐', color: '#6366f1' },
-  { name: 'English',     icon: '📝', color: '#8b5cf6' },
-  { name: 'Science',     icon: '🔬', color: '#06b6d4' },
-  { name: 'French',      icon: '🗣️', color: '#ec4899' },
-  { name: 'Physics',     icon: '⚛️',  color: '#f59e0b' },
-  { name: 'Chemistry',   icon: '🧪', color: '#10b981' },
-  { name: 'Biology',     icon: '🧬', color: '#22c55e' },
-  { name: 'History',     icon: '📜', color: '#dc2626' },
-  { name: 'Geography',   icon: '🌍', color: '#2563eb' },
-  { name: 'Economics',   icon: '📊', color: '#7c3aed' },
-  { name: 'Computing',   icon: '💻', color: '#0f172a' },
+  { name: 'Mathematics',  icon: '📐', color: '#6366f1' },
+  { name: 'English',      icon: '📝', color: '#8b5cf6' },
+  { name: 'Science',      icon: '🔬', color: '#06b6d4' },
+  { name: 'Biology',      icon: '🧬', color: '#22c55e' },
+  { name: 'Chemistry',    icon: '🧪', color: '#10b981' },
+  { name: 'Physics',      icon: '⚛️',  color: '#f59e0b' },
+  { name: 'History',      icon: '📜', color: '#dc2626' },
+  { name: 'Geography',    icon: '🌍', color: '#2563eb' },
+  { name: 'Economics',    icon: '📊', color: '#7c3aed' },
+  { name: 'Computing',    icon: '💻', color: '#334155' },
+  { name: 'Music',        icon: '🎵', color: '#a21caf' },
+  { name: 'French',       icon: '🇫🇷', color: '#ec4899' },
+  { name: 'Spanish',      icon: '🇪🇸', color: '#f97316' },
+  { name: 'Te Reo Māori', icon: '🪶', color: '#15803d' },
 ]
 
 const LEVEL_META = {
