@@ -668,6 +668,24 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // Spanish (NZC Learning Languages)
   if (s.includes('spanish') || s.includes('español')) {
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA SPANISH LEVEL 1 (Year 11) CALIBRATION (~CEFR A2):
+- FOUNDATION (Novice, 1-3 years): Greetings; self-introduction; present tense SER/TENER/regular -AR verbs; adjective agreement; likes/dislikes; numbers; family
+- DEVELOPING (NCEA Level 1, ~A2): Regular -ER and -IR verbs in present tense; preterite tense (pretérito indefinido — regular and key irregular verbs: ir/ser→fui, tener→tuve, hacer→hice, estar→estuve; expressing completed past events); reflexive verbs (levantarse, ducharse, llamarse — daily routines); negative constructions (no, nunca, nada, nadie); question formation with question words; gustar-type verbs (interesar, encantar, molestar) with indirect object pronouns; ser vs estar with adjectives (ser for permanent, estar for temporary/location); topic vocabulary: school, leisure, food, health, daily routines, holidays, family; writing 50-80 words on familiar topics; reading short authentic texts; understanding slow to moderate spoken Spanish
+- ADVANCED (NCEA Level 2 skills, ~B1): Imperfect tense; conditional; si-clauses type 1; complex sentence structures`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA SPANISH LEVEL 2 (Year 12) CALIBRATION (~CEFR B1):
+- FOUNDATION (NCEA Level 1 / A2 skills): Preterite tense; reflexive verbs; gustar-type verbs; ser vs estar; A2-level vocabulary
+- DEVELOPING (NCEA Level 2 skills, ~B1): Imperfect tense (imperfecto — describing past states, habits, and ongoing actions; contrast with preterite for single completed actions); conditional (condicional — hypothetical situations; me gustaría, podría, debería); future simple (futuro simple — predictions; seré, haré, tendrá); subjunctive in common constructions (after querer que, esperar que, ojalá; impersonal expressions — es importante que, es necesario que); relative pronouns (que, quien, donde, cuyo); object pronouns in complex positions (double pronoun order: me lo da, se lo dije); si-clauses type 1 (si + present, future — si tengo dinero, iré); topic vocabulary: environment, technology, media, travel, health, relationships, cultural diversity; reading authentic texts ~200 words; writing 150-200 word structured responses (email, opinion, narrative); understanding authentic Spanish at moderate pace
+- ADVANCED (NCEA Level 3 skills, ~B2): Si-clauses type 2 and 3; passive voice; subjunctive in complex clauses; literary analysis`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA SPANISH LEVEL 3 (Year 13) CALIBRATION (~CEFR B2):
+- FOUNDATION (NCEA Level 2 / B1 skills): Imperfect vs preterite; conditional; future; subjunctive in common constructions; si-clauses type 1; B1 vocabulary
+- DEVELOPING (NCEA Level 3 skills, ~B2): Advanced si-clauses (type 2: si + imperfect subjunctive + conditional — si tuviera dinero, compraría; type 3: si + pluperfect subjunctive + conditional perfect — si hubiera sabido, lo habría hecho); passive voice (voz pasiva with ser + past participle and reflexive se-passive — se vende, se habla); subjunctive in complex clauses (after aunque, cuando + future meaning, para que, a menos que, antes de que, sin que; sequence of tenses); literary and cultural analysis (commenting on tone, style, narrative perspective, and social/historical context in Spanish texts; identifying rhetorical devices in Spanish — anáfora, metáfora, ironía); reading and responding to complex authentic texts (~300-400 words — editorial, literary extract, cultural essay); writing sophisticated 250-300 word responses (argumentative essay, formal letter, critical commentary); understanding native-speed spoken Spanish on complex topics
+- ADVANCED (university/scholarship skills): Translation from English to Spanish; stylistic literary analysis; writing a research essay in Spanish; advanced discourse analysis`
+    }
     return `NZC SPANISH (LEARNING LANGUAGES) CALIBRATION:
 NOTE: Spanish in NZ is proficiency-based (Novice → Intermediate → Advanced). Assess based on years of study, not just year group.
 - FOUNDATION (zero/minimal Spanish): Cannot produce any Spanish; may recognise a few cognates (hotel, chocolate, animal, musica); no knowledge of grammar
@@ -695,11 +713,53 @@ NOTE: Spanish in NZ is proficiency-based (Novice → Intermediate → Advanced).
 - DEVELOPING (Year 5-6 skills): Māori sentence structure (VSO — verb first: Ka kai ahau; Kei te mahi ia); past tense (I — I haere ahau ki te kura); future tense (Ka — Ka hoki āpōpō); locative sentences (Kei hea? — where is?; Kei [place] a [person/thing]); possessives — a-class and o-class (tōku/tāku distinction at a basic level); directions (ki te raro, ki runga, ki roto, ki waho); describing people and things with adjectives; question formation (He aha...? He wai...? Nō wai...? Kei hea...? He mea aha...?); numbers with people and things (tekau ngā tamariki); Māori concepts (kaitiakitanga, manaakitanga, whanaungatanga — meaning and use); reading and responding to a short simple te reo passage
 - ADVANCED (Year 7-8 skills): Subordinate clauses; dual and plural pronouns; passive voice (e...ia); writing a personal paragraph in te reo Māori using correct grammar`
     }
+    if (nzcLevel.includes('Level 4') || nzcLevel.includes('Year 7') || nzcLevel.includes('Year 8')) {
+      return `NZC TE REO MĀORI LEVEL 4 CALIBRATION (Year 7-8):
+- FOUNDATION (Year 5-6 skills): VSO sentence structure; past/future tense (I.../Ka...); possessives (tōku/tāku); locative sentences; question words; basic Māori concepts
+- DEVELOPING (Year 7-8 skills): Passive voice constructions (e...ia — Ko te āporo e kainga ana e ia); subordinate clauses using conjunctions (i mua i... — before; nō muri... — after; i te wā... — while); dual and plural pronouns (māua/mātou — we excl.; tāua/tātou — we incl.; rāua/rātou — they); a-class and o-class possessives systematically (tōku/tāku, tō/tā, tōna/tāna, ō/ā); complex descriptions using relative clauses; writing a structured paragraph (3-5 sentences) in te reo using correct grammar; reading and responding to a short passage of authentic te reo Māori; numbers beyond 100 (rautau — hundred, mano — thousand); understanding and using formal register
+- ADVANCED (NCEA Level 1 skills): Complex sentence structures with multiple clauses; stative verbs; command forms; te reo in a cultural performance context`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA TE REO MĀORI LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 7-8 skills): Passive voice; dual/plural pronouns; a/o-class possessives; subordinate clauses; paragraph writing; formal register
+- DEVELOPING (NCEA Level 1 skills): Listening and reading comprehension of te reo texts (identifying main ideas, specific details, and implied meaning from oral and written texts about familiar topics); writing extended te reo (3-5 paragraph responses; structured argument; narrative with correct tense sequencing); stative verbs (kei te ngenge ahau — I am tired; expressing states and conditions); nominalisations (te mahi — the work; te haere — the going); periphrastic constructions; cultural contexts in te reo (karakia, waiata, whakatauki — understanding and using in context; marae protocol language); vocabulary — 500+ words across familiar domains (school, family, community, food, environment, time, feelings)
+- ADVANCED (NCEA Level 2 skills): Complex multi-clause sentences; rhetorical structures; analysing and responding to unseen te reo texts; using te reo in persuasive or formal contexts`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA TE REO MĀORI LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Listening/reading comprehension; extended writing; stative verbs; nominalisations; cultural contexts; 500+ vocabulary
+- DEVELOPING (NCEA Level 2 skills): Sustained communication in te reo Māori (giving and justifying opinions; participating in discussions; explaining complex ideas; narrating events with varied tense and aspect markers); comprehension of authentic material (newspaper articles, radio broadcasts, speeches in te reo at a moderate pace); grammar in depth (relative clauses with ai — te tangata i haere ai — the person who went; comparison — ake/iho for up/down; complex aspect markers — kua, i, ka, kei te, e...ana; cleft sentences — Ko ia te tino rangatira); writing for different purposes and audiences (formal letter, persuasive essay, creative writing); idioms and whakatauki (interpreting and using proverbs appropriately); cultural identity (discussing whakapapa, iwi, hapū; marae-based language)
+- ADVANCED (NCEA Level 3 skills): Fluent sustained discourse; debating and argumentation in te reo; evaluating and critiquing te reo texts; using archaic vocabulary and poetic language`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA TE REO MĀORI LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Sustained communication; authentic text comprehension; complex grammar (relative clauses with ai, aspect markers); writing for different purposes; whakatauki and cultural identity
+- DEVELOPING (NCEA Level 3 skills): Advanced comprehension and production (listening to and reading sophisticated te reo texts at natural pace; understanding archaic and poetic language; responding to complex arguments and abstract topics in te reo); debating and argumentation (presenting and defending a nuanced position in te reo; anticipating counter-arguments; using rhetorical devices; formal oral presentation); extended writing (2000+ word essay or creative work in te reo with control of register, style, and sophisticated grammar); language and culture in depth (analysing waiata as literature — poetic devices, historical context, cultural meaning; oral traditions — kōrero pūrākau, whakaaro hou; evaluating the role of te reo Māori revitalisation in NZ society; te reo in media, education, and law)
+- ADVANCED (university/wānanga skills): Archaic te reo vocabulary; dialectal variation across iwi; translation from classical te reo; writing a research essay in te reo Māori`
+    }
     return `Use appropriate NZC Te Reo Māori content for ${nzcLevel}, covering greetings, self-introduction, basic grammar structures, and key vocabulary in cultural context.`
   }
 
   // French
   if (s.includes('french') || s.includes('français')) {
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA FRENCH LEVEL 1 (Year 11) CALIBRATION (~CEFR A2):
+- FOUNDATION (Novice, 1-3 years of French): Greetings; self-introduction; numbers; colours; present tense of avoir/être; regular -ER verbs; family; likes/dislikes; basic adjective agreement
+- DEVELOPING (NCEA Level 1 skills, ~A2): Regular -IR and -RE verbs; past tense (passé composé with avoir and être — including irregular participles); immediate future (aller + infinitive); reflexive verbs (se lever, se laver); negative constructions (ne...pas, ne...jamais, ne...rien); partitive articles (du, de la, des); direct and indirect object pronouns (le, la, les, me, te, lui); question formation (inversion, est-ce que, question words — qui, que, où, quand, comment, pourquoi, combien); topic vocabulary: school, leisure, daily routines, food, holidays, weather; writing 50-80 word responses on familiar topics; understanding short authentic dialogues and texts
+- ADVANCED (NCEA Level 2 skills, ~B1): Imperfect tense; conditional; subjunctive introduction; complex sentence structures; reading longer authentic texts`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA FRENCH LEVEL 2 (Year 12) CALIBRATION (~CEFR B1):
+- FOUNDATION (NCEA Level 1 / A2 skills): Passé composé; reflexive verbs; object pronouns; regular and common irregular verbs; A2-level vocabulary (school, daily life, food, holidays)
+- DEVELOPING (NCEA Level 2 skills, ~B1): Imperfect tense (imparfait — description, habitual past, background context) and contrast with passé composé; conditional (conditionnel présent — hypothetical situations; je voudrais, il faudrait); future simple (futur simple — predictions, plans; je serai, nous ferons); pluperfect (plus-que-parfait); subjunctive in common constructions (after il faut que, bien que, pour que); relative pronouns (qui, que, dont, où); negative constructions (ne...plus, ne...que, ne...personne); pronouns in depth (y, en, double object pronouns); topic vocabulary: environment, technology, travel, media, health, society; reading authentic texts of ~200 words (articles, letters, literary extracts); writing structured 150-200 word responses (letter, opinion piece, narrative)
+- ADVANCED (NCEA Level 3 skills, ~B2): Passive voice; si-clauses (type 2 and 3); reported speech; advanced literary analysis; reading literary extracts`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA FRENCH LEVEL 3 (Year 13) CALIBRATION (~CEFR B2):
+- FOUNDATION (NCEA Level 2 / B1 skills): Imperfect vs passé composé; conditional; future; subjunctive in common constructions; relative pronouns; 200-word responses; B1 vocabulary
+- DEVELOPING (NCEA Level 3 skills, ~B2): Passive voice (voix passive — all tenses; distinguishing passive from reflexive); hypothetical si-clauses (type 2: imparfait + conditionnel; type 3: plus-que-parfait + conditionnel passé); reported speech (discours indirect — tense backshift; changing pronouns and time expressions); advanced subjunctive (emotion, doubt, superlative constructions — c'est le meilleur que je connaisse); literary analysis (identifying and commenting on tone, style, narrative voice, symbolism, irony, register in French literary texts; using literary vocabulary in French: le narrateur, le point de vue, la métaphore, l'ironie, le registre); reading and responding to complex authentic texts (~300-400 words — newspaper editorial, literary extract, cultural commentary); writing sophisticated 250-300 word extended responses (essay, critical analysis, formal argument); vocabulary: francophone culture and society, current affairs, abstract concepts; understanding authentic spoken French at normal speed
+- ADVANCED (university/scholarship skills): Academic discourse in French; translation from English to French; stylistic analysis of literary works; comparative literature`
+    }
     return `NZC FRENCH (LEARNING LANGUAGES) CALIBRATION:
 NOTE: French in NZ is proficiency-based, not strictly year-based. Assess at Novice level unless the student's grade/age indicates they have had several years of instruction.
 - FOUNDATION (zero/minimal French): No French knowledge; possibly recognises a few cognates (restaurant, café, musique); cannot produce any French
