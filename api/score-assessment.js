@@ -153,7 +153,7 @@ Return ONLY valid JSON with no markdown fences:
     const client = new Anthropic({ apiKey })
     const response = await client.messages.create({
       model: model || 'claude-sonnet-4-6',
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: systemPrompt,
       messages: [{ role: 'user', content: messageContent }],
     })
