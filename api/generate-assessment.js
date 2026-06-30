@@ -171,19 +171,20 @@ IMPORTANT: Order questions from easiest to hardest (foundation first, then devel
 
 function estimateNzcLevel(grade, age) {
   const g = String(grade).toLowerCase()
-  if (g.includes('year 1') || g.includes('y1') || age <= 6) return 'NZC Level 1 (Year 1-2)'
-  if (g.includes('year 2') || g.includes('y2') || age === 7) return 'NZC Level 1 (Year 1-2)'
-  if (g.includes('year 3') || g.includes('y3') || age === 8) return 'NZC Level 2 (Year 3-4)'
-  if (g.includes('year 4') || g.includes('y4') || age === 9) return 'NZC Level 2 (Year 3-4)'
-  if (g.includes('year 5') || g.includes('y5') || age === 10) return 'NZC Level 3 (Year 5-6)'
-  if (g.includes('year 6') || g.includes('y6') || age === 11) return 'NZC Level 3 (Year 5-6)'
-  if (g.includes('year 7') || g.includes('y7') || age === 12) return 'NZC Level 4 (Year 7-8)'
-  if (g.includes('year 8') || g.includes('y8') || age === 13) return 'NZC Level 4 (Year 7-8)'
-  if (g.includes('year 9') || g.includes('y9') || age === 14) return 'NZC Level 5 (Year 9-10)'
-  if (g.includes('year 10') || g.includes('y10') || age === 15) return 'NZC Level 5 (Year 9-10)'
-  if (g.includes('year 11') || g.includes('y11') || age === 16) return 'NZC Level 6 / NCEA Level 1'
-  if (g.includes('year 12') || g.includes('y12') || age === 17) return 'NZC Level 7 / NCEA Level 2'
+  // Check longest year strings FIRST — "year 1" is a substring of "year 10/11/12/13"
   if (g.includes('year 13') || g.includes('y13') || age >= 18) return 'NZC Level 8 / NCEA Level 3'
+  if (g.includes('year 12') || g.includes('y12') || age === 17) return 'NZC Level 7 / NCEA Level 2'
+  if (g.includes('year 11') || g.includes('y11') || age === 16) return 'NZC Level 6 / NCEA Level 1'
+  if (g.includes('year 10') || g.includes('y10') || age === 15) return 'NZC Level 5 (Year 9-10)'
+  if (g.includes('year 9')  || g.includes('y9')  || age === 14) return 'NZC Level 5 (Year 9-10)'
+  if (g.includes('year 8')  || g.includes('y8')  || age === 13) return 'NZC Level 4 (Year 7-8)'
+  if (g.includes('year 7')  || g.includes('y7')  || age === 12) return 'NZC Level 4 (Year 7-8)'
+  if (g.includes('year 6')  || g.includes('y6')  || age === 11) return 'NZC Level 3 (Year 5-6)'
+  if (g.includes('year 5')  || g.includes('y5')  || age === 10) return 'NZC Level 3 (Year 5-6)'
+  if (g.includes('year 4')  || g.includes('y4')  || age === 9)  return 'NZC Level 2 (Year 3-4)'
+  if (g.includes('year 3')  || g.includes('y3')  || age === 8)  return 'NZC Level 2 (Year 3-4)'
+  if (g.includes('year 2')  || g.includes('y2')  || age === 7)  return 'NZC Level 1 (Year 1-2)'
+  if (g.includes('year 1')  || g.includes('y1')  || age <= 6)   return 'NZC Level 1 (Year 1-2)'
   return `Expected year level for age ${age}`
 }
 
