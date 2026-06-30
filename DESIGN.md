@@ -684,13 +684,13 @@ Motivational framing, not alarming. Tap to see why.
 - ParentApp: dashboard overview, roadmap, chat history, controls
 - localStorage fallback mode (works without Supabase env vars)
 
-### Phase 1.5 — Level Assessment (Implemented 2026-06-30)
+### Phase 1.5 — Level Assessment (Implemented 2026-06-30, iteratively improved 2026-07-01)
 
 Student-initiated diagnostic assessment to establish subject mastery level, persisted per child.
 
 #### Flow
 1. **Assess Level tab** (new tab in StudentApp nav) — student taps to start
-2. **Subject selection** — grid of 11 subjects (Mathematics, English, Science, French, Physics, Chemistry, Biology, History, Geography, Economics, Computing); shows existing assessed levels inline
+2. **Subject selection** — grid of 14 subjects (Mathematics, English, Science, Biology, Chemistry, Physics, History, Geography, Economics, Computing, Music, French, Spanish, Te Reo Māori); shows existing assessed levels inline
 3. **Optional upload** — student uploads up to 3 photos of recent exercises or homework (or takes a camera photo); these are sent to Claude Vision to calibrate question difficulty
 4. **Question generation** — `/api/generate-assessment` produces 7 questions: 2 foundation, 3 developing, 2 advanced; question types: multiple-choice, short-answer, long-answer, drawing
 5. **Quiz** — one question per screen; toggle between Type (keyboard) and Draw (Apple Pencil canvas, 380px height); question dot navigator; skip any question; progress bar
@@ -698,12 +698,61 @@ Student-initiated diagnostic assessment to establish subject mastery level, pers
 7. **Results** — level badge with star rating (1–4 stars), score, detailed feedback, expandable per-question breakdown; level persisted to DB
 
 #### Level scale
-| Level | Stars | Score range | Meaning |
+| Level | Stars | Tier logic | Meaning |
 |---|---|---|---|
-| Foundation | ⭐ | 0–39% | Prerequisite gaps; foundational support needed |
-| Developing | ⭐⭐ | 40–64% | At year level with some gaps |
-| Advanced | ⭐⭐⭐ | 65–84% | Solid at-level, some above-level success |
-| Expert | ⭐⭐⭐⭐ | 85–100% | Consistently above-level mastery |
+| Foundation | ⭐ | developingAvg < 30% | Prerequisite gaps; foundational support needed |
+| Developing | ⭐⭐ | developingAvg ≥ 30% | At year level with some gaps |
+| Advanced | ⭐⭐⭐ | developingAvg ≥ 70% AND advancedAvg ≥ 30% | Solid at-level, meaningful above-level success |
+| Expert | ⭐⭐⭐⭐ | developingAvg ≥ 85% AND advancedAvg ≥ 65% | Consistently above-level mastery |
+
+Level is determined **server-side** using tier averages only — not the AI's judgment call — to ensure consistent, deterministic results.
+
+#### Tier calibration (`generate-assessment.js` — `buildSubjectGuidance`)
+
+All 14 subjects are calibrated across NZC Levels 1–8 and NCEA Levels 1–3. Subject-specific guidance is injected into the generation prompt so Claude produces correctly-levelled questions for each year group.
+
+| Subject | NZC coverage | NCEA coverage |
+|---|---|---|
+| Mathematics | L1–L5 | NCEA L1–L3 |
+| English | L1–L5 | NCEA L1–L3 |
+| Science (general) | L2–L5 | — |
+| Biology | L4–L5 | NCEA L1–L3 |
+| Chemistry | L4–L5 | NCEA L1–L3 |
+| Physics | L4–L5 | NCEA L1–L3 |
+| History | L2–L5 | NCEA L1–L3 |
+| Geography | L2–L5 | NCEA L1–L2 |
+| Economics | L4–L5 | NCEA L1–L3 |
+| Computing | L2–L5 | NCEA L1–L2 |
+| Music | L1–L4 | — |
+| Spanish | proficiency-based (Novice 1–2) | — |
+| French | proficiency-based | — |
+| Te Reo Māori | L1–L3 | — |
+
+**Routing bugs fixed (commit 71649f4):**
+- Biology/Chemistry/Physics previously fell into the generic Science block (`s.includes('chemistry')` matched too broadly), so NCEA Level 1/2/3 blocks were unreachable dead code. Fixed to `s !== 'biology' && s !== 'chemistry' && s !== 'physics'`.
+- All NZC Level 1/2/3 checks used `nzcLevel.includes('Level X')`, which false-matched strings like `'NZC Level 7 / NCEA Level 2'` (contains "Level 2" as a suffix). This routed Year 12 students to Year 3-4 content. Fixed throughout by using `nzcLevel.startsWith('NZC Level X')`.
+
+#### Scoring engine (`score-assessment.js`)
+
+**Anti-leniency anchors** enforced in the system prompt:
+- 0: No answer / "I don't know" / blank
+- 20: Vague mention without demonstrating knowledge
+- 40: Partial understanding with significant gaps
+- 60: Mostly correct with minor gaps
+- 80: Correct and clear, minor omissions
+- 100: Fully correct and well-explained
+
+**Server-side tier logic** (overrides AI judgment, applied after scoring):
+```
+developingAvg ≥ 85 AND advancedAvg ≥ 65 → expert
+developingAvg ≥ 70 AND advancedAvg ≥ 30 → advanced
+developingAvg ≥ 30                       → developing
+else                                     → foundation
+```
+
+**Score-by-questionId** (commit 039df37): Tier averages are computed by matching `questionId` not array index, so AI response ordering never corrupts the tier-to-score mapping.
+
+**max_tokens = 4096** in score-assessment.js to prevent JSON truncation on long essay scoring responses.
 
 #### New API endpoints
 - `POST /api/generate-assessment` — 7 questions from Claude (Vision-optional); input: subject, childAge/Grade, exerciseImages[]
@@ -735,6 +784,16 @@ student_levels (id, child_id, subject, level, level_label, score, assessed_at)
 - `AppContext`: `subjectLevels: SubjectLevel[]` (ls key `sp_subject_levels`), `saveSubjectLevel()` upserts to `student_levels`
 - `get-child-data.js`: returns `subjectLevels` array in API response
 - Levels cleared on logout
+
+#### Simulation test accuracy (as of 2026-07-01)
+Tested using `test-assessment-accuracy.mjs` (local only, in .gitignore). Simulation feeds Claude-generated perfect answers to the scoring endpoint, then selectively blanks tier answers to verify each level boundary:
+
+| Round | Scenarios | Pass rate | Key finding |
+|---|---|---|---|
+| Round 2 | 44 | 95% (42/44) | Index-based tier mapping caused Geography/Computing misrouting |
+| Round 3 | 38 | 100% (38/38) | After questionId fix |
+| Round 4 | 32 | 97% (31/32) | One Science Year 8 JSON truncation (max_tokens 3200) |
+| Round 5 | 42+ | Pending | After routing bug fixes — covers Year 11/12/13 for all senior subjects |
 
 ### Phase 2 — Adaptive Intelligence (Next)
 - Weak spot analysis: /api/analyze-performance + adaptive /api/generate-weekly
