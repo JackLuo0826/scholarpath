@@ -132,12 +132,13 @@ Create a detailed, honest, system-specific year-by-year plan. Be concrete with s
     // More years = more content in phased mode; cap at 32K for very long spans
     const maxTokens = yearsRemaining <= 3 ? 16000 : yearsRemaining <= 6 ? 24000 : 32000
 
-    const response = await client.messages.create({
+    const stream = client.messages.stream({
       model: model || 'claude-opus-4-6',
       max_tokens: maxTokens,
       system: systemPrompt,
       messages: [{ role: 'user', content: userMessage }],
     })
+    const response = await stream.finalMessage()
 
     const text = response.content[0].text.trim()
     const start = text.indexOf('{')

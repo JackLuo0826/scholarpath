@@ -1,17 +1,22 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@supabase/supabase-js'
+import { buildSpineContext } from '../src/curriculum/index.js'
 
 /**
  * POST /api/generate-weekly
  * Generates a personalised set of weekly activities based on the child's
  * age, grade, goal plan, and current quarter milestones.
  *
- * Body: { childAge, childGrade, childName, goalPlan, apiKey, model }
+ * Body: { childAge, childGrade, childName, goalPlan, apiKey, model, childId? }
  * Returns: { weekTheme, activities: WeeklyActivity[] }
+ *
+ * When childId is provided and SUPABASE_SERVICE_ROLE_KEY is configured, the
+ * generated activities are saved server-side (bypassing student RLS limitations).
  */
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
-  const { childAge, childGrade, childName, goalPlan, apiKey, model } = req.body
+  const { childAge, childGrade, childName, goalPlan, apiKey, model, childId } = req.body
   if (!apiKey) return res.status(400).json({ error: 'No API key provided' })
 
   // ── Derive current context ─────────────────────────────────────────────────
@@ -28,6 +33,14 @@ export default async function handler(req, res) {
   const name = childName || 'the student'
   const ageCtx = childAge ? `${childAge} years old` : 'school age'
   const gradeCtx = childGrade || 'unspecified grade'
+
+  // ── Curriculum spine context ───────────────────────────────────────────────
+  const subjectNames = subjectTargets.map(s => s.subject).filter(Boolean)
+  const defaultSubjects = ['Mathematics', 'English', 'Science']
+  const spineSubjects = subjectNames.length > 0 ? subjectNames : defaultSubjects
+  const country = goalPlan?.country || 'NZ'
+  const pathway = goalPlan?.pathway
+  const spineContext = buildSpineContext(gradeCtx, spineSubjects, country, pathway)
 
   // Estimate developmental stage for content calibration
   const age = parseInt(childAge) || 13
@@ -72,6 +85,9 @@ ${weeklyHabits.length > 0
   ? weeklyHabits.slice(0, 3).map(h => `• ${h.habit} — ${h.frequency}`).join('\n')
   : '• None specified'}
 
+Curriculum alignment:
+${spineContext}
+
 Design guidelines:
 - Mix subjects (don't put all maths together)
 - Calibrate difficulty to age ${age}: use vocabulary, context, and problem complexity appropriate for ${gradeCtx}
@@ -79,6 +95,8 @@ Design guidelines:
 - For reading/todo types: give a clear, concrete task the student can complete alone
 - Hints should nudge thinking without giving away the answer
 - milestoneRef should name the specific milestone or habit it serves
+- spineRef: include the curriculum objective ID from the alignment section above that best matches the activity (e.g. "NZC-MATH-L4-NA-7" or "AS91261"). Use null if no match.
+- hplAcps: include 1-2 HPL Advanced Cognitive Performance characteristics this activity develops (e.g. ["Problem-Solving", "Making Connections"])
 
 Return this exact JSON structure:
 {
@@ -95,7 +113,9 @@ Return this exact JSON structure:
       "hint": "A gentle nudge — points toward the approach without revealing the answer",
       "durationMin": 25,
       "difficulty": "foundation",
-      "milestoneRef": "Which milestone or habit this serves"
+      "milestoneRef": "Which milestone or habit this serves",
+      "spineRef": "NZC-MATH-L4-NA-7",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
     }
   ]
 }
@@ -118,6 +138,48 @@ Subject colours: Mathematics #6366f1, English/Reading #10b981, Science #f59e0b, 
     const end = raw.lastIndexOf('}')
     const json = (start !== -1 && end !== -1) ? raw.slice(start, end + 1) : raw
     const parsed = JSON.parse(json)
+
+    // Server-side persist: embed weeklyPlan into the goal_plans record.
+    // weekly_activities table has a PostgREST schema cache miss (PGRST205), so we
+    // piggyback on goal_plans which is accessible. WeekStart is stored so get-child-data
+    // can validate freshness and only return activities for the current week.
+    if (childId && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      try {
+        const admin = createClient(
+          process.env.VITE_SUPABASE_URL,
+          process.env.SUPABASE_SERVICE_ROLE_KEY,
+          { auth: { autoRefreshToken: false, persistSession: false } }
+        )
+        const weekStart = (() => {
+          const d = new Date(); const day = d.getUTCDay()
+          const diff = (day === 0) ? -6 : 1 - day
+          const mon = new Date(d); mon.setUTCDate(d.getUTCDate() + diff)
+          return mon.toISOString().slice(0, 10)
+        })()
+        // Fetch the latest goal plan record so we can update it in place
+        const { data: planRow } = await admin.from('goal_plans')
+          .select('id, plan_json')
+          .eq('child_id', childId)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+        if (planRow) {
+          const updatedJson = {
+            ...planRow.plan_json,
+            weeklyPlan: {
+              weekStart,
+              weekTheme: parsed.weekTheme ?? '',
+              activities: parsed.activities ?? [],
+              generatedAt: new Date().toISOString(),
+            },
+          }
+          await admin.from('goal_plans').update({ plan_json: updatedJson }).eq('id', planRow.id)
+        }
+      } catch (saveErr) {
+        console.warn('generate-weekly: server-side save failed:', saveErr.message)
+      }
+    }
+
     res.json(parsed)
   } catch (err) {
     console.error('generate-weekly error:', err)

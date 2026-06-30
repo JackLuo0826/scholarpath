@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
-import type { User, ChatMessage, ChildInfo, WeeklyActivity, ActivityCompletion } from './types'
+import type { User, ChatMessage, ChildInfo, WeeklyActivity, ActivityCompletion, SubjectLevel } from './types'
 import { MOCK_MESSAGES } from './mockData'
 import type { GoalPlan } from './pages/GoalWizard'
 import type { UniversityPath } from './pages/UniversityPathPlanner'
@@ -27,6 +27,7 @@ interface AppState {
   weeklyTheme: string
   activityCompletions: ActivityCompletion[]
   weekStart: string
+  subjectLevels: SubjectLevel[]
   isGeneratingActivities: boolean
   isLoadingSession: boolean
   setUser: (u: User | null) => void
@@ -39,6 +40,7 @@ interface AppState {
   generateWeeklyActivities: () => Promise<void>
   submitActivityAnswer: (completion: ActivityCompletion) => Promise<void>
   updateChildProfile: (update: { age?: number; grade?: string; name?: string }) => Promise<void>
+  saveSubjectLevel: (level: SubjectLevel) => Promise<void>
 }
 
 const AppContext = createContext<AppState | null>(null)
@@ -62,6 +64,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [weeklyActivities, setWeeklyActivities] = useState<WeeklyActivity[]>(() => ls('sp_weekly_acts', []))
   const [weeklyTheme, setWeeklyTheme] = useState<string>(() => localStorage.getItem('sp_weekly_theme') || '')
   const [activityCompletions, setActivityCompletions] = useState<ActivityCompletion[]>(() => ls('sp_act_completions', []))
+  const [subjectLevels, setSubjectLevels] = useState<SubjectLevel[]>(() => ls('sp_subject_levels', []))
   const [weekStart] = useState<string>(getWeekStart)
   const [isGeneratingActivities, setIsGeneratingActivities] = useState(false)
   const [isLoadingSession, setIsLoadingSession] = useState(isSupabaseConfigured)
@@ -139,45 +142,88 @@ export function AppProvider({ children }: { children: ReactNode }) {
         }
       }
     } else if (profile.role === 'student') {
-      // Resolve child row by auth_id (include parent_id to load their settings)
-      const { data: childRow } = await supabase
-        .from('children')
-        .select('id, parent_id, name, age, grade, goal, target_year, avatar_color, streak')
-        .eq('auth_id', authId)
-        .maybeSingle()
+      // Resolve ALL student data via server-side API (bypasses RLS using service role).
+      // This is needed because the children table's SELECT policy for students may not
+      // be applied in the production database, which causes all downstream RLS policies
+      // (which subquery children) to also fail.
+      let apiLoaded = false
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.access_token) {
+          const resp = await fetch('/api/get-child-data', {
+            headers: { Authorization: `Bearer ${session.access_token}` }
+          })
+          if (resp.ok) {
+            const json = await resp.json()
+            const cr = json.child
+            if (cr) {
+              const cid = cr.id
+              setChildId(cid)
+              localStorage.setItem('sp_child_id', cid)
 
-      const cid = childRow?.id ?? null
-      setChildId(cid)
-      if (cid) localStorage.setItem('sp_child_id', cid)
+              const ci: ChildInfo = {
+                id: cr.id, name: cr.name, age: cr.age,
+                grade: cr.grade, goal: cr.goal, targetYear: cr.target_year,
+                avatarColor: cr.avatar_color ?? '#6366f1', streak: cr.streak ?? 0,
+              }
+              setChildInfo(ci); lsSet('sp_child_info', ci)
 
-      if (childRow) {
-        const ci: ChildInfo = {
-          id: childRow.id, name: childRow.name, age: childRow.age,
-          grade: childRow.grade, goal: childRow.goal, targetYear: childRow.target_year,
-          avatarColor: childRow.avatar_color ?? '#6366f1', streak: childRow.streak ?? 0,
-        }
-        setChildInfo(ci); lsSet('sp_child_info', ci)
-
-        // Load parent's api_key + model so student can generate/submit activities
-        if (childRow.parent_id) {
-          const { data: parentSettings } = await supabase
-            .from('settings')
-            .select('claude_model, claude_api_key')
-            .eq('parent_id', childRow.parent_id)
-            .maybeSingle()
-          if (parentSettings?.claude_api_key) {
-            setApiKeyState(parentSettings.claude_api_key)
-            localStorage.setItem('sp_api_key', parentSettings.claude_api_key)
+              if (json.apiKey) { setApiKeyState(json.apiKey); localStorage.setItem('sp_api_key', json.apiKey) }
+              if (json.model)  { setModelState(json.model);   localStorage.setItem('sp_model', json.model) }
+              if (json.goalPlan) { setGoalPlanState(json.goalPlan); lsSet('sp_goal_plan', json.goalPlan) }
+              if (json.universityPath) { setUniversityPathState(json.universityPath); lsSet('sp_university_path', json.universityPath) }
+              if (json.messages?.length) { setMessages(json.messages); lsSet('sp_messages', json.messages) }
+              if (json.weeklyActivities?.length) {
+                setWeeklyActivities(json.weeklyActivities)
+                setWeeklyTheme(json.weeklyTheme ?? '')
+                lsSet('sp_weekly_acts', json.weeklyActivities)
+                localStorage.setItem('sp_weekly_theme', json.weeklyTheme ?? '')
+              }
+              if (json.activityCompletions?.length) {
+                setActivityCompletions(json.activityCompletions)
+                lsSet('sp_act_completions', json.activityCompletions)
+              }
+              if (json.subjectLevels?.length) {
+                setSubjectLevels(json.subjectLevels)
+                lsSet('sp_subject_levels', json.subjectLevels)
+              }
+              apiLoaded = true
+            }
           }
-          if (parentSettings?.claude_model) {
-            setModelState(parentSettings.claude_model)
-            localStorage.setItem('sp_model', parentSettings.claude_model)
-          }
         }
+      } catch (e) {
+        console.warn('get-child-data API failed, falling back to Supabase:', e)
       }
 
-      if (cid) {
-        await loadChildData(cid)
+      if (!apiLoaded) {
+        // Fallback: direct Supabase queries (will work once RLS policy is applied)
+        const { data: childRow } = await supabase
+          .from('children')
+          .select('id, parent_id, name, age, grade, goal, target_year, avatar_color, streak')
+          .eq('auth_id', authId)
+          .maybeSingle()
+
+        const cid = childRow?.id ?? null
+        setChildId(cid)
+        if (cid) localStorage.setItem('sp_child_id', cid)
+
+        if (childRow) {
+          const ci: ChildInfo = {
+            id: childRow.id, name: childRow.name, age: childRow.age,
+            grade: childRow.grade, goal: childRow.goal, targetYear: childRow.target_year,
+            avatarColor: childRow.avatar_color ?? '#6366f1', streak: childRow.streak ?? 0,
+          }
+          setChildInfo(ci); lsSet('sp_child_info', ci)
+
+          if (childRow.parent_id) {
+            const { data: ps } = await supabase
+              .from('settings').select('claude_model, claude_api_key')
+              .eq('parent_id', childRow.parent_id).maybeSingle()
+            if (ps?.claude_api_key) { setApiKeyState(ps.claude_api_key); localStorage.setItem('sp_api_key', ps.claude_api_key) }
+            if (ps?.claude_model)   { setModelState(ps.claude_model);    localStorage.setItem('sp_model', ps.claude_model) }
+          }
+        }
+        if (cid) await loadChildData(cid)
       }
     }
   }
@@ -258,6 +304,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setActivityCompletions(completions)
       lsSet('sp_act_completions', completions)
     }
+
+    // Load subject levels
+    const { data: sl } = await supabase
+      .from('student_levels')
+      .select('subject, level, level_label, score, assessed_at')
+      .eq('child_id', cid)
+    if (sl && sl.length > 0) {
+      const levels: SubjectLevel[] = sl.map(r => ({
+        subject: r.subject,
+        level: r.level,
+        levelLabel: r.level_label,
+        score: r.score,
+        assessedAt: r.assessed_at,
+      }))
+      setSubjectLevels(levels)
+      lsSet('sp_subject_levels', levels)
+    }
   }
 
   // ── Auth ─────────────────────────────────────────────────────────────────
@@ -283,8 +346,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setWeeklyActivities([])
     setWeeklyTheme('')
     setActivityCompletions([])
+    setSubjectLevels([])
     lsSet('sp_weekly_acts', null)
     lsSet('sp_act_completions', null)
+    lsSet('sp_subject_levels', null)
     localStorage.removeItem('sp_weekly_theme')
   }
 
@@ -362,6 +427,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           goalPlan,
           apiKey,
           model,
+          childId: childId ?? undefined,  // enables server-side save
         }),
       })
       if (!resp.ok) throw new Error(await resp.text())
@@ -411,6 +477,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const saveSubjectLevel = async (level: SubjectLevel) => {
+    setSubjectLevels(prev => {
+      const filtered = prev.filter(l => l.subject !== level.subject)
+      const next = [...filtered, level]
+      lsSet('sp_subject_levels', next)
+      return next
+    })
+
+    if (isSupabaseConfigured && childId) {
+      await supabase.from('student_levels').upsert({
+        child_id: childId,
+        subject: level.subject,
+        level: level.level,
+        level_label: level.levelLabel,
+        score: level.score,
+        assessed_at: level.assessedAt,
+      }, { onConflict: 'child_id,subject' })
+    }
+  }
+
   const submitActivityAnswer = async (completion: ActivityCompletion) => {
     // Optimistic update
     setActivityCompletions(prev => {
@@ -441,9 +527,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     <AppContext.Provider value={{
       user, messages, apiKey, model, goalPlan, universityPath,
       childId, childInfo, weeklyActivities, weeklyTheme, activityCompletions, weekStart,
+      subjectLevels,
       isGeneratingActivities, isLoadingSession,
       setUser, logout, addMessage, setApiKey, setModel, setGoalPlan, setUniversityPath,
-      generateWeeklyActivities, submitActivityAnswer, updateChildProfile,
+      generateWeeklyActivities, submitActivityAnswer, updateChildProfile, saveSubjectLevel,
     }}>
       {children}
     </AppContext.Provider>

@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import {
   BookOpen, Brain, Send, Flame, Trophy,
   GraduationCap, LogOut, Loader2, Lock, BookMarked, Map, Target, CheckCircle2,
+  ClipboardCheck,
 } from 'lucide-react'
 import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
 import GoalSummary from './GoalSummary'
 import WeeklyActivities from './WeeklyActivities'
 import ExerciseSheet from './ExerciseSheet'
+import LevelAssessment from './LevelAssessment'
 import { useApp } from '../AppContext'
 import type { ChatMessage, WeeklyActivity } from '../types'
 
@@ -57,7 +59,7 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
   )
 }
 
-type Tab = 'today' | 'goals' | 'roadmap' | 'chat' | 'knowledge' | 'progress'
+type Tab = 'today' | 'goals' | 'roadmap' | 'chat' | 'knowledge' | 'progress' | 'assess'
 
 interface KnowledgeItem {
   id: string
@@ -77,6 +79,7 @@ export default function StudentApp() {
     messages, addMessage, logout: logoutFn, apiKey, model, goalPlan,
     childInfo, weeklyActivities, weeklyTheme, activityCompletions, weekStart,
     isGeneratingActivities, generateWeeklyActivities, submitActivityAnswer,
+    subjectLevels, saveSubjectLevel,
   } = useApp()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<Tab>('today')
@@ -297,6 +300,7 @@ export default function StudentApp() {
           { key: 'chat',     label: 'AI Tutor',   icon: Brain },
           { key: 'knowledge',label: 'Knowledge',  icon: BookMarked },
           { key: 'progress', label: 'Progress',   icon: Trophy },
+          { key: 'assess',   label: 'Assess Level', icon: ClipboardCheck },
         ] as const).map(({ key, label, icon: Icon }) => (
           <button
             key={key}
@@ -455,6 +459,33 @@ export default function StudentApp() {
               addMessage(msg)
             }}
           />
+        )}
+
+        {/* ASSESS LEVEL */}
+        {activeTab === 'assess' && (
+          <div>
+            {!apiKey ? (
+              <div className="bg-gradient-to-br from-brand-50 to-purple-50 border border-brand-100 rounded-2xl p-6 text-center">
+                <div className="w-12 h-12 rounded-2xl bg-brand-100 flex items-center justify-center mx-auto mb-4">
+                  <ClipboardCheck className="w-6 h-6 text-brand-600" />
+                </div>
+                <h2 className="text-base font-bold text-gray-900 mb-1">API key required</h2>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  A parent needs to add a Claude API key in Settings to enable level assessments.
+                </p>
+              </div>
+            ) : (
+              <LevelAssessment
+                childAge={childInfo?.age ?? null}
+                childGrade={childInfo?.grade ?? null}
+                childName={childName}
+                apiKey={apiKey}
+                model={model}
+                existingLevels={subjectLevels}
+                onLevelSaved={saveSubjectLevel}
+              />
+            )}
+          </div>
         )}
 
         {/* PROGRESS */}

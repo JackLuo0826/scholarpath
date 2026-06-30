@@ -92,7 +92,7 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
   try {
     const client = new Anthropic({ apiKey })
 
-    const response = await client.messages.create({
+    const stream = client.messages.stream({
       model: model || 'claude-opus-4-6',
       max_tokens: 16000,
       system: systemPrompt,
@@ -103,6 +103,7 @@ Return ONLY valid JSON — no markdown, no explanation. Use this exact structure
         },
       ],
     })
+    const response = await stream.finalMessage()
 
     const text = response.content[0].text.trim()
     const start = text.indexOf('{')

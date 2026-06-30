@@ -37,6 +37,252 @@
 
 ---
 
+## Curriculum Frameworks Research
+
+Rather than generating all content from scratch, ScholarPath can anchor to established frameworks. This reduces hallucinated content, makes exercises measurable, and lets us use the same language schools already use with parents and students.
+
+### HPL — High Performance Learning
+
+Used by St Cuthbert's College (Auckland) and ~700 schools globally. Developed by Prof. Deborah Eyre. HPL is **not a subject curriculum** — it is a pedagogical layer that sits on top of any curriculum (NCEA, IB, national). This makes it directly composable with ScholarPath.
+
+Two pillars:
+
+**ACPs — Advanced Cognitive Performance (20 thinking characteristics)**
+
+These are the thinking skills that separate high performers from average students:
+
+| Cluster | Examples |
+|---|---|
+| Meta-cognitive | Meta-thinking, self-regulation, strategic planning |
+| Analytical | Critical analysis, precision, intellectual curiosity |
+| Creative | Creative thinking, making connections across subjects |
+| Practical | Problem-solving, generalisation, applying knowledge in context |
+| Intellectual | Realisation (understanding complex conceptual relationships), intellectual confidence |
+
+**VAAs — Values, Attitudes, and Attributes (10 behavioural dispositions)**
+
+How students need to behave to sustain high performance:
+- Resilience, empathy, collaboration, growth mindset, open-mindedness, integrity, independence, confidence, commitment, ethical responsibility
+
+**Why this matters for ScholarPath:** The AI tutor can explicitly name and develop ACPs during sessions ("That's great meta-thinking — you just caught your own error"). Parents see ACP progress tracked alongside subject scores. This is the exact vocabulary St Cuth teachers use, making ScholarPath legible to that school community.
+
+---
+
+### Existing Curriculum Standards We Can Align To
+
+Instead of generating exercises against vague difficulty levels, each activity can be tagged to a real standard:
+
+| Framework | Coverage | Relevance to ScholarPath |
+|---|---|---|
+| **NCEA** (NZ national) | Years 11–13, all subjects, credit-based achievement standards | High — already using NZ term dates; primary NZ market |
+| **NZ Curriculum (NZC)** | Years 1–10, 8 learning areas (English, Maths, Science, etc.) | High — foundational years pre-NCEA |
+| **IB (PYP/MYP/Diploma)** | Years 1–13, global, inquiry-based | High — St Cuth offers IB Diploma (Years 12–13 only); PYP/MYP at other NZ schools |
+| **Cambridge IGCSE / A-Level** | Years 10–13, global alternative to NCEA | Medium — some NZ private schools |
+| **Khan Academy** | K-12, mapped to Common Core + many state standards | Medium — free content structure usable as reference |
+| **HPL framework** | Any age, cross-subject thinking skills | High — composable pedagogical layer |
+
+**NCEA Achievement Standards** are the most actionable: each standard has a code (e.g. AS91027 — Apply algebraic procedures), a difficulty level (Achieved / Merit / Excellence), and a credit value. Tagging exercises to NCEA standards lets the parent dashboard show "Your child completed 3 Merit-level Algebra credits this week."
+
+---
+
+### Strategic Recommendation: HPL + NCEA/IB
+
+Combine the two:
+
+1. **NCEA / IB as content spine** — weekly exercises tagged to real achievement standards; roadmap milestones mapped to credit accumulation and prerequisite subjects
+2. **HPL ACPs as the skills layer** — each exercise explicitly targets 1-2 ACPs; tutor prompts embed HPL language; student profile tracks ACP development over time
+3. **University-path roadmap stays AI-generated** — this is genuinely novel and not covered by any existing framework; it synthesises NCEA credits + HPL skill levels + target university requirements
+
+**Positioning this enables:** "ScholarPath follows the same High Performance Learning framework as St Cuthbert's, aligned to your child's actual NCEA standards — so every session builds directly towards their qualifications."
+
+> **Note on St Cuthbert's IB scope:** St Cuth offers **only the IB Diploma** (Years 12–13). Junior/middle school (Years 0–11) follows the NZ Curriculum with HPL overlay — not PYP or MYP. PYP (ages 3–12, from 1997) and MYP (ages 11–16, from 1994) are separate IB programmes available at other NZ schools (e.g. ACG, Kristin, Queen Margaret College).
+
+---
+
+### Implementation Notes
+
+- `WeeklyActivity` type gains optional `nceaStandardCode?: string` and `hplAcps?: string[]` fields
+- Exercise generation prompt updated to request alignment to a target NCEA standard where subject/grade match
+- ACP tracking: new `acp_progress` table or column in `skill_state` (when BKT is built)
+- NCEA standard codes are public and stable — can be embedded as a static JSON lookup table, no API needed
+
+---
+
+## Student Pathway: NZ/IB → US University
+
+The canonical pathway for a St Cuthbert's student (or equivalent NZ private school) targeting a US university via IB Diploma. Three concurrent tracks run from enrolment to admission.
+
+### Track 1 — Academic Content (by school year)
+
+| Years | Framework | Focus |
+|---|---|---|
+| **Y1–8** | NZ Curriculum (NZC) + HPL | Literacy, numeracy, science, social sciences; build all 20 HPL ACPs |
+| **Y9–10** | NZ Curriculum (deepening) + HPL | Deepen subject strengths; keep all IB HL options open; no premature specialisation |
+| **Y11** | School bespoke Year 11 + HPL | Bridge year before IB; finalise HL subject choices based on target university/major |
+| **Y12** (IB Year 1) | IB DP: 6 subjects (3 HL + 3 SL) + Core | Subject tuition, Extended Essay topic selection, Theory of Knowledge intro, CAS planning |
+| **Y13** (IB Year 2) | IB DP exam prep | Push for 38–42/45; EE completion (4,000 words), ToK essay, CAS hours |
+
+**IB Diploma structure the app must model:**
+- 6 subject groups: Language & Literature · Language Acquisition · Individuals & Societies · Sciences · Mathematics · Arts
+- 3 Higher Level (HL) + 3 Standard Level (SL) subjects
+- Core: Extended Essay (EE), Theory of Knowledge (ToK), Creativity/Activity/Service (CAS)
+- Maximum 45 points (42 from subjects + 3 core bonus); top US schools expect **38–42+**
+
+**HL subject selection by intended US major** (critical decision at Y11):
+
+| Target major | Recommended HLs |
+|---|---|
+| Engineering | Maths AA + Physics + Chemistry |
+| Pre-medicine | Chemistry + Biology + Maths AA |
+| Economics / Business | Maths AA + Economics + one more |
+| Humanities / Law | English A + History + one more |
+| Computer Science | Maths AA + Physics or CS + one more |
+
+### Track 2 — US Admissions Prep (layered on top of IB)
+
+| Year | Milestone |
+|---|---|
+| Y10 | Begin US university list research; identify reach / match / safety tiers |
+| Y11 | SAT/ACT awareness — Harvard, MIT, Stanford, Yale, Caltech now require or are test-flexible; start light prep |
+| Y12 | SAT/ACT prep in earnest; understand Common App structure; extracurricular narrative planning |
+| Y13 (Term 1–2) | Common App personal statement + supplementals; teacher recommendation guidance |
+| Y13 (Aug–Nov) | Submit applications; IB predicted grades issued by school |
+
+**Key US admissions factors for NZ IB students:**
+- IB Diploma score (38+ for selective schools)
+- SAT/ACT — increasingly mandatory at top 20 US schools from 2025–26
+- Common App essays (personal statement + school-specific supplements)
+- Two teacher recommendations + counsellor letter
+- Extracurriculars with depth and leadership (not breadth)
+- IB Extended Essay treated as evidence of independent research ability
+
+### Track 3 — HPL Skills (continuous, cross-subject)
+
+ACPs are developed and tracked in every tutoring session regardless of year or subject. Notably, IB's own core components map directly onto HPL ACPs:
+- **Extended Essay** → meta-thinking, critical analysis, intellectual confidence
+- **Theory of Knowledge** → making connections across subjects, realisation, questioning
+- **CAS** → collaboration, empathy, resilience (VAAs)
+
+The HPL layer therefore *reinforces* IB core requirements without additional effort.
+
+### GoalWizard Additions for This Pathway
+
+The intake conversation must capture:
+1. Current year level (determines which phase)
+2. Target country and university tier (NZ / AUS / US / UK / other)
+3. Subject interest area → drives HL subject recommendations at Y11
+4. Whether IB or NCEA is planned (or undecided)
+
+The parent-facing university roadmap should display all three tracks as parallel timelines, not a single linear plan.
+
+---
+
+## Pre-Generated Curriculum Spine
+
+### What It Is
+
+Instead of generating all exercise content from scratch per-child, ScholarPath maintains a static **curriculum spine** — a structured JSON database of all learning objectives and standards from Year 1 through university entrance. This spine is the anchor for all AI-generated exercises and the mastery tracking system.
+
+```
+spine/
+├── nz_curriculum/          # NZC Years 0–10 achievement objectives
+│   ├── english.json
+│   ├── mathematics.json
+│   ├── science.json
+│   ├── social_sciences.json
+│   ├── technology.json
+│   ├── health_pe.json
+│   ├── the_arts.json
+│   └── languages.json
+├── ncea/                   # NZQA achievement standards Years 11–13
+│   ├── level1.json
+│   ├── level2.json
+│   └── level3.json
+├── au_curriculum/          # ACARA V9 Foundation–Year 10 (AUS support)
+│   └── [same structure as nz_curriculum/]
+└── ib_dp/                  # IB Diploma Programme topic structure
+    ├── group1_english.json
+    ├── group2_languages.json
+    ├── group3_humanities.json
+    ├── group4_sciences.json
+    ├── group5_mathematics.json
+    └── group6_arts.json
+```
+
+### Data Sources and Availability
+
+| Framework | Source | Format | Status |
+|---|---|---|---|
+| **NZ Curriculum (NZC)** | NZ Ministry of Education — newzealandcurriculum.tahurangi.education.govt.nz | Public PDF + online; achievement objectives by level and learning area | Fully public; strong coverage in Claude training data |
+| **NZQA NCEA Standards** | data.govt.nz — official government open data portal | Structured download: code, title, level, credits, internal/external, subject | Fully public; downloadable as structured data |
+| **Australian Curriculum (ACARA V9)** | australiancurriculum.edu.au/downloads/learning-areas | Public downloadable documents by learning area | Fully public; reasonable training coverage |
+| **IB Diploma** | ibo.org (structure + topics public; full syllabus PDFs behind school login) | Topic lists and assessment objectives publicly discussed | Partial — structure and topics well-known; granular criteria restricted |
+
+**What the spine contains (not lesson plans):**
+- NZC: achievement *objectives* per level (broad goals like "use multiplicative strategies with whole numbers")
+- NZQA: standard code, title, credits, level, assessment type — not exam content
+- ACARA: achievement *standards* per year level — descriptors of expected learning
+- IB DP: topic lists and sub-topics per subject group
+
+**What it does not contain:** lesson-by-lesson content, worked examples, or exam questions — all of that is generated dynamically by the AI, but always tagged to a specific spine node.
+
+### Spine Schema
+
+```typescript
+// NZC / ACARA objective node
+interface CurriculumObjective {
+  id: string               // e.g. "NZC-MATH-L3-2"
+  framework: 'NZC' | 'ACARA' | 'NCEA' | 'IB_DP'
+  country: 'NZ' | 'AU'
+  subject: string          // e.g. "Mathematics"
+  strand?: string          // e.g. "Number", "Algebra"
+  yearBand: string         // e.g. "Y3-4", "Y9-10"
+  level?: number           // NZC curriculum level 1–8
+  objectiveText: string    // the actual achievement objective
+  hplAcps?: string[]       // mapped HPL ACPs this objective develops
+}
+
+// NCEA standard node
+interface NceaStandard {
+  id: string               // e.g. "AS91027"
+  framework: 'NCEA'
+  country: 'NZ'
+  subject: string
+  level: 1 | 2 | 3        // NCEA level
+  title: string
+  credits: number
+  assessmentType: 'Internal' | 'External'
+  hplAcps?: string[]
+}
+
+// WeeklyActivity gains spine reference
+WeeklyActivity {
+  ...existing fields...
+  spineRef?: string        // links to CurriculumObjective.id or NceaStandard.id
+  hplAcps?: string[]
+}
+```
+
+### Why Pre-Generate Rather Than Dynamic-Only
+
+| Approach | Pros | Cons |
+|---|---|---|
+| **Fully dynamic** (current) | Flexible, personalised | No curriculum alignment; hallucinated difficulty; no mastery tracking against real objectives |
+| **Spine-anchored** (proposed) | Consistent progression; real standard alignment; mastery tracked against known objectives; cheaper (spine is static) | Build effort upfront; spine needs maintenance as standards update |
+
+The spine is built once from public data, stored as static JSON files checked into the repo, and referenced at exercise-generation time. NZQA updates standards occasionally — the spine would need a yearly review pass.
+
+### Build Plan for Spine
+
+1. **NZC** — generate from Claude training data + Ministry PDF; covers 8 learning areas × 8 levels → ~300–400 objectives
+2. **NZQA NCEA** — download from data.govt.nz; parse into JSON; currently ~1,200+ active achievement standards across Levels 1–3
+3. **ACARA** — download learning area documents from australiancurriculum.edu.au; parse achievement standards by year
+4. **IB DP** — generate topic lists from Claude training data (public topic structure); flag as approximate until verified against a school's subject guide
+
+Total spine size: estimated 2,000–3,000 nodes. Small enough to embed as static JSON; large enough to cover the full Y1–Y13 journey for both NZ and AUS students.
+
+---
+
 ## Architecture
 
 ### Tech Stack
@@ -396,6 +642,58 @@ Motivational framing, not alarming. Tap to see why.
 - ExerciseSheet: typed or drawn (DrawingCanvas) answers, /api/check-answer scoring
 - ParentApp: dashboard overview, roadmap, chat history, controls
 - localStorage fallback mode (works without Supabase env vars)
+
+### Phase 1.5 — Level Assessment (Implemented 2026-06-30)
+
+Student-initiated diagnostic assessment to establish subject mastery level, persisted per child.
+
+#### Flow
+1. **Assess Level tab** (new tab in StudentApp nav) — student taps to start
+2. **Subject selection** — grid of 11 subjects (Mathematics, English, Science, French, Physics, Chemistry, Biology, History, Geography, Economics, Computing); shows existing assessed levels inline
+3. **Optional upload** — student uploads up to 3 photos of recent exercises or homework (or takes a camera photo); these are sent to Claude Vision to calibrate question difficulty
+4. **Question generation** — `/api/generate-assessment` produces 7 questions: 2 foundation, 3 developing, 2 advanced; question types: multiple-choice, short-answer, long-answer, drawing
+5. **Quiz** — one question per screen; toggle between Type (keyboard) and Draw (Apple Pencil canvas, 380px height); question dot navigator; skip any question; progress bar
+6. **Scoring** — `/api/score-assessment` evaluates all answers (including drawn images via Vision); returns per-question scores + overall level
+7. **Results** — level badge with star rating (1–4 stars), score, detailed feedback, expandable per-question breakdown; level persisted to DB
+
+#### Level scale
+| Level | Stars | Score range | Meaning |
+|---|---|---|---|
+| Foundation | ⭐ | 0–39% | Prerequisite gaps; foundational support needed |
+| Developing | ⭐⭐ | 40–64% | At year level with some gaps |
+| Advanced | ⭐⭐⭐ | 65–84% | Solid at-level, some above-level success |
+| Expert | ⭐⭐⭐⭐ | 85–100% | Consistently above-level mastery |
+
+#### New API endpoints
+- `POST /api/generate-assessment` — 7 questions from Claude (Vision-optional); input: subject, childAge/Grade, exerciseImages[]
+- `POST /api/score-assessment` — evaluate answers, return per-question scores + level; supports drawing images via Vision
+
+#### New DB tables
+```sql
+level_assessments (id, child_id, subject, questions, answers, question_scores,
+                   overall_score, level, level_label, feedback, subject_report, created_at)
+
+student_levels (id, child_id, subject, level, level_label, score, assessed_at)
+  UNIQUE(child_id, subject) -- upserted after each assessment
+```
+
+#### iPad / Apple Pencil optimisations
+- Drawing canvas fixed at 380px height (vs 300px in ExerciseSheet)
+- ResizeObserver-based canvas width (fills container up to 640px)
+- Multiple-choice rendered as large full-width tap targets (48px min height)
+- `type !== 'multiple-choice'` → shows Type/Draw toggle; `drawing` type questions default to Draw mode
+
+#### TypeScript types added (`src/types.ts`)
+- `AssessmentQuestion` — id, question, hint, type, options?, difficulty, topic
+- `AssessmentAnswer` — questionId, answerText?, answerImageBase64?, selectedOption?
+- `QuestionScore` — questionId, score, isCorrect, feedback
+- `LevelAssessment` — full record (questions + answers + scores + level)
+- `SubjectLevel` — persisted result: subject, level, levelLabel, score, assessedAt
+
+#### State management
+- `AppContext`: `subjectLevels: SubjectLevel[]` (ls key `sp_subject_levels`), `saveSubjectLevel()` upserts to `student_levels`
+- `get-child-data.js`: returns `subjectLevels` array in API response
+- Levels cleared on logout
 
 ### Phase 2 — Adaptive Intelligence (Next)
 - Weak spot analysis: /api/analyze-performance + adaptive /api/generate-weekly

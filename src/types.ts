@@ -75,6 +75,8 @@ export interface WeeklyActivity {
   durationMin: number
   difficulty: 'foundation' | 'developing' | 'advanced'
   milestoneRef: string    // which goal milestone / habit this serves
+  spineRef?: string       // curriculum spine node ID e.g. "NZC-MATH-L4-NA-7" or "AS91261"
+  hplAcps?: string[]      // HPL Advanced Cognitive Performance characteristics targeted
 }
 
 // ── Activity completion record ────────────────────────────────────────────────
@@ -105,4 +107,51 @@ export interface Child {
   milestones: Milestone[]
   streak: number
   totalMinutesThisWeek: number
+}
+
+// ── Level Assessment ──────────────────────────────────────────────────────────
+export interface AssessmentQuestion {
+  id: string
+  question: string
+  hint?: string
+  type: 'short-answer' | 'long-answer' | 'multiple-choice' | 'drawing'
+  options?: string[]      // only for multiple-choice, e.g. ["A. Paris", "B. London", ...]
+  difficulty: 'foundation' | 'developing' | 'advanced'
+  topic: string           // e.g. "Fractions", "Photosynthesis"
+}
+
+export interface AssessmentAnswer {
+  questionId: string
+  answerText?: string
+  answerImageBase64?: string
+  selectedOption?: string  // for multiple-choice
+}
+
+export interface QuestionScore {
+  questionId: string
+  score: number
+  isCorrect: boolean
+  feedback: string
+}
+
+export interface LevelAssessment {
+  id: string
+  subject: string
+  questions: AssessmentQuestion[]
+  answers: AssessmentAnswer[]
+  questionScores: QuestionScore[]
+  overallScore: number
+  level: 'foundation' | 'developing' | 'advanced' | 'expert'
+  levelLabel: string   // e.g. "Year 5 - Developing" or "NZC Level 3"
+  feedback: string
+  subjectReport: string
+  createdAt: string
+}
+
+export interface SubjectLevel {
+  subject: string
+  level: 'foundation' | 'developing' | 'advanced' | 'expert'
+  levelLabel: string
+  score: number
+  assessedAt: string
 }

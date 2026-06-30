@@ -129,6 +129,34 @@ create table if not exists public.activity_completions (
   unique(child_id, activity_id, week_start)
 );
 
+-- ── Level assessments (full historical record per assessment session) ─────────
+create table if not exists public.level_assessments (
+  id             uuid primary key default uuid_generate_v4(),
+  child_id       uuid not null references public.children(id) on delete cascade,
+  subject        text not null,
+  questions      jsonb not null,
+  answers        jsonb not null,
+  question_scores jsonb not null default '[]',
+  overall_score  int not null default 0,
+  level          text not null check (level in ('foundation', 'developing', 'advanced', 'expert')),
+  level_label    text not null default '',
+  feedback       text not null default '',
+  subject_report text not null default '',
+  created_at     timestamptz not null default now()
+);
+
+-- ── Current assessed level per subject (upserted after each assessment) ───────
+create table if not exists public.student_levels (
+  id           uuid primary key default uuid_generate_v4(),
+  child_id     uuid not null references public.children(id) on delete cascade,
+  subject      text not null,
+  level        text not null check (level in ('foundation', 'developing', 'advanced', 'expert')),
+  level_label  text not null default '',
+  score        int not null default 0,
+  assessed_at  timestamptz not null default now(),
+  unique(child_id, subject)
+);
+
 -- ============================================================
 -- Drop old/renamed policies before recreating (idempotent re-runs)
 -- ============================================================
@@ -289,6 +317,37 @@ create policy "Student manages own completions" on public.activity_completions
 create policy "Parent reads child completions" on public.activity_completions
   for select using (
     exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+-- ── Drop new assessment policies (idempotent) ────────────────────────────────
+drop policy if exists "Parent manages level assessments"    on public.level_assessments;
+drop policy if exists "Student manages own level assessments" on public.level_assessments;
+drop policy if exists "Parent manages student levels"       on public.student_levels;
+drop policy if exists "Student manages own student levels"  on public.student_levels;
+
+-- Level assessments: RLS
+alter table public.level_assessments enable row level security;
+alter table public.student_levels     enable row level security;
+
+create policy "Parent manages level assessments" on public.level_assessments
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+create policy "Student manages own level assessments" on public.level_assessments
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
+  );
+
+-- Student levels: RLS
+create policy "Parent manages student levels" on public.student_levels
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.parent_id = auth.uid())
+  );
+
+create policy "Student manages own student levels" on public.student_levels
+  for all using (
+    exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
   );
 
 -- ============================================================
