@@ -67,11 +67,11 @@ Step 2: Determine level using DEVELOPING TIER as the primary diagnostic:
   "advanced":   developingAvg ≥ 70 AND advancedAvg ≥ 30 (but not expert)
     → Student is solid at year-level AND shows meaningful above-level capability
 
-  "developing": developingAvg ≥ 35 (but not advanced or expert)
-    → Student is working at or approaching year level; may struggle with above-level content
+  "developing": developingAvg ≥ 30 (but not advanced or expert)
+    → Student is working at or approaching year level; shows some year-level understanding
 
-  "foundation": developingAvg < 35
-    → Student has significant gaps at year level; foundational support needed
+  "foundation": developingAvg < 30
+    → Student has significant gaps at year level; needs prerequisite support
 
   DECISION ORDER: Check expert first, then advanced, then developing, then foundation.
   Use developing tier score as the primary signal. Foundation tier confirms prerequisites but
