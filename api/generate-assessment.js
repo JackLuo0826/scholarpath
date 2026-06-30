@@ -170,7 +170,19 @@ IMPORTANT: Order questions from easiest to hardest (foundation first, then devel
 }
 
 function estimateNzcLevel(grade, age) {
-  const g = String(grade).toLowerCase()
+  // Normalise no-space variants ("year13" → "year 13") and lowercase
+  const g = String(grade).toLowerCase().replace(/year(\d)/g, 'year $1')
+
+  // Pre-school / early childhood
+  if (g.includes('preschool') || g.includes('pre-school') || g.includes('kindergarten') || g.includes('kindy') || g.includes('kohanga') || g.includes('early childhood')) return 'NZC Level 1 (Year 1-2)'
+
+  // NZ legacy "Form" terminology (phased out 1989): Form 7=Yr13, 6=Yr12, 5=Yr11, 4=Yr10, 3=Yr9
+  if (g.includes('form 7') || g.includes('7th form') || g.includes('seventh form')) return 'NZC Level 8 / NCEA Level 3'
+  if (g.includes('form 6') || g.includes('6th form') || g.includes('sixth form'))   return 'NZC Level 7 / NCEA Level 2'
+  if (g.includes('form 5') || g.includes('5th form') || g.includes('fifth form'))   return 'NZC Level 6 / NCEA Level 1'
+  if (g.includes('form 4') || g.includes('4th form') || g.includes('fourth form'))  return 'NZC Level 5 (Year 9-10)'
+  if (g.includes('form 3') || g.includes('3rd form') || g.includes('third form'))   return 'NZC Level 4 (Year 7-8)'
+
   // Check longest year strings FIRST — "year 1" is a substring of "year 10/11/12/13"
   if (g.includes('year 13') || g.includes('y13') || age >= 18) return 'NZC Level 8 / NCEA Level 3'
   if (g.includes('year 12') || g.includes('y12') || age === 17) return 'NZC Level 7 / NCEA Level 2'

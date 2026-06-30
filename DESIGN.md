@@ -728,9 +728,11 @@ All 14 subjects are calibrated across NZC Levels 1–8 and NCEA Levels 1–3. Su
 | French | proficiency-based | — |
 | Te Reo Māori | L1–L3 | — |
 
-**Routing bugs fixed (commit 71649f4):**
-- Biology/Chemistry/Physics previously fell into the generic Science block (`s.includes('chemistry')` matched too broadly), so NCEA Level 1/2/3 blocks were unreachable dead code. Fixed to `s !== 'biology' && s !== 'chemistry' && s !== 'physics'`.
-- All NZC Level 1/2/3 checks used `nzcLevel.includes('Level X')`, which false-matched strings like `'NZC Level 7 / NCEA Level 2'` (contains "Level 2" as a suffix). This routed Year 12 students to Year 3-4 content. Fixed throughout by using `nzcLevel.startsWith('NZC Level X')`.
+**Routing bugs fixed:**
+- (71649f4) Biology/Chemistry/Physics fell into the generic Science block (`s.includes('chemistry')` matched too broadly), so their NCEA Level 1/2/3 blocks were unreachable dead code. Fixed to `s !== 'biology' && s !== 'chemistry' && s !== 'physics'`.
+- (71649f4) All NZC Level 1/2/3 checks used `nzcLevel.includes('Level X')`, which false-matched `'NZC Level 7 / NCEA Level 2'` (contains "Level 2" as a suffix), routing Year 12 students to Year 3-4 content. Fixed throughout by using `nzcLevel.startsWith('NZC Level X')`.
+- (562365f) `estimateNzcLevel` checked years in ascending order. `"year 13".includes("year 1")` is TRUE, so Year 13 was mapped to 'NZC Level 1 (Year 1-2)' and generated Year 1-2 questions. Fixed by checking Year 13 → Year 1 (highest first), so longer year strings are matched before their short prefixes.
+- (ee6954a) Vercel Hobby plan allows 12 serverless functions max. 13 functions caused all recent deployments to fail with `deploy_failed`. Fixed by merging `knowledge.js` into `chat.js` via a `type: 'knowledge'` body param.
 
 #### Scoring engine (`score-assessment.js`)
 
@@ -793,7 +795,8 @@ Tested using `test-assessment-accuracy.mjs` (local only, in .gitignore). Simulat
 | Round 2 | 44 | 95% (42/44) | Index-based tier mapping caused Geography/Computing misrouting |
 | Round 3 | 38 | 100% (38/38) | After questionId fix |
 | Round 4 | 32 | 97% (31/32) | One Science Year 8 JSON truncation (max_tokens 3200) |
-| Round 5 | 42+ | Pending | After routing bug fixes — covers Year 11/12/13 for all senior subjects |
+| Round 5 | 39  | 100% (39/39) | After routing bug fixes — all Year 11/12/13 subjects generate correct NCEA-level content |
+| Round 6 | TBD | Pending | After Form 5/6/7 + year normalisation + server-side overallScore improvements |
 
 ### Phase 2 — Adaptive Intelligence (Next)
 - Weak spot analysis: /api/analyze-performance + adaptive /api/generate-weekly

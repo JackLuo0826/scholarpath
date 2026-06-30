@@ -182,6 +182,7 @@ Return ONLY valid JSON with no markdown fences:
       const s = scoreById[q.id]
       if (s !== undefined && tierScores[q.difficulty]) tierScores[q.difficulty].push(s)
     })
+    const fAvg = avg(tierScores.foundation)
     const dAvg = avg(tierScores.developing)
     const aAvg = avg(tierScores.advanced)
 
@@ -191,7 +192,8 @@ Return ONLY valid JSON with no markdown fences:
     else if (dAvg >= 30)               level = 'developing'
     else                               level = 'foundation'
 
-    const overallScore = Math.min(100, Math.max(0, Number(result.overallScore) || 0))
+    // Compute overallScore server-side so it's always consistent with the tier weights
+    const overallScore = Math.round(fAvg * 0.20 + dAvg * 0.50 + aAvg * 0.30)
 
     res.json({
       questionScores,
