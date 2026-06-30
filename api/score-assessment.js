@@ -164,18 +164,35 @@ Return ONLY valid JSON with no markdown fences:
     if (start === -1 || end === -1) throw new Error('Invalid JSON response from AI')
     const result = JSON.parse(raw.slice(start, end + 1))
 
-    // Normalise
-    const validLevels = ['foundation', 'developing', 'advanced', 'expert']
-    const level = validLevels.includes(result.level) ? result.level : 'developing'
+    // Normalise question scores
+    const questionScores = (result.questionScores || []).map(qs => ({
+      questionId: qs.questionId || '',
+      score: Math.min(100, Math.max(0, Number(qs.score) || 0)),
+      isCorrect: Boolean(qs.isCorrect),
+      feedback: qs.feedback || '',
+    }))
+
+    // Server-side tier logic — overrides AI judgment to enforce consistent rules.
+    // Compute tier averages from the actual question scores.
+    const avg = arr => arr.length ? Math.round(arr.reduce((s, v) => s + v, 0) / arr.length) : 0
+    const tierScores = { foundation: [], developing: [], advanced: [] }
+    questions.forEach((q, i) => {
+      const qs = questionScores[i]
+      if (qs && tierScores[q.difficulty]) tierScores[q.difficulty].push(qs.score)
+    })
+    const dAvg = avg(tierScores.developing)
+    const aAvg = avg(tierScores.advanced)
+
+    let level
+    if      (dAvg >= 85 && aAvg >= 65) level = 'expert'
+    else if (dAvg >= 70 && aAvg >= 30) level = 'advanced'
+    else if (dAvg >= 30)               level = 'developing'
+    else                               level = 'foundation'
+
     const overallScore = Math.min(100, Math.max(0, Number(result.overallScore) || 0))
 
     res.json({
-      questionScores: (result.questionScores || []).map(qs => ({
-        questionId: qs.questionId || '',
-        score: Math.min(100, Math.max(0, Number(qs.score) || 0)),
-        isCorrect: Boolean(qs.isCorrect),
-        feedback: qs.feedback || '',
-      })),
+      questionScores,
       overallScore,
       level,
       levelLabel: result.levelLabel || `${grade} ${subject} — ${level.charAt(0).toUpperCase() + level.slice(1)}`,
