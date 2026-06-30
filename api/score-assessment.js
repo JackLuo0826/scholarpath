@@ -173,12 +173,14 @@ Return ONLY valid JSON with no markdown fences:
     }))
 
     // Server-side tier logic — overrides AI judgment to enforce consistent rules.
-    // Compute tier averages from the actual question scores.
+    // Match scores by questionId so AI response ordering never corrupts tier averages.
     const avg = arr => arr.length ? Math.round(arr.reduce((s, v) => s + v, 0) / arr.length) : 0
+    const scoreById = {}
+    questionScores.forEach(qs => { scoreById[qs.questionId] = qs.score })
     const tierScores = { foundation: [], developing: [], advanced: [] }
-    questions.forEach((q, i) => {
-      const qs = questionScores[i]
-      if (qs && tierScores[q.difficulty]) tierScores[q.difficulty].push(qs.score)
+    questions.forEach(q => {
+      const s = scoreById[q.id]
+      if (s !== undefined && tierScores[q.difficulty]) tierScores[q.difficulty].push(s)
     })
     const dAvg = avg(tierScores.developing)
     const aAvg = avg(tierScores.advanced)
