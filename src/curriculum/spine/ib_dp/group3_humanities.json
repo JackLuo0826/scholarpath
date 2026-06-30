@@ -1,0 +1,79 @@
+{
+  "framework": "IB_DP",
+  "group": 3,
+  "note": "IB Diploma Programme Group 3 — Individuals and Societies. Subjects include History, Economics, Geography, Psychology, Business Management, Global Politics, and more. All at SL and HL.",
+  "topics": [
+    {
+      "id": "IB-HIST-T1-1", "framework": "IB_DP", "subject": "History", "group": 3,
+      "topicNumber": 1, "topicTitle": "Paper 1 — Prescribed Subjects",
+      "subtopicTitle": "Source analysis and evaluation (5 options)",
+      "levels": ["SL", "HL"],
+      "description": "Analysis of primary and secondary historical sources on 5 prescribed subjects (e.g. Military Leaders, Causes and Effects of 20th century wars, Rights and Protest). Skills: provenance, reliability, bias, corroboration.",
+      "hplAcps": ["Evaluating for Bias", "Analysing and Evaluating", "Reading Actively"]
+    },
+    {
+      "id": "IB-HIST-T2-1", "framework": "IB_DP", "subject": "History", "group": 3,
+      "topicNumber": 2, "topicTitle": "Paper 2 — World History Topics",
+      "subtopicTitle": "Comparative essay across two world history topics",
+      "levels": ["SL", "HL"],
+      "description": "12 world history topics including: Causes and effects of 20th century wars; Authoritarian states; The Cold War; Decolonisation; Rights and protest. Two topics studied; essay comparing events from different regions.",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections", "Justifying and Reasoning"]
+    },
+    {
+      "id": "IB-HIST-T3-1", "framework": "IB_DP", "subject": "History", "group": 3,
+      "topicNumber": 3, "topicTitle": "Paper 3 — Regional History (HL only)",
+      "subtopicTitle": "Depth study of a world region",
+      "levels": ["HL"],
+      "description": "Four regional options (Europe, Americas, Asia and Oceania, Africa and Middle East). Three in-depth sections studied; three essay questions answered in exam. Requires detailed knowledge of causes, developments, and significance.",
+      "hplAcps": ["Higher-Order Thinking", "Justifying and Reasoning", "Analysing and Evaluating"]
+    },
+    {
+      "id": "IB-HIST-T4-1", "framework": "IB_DP", "subject": "History", "group": 3,
+      "topicNumber": 4, "topicTitle": "Internal Assessment — Historical Investigation",
+      "subtopicTitle": "Independent historical investigation (2,200 words)",
+      "levels": ["SL", "HL"],
+      "description": "Student-chosen historical question; research using primary and secondary sources; evaluation of sources; analysis and argument; reflection on the methods of historians.",
+      "hplAcps": ["Asking Questions", "Evaluating for Bias", "Higher-Order Thinking", "Meta-Thinking"]
+    },
+    {
+      "id": "IB-ECON-T1-1", "framework": "IB_DP", "subject": "Economics", "group": 3,
+      "topicNumber": 1, "topicTitle": "Microeconomics",
+      "subtopicTitle": "Markets, demand, supply, and elasticity",
+      "levels": ["SL", "HL"],
+      "description": "Scarcity and opportunity cost; PPF; demand and supply analysis; market equilibrium; price elasticity; cross-elasticity; income elasticity; HL: price discrimination, monopoly, oligopoly",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "IB-ECON-T2-1", "framework": "IB_DP", "subject": "Economics", "group": 3,
+      "topicNumber": 2, "topicTitle": "Microeconomics",
+      "subtopicTitle": "Market failure and government intervention",
+      "levels": ["SL", "HL"],
+      "description": "Externalities; public goods; information asymmetry; government policies (taxes, subsidies, price controls); evaluation of intervention; common pool resources; HL: market power and regulation",
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-ECON-T3-1", "framework": "IB_DP", "subject": "Economics", "group": 3,
+      "topicNumber": 3, "topicTitle": "Macroeconomics",
+      "subtopicTitle": "GDP, unemployment, inflation, and macroeconomic policy",
+      "levels": ["SL", "HL"],
+      "description": "National income accounting; AD/AS model; types of unemployment; causes and effects of inflation; fiscal and monetary policy; supply-side policies; HL: Keynesian vs monetarist debate",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-ECON-T4-1", "framework": "IB_DP", "subject": "Economics", "group": 3,
+      "topicNumber": 4, "topicTitle": "International Economics",
+      "subtopicTitle": "Trade, exchange rates, and balance of payments",
+      "levels": ["SL", "HL"],
+      "description": "Comparative advantage; trade barriers and free trade agreements; exchange rate systems; balance of payments; current account deficits; HL: Marshall-Lerner condition; J-curve",
+      "hplAcps": ["Making Connections", "Analysing and Evaluating", "Generalising"]
+    },
+    {
+      "id": "IB-ECON-T5-1", "framework": "IB_DP", "subject": "Economics", "group": 3,
+      "topicNumber": 5, "topicTitle": "Development Economics",
+      "subtopicTitle": "Measuring and promoting development",
+      "levels": ["SL", "HL"],
+      "description": "Definitions and measures of development (GDP, HDI, MPI); economic and social indicators; barriers to development; strategies (trade, aid, microfinance, debt relief); sustainability",
+      "hplAcps": ["Analysing and Evaluating", "Open-Mindedness", "Evaluating for Bias"]
+    }
+  ]
+}

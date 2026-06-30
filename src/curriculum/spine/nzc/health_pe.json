@@ -1,0 +1,57 @@
+{
+  "framework": "NZC",
+  "version": "2007",
+  "country": "NZ",
+  "subject": "Health and Physical Education",
+  "note": "Achievement objectives from the New Zealand Curriculum. Four strands: Personal Health and Physical Development (PHPD); Movement Concepts and Motor Skills (MCMS); Relationships with Other People (ROP); Healthy Communities and Environments (HCE).",
+  "objectives": [
+    {
+      "id": "NZC-HPE-L1-PHPD-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Personal Health and Physical Development", "level": 1, "yearBand": "Y1-2",
+      "text": "Identify and describe their own feelings and explore and share ideas about wellbeing",
+      "hplAcps": ["Meta-Thinking", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-HPE-L1-MCMS-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Movement Concepts and Motor Skills", "level": 1, "yearBand": "Y1-2",
+      "text": "Develop fundamental movement skills and apply these in simple movement situations",
+      "hplAcps": ["Strategic Thinking", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-HPE-L2-PHPD-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Personal Health and Physical Development", "level": 2, "yearBand": "Y3-4",
+      "text": "Describe their feelings and responses to a range of situations; explain ways of keeping themselves safe and healthy",
+      "hplAcps": ["Meta-Thinking", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-HPE-L2-ROP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Relationships with Other People", "level": 2, "yearBand": "Y3-4",
+      "text": "Identify and demonstrate ways of maintaining and enhancing relationships between individuals and within groups",
+      "hplAcps": ["Open-Mindedness", "Collaborative Working"]
+    },
+    {
+      "id": "NZC-HPE-L3-PHPD-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Personal Health and Physical Development", "level": 3, "yearBand": "Y5-6",
+      "text": "Identify personal, social, and environmental factors that affect personal and group wellbeing; describe strategies for promoting and maintaining wellbeing",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-HPE-L4-PHPD-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Personal Health and Physical Development", "level": 4, "yearBand": "Y7-8",
+      "text": "Analyse personal, social, and environmental factors that influence health-related behaviours and describe strategies for promoting wellbeing during adolescence",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-HPE-L4-ROP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Relationships with Other People", "level": 4, "yearBand": "Y7-8",
+      "text": "Demonstrate an understanding of how to develop and manage respectful relationships; identify and apply strategies to manage conflict and maintain personal safety",
+      "hplAcps": ["Open-Mindedness", "Collaborative Working", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-HPE-L5-PHPD-1", "framework": "NZC", "country": "NZ",
+      "subject": "Health and PE", "strand": "Personal Health and Physical Development", "level": 5, "yearBand": "Y9-10",
+      "text": "Critically analyse factors that influence health and wellbeing and evaluate strategies for health promotion, including cultural and social perspectives",
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias", "Higher-Order Thinking"]
+    }
+  ]
+}

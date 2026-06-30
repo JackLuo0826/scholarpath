@@ -1,0 +1,69 @@
+{
+  "framework": "NZC",
+  "version": "2007",
+  "country": "NZ",
+  "subject": "The Arts",
+  "note": "Achievement objectives from the New Zealand Curriculum. Four disciplines: Dance, Drama, Music, Visual Art. Each shares two strands: Developing Practical Knowledge (DPK) and Developing Ideas (DI), with additional strands Communicating and Interpreting (CI) and Understanding Music in Context (UMC) for Music.",
+  "objectives": [
+    {
+      "id": "NZC-ARTS-L1-MUS-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Music - Developing Practical Knowledge", "level": 1, "yearBand": "Y1-2",
+      "text": "Explore and use basic elements of music (beat, rhythm, pitch) through singing, playing instruments, and moving",
+      "hplAcps": ["Creating and Innovating", "Intellectual Curiosity"]
+    },
+    {
+      "id": "NZC-ARTS-L1-VA-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Visual Art - Developing Practical Knowledge", "level": 1, "yearBand": "Y1-2",
+      "text": "Explore and use art-making skills (drawing, painting, collage) with a developing understanding of materials and visual elements",
+      "hplAcps": ["Creating and Innovating", "Imaginative Thinking"]
+    },
+    {
+      "id": "NZC-ARTS-L2-MUS-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Music - Developing Practical Knowledge", "level": 2, "yearBand": "Y3-4",
+      "text": "Explore and use elements of music (duration, pitch, dynamics, tone colour) to create, perform, and respond to music",
+      "hplAcps": ["Creating and Innovating", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-ARTS-L2-DRAMA-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Drama - Developing Practical Knowledge", "level": 2, "yearBand": "Y3-4",
+      "text": "Use drama techniques (role, improvisation, scripted performance) to explore and express ideas",
+      "hplAcps": ["Creating and Innovating", "Imaginative Thinking", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-ARTS-L3-VA-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Visual Art - Developing Practical Knowledge", "level": 3, "yearBand": "Y5-6",
+      "text": "Select and use art-making skills, applying knowledge of visual elements (colour, form, line, space, texture) with intention",
+      "hplAcps": ["Creating and Innovating", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-ARTS-L3-MUS-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Music - Developing Practical Knowledge", "level": 3, "yearBand": "Y5-6",
+      "text": "Use musical elements and notation to create, perform, and respond to music in a range of styles and contexts",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-ARTS-L4-VA-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Visual Art - Developing Practical Knowledge", "level": 4, "yearBand": "Y7-8",
+      "text": "Develop art works informed by understanding of art history, cultural contexts, and personal voice; use appropriate techniques and materials with increasing control",
+      "hplAcps": ["Creating and Innovating", "Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-ARTS-L4-MUS-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Music - Developing Practical Knowledge", "level": 4, "yearBand": "Y7-8",
+      "text": "Use musical elements and notation with understanding; perform with expression and technical control; compose and arrange music for different purposes",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-ARTS-L5-VA-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Visual Art - Developing Practical Knowledge", "level": 5, "yearBand": "Y9-10",
+      "text": "Develop increasingly sophisticated art works, drawing on personal, cultural, and historical contexts; use purposeful research to inform artistic decision-making",
+      "hplAcps": ["Creating and Innovating", "Higher-Order Thinking", "Intellectual Curiosity"]
+    },
+    {
+      "id": "NZC-ARTS-L5-MUS-1", "framework": "NZC", "country": "NZ",
+      "subject": "The Arts", "strand": "Music - Developing Practical Knowledge", "level": 5, "yearBand": "Y9-10",
+      "text": "Perform, compose, and respond to music with technical skill and artistic sensitivity; understand music in its cultural and historical context",
+      "hplAcps": ["Creating and Innovating", "Making Connections", "Analysing and Evaluating"]
+    }
+  ]
+}

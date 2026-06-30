@@ -1,0 +1,71 @@
+{
+  "framework": "IB_DP",
+  "group": 1,
+  "note": "IB Diploma Programme Group 1 — Studies in Language and Literature. Two courses: Language A: Literature, and Language A: Language and Literature. Both offered at SL and HL. Assessment model from first examinations 2021.",
+  "topics": [
+    {
+      "id": "IB-ENG-LIT-A1", "framework": "IB_DP", "subject": "English A: Literature", "group": 1,
+      "topicNumber": 1, "topicTitle": "Readers, Listeners, and Viewers",
+      "subtopicTitle": "Paper 1 — Guided literary analysis",
+      "levels": ["SL", "HL"],
+      "description": "SL: one guided analysis of an unseen text. HL: two guided analyses of two unseen texts (one prose, one poetry). Assessment of how language, structure, and form create meaning.",
+      "hplAcps": ["Analysing and Evaluating", "Precision and Accuracy", "Reading Actively"]
+    },
+    {
+      "id": "IB-ENG-LIT-A2", "framework": "IB_DP", "subject": "English A: Literature", "group": 1,
+      "topicNumber": 2, "topicTitle": "Readers, Listeners, and Viewers",
+      "subtopicTitle": "Paper 2 — Comparative essay",
+      "levels": ["SL", "HL"],
+      "description": "Comparative essay on two works from the reading list, responding to one of four questions. Assessment of comparative literary analysis, thesis development, and textual evidence.",
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning", "Making Connections"]
+    },
+    {
+      "id": "IB-ENG-LIT-A3", "framework": "IB_DP", "subject": "English A: Literature", "group": 1,
+      "topicNumber": 3, "topicTitle": "Texts in Context",
+      "subtopicTitle": "Individual Oral (IO)",
+      "levels": ["SL", "HL"],
+      "description": "15-minute recorded oral: 10-minute commentary on a student-chosen extract from a studied work, followed by 5-minute discussion. Assessment of sustained close reading and articulation of literary ideas.",
+      "hplAcps": ["Justifying and Reasoning", "Intellectual Curiosity", "Analysing and Evaluating"]
+    },
+    {
+      "id": "IB-ENG-LIT-A4", "framework": "IB_DP", "subject": "English A: Literature", "group": 1,
+      "topicNumber": 4, "topicTitle": "Texts in Context",
+      "subtopicTitle": "HL Essay",
+      "levels": ["HL"],
+      "description": "Independent formal literary essay of 1,200–1,500 words on one of the works studied. Student-chosen focus; assessed for depth of analysis, originality, and literary understanding.",
+      "hplAcps": ["Higher-Order Thinking", "Creating and Innovating", "Meta-Thinking"]
+    },
+    {
+      "id": "IB-ENG-LIT-A5", "framework": "IB_DP", "subject": "English A: Literature", "group": 1,
+      "topicNumber": 5, "topicTitle": "Works Studied",
+      "subtopicTitle": "Reading list requirements",
+      "levels": ["SL", "HL"],
+      "description": "SL: minimum 4 works across at least 3 literary forms, including at least 1 work in translation. HL: minimum 6 works across at least 3 literary forms, including at least 2 works in translation. Works must span different time periods and cultures.",
+      "hplAcps": ["Reading Actively", "Open-Mindedness", "Making Connections"]
+    },
+    {
+      "id": "IB-ENG-LL-A1", "framework": "IB_DP", "subject": "English A: Language and Literature", "group": 1,
+      "topicNumber": 1, "topicTitle": "Language and Mass Communication",
+      "subtopicTitle": "Paper 1 — Textual analysis",
+      "levels": ["SL", "HL"],
+      "description": "Analysis of non-literary texts (media, advertising, speeches, journalism). Assessment of how language choices, register, tone, and context construct meaning for specific audiences.",
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-ENG-LL-A2", "framework": "IB_DP", "subject": "English A: Language and Literature", "group": 1,
+      "topicNumber": 2, "topicTitle": "Language and Identity",
+      "subtopicTitle": "Paper 2 — Comparative essay",
+      "levels": ["SL", "HL"],
+      "description": "Comparative essay responding to a prompt about two literary works. Assessment of ability to compare how different texts construct meaning in their social and cultural contexts.",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections", "Justifying and Reasoning"]
+    },
+    {
+      "id": "IB-ENG-LL-A3", "framework": "IB_DP", "subject": "English A: Language and Literature", "group": 1,
+      "topicNumber": 3, "topicTitle": "Language in Cultural Context",
+      "subtopicTitle": "Individual Oral (IO)",
+      "levels": ["SL", "HL"],
+      "description": "Oral commentary on a student-chosen extract from one non-literary and one literary text studied; focus on a global issue present in both. Assessment of close reading, argumentation, and oral expression.",
+      "hplAcps": ["Analysing and Evaluating", "Open-Mindedness", "Justifying and Reasoning"]
+    }
+  ]
+}

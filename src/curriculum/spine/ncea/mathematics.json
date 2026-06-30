@@ -1,0 +1,196 @@
+{
+  "framework": "NCEA",
+  "country": "NZ",
+  "note": "NZQA achievement standards for Mathematics, Statistics, and Calculus. Standards are undergoing a refresh (2022–2026); Level 1 new standards rolled out 2024. Codes marked verified:false should be cross-checked at nzqa.govt.nz before use in production. Credits and external/internal status are stable.",
+  "standards": [
+    {
+      "id": "AS91027", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Apply algebraic procedures in solving problems",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Strategic Thinking", "Precision and Accuracy"]
+    },
+    {
+      "id": "AS91028", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Investigate relationships between tables, equations, and graphs",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91029", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Apply linear algebra in solving problems",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "AS91030", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Apply measurement in solving problems",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "AS91031", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Apply geometric reasoning in solving problems",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Justifying and Reasoning", "Problem-Solving"]
+    },
+    {
+      "id": "AS91032", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Apply right-angled triangles in solving measurement problems",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "AS91034", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Use statistical methods to make an inference",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91035", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Investigate a given multivariate data set using the statistical enquiry cycle",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91037", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Demonstrate understanding of chance and data",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91038", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 1,
+      "title": "Investigate a situation involving elements of chance",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91256", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 2,
+      "title": "Apply co-ordinate geometry methods in solving problems",
+      "credits": 2, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "AS91257", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 2,
+      "title": "Apply graphical methods in solving problems",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "AS91258", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 2,
+      "title": "Apply sequences and series in solving problems",
+      "credits": 2, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Generalising", "Problem-Solving"]
+    },
+    {
+      "id": "AS91259", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 2,
+      "title": "Apply trigonometric relationships in solving problems",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "AS91261", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 2,
+      "title": "Apply algebraic methods in solving problems",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Strategic Thinking", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91262", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 2,
+      "title": "Apply calculus methods in solving problems",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91264", "framework": "NCEA", "country": "NZ",
+      "subject": "Statistics", "level": 2,
+      "title": "Use statistical methods to make an inference",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning", "Evaluating for Bias"]
+    },
+    {
+      "id": "AS91265", "framework": "NCEA", "country": "NZ",
+      "subject": "Statistics", "level": 2,
+      "title": "Conduct an experiment to investigate a situation using statistical methods",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91267", "framework": "NCEA", "country": "NZ",
+      "subject": "Statistics", "level": 2,
+      "title": "Apply probability methods in solving problems",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91574", "framework": "NCEA", "country": "NZ",
+      "subject": "Mathematics", "level": 3,
+      "title": "Apply linear programming methods in solving problems",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "AS91575", "framework": "NCEA", "country": "NZ",
+      "subject": "Calculus", "level": 3,
+      "title": "Apply trigonometric methods in solving problems",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "AS91577", "framework": "NCEA", "country": "NZ",
+      "subject": "Calculus", "level": 3,
+      "title": "Apply the algebra of complex numbers in solving problems",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Problem-Solving"]
+    },
+    {
+      "id": "AS91578", "framework": "NCEA", "country": "NZ",
+      "subject": "Calculus", "level": 3,
+      "title": "Apply differentiation methods in solving problems",
+      "credits": 6, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking", "Strategic Thinking"]
+    },
+    {
+      "id": "AS91579", "framework": "NCEA", "country": "NZ",
+      "subject": "Calculus", "level": 3,
+      "title": "Apply integration methods in solving problems",
+      "credits": 6, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91582", "framework": "NCEA", "country": "NZ",
+      "subject": "Statistics", "level": 3,
+      "title": "Use statistical methods to make a formal inference",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning", "Evaluating for Bias"]
+    },
+    {
+      "id": "AS91585", "framework": "NCEA", "country": "NZ",
+      "subject": "Statistics", "level": 3,
+      "title": "Apply probability concepts in solving problems",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91586", "framework": "NCEA", "country": "NZ",
+      "subject": "Statistics", "level": 3,
+      "title": "Apply probability distributions in solving problems",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking"]
+    }
+  ]
+}

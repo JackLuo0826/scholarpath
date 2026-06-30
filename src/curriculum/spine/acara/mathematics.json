@@ -1,0 +1,141 @@
+{
+  "framework": "ACARA",
+  "version": "Version 9 (2022)",
+  "country": "AU",
+  "subject": "Mathematics",
+  "note": "Achievement standards from the Australian Curriculum Version 9. Individual year levels (not 2-year bands like NZC). Strands: Number, Algebra, Measurement, Space, Statistics, Probability. Verify against australiancurriculum.edu.au.",
+  "objectives": [
+    {
+      "id": "ACARA-MATH-F-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 0, "yearBand": "Foundation",
+      "text": "Subitise small collections; count objects to at least 20; connect number names, numerals, and quantities; compare and order collections",
+      "hplAcps": ["Memorising Effectively", "Precision and Accuracy"]
+    },
+    {
+      "id": "ACARA-MATH-Y1-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 1, "yearBand": "Y1",
+      "text": "Count to and from 120; partition numbers using place value; addition and subtraction within 20; recognise and describe simple fractions (halves and quarters)",
+      "hplAcps": ["Problem-Solving", "Memorising Effectively"]
+    },
+    {
+      "id": "ACARA-MATH-Y2-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 2, "yearBand": "Y2",
+      "text": "Count to 1000; use and represent numbers flexibly; mental strategies for addition and subtraction to 100; basic multiplication and division concepts; simple fractions",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "ACARA-MATH-Y3-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 3, "yearBand": "Y3",
+      "text": "Read, write, and order numbers to 10,000; multiplication and division facts to 10×10; add and subtract two- and three-digit numbers; model fractions and decimals",
+      "hplAcps": ["Memorising Effectively", "Problem-Solving"]
+    },
+    {
+      "id": "ACARA-MATH-Y4-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 4, "yearBand": "Y4",
+      "text": "Apply place value to millions; use efficient strategies for multi-digit multiplication and division; compare, order, and represent fractions and decimals; connect fractions, decimals, and percentages",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "ACARA-MATH-Y4-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Measurement", "level": 4, "yearBand": "Y4",
+      "text": "Measure and compare length, area, mass, capacity, and time using standard units; estimate area using arrays; calculate perimeter of rectangles",
+      "hplAcps": ["Precision and Accuracy", "Problem-Solving"]
+    },
+    {
+      "id": "ACARA-MATH-Y5-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 5, "yearBand": "Y5",
+      "text": "Apply strategies for multiplication and division of larger numbers; compute with fractions, decimals, and percentages; use ratios and proportional reasoning",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "ACARA-MATH-Y5-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Algebra", "level": 5, "yearBand": "Y5",
+      "text": "Describe and continue numerical and geometric patterns; write and evaluate simple algebraic expressions; use number properties to solve problems",
+      "hplAcps": ["Generalising", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y6-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 6, "yearBand": "Y6",
+      "text": "Apply operations with fractions, decimals, and percentages; use ratios and rates to solve problems; introduce integers on a number line",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "ACARA-MATH-Y6-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Statistics", "level": 6, "yearBand": "Y6",
+      "text": "Collect, display, and interpret data in a range of representations; calculate mean, median, and mode; interpret probability as a value between 0 and 1",
+      "hplAcps": ["Analysing and Evaluating", "Asking Questions"]
+    },
+    {
+      "id": "ACARA-MATH-Y7-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 7, "yearBand": "Y7",
+      "text": "Apply operations with integers and rational numbers; solve problems involving fractions, decimals, percentages, ratios, and rates; use index notation",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y7-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Algebra", "level": 7, "yearBand": "Y7",
+      "text": "Generate sequences; simplify algebraic expressions; apply the four operations to algebraic terms; introduce linear equations",
+      "hplAcps": ["Generalising", "Problem-Solving"]
+    },
+    {
+      "id": "ACARA-MATH-Y7-3", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Geometry", "level": 7, "yearBand": "Y7",
+      "text": "Classify triangles and quadrilaterals; use properties of angles formed by parallel lines and transversals; apply transformations on the Cartesian plane",
+      "hplAcps": ["Justifying and Reasoning", "Precision and Accuracy"]
+    },
+    {
+      "id": "ACARA-MATH-Y8-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 8, "yearBand": "Y8",
+      "text": "Apply the four operations with rational numbers; solve problems involving percentages, ratios, and rates in context; introduce scientific notation",
+      "hplAcps": ["Problem-Solving", "Precision and Accuracy"]
+    },
+    {
+      "id": "ACARA-MATH-Y8-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Algebra", "level": 8, "yearBand": "Y8",
+      "text": "Solve linear equations and inequalities; plot linear relations on the Cartesian plane; explore gradient and y-intercept",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y8-3", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Measurement", "level": 8, "yearBand": "Y8",
+      "text": "Apply Pythagoras' theorem; calculate areas of composite shapes; calculate volumes of prisms and cylinders; convert between units",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y9-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 9, "yearBand": "Y9",
+      "text": "Apply operations with real numbers including surds; use scientific notation; solve problems involving direct and inverse proportion",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y9-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Algebra", "level": 9, "yearBand": "Y9",
+      "text": "Expand binomial products; factorise algebraic expressions; solve quadratic equations graphically and algebraically; explore non-linear functions",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking", "Higher-Order Thinking"]
+    },
+    {
+      "id": "ACARA-MATH-Y9-3", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Geometry", "level": 9, "yearBand": "Y9",
+      "text": "Apply trigonometric ratios to right-angled triangles; use similarity and congruence in geometric proofs; explore properties of circles",
+      "hplAcps": ["Justifying and Reasoning", "Problem-Solving"]
+    },
+    {
+      "id": "ACARA-MATH-Y10-1", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Number", "level": 10, "yearBand": "Y10",
+      "text": "Apply operations with real numbers and surds; use logarithms; solve problems involving compound interest and financial planning",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y10-2", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Algebra", "level": 10, "yearBand": "Y10",
+      "text": "Factorise and expand more complex algebraic expressions; solve quadratic and exponential equations; graph a range of functions; introduce polynomial and logarithmic functions",
+      "hplAcps": ["Higher-Order Thinking", "Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "ACARA-MATH-Y10-3", "framework": "ACARA", "country": "AU",
+      "subject": "Mathematics", "strand": "Statistics", "level": 10, "yearBand": "Y10",
+      "text": "Analyse bivariate data using scatter plots and lines of best fit; calculate and interpret statistical measures; evaluate probability including conditional probability",
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning"]
+    }
+  ]
+}

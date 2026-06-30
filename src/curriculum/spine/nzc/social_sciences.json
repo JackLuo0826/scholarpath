@@ -1,0 +1,123 @@
+{
+  "framework": "NZC",
+  "version": "2007",
+  "country": "NZ",
+  "subject": "Social Sciences",
+  "note": "Achievement objectives from the New Zealand Curriculum. Strands: Identity, Culture, and Organisation; Place and Environment; Continuity and Change; The Economic World.",
+  "objectives": [
+    {
+      "id": "NZC-SS-L1-ICO-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Identity, Culture, and Organisation", "level": 1, "yearBand": "Y1-2",
+      "text": "Understand that families are important for children in many different ways",
+      "hplAcps": ["Making Connections", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-SS-L1-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Place and Environment", "level": 1, "yearBand": "Y1-2",
+      "text": "Understand that people have different roles and responsibilities as part of their belonging to groups",
+      "hplAcps": ["Making Connections", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-SS-L1-CC-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Continuity and Change", "level": 1, "yearBand": "Y1-2",
+      "text": "Understand how the past is important to people",
+      "hplAcps": ["Making Connections", "Intellectual Curiosity"]
+    },
+    {
+      "id": "NZC-SS-L1-EW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "The Economic World", "level": 1, "yearBand": "Y1-2",
+      "text": "Understand that people have needs and wants and that these are satisfied in different ways",
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-SS-L2-ICO-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Identity, Culture, and Organisation", "level": 2, "yearBand": "Y3-4",
+      "text": "Understand how cultural practices reflect and express people's customs, traditions, and values",
+      "hplAcps": ["Open-Mindedness", "Making Connections"]
+    },
+    {
+      "id": "NZC-SS-L2-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Place and Environment", "level": 2, "yearBand": "Y3-4",
+      "text": "Understand how places influence people and people influence places",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-SS-L2-CC-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Continuity and Change", "level": 2, "yearBand": "Y3-4",
+      "text": "Understand how and why people make changes and the consequences of those changes",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-SS-L2-EW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "The Economic World", "level": 2, "yearBand": "Y3-4",
+      "text": "Understand how producers and consumers exercise choice in meeting their needs and wants",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-SS-L3-ICO-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Identity, Culture, and Organisation", "level": 3, "yearBand": "Y5-6",
+      "text": "Understand how groups make and implement rules and laws that affect individuals, groups, and communities",
+      "hplAcps": ["Higher-Order Thinking", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-SS-L3-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Place and Environment", "level": 3, "yearBand": "Y5-6",
+      "text": "Understand how the movement of people, goods, and ideas affects the culture and society of both the place of origin and destination",
+      "hplAcps": ["Making Connections", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-SS-L3-CC-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Continuity and Change", "level": 3, "yearBand": "Y5-6",
+      "text": "Understand how people remember and record the past in different ways",
+      "hplAcps": ["Evaluating for Bias", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-SS-L3-EW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "The Economic World", "level": 3, "yearBand": "Y5-6",
+      "text": "Understand how and why people find, buy, and sell resources and that this process benefits individuals, groups, and communities",
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-SS-L4-ICO-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Identity, Culture, and Organisation", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand how formal and informal groups make decisions that impact on communities and that participation in decision-making differs",
+      "hplAcps": ["Justifying and Reasoning", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-SS-L4-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Place and Environment", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand how people participate individually and collectively in response to community challenges, including environmental challenges",
+      "hplAcps": ["Higher-Order Thinking", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-SS-L4-CC-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Continuity and Change", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand how exploration and innovation create opportunities and challenges for people, places, and environments",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-SS-L4-EW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "The Economic World", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand how producers and consumers exercise choice in the allocation of scarce resources and that these choices have consequences",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-SS-L5-ICO-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Identity, Culture, and Organisation", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand how systems of government in New Zealand operate and how they affect individuals and groups",
+      "hplAcps": ["Higher-Order Thinking", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-SS-L5-CC-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "Continuity and Change", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand how historical forces (colonisation, globalisation, technology) have shaped societies and ongoing change",
+      "hplAcps": ["Evaluating for Bias", "Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-SS-L5-EW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Social Sciences", "strand": "The Economic World", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand how microeconomic and macroeconomic forces influence individual, business, and government decisions",
+      "hplAcps": ["Higher-Order Thinking", "Analysing and Evaluating", "Making Connections"]
+    }
+  ]
+}

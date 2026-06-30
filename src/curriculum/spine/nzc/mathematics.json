@@ -1,0 +1,387 @@
+{
+  "framework": "NZC",
+  "version": "2007 (refresh underway 2023–2026)",
+  "country": "NZ",
+  "subject": "Mathematics and Statistics",
+  "note": "Achievement objectives from the New Zealand Curriculum. Verify against the Ministry of Education's Tāhūrangi platform (newzealandcurriculum.tahurangi.education.govt.nz) for the latest refreshed content.",
+  "objectives": [
+    {
+      "id": "NZC-MATH-L1-NA-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 1, "yearBand": "Y1-2",
+      "text": "Use a range of counting, grouping, and equal-sharing strategies with whole numbers and fractions",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L1-NA-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 1, "yearBand": "Y1-2",
+      "text": "Know the forward and backward counting sequences of whole numbers to 100",
+      "hplAcps": ["Memorising Effectively", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L1-NA-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 1, "yearBand": "Y1-2",
+      "text": "Know groupings with five, within ten, and with ten",
+      "hplAcps": ["Memorising Effectively", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L1-NA-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 1, "yearBand": "Y1-2",
+      "text": "Communicate and explain counting, grouping, and equal-sharing strategies using words, numbers, and pictures",
+      "hplAcps": ["Justifying and Reasoning", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L1-NA-5", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 1, "yearBand": "Y1-2",
+      "text": "Generalise that the next counting number gives the result of adding one object to a set and that counting the number of objects in a set tells how many",
+      "hplAcps": ["Generalising", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L1-NA-6", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 1, "yearBand": "Y1-2",
+      "text": "Create and continue sequential patterns",
+      "hplAcps": ["Generalising", "Creating and Innovating"]
+    },
+    {
+      "id": "NZC-MATH-L1-GM-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 1, "yearBand": "Y1-2",
+      "text": "Order and compare objects or events by length, area, volume and capacity, weight (mass), turn (angle), temperature, and time by direct comparison and/or counting whole numbers of units",
+      "hplAcps": ["Analysing and Evaluating", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L1-GM-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 1, "yearBand": "Y1-2",
+      "text": "Sort objects by their appearance",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L1-GM-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 1, "yearBand": "Y1-2",
+      "text": "Give and follow instructions for movement that involve distances, directions, and half or quarter turns",
+      "hplAcps": ["Precision and Accuracy", "Listening Actively"]
+    },
+    {
+      "id": "NZC-MATH-L1-GM-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 1, "yearBand": "Y1-2",
+      "text": "Describe their position relative to a person or object",
+      "hplAcps": ["Precision and Accuracy", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L1-S-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 1, "yearBand": "Y1-2",
+      "text": "Conduct investigations using the statistical enquiry cycle: gathering, sorting and counting, and displaying category data; discussing the results",
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L2-NA-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 2, "yearBand": "Y3-4",
+      "text": "Use simple additive strategies with whole numbers and fractions",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L2-NA-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 2, "yearBand": "Y3-4",
+      "text": "Know forward and backward counting sequences with whole numbers to at least 1000",
+      "hplAcps": ["Memorising Effectively", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L2-NA-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 2, "yearBand": "Y3-4",
+      "text": "Know the basic addition and subtraction facts",
+      "hplAcps": ["Memorising Effectively", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L2-NA-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 2, "yearBand": "Y3-4",
+      "text": "Know how many ones, tens, and hundreds are in whole numbers to at least 1000",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L2-NA-5", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 2, "yearBand": "Y3-4",
+      "text": "Know simple fractions in everyday use",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-MATH-L2-NA-6", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 2, "yearBand": "Y3-4",
+      "text": "Investigate and describe in words, rules for continuing number and spatial patterns",
+      "hplAcps": ["Generalising", "Asking Questions"]
+    },
+    {
+      "id": "NZC-MATH-L2-GM-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 2, "yearBand": "Y3-4",
+      "text": "Describe the characteristics of two- and three-dimensional objects using the language of geometry",
+      "hplAcps": ["Precision and Accuracy", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L2-GM-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 2, "yearBand": "Y3-4",
+      "text": "Partition and/or combine like measures and communicate findings, using numbers, words, and pictures",
+      "hplAcps": ["Justifying and Reasoning", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L2-S-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 2, "yearBand": "Y3-4",
+      "text": "Conduct investigations using the statistical enquiry cycle: gathering, sorting, and displaying category and whole-number data; communicating findings based on the data",
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-MATH-L2-S-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 2, "yearBand": "Y3-4",
+      "text": "Compare statements with the features of simple data displays from statistical investigations or probability activities undertaken by others",
+      "hplAcps": ["Evaluating for Bias", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L3-NA-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 3, "yearBand": "Y5-6",
+      "text": "Use a range of additive and simple multiplicative strategies with whole numbers, fractions, decimals, and percentages",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L3-NA-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 3, "yearBand": "Y5-6",
+      "text": "Know basic multiplication and division facts",
+      "hplAcps": ["Memorising Effectively", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L3-NA-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 3, "yearBand": "Y5-6",
+      "text": "Know how many tenths, hundredths, and thousandths are in decimals",
+      "hplAcps": ["Making Connections", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L3-NA-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 3, "yearBand": "Y5-6",
+      "text": "Know fractions and percentages in everyday use",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-MATH-L3-NA-5", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 3, "yearBand": "Y5-6",
+      "text": "Record and interpret additive and simple multiplicative strategies, using words, diagrams, and symbols with understanding",
+      "hplAcps": ["Justifying and Reasoning", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L3-NA-6", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 3, "yearBand": "Y5-6",
+      "text": "Describe and continue patterns with fractions, decimals, and integers, and represent these using graphs, tables, and diagrams",
+      "hplAcps": ["Generalising", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L3-GM-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 3, "yearBand": "Y5-6",
+      "text": "Use linear scales and whole numbers of metric units for length, area, volume and capacity, weight (mass), angle, temperature, and time",
+      "hplAcps": ["Precision and Accuracy", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L3-GM-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 3, "yearBand": "Y5-6",
+      "text": "Find areas of rectangles and volumes of cuboids by applying multiplication",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L3-GM-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 3, "yearBand": "Y5-6",
+      "text": "Classify plane shapes and prisms by their spatial features",
+      "hplAcps": ["Analysing and Evaluating", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L3-GM-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 3, "yearBand": "Y5-6",
+      "text": "Use a co-ordinate system or the language of direction and distance to specify locations and describe paths",
+      "hplAcps": ["Precision and Accuracy", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L3-GM-5", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 3, "yearBand": "Y5-6",
+      "text": "Describe the transformations (reflection, rotation, translation, or enlargement) that have mapped one object onto another",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-MATH-L3-S-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 3, "yearBand": "Y5-6",
+      "text": "Conduct investigations using the statistical enquiry cycle: gathering, sorting, and displaying multivariate category and whole-number data and simple time-series data to answer questions; identifying patterns and trends in context, within and between data sets",
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L3-S-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 3, "yearBand": "Y5-6",
+      "text": "Order the likeliness of outcomes for situations involving chance, using everyday language and simple fractions",
+      "hplAcps": ["Justifying and Reasoning", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Use a range of multiplicative strategies when operating on whole numbers",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand addition and subtraction of fractions, decimals, and integers",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Find fractions, decimals, and percentages of amounts expressed as whole numbers, simple fractions, and decimals",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Apply simple linear proportions, including ordering fractions",
+      "hplAcps": ["Generalising", "Problem-Solving"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-5", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Know the equivalent decimal and percentage forms for everyday fractions",
+      "hplAcps": ["Making Connections", "Memorising Effectively"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-6", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Know the relative size and place value structure of positive and negative integers and decimals to three places",
+      "hplAcps": ["Making Connections", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-7", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Form and solve simple linear equations",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-MATH-L4-NA-8", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 4, "yearBand": "Y7-8",
+      "text": "Relate tables, graphs, and equations to linear and simple quadratic relationships found in number and spatial patterns",
+      "hplAcps": ["Making Connections", "Generalising", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L4-GM-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 4, "yearBand": "Y7-8",
+      "text": "Use appropriate scales, devices, and metric units for length, area, volume and capacity, weight (mass), temperature, angle, and time",
+      "hplAcps": ["Precision and Accuracy", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L4-GM-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 4, "yearBand": "Y7-8",
+      "text": "Use side or edge lengths to find the perimeters and areas of rectangles, parallelograms, and triangles and the volumes of cuboids",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L4-GM-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 4, "yearBand": "Y7-8",
+      "text": "Deduce the angle properties of intersecting and parallel lines and the angle properties of polygons and apply these properties",
+      "hplAcps": ["Justifying and Reasoning", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L4-S-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 4, "yearBand": "Y7-8",
+      "text": "Plan and conduct investigations using the statistical enquiry cycle: determining appropriate variables and data collection methods; comparing distributions visually; communicating findings using appropriate displays",
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-MATH-L4-S-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 4, "yearBand": "Y7-8",
+      "text": "Evaluate statements made by others about the findings of statistical investigations and probability activities",
+      "hplAcps": ["Evaluating for Bias", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L4-S-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 4, "yearBand": "Y7-8",
+      "text": "Investigate situations that involve elements of chance by comparing experimental distributions with expectations from models of the possible outcomes, acknowledging variation and independence",
+      "hplAcps": ["Problem-Solving", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Reason with linear proportions",
+      "hplAcps": ["Justifying and Reasoning", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Use prime numbers, common factors and multiples, and powers (including square roots)",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand operations on fractions, decimals, percentages, and integers",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Use rates and ratios",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-5", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Know and apply standard form, significant figures, rounding, and decimal place value",
+      "hplAcps": ["Precision and Accuracy", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-6", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Form and solve linear and simple quadratic equations",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-7", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Relate graphs, tables, and equations to linear, quadratic, and simple exponential relationships found in number and spatial patterns",
+      "hplAcps": ["Making Connections", "Generalising", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L5-NA-8", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Number and Algebra", "level": 5, "yearBand": "Y9-10",
+      "text": "Apply the properties of arithmetic and geometric sequences and series",
+      "hplAcps": ["Generalising", "Problem-Solving"]
+    },
+    {
+      "id": "NZC-MATH-L5-GM-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 5, "yearBand": "Y9-10",
+      "text": "Deduce and use formulae to find the perimeters and areas of polygons and the volumes of prisms",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L5-GM-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 5, "yearBand": "Y9-10",
+      "text": "Find the perimeters and areas of circles and composite shapes and the volumes of prisms, including cylinders",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L5-GM-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 5, "yearBand": "Y9-10",
+      "text": "Use trigonometric ratios and the theorem of Pythagoras in two dimensions",
+      "hplAcps": ["Problem-Solving", "Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-MATH-L5-GM-4", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Geometry and Measurement", "level": 5, "yearBand": "Y9-10",
+      "text": "Apply deductive reasoning to interpret and justify results in geometric contexts",
+      "hplAcps": ["Justifying and Reasoning", "Higher-Order Thinking", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-MATH-L5-S-1", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 5, "yearBand": "Y9-10",
+      "text": "Plan and conduct surveys and experiments using the statistical enquiry cycle; evaluate the quality of data and the trustworthiness of conclusions",
+      "hplAcps": ["Asking Questions", "Evaluating for Bias", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-MATH-L5-S-2", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 5, "yearBand": "Y9-10",
+      "text": "Compare and describe the variation between theoretical and experimental distributions in situations that involve elements of chance",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-MATH-L5-S-3", "framework": "NZC", "country": "NZ",
+      "subject": "Mathematics", "strand": "Statistics", "level": 5, "yearBand": "Y9-10",
+      "text": "Calculate probabilities, using fractions, percentages, and ratios",
+      "hplAcps": ["Problem-Solving", "Precision and Accuracy"]
+    }
+  ]
+}

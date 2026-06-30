@@ -1,0 +1,129 @@
+{
+  "framework": "NZC",
+  "version": "2007 (refresh underway 2023–2026)",
+  "country": "NZ",
+  "subject": "English",
+  "note": "Achievement objectives from the New Zealand Curriculum. The refreshed NZC English (2023+) introduces new phase-based progressions; verify against nzcurriculum.tahurangi.education.govt.nz.",
+  "objectives": [
+    {
+      "id": "NZC-ENG-L1-LRV-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 1, "yearBand": "Y1-2",
+      "text": "Use sources of information and prior knowledge with developing confidence to make meaning from texts",
+      "hplAcps": ["Making Connections", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-ENG-L1-LRV-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 1, "yearBand": "Y1-2",
+      "text": "Recognise features of texts and relate these to their purposes",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-ENG-L1-SWP-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 1, "yearBand": "Y1-2",
+      "text": "Use an increasing understanding of the connections between oral and written language when creating texts",
+      "hplAcps": ["Making Connections", "Creating and Innovating"]
+    },
+    {
+      "id": "NZC-ENG-L1-SWP-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 1, "yearBand": "Y1-2",
+      "text": "Create texts for a range of purposes and audiences, using developing knowledge of text conventions",
+      "hplAcps": ["Creating and Innovating", "Imaginative Thinking"]
+    },
+    {
+      "id": "NZC-ENG-L2-LRV-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 2, "yearBand": "Y3-4",
+      "text": "Select and use sources of information and prior knowledge with some confidence to make sense of increasingly varied and complex texts",
+      "hplAcps": ["Strategic Thinking", "Making Connections", "Reading Actively"]
+    },
+    {
+      "id": "NZC-ENG-L2-LRV-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 2, "yearBand": "Y3-4",
+      "text": "Show some understanding of how to shape texts for different purposes and audiences",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-ENG-L2-SWP-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 2, "yearBand": "Y3-4",
+      "text": "Select, form, and express ideas on a range of topics",
+      "hplAcps": ["Creating and Innovating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-ENG-L2-SWP-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 2, "yearBand": "Y3-4",
+      "text": "Use an increasing knowledge of text conventions and language features to create a range of texts",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-ENG-L3-LRV-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 3, "yearBand": "Y5-6",
+      "text": "Integrate sources of information, processes, and strategies with developing confidence to identify, form, and express increasingly sophisticated ideas",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking", "Reading Actively"]
+    },
+    {
+      "id": "NZC-ENG-L3-LRV-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 3, "yearBand": "Y5-6",
+      "text": "Show a developing understanding of how texts are constructed for different purposes and audiences and identify connections between texts",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-ENG-L3-SWP-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 3, "yearBand": "Y5-6",
+      "text": "Integrate sources of information, processes, and strategies purposefully when creating texts for a range of purposes and audiences",
+      "hplAcps": ["Creating and Innovating", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-ENG-L3-SWP-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 3, "yearBand": "Y5-6",
+      "text": "Use language features appropriate to the audience and purpose, with developing control over writing conventions",
+      "hplAcps": ["Precision and Accuracy", "Creating and Innovating"]
+    },
+    {
+      "id": "NZC-ENG-L4-LRV-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 4, "yearBand": "Y7-8",
+      "text": "Integrate sources of information, processes, and strategies to identify and form ideas; analyse and evaluate texts for construction, purpose, and effect",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-ENG-L4-LRV-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 4, "yearBand": "Y7-8",
+      "text": "Show an understanding of how texts are shaped by purpose and audience, and identify and evaluate perspectives in texts",
+      "hplAcps": ["Evaluating for Bias", "Analysing and Evaluating", "Open-Mindedness"]
+    },
+    {
+      "id": "NZC-ENG-L4-SWP-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 4, "yearBand": "Y7-8",
+      "text": "Show a developed understanding of how to shape texts for different purposes and audiences; use a range of text structures, language features, and writing conventions accurately",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-ENG-L4-SWP-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 4, "yearBand": "Y7-8",
+      "text": "Use a range of language features and writing conventions to communicate ideas with increasing clarity and effect",
+      "hplAcps": ["Precision and Accuracy", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-ENG-L5-LRV-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 5, "yearBand": "Y9-10",
+      "text": "Identify and understand ideas and information across increasingly complex and varied texts; critically analyse texts for their construction, purpose, and intended effect",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking", "Evaluating for Bias"]
+    },
+    {
+      "id": "NZC-ENG-L5-LRV-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Listening, Reading, and Viewing", "level": 5, "yearBand": "Y9-10",
+      "text": "Critically evaluate texts and identify perspectives and biases, considering the social, cultural, and historical context",
+      "hplAcps": ["Evaluating for Bias", "Open-Mindedness", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-ENG-L5-SWP-1", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 5, "yearBand": "Y9-10",
+      "text": "Create texts for specific purposes and audiences, using sophisticated text structures and language features with precision and deliberate effect",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy", "Strategic Thinking"]
+    },
+    {
+      "id": "NZC-ENG-L5-SWP-2", "framework": "NZC", "country": "NZ",
+      "subject": "English", "strand": "Speaking, Writing, and Presenting", "level": 5, "yearBand": "Y9-10",
+      "text": "Demonstrate control of language features and writing conventions, using them deliberately and perceptively to achieve effect",
+      "hplAcps": ["Precision and Accuracy", "Meta-Thinking", "Higher-Order Thinking"]
+    }
+  ]
+}

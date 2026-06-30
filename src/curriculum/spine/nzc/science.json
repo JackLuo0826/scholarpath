@@ -1,0 +1,165 @@
+{
+  "framework": "NZC",
+  "version": "2007",
+  "country": "NZ",
+  "subject": "Science",
+  "note": "Achievement objectives from the New Zealand Curriculum. Science has five strands: Nature of Science (NoS), Living World, Physical World, Material World, Planet Earth and Beyond.",
+  "objectives": [
+    {
+      "id": "NZC-SCI-L1-NOS-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Nature of Science", "level": 1, "yearBand": "Y1-2",
+      "text": "Observe, sort, and describe objects and materials by their properties using words, pictures, diagrams, and tables",
+      "hplAcps": ["Asking Questions", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-SCI-L1-NOS-2", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Nature of Science", "level": 1, "yearBand": "Y1-2",
+      "text": "Ask questions and find simple explanations for the properties of everyday objects and materials",
+      "hplAcps": ["Asking Questions", "Intellectual Curiosity"]
+    },
+    {
+      "id": "NZC-SCI-L1-LW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Living World", "level": 1, "yearBand": "Y1-2",
+      "text": "Recognise that living things grow, reproduce, and have different features; identify that they have requirements to stay alive",
+      "hplAcps": ["Making Connections", "Asking Questions"]
+    },
+    {
+      "id": "NZC-SCI-L1-PW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Physical World", "level": 1, "yearBand": "Y1-2",
+      "text": "Explore everyday examples of physical phenomena, including light, sound, heat, motion, and electricity, and describe these simply",
+      "hplAcps": ["Intellectual Curiosity", "Asking Questions"]
+    },
+    {
+      "id": "NZC-SCI-L1-MW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Material World", "level": 1, "yearBand": "Y1-2",
+      "text": "Describe the properties of materials and simple changes in materials (e.g. mixing, heating, cooling)",
+      "hplAcps": ["Analysing and Evaluating", "Asking Questions"]
+    },
+    {
+      "id": "NZC-SCI-L1-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Planet Earth and Beyond", "level": 1, "yearBand": "Y1-2",
+      "text": "Explore and describe natural features and resources of the local environment; describe how the Sun, Earth, and Moon move relative to each other",
+      "hplAcps": ["Asking Questions", "Making Connections"]
+    },
+    {
+      "id": "NZC-SCI-L2-NOS-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Nature of Science", "level": 2, "yearBand": "Y3-4",
+      "text": "Extend their experiences and personal explanations of the natural world through exploration, play, asking questions, and discussing simple models",
+      "hplAcps": ["Asking Questions", "Intellectual Curiosity", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L2-LW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Living World", "level": 2, "yearBand": "Y3-4",
+      "text": "Recognise that all living things have a life cycle; describe how living things are suited to their particular habitat and how they respond to environmental changes",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L2-PW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Physical World", "level": 2, "yearBand": "Y3-4",
+      "text": "Explore and describe the effects of forces (e.g. push, pull, gravity) on objects and everyday uses of simple circuits and electrical energy",
+      "hplAcps": ["Intellectual Curiosity", "Making Connections"]
+    },
+    {
+      "id": "NZC-SCI-L2-MW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Material World", "level": 2, "yearBand": "Y3-4",
+      "text": "Describe properties of materials that enable them to be used and transformed for specific purposes; distinguish physical from chemical changes",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-SCI-L2-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Planet Earth and Beyond", "level": 2, "yearBand": "Y3-4",
+      "text": "Describe how natural processes have shaped the local landscape and how heat from the Sun affects the Earth",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L3-NOS-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Nature of Science", "level": 3, "yearBand": "Y5-6",
+      "text": "Collect and use evidence in investigations; consider the reliability of data and develop more complex models to explain natural phenomena",
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "NZC-SCI-L3-LW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Living World", "level": 3, "yearBand": "Y5-6",
+      "text": "Identify the characteristics of living things; describe how adaptations of organisms suit different environments; understand food chains and webs",
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-SCI-L3-PW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Physical World", "level": 3, "yearBand": "Y5-6",
+      "text": "Investigate and describe the effects of balanced and unbalanced forces on objects; describe the properties and transfer of light, sound, and heat energy",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "NZC-SCI-L3-MW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Material World", "level": 3, "yearBand": "Y5-6",
+      "text": "Classify substances as pure or impure; describe physical and chemical changes and investigate properties of common materials",
+      "hplAcps": ["Analysing and Evaluating", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-SCI-L3-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Planet Earth and Beyond", "level": 3, "yearBand": "Y5-6",
+      "text": "Describe the water cycle and its effects on environments; investigate features of the solar system",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L4-NOS-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Nature of Science", "level": 4, "yearBand": "Y7-8",
+      "text": "Use scientific methodology (planning, data collection, analysis, conclusion) and communicate findings using appropriate scientific terminology and conventions",
+      "hplAcps": ["Justifying and Reasoning", "Precision and Accuracy", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-SCI-L4-LW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Living World", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand life processes at a cellular level: cell structure and function, photosynthesis, cellular respiration, reproduction",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-SCI-L4-LW-2", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Living World", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand the basic principles of genetic inheritance and how natural selection drives evolution",
+      "hplAcps": ["Higher-Order Thinking", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L4-PW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Physical World", "level": 4, "yearBand": "Y7-8",
+      "text": "Describe forces and motion in terms of Newton's laws; investigate the properties of waves (light, sound) and electricity and magnetism",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "NZC-SCI-L4-MW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Material World", "level": 4, "yearBand": "Y7-8",
+      "text": "Investigate chemical and physical changes; understand acids, bases, and neutralisation reactions; relate properties of materials to their structure",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-SCI-L4-PE-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Planet Earth and Beyond", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand geological features of New Zealand (volcanoes, earthquakes, erosion) and the structure of the Earth",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L5-NOS-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Nature of Science", "level": 5, "yearBand": "Y9-10",
+      "text": "Use and critique scientific models and theories to explain the natural world; evaluate the quality of scientific evidence and discuss ethical implications of scientific inquiry",
+      "hplAcps": ["Evaluating for Bias", "Higher-Order Thinking", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-SCI-L5-LW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Living World", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand cell biology (organelles, DNA, protein synthesis), genetics (inheritance, mutations), and mechanisms of evolution (natural and artificial selection)",
+      "hplAcps": ["Higher-Order Thinking", "Making Connections", "Generalising"]
+    },
+    {
+      "id": "NZC-SCI-L5-PW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Physical World", "level": 5, "yearBand": "Y9-10",
+      "text": "Apply physics concepts: mechanics (forces, energy, momentum), electricity and magnetism, waves (light, sound, electromagnetic spectrum)",
+      "hplAcps": ["Problem-Solving", "Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "NZC-SCI-L5-MW-1", "framework": "NZC", "country": "NZ",
+      "subject": "Science", "strand": "Material World", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand atomic structure, chemical bonding (ionic, covalent, metallic), types of chemical reactions, and the periodic table",
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    }
+  ]
+}

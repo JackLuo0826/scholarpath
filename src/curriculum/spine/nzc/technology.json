@@ -1,0 +1,69 @@
+{
+  "framework": "NZC",
+  "version": "2007",
+  "country": "NZ",
+  "subject": "Technology",
+  "note": "Achievement objectives from the New Zealand Curriculum. Strands: Technological Practice; Technological Knowledge; Nature of Technology.",
+  "objectives": [
+    {
+      "id": "NZC-TECH-L1-TP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Practice", "level": 1, "yearBand": "Y1-2",
+      "text": "Develop a plan that identifies the outcome they are developing and the key features of that outcome; follow through to make an outcome",
+      "hplAcps": ["Strategic Thinking", "Creating and Innovating"]
+    },
+    {
+      "id": "NZC-TECH-L1-TK-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Knowledge", "level": 1, "yearBand": "Y1-2",
+      "text": "Describe the nature and functions of everyday technological objects in their physical environment",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "NZC-TECH-L2-TP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Practice", "level": 2, "yearBand": "Y3-4",
+      "text": "Develop a plan to identify the outcome they are developing; undertake testing to check that the outcome meets the brief; evaluate the outcome to improve future designs",
+      "hplAcps": ["Strategic Thinking", "Creating and Innovating", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-TECH-L2-TK-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Knowledge", "level": 2, "yearBand": "Y3-4",
+      "text": "Understand how the form and function of technological products are related to the materials and processes used",
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-TECH-L3-TP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Practice", "level": 3, "yearBand": "Y5-6",
+      "text": "Develop specifications to guide and evaluate the development of an outcome; apply appropriate testing procedures and evaluate the outcome against design criteria",
+      "hplAcps": ["Strategic Thinking", "Precision and Accuracy", "Analysing and Evaluating"]
+    },
+    {
+      "id": "NZC-TECH-L3-TK-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Knowledge", "level": 3, "yearBand": "Y5-6",
+      "text": "Understand how properties of materials can be worked with and transformed to produce desired outcomes",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "NZC-TECH-L4-TP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Practice", "level": 4, "yearBand": "Y7-8",
+      "text": "Develop a brief that includes specifications for the outcome and the constraints on its development; use iterative design processes to develop, test, and refine an outcome",
+      "hplAcps": ["Strategic Thinking", "Creating and Innovating", "Problem-Solving"]
+    },
+    {
+      "id": "NZC-TECH-L4-DT-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Digital Technologies", "level": 4, "yearBand": "Y7-8",
+      "text": "Understand programming concepts: sequencing, loops, conditions, variables; create programs that use these concepts to solve problems",
+      "hplAcps": ["Problem-Solving", "Strategic Thinking", "Precision and Accuracy"]
+    },
+    {
+      "id": "NZC-TECH-L5-TP-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Technological Practice", "level": 5, "yearBand": "Y9-10",
+      "text": "Develop and justify specifications and design criteria; use prototyping, testing, and evaluation to refine and communicate design decisions",
+      "hplAcps": ["Strategic Thinking", "Justifying and Reasoning", "Meta-Thinking"]
+    },
+    {
+      "id": "NZC-TECH-L5-DT-1", "framework": "NZC", "country": "NZ",
+      "subject": "Technology", "strand": "Digital Technologies", "level": 5, "yearBand": "Y9-10",
+      "text": "Understand and apply algorithms, data structures, and computational thinking to design and implement programs; consider social and ethical implications of digital systems",
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking", "Ethical Reasoning"]
+    }
+  ]
+}

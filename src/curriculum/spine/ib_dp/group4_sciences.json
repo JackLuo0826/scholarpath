@@ -1,0 +1,143 @@
+{
+  "framework": "IB_DP",
+  "group": 4,
+  "note": "IB Diploma Programme Group 4 — Sciences. Subjects: Biology, Chemistry, Physics, Computer Science, Environmental Systems and Societies (ESS), Sports, Exercise, and Health Science (SEHS). All at SL and HL except ESS (SL only). Topic structure from first examinations 2016; some subjects updated 2025.",
+  "topics": [
+    {
+      "id": "IB-BIO-T1-1", "framework": "IB_DP", "subject": "Biology", "group": 4,
+      "topicNumber": 1, "topicTitle": "Cell Biology",
+      "subtopicTitle": "Cell theory, membrane structure, and transport",
+      "levels": ["SL", "HL"],
+      "description": "Cell theory; prokaryotic and eukaryotic cells; cell membrane (fluid mosaic model); passive and active transport; osmosis; endocytosis and exocytosis",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-BIO-T2-1", "framework": "IB_DP", "subject": "Biology", "group": 4,
+      "topicNumber": 2, "topicTitle": "Molecular Biology",
+      "subtopicTitle": "DNA, RNA, and protein synthesis",
+      "levels": ["SL", "HL"],
+      "description": "DNA structure and replication; transcription and translation; the genetic code; gene expression; enzymes; metabolic pathways",
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "IB-BIO-T3-1", "framework": "IB_DP", "subject": "Biology", "group": 4,
+      "topicNumber": 3, "topicTitle": "Genetics",
+      "subtopicTitle": "Chromosomes, meiosis, and Mendelian inheritance",
+      "levels": ["SL", "HL"],
+      "description": "Chromosome structure; meiosis; monohybrid and dihybrid crosses; Mendel's laws; sex-linked traits; polygenic inheritance (HL)",
+      "hplAcps": ["Generalising", "Problem-Solving"]
+    },
+    {
+      "id": "IB-BIO-T4-1", "framework": "IB_DP", "subject": "Biology", "group": 4,
+      "topicNumber": 4, "topicTitle": "Ecology",
+      "subtopicTitle": "Ecosystems, energy flow, and nutrient cycling",
+      "levels": ["SL", "HL"],
+      "description": "Species, populations, communities, ecosystems; energy flow through food chains and webs; carbon and nitrogen cycling; impact of human activity",
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "IB-BIO-T5-1", "framework": "IB_DP", "subject": "Biology", "group": 4,
+      "topicNumber": 5, "topicTitle": "Evolution and Biodiversity",
+      "subtopicTitle": "Natural selection, speciation, and classification",
+      "levels": ["SL", "HL"],
+      "description": "Evidence for evolution; natural selection; speciation; classification (three domains); cladistics (HL)",
+      "hplAcps": ["Analysing and Evaluating", "Generalising", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-BIO-T6-1", "framework": "IB_DP", "subject": "Biology", "group": 4,
+      "topicNumber": 6, "topicTitle": "Human Physiology",
+      "subtopicTitle": "Digestion, respiration, blood, and neural control",
+      "levels": ["SL", "HL"],
+      "description": "Digestive system; gas exchange; blood composition and transport; immune response; neural and hormonal coordination; reproduction (HL: further detail on immune system and kidneys)",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-CHEM-T1-1", "framework": "IB_DP", "subject": "Chemistry", "group": 4,
+      "topicNumber": 1, "topicTitle": "Stoichiometric Relationships",
+      "subtopicTitle": "Moles, equations, and calculations",
+      "levels": ["SL", "HL"],
+      "description": "Relative atomic mass; moles; chemical equations; limiting reagents; percentage yield and composition; concentration calculations",
+      "hplAcps": ["Precision and Accuracy", "Problem-Solving"]
+    },
+    {
+      "id": "IB-CHEM-T2-1", "framework": "IB_DP", "subject": "Chemistry", "group": 4,
+      "topicNumber": 2, "topicTitle": "Atomic Structure",
+      "subtopicTitle": "Electrons, orbitals, and periodic trends",
+      "levels": ["SL", "HL"],
+      "description": "Nuclear structure; electron configuration; atomic emission spectra; periodic trends (ionisation energy, electronegativity, atomic radius); HL: sub-shell electron filling and spectroscopy",
+      "hplAcps": ["Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-CHEM-T4-1", "framework": "IB_DP", "subject": "Chemistry", "group": 4,
+      "topicNumber": 4, "topicTitle": "Chemical Bonding and Structure",
+      "subtopicTitle": "Ionic, covalent, and metallic bonding; VSEPR",
+      "levels": ["SL", "HL"],
+      "description": "Types of bonding; Lewis structures; VSEPR theory and molecular geometry; intermolecular forces; physical properties from bonding type; HL: hybridisation, resonance",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "IB-CHEM-T5-1", "framework": "IB_DP", "subject": "Chemistry", "group": 4,
+      "topicNumber": 5, "topicTitle": "Energetics and Thermochemistry",
+      "subtopicTitle": "Enthalpy changes, Hess's Law, and bond enthalpies",
+      "levels": ["SL", "HL"],
+      "description": "Exothermic and endothermic reactions; enthalpy of combustion and neutralisation; Hess's Law; bond enthalpies; HL: Born-Haber cycles, Gibbs free energy",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "IB-CHEM-T7-1", "framework": "IB_DP", "subject": "Chemistry", "group": 4,
+      "topicNumber": 7, "topicTitle": "Equilibrium",
+      "subtopicTitle": "Equilibrium constant and Le Chatelier's principle",
+      "levels": ["SL", "HL"],
+      "description": "Dynamic equilibrium; Kc and Kp expressions; Le Chatelier's principle; industrial applications (Haber process); HL: Kw, solubility product, common ion effect",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "IB-CHEM-T8-1", "framework": "IB_DP", "subject": "Chemistry", "group": 4,
+      "topicNumber": 8, "topicTitle": "Acids and Bases",
+      "subtopicTitle": "pH scale, neutralisation, and buffer solutions",
+      "levels": ["SL", "HL"],
+      "description": "Brønsted-Lowry theory; strong and weak acids and bases; pH calculations; neutralisation; HL: Ka and Kb; buffer solutions; acid-base titration curves",
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-PHYS-T2-1", "framework": "IB_DP", "subject": "Physics", "group": 4,
+      "topicNumber": 2, "topicTitle": "Mechanics",
+      "subtopicTitle": "Kinematics, forces, work, energy, and momentum",
+      "levels": ["SL", "HL"],
+      "description": "Kinematic equations; Newton's three laws; projectile motion; work, energy, and power; impulse and momentum; conservation laws; HL: torque and circular motion",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "IB-PHYS-T3-1", "framework": "IB_DP", "subject": "Physics", "group": 4,
+      "topicNumber": 3, "topicTitle": "Thermal Physics",
+      "subtopicTitle": "Ideal gases and thermodynamics",
+      "levels": ["SL", "HL"],
+      "description": "Temperature scales; specific heat capacity; ideal gas law; kinetic theory; first and second laws of thermodynamics (HL)",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "IB-PHYS-T4-1", "framework": "IB_DP", "subject": "Physics", "group": 4,
+      "topicNumber": 4, "topicTitle": "Waves",
+      "subtopicTitle": "Wave properties, superposition, and standing waves",
+      "levels": ["SL", "HL"],
+      "description": "Wave properties (amplitude, frequency, wavelength, speed); transverse and longitudinal waves; superposition; standing waves; Doppler effect; HL: single-slit diffraction, interference, polarisation",
+      "hplAcps": ["Making Connections", "Generalising"]
+    },
+    {
+      "id": "IB-PHYS-T5-1", "framework": "IB_DP", "subject": "Physics", "group": 4,
+      "topicNumber": 5, "topicTitle": "Electricity and Magnetism",
+      "subtopicTitle": "Electric fields, circuits, and magnetic forces",
+      "levels": ["SL", "HL"],
+      "description": "Coulomb's law; electric field and potential; current, resistance, Ohm's law; series and parallel circuits; magnetic fields; electromagnetic induction; HL: Faraday's and Lenz's laws; capacitors",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "IB-PHYS-T7-1", "framework": "IB_DP", "subject": "Physics", "group": 4,
+      "topicNumber": 7, "topicTitle": "Atomic, Nuclear and Particle Physics",
+      "subtopicTitle": "Nuclear reactions, radioactivity, and particle physics",
+      "levels": ["SL", "HL"],
+      "description": "Nuclear structure; radioactive decay (alpha, beta, gamma); half-life; nuclear fission and fusion; binding energy; Standard Model overview (HL: deeper particle physics)",
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    }
+  ]
+}

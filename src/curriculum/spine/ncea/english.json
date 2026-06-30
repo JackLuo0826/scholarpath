@@ -1,0 +1,119 @@
+{
+  "framework": "NCEA",
+  "country": "NZ",
+  "note": "NZQA achievement standards for English. NCEA Level 1 English was significantly revised in 2024 (new standards replace old AS908xx series). Level 2 and 3 are being refreshed. Codes marked verified:false need checking at nzqa.govt.nz. Core skills: reading, writing, speaking, viewing, presenting.",
+  "standards": [
+    {
+      "id": "AS91101", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Produce a selection of crafted and controlled writing",
+      "credits": 6, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy", "Strategic Thinking"]
+    },
+    {
+      "id": "AS91102", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Construct and deliver a crafted and controlled oral text",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Creating and Innovating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91103", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Use written language to analyse and respond to text(s)",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91104", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Analyse aspects of visual and/or oral text(s) through close viewing and/or listening, supported by evidence",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias"]
+    },
+    {
+      "id": "AS91106", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Form developed personal response to independently read texts, supported by evidence",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Reading Actively", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91107", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Analyse aspects of written text(s) through close reading, supported by evidence",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Precision and Accuracy", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91108", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Demonstrate understanding of unfamiliar written text through close reading",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Reading Actively", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91098", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 2,
+      "title": "Analyse significant aspects of unfamiliar written texts through close reading",
+      "credits": 4, "assessmentType": "External", "verified": false,
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91473", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Respond critically to significant aspects of visual and/or oral text(s) through close viewing and/or listening, supported by evidence",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91474", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Write a developed, convincing essay that presents a critical point of view",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Justifying and Reasoning", "Creating and Innovating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91475", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Produce a selection of crafted and controlled writing",
+      "credits": 6, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy", "Strategic Thinking"]
+    },
+    {
+      "id": "AS91476", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Construct and deliver a crafted and controlled oral text",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Creating and Innovating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "AS91477", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Develop an informed understanding of literature and/or language using critical texts",
+      "credits": 5, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91478", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Respond critically to significant aspects of written text(s) through close reading, supported by evidence",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91479", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Develop an understanding of significant aspects of unfamiliar written text(s) through close reading",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Reading Actively", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91480", "framework": "NCEA", "country": "NZ",
+      "subject": "English", "level": 3,
+      "title": "Respond critically to specified aspect(s) of studied written text(s), supported by evidence",
+      "credits": 3, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning"]
+    }
+  ]
+}

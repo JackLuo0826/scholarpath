@@ -1,0 +1,55 @@
+{
+  "framework": "IB_DP",
+  "group": 2,
+  "note": "IB Diploma Programme Group 2 — Language Acquisition. Two courses: Language B (for students with prior experience) and Language ab initio (beginners). Most common languages: French, Spanish, Mandarin, Japanese, German. Assessed via internal oral and external written exams.",
+  "topics": [
+    {
+      "id": "IB-LANG-B-T1", "framework": "IB_DP", "subject": "Language B", "group": 2,
+      "topicNumber": 1, "topicTitle": "Identities",
+      "subtopicTitle": "Personal and cultural identity",
+      "levels": ["SL", "HL"],
+      "description": "Themes: lifestyle, health, beliefs, subcultures. Students discuss and write about personal experiences and cultural identity in the target language.",
+      "hplAcps": ["Open-Mindedness", "Creating and Innovating"]
+    },
+    {
+      "id": "IB-LANG-B-T2", "framework": "IB_DP", "subject": "Language B", "group": 2,
+      "topicNumber": 2, "topicTitle": "Experiences",
+      "subtopicTitle": "Learning and leisure, travel, and migration",
+      "levels": ["SL", "HL"],
+      "description": "Themes: education systems, travel, global movement of people. Students compare and discuss these experiences across cultures.",
+      "hplAcps": ["Making Connections", "Open-Mindedness"]
+    },
+    {
+      "id": "IB-LANG-B-T3", "framework": "IB_DP", "subject": "Language B", "group": 2,
+      "topicNumber": 3, "topicTitle": "Human Ingenuity",
+      "subtopicTitle": "Science, technology, and creativity",
+      "levels": ["SL", "HL"],
+      "description": "Themes: innovation, technology, arts and expression. Students analyse how these shape modern society using target language texts.",
+      "hplAcps": ["Analysing and Evaluating", "Creating and Innovating"]
+    },
+    {
+      "id": "IB-LANG-B-T4", "framework": "IB_DP", "subject": "Language B", "group": 2,
+      "topicNumber": 4, "topicTitle": "Social Organisation",
+      "subtopicTitle": "Community, social structures, and political systems",
+      "levels": ["SL", "HL"],
+      "description": "Themes: social groups, rights and responsibilities, governance. Students engage with a range of texts and perspectives.",
+      "hplAcps": ["Open-Mindedness", "Analysing and Evaluating"]
+    },
+    {
+      "id": "IB-LANG-B-T5", "framework": "IB_DP", "subject": "Language B", "group": 2,
+      "topicNumber": 5, "topicTitle": "Sharing the Planet",
+      "subtopicTitle": "Environment, globalisation, and ethics",
+      "levels": ["SL", "HL"],
+      "description": "Themes: environment, global challenges, peace and conflict, ethical questions. Assessment: Paper 1 (reading comprehension); Paper 2 (written tasks); Individual Oral (stimulus-based).",
+      "hplAcps": ["Open-Mindedness", "Evaluating for Bias", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-LANG-AB-T1", "framework": "IB_DP", "subject": "Language ab initio", "group": 2,
+      "topicNumber": 1, "topicTitle": "Identities, Experiences, and Ingenuity",
+      "subtopicTitle": "Beginner language acquisition across three themes",
+      "levels": ["SL"],
+      "description": "For students with no prior experience of the language. Five themes (same as Language B) covered at beginner to intermediate level. Focus on receptive, productive, and interactive skills. Assessed by Paper 1 (reading/listening), Paper 2 (writing), and Individual Oral.",
+      "hplAcps": ["Open-Mindedness", "Meta-Thinking"]
+    }
+  ]
+}

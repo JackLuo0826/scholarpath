@@ -1,0 +1,143 @@
+{
+  "framework": "IB_DP",
+  "group": 5,
+  "note": "IB Diploma Programme Mathematics topic structure. Two courses: Analysis & Approaches (AA) and Applications & Interpretations (AI), each at SL and HL. Topic structure is public; detailed syllabus requires IB World School access. Verify against the current IB subject guides (first examinations 2021).",
+  "topics": [
+    {
+      "id": "IB-MATH-AA-T1-1", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 1, "topicTitle": "Number and Algebra",
+      "subtopicTitle": "Sequences and series",
+      "levels": ["SL", "HL"],
+      "description": "Arithmetic and geometric sequences and series; sigma notation; applications; finite and infinite geometric series",
+      "hplAcps": ["Generalising", "Problem-Solving"]
+    },
+    {
+      "id": "IB-MATH-AA-T1-2", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 1, "topicTitle": "Number and Algebra",
+      "subtopicTitle": "Exponents and logarithms",
+      "levels": ["SL", "HL"],
+      "description": "Laws of exponents and logarithms; change of base; solving exponential and logarithmic equations",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "IB-MATH-AA-T1-3", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 1, "topicTitle": "Number and Algebra",
+      "subtopicTitle": "Binomial theorem and counting principles",
+      "levels": ["SL", "HL"],
+      "description": "Binomial theorem; Pascal's triangle; combinations and permutations (HL: proof by induction, complex numbers)",
+      "hplAcps": ["Higher-Order Thinking", "Generalising"]
+    },
+    {
+      "id": "IB-MATH-AA-T1-4", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 1, "topicTitle": "Number and Algebra",
+      "subtopicTitle": "Complex numbers (HL only)",
+      "levels": ["HL"],
+      "description": "Complex number operations; modulus-argument form; De Moivre's theorem; roots of complex numbers",
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "IB-MATH-AA-T2-1", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 2, "topicTitle": "Functions",
+      "subtopicTitle": "Function concepts and notation",
+      "levels": ["SL", "HL"],
+      "description": "Function notation; domain and range; inverse functions; composite functions; transformations of graphs",
+      "hplAcps": ["Making Connections", "Strategic Thinking"]
+    },
+    {
+      "id": "IB-MATH-AA-T2-2", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 2, "topicTitle": "Functions",
+      "subtopicTitle": "Quadratic, rational, and exponential functions",
+      "levels": ["SL", "HL"],
+      "description": "Quadratic functions and equations; discriminant; rational functions; exponential and logarithmic functions",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "IB-MATH-AA-T3-1", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 3, "topicTitle": "Geometry and Trigonometry",
+      "subtopicTitle": "Trigonometric ratios and identities",
+      "levels": ["SL", "HL"],
+      "description": "Radian measure; unit circle; trig ratios; double angle and compound angle formulae; trig equations and graphs",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "IB-MATH-AA-T3-2", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 3, "topicTitle": "Geometry and Trigonometry",
+      "subtopicTitle": "Vectors (HL only)",
+      "levels": ["HL"],
+      "description": "Vector algebra; dot and cross products; equations of lines and planes; intersections and angles in 3D",
+      "hplAcps": ["Higher-Order Thinking", "Problem-Solving"]
+    },
+    {
+      "id": "IB-MATH-AA-T4-1", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 4, "topicTitle": "Statistics and Probability",
+      "subtopicTitle": "Descriptive statistics and probability",
+      "levels": ["SL", "HL"],
+      "description": "Descriptive statistics; probability rules; conditional probability; Bayes' theorem (HL); Venn diagrams; tree diagrams",
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "IB-MATH-AA-T4-2", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 4, "topicTitle": "Statistics and Probability",
+      "subtopicTitle": "Probability distributions and hypothesis testing",
+      "levels": ["SL", "HL"],
+      "description": "Discrete and continuous distributions; binomial; normal; t-distribution; hypothesis testing; chi-squared test (HL)",
+      "hplAcps": ["Analysing and Evaluating", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-MATH-AA-T5-1", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 5, "topicTitle": "Calculus",
+      "subtopicTitle": "Differential calculus",
+      "levels": ["SL", "HL"],
+      "description": "Limits and derivatives; differentiation rules (product, quotient, chain); tangent and normal lines; optimisation; kinematics",
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-MATH-AA-T5-2", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 5, "topicTitle": "Calculus",
+      "subtopicTitle": "Integral calculus",
+      "levels": ["SL", "HL"],
+      "description": "Definite and indefinite integration; area under and between curves; integration by substitution; volumes of revolution (HL)",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    },
+    {
+      "id": "IB-MATH-AA-T5-3", "framework": "IB_DP", "subject": "Mathematics AA", "group": 5,
+      "topicNumber": 5, "topicTitle": "Calculus",
+      "subtopicTitle": "Maclaurin series and differential equations (HL only)",
+      "levels": ["HL"],
+      "description": "Maclaurin series; first-order and second-order differential equations; Euler's method",
+      "hplAcps": ["Higher-Order Thinking", "Generalising"]
+    },
+    {
+      "id": "IB-MATH-AI-T1-1", "framework": "IB_DP", "subject": "Mathematics AI", "group": 5,
+      "topicNumber": 1, "topicTitle": "Number and Algebra",
+      "subtopicTitle": "Arithmetic, geometric sequences, and financial maths",
+      "levels": ["SL", "HL"],
+      "description": "Sequences and series; compound interest; amortisation; annuities; depreciation; approximations and errors",
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "IB-MATH-AI-T2-1", "framework": "IB_DP", "subject": "Mathematics AI", "group": 5,
+      "topicNumber": 2, "topicTitle": "Functions",
+      "subtopicTitle": "Modelling with functions",
+      "levels": ["SL", "HL"],
+      "description": "Linear, quadratic, exponential, sinusoidal, and logistic models; regression analysis using GDC; piecewise functions",
+      "hplAcps": ["Making Connections", "Problem-Solving", "Generalising"]
+    },
+    {
+      "id": "IB-MATH-AI-T4-1", "framework": "IB_DP", "subject": "Mathematics AI", "group": 5,
+      "topicNumber": 4, "topicTitle": "Statistics and Probability",
+      "subtopicTitle": "Statistical analysis and hypothesis testing",
+      "levels": ["SL", "HL"],
+      "description": "Collecting and displaying data; measures of central tendency and spread; linear correlation; chi-squared test; t-test; ANOVA (HL)",
+      "hplAcps": ["Analysing and Evaluating", "Justifying and Reasoning", "Evaluating for Bias"]
+    },
+    {
+      "id": "IB-MATH-AI-T5-1", "framework": "IB_DP", "subject": "Mathematics AI", "group": 5,
+      "topicNumber": 5, "topicTitle": "Calculus",
+      "subtopicTitle": "Differential and integral calculus for applications",
+      "levels": ["SL", "HL"],
+      "description": "Differentiation for rates of change and optimisation; integration for areas and accumulated change; Euler's method and numerical methods (HL)",
+      "hplAcps": ["Problem-Solving", "Making Connections"]
+    }
+  ]
+}

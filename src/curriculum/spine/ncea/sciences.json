@@ -1,0 +1,154 @@
+{
+  "framework": "NCEA",
+  "country": "NZ",
+  "note": "NZQA achievement standards for Science, Biology, Chemistry, and Physics. Level 1 Science is generic; Levels 2–3 split into Biology, Chemistry, Physics. Verify codes at nzqa.govt.nz as standards are being refreshed.",
+  "standards": [
+    {
+      "id": "AS90940", "framework": "NCEA", "country": "NZ",
+      "subject": "Science", "level": 1,
+      "title": "Investigate biological ideas relating to the life processes of plants and animals",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Asking Questions", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS90944", "framework": "NCEA", "country": "NZ",
+      "subject": "Science", "level": 1,
+      "title": "Demonstrate understanding of aspects of acids and bases",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS90948", "framework": "NCEA", "country": "NZ",
+      "subject": "Science", "level": 1,
+      "title": "Investigate the behaviour of waves",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91153", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 2,
+      "title": "Demonstrate understanding of adaptation of plants or animals to their way of life",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91154", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 2,
+      "title": "Demonstrate understanding of the role of DNA in relation to gene expression",
+      "credits": 3, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91156", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 2,
+      "title": "Demonstrate understanding of life processes at the cellular level",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91164", "framework": "NCEA", "country": "NZ",
+      "subject": "Chemistry", "level": 2,
+      "title": "Demonstrate understanding of bonding, structure, properties and energy changes",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91165", "framework": "NCEA", "country": "NZ",
+      "subject": "Chemistry", "level": 2,
+      "title": "Demonstrate understanding of the properties of selected organic compounds",
+      "credits": 4, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Making Connections", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91168", "framework": "NCEA", "country": "NZ",
+      "subject": "Chemistry", "level": 2,
+      "title": "Carry out a practical investigation in chemistry and write a report",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Asking Questions", "Precision and Accuracy"]
+    },
+    {
+      "id": "AS91171", "framework": "NCEA", "country": "NZ",
+      "subject": "Physics", "level": 2,
+      "title": "Demonstrate understanding of mechanics",
+      "credits": 6, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91172", "framework": "NCEA", "country": "NZ",
+      "subject": "Physics", "level": 2,
+      "title": "Demonstrate understanding of atomic and nuclear physics",
+      "credits": 3, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91173", "framework": "NCEA", "country": "NZ",
+      "subject": "Physics", "level": 2,
+      "title": "Demonstrate understanding of electricity and electromagnetism",
+      "credits": 6, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Making Connections", "Problem-Solving"]
+    },
+    {
+      "id": "AS91601", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 3,
+      "title": "Carry out a practical investigation in a biological context, with guidance",
+      "credits": 4, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Asking Questions", "Precision and Accuracy", "Analysing and Evaluating"]
+    },
+    {
+      "id": "AS91602", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 3,
+      "title": "Integrate biological knowledge to develop an informed response to a socio-scientific issue",
+      "credits": 3, "assessmentType": "Internal", "verified": true,
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91604", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 3,
+      "title": "Demonstrate understanding of how an animal maintains a stable internal environment",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91607", "framework": "NCEA", "country": "NZ",
+      "subject": "Biology", "level": 3,
+      "title": "Demonstrate understanding of human evolution",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Generalising", "Making Connections"]
+    },
+    {
+      "id": "AS91390", "framework": "NCEA", "country": "NZ",
+      "subject": "Chemistry", "level": 3,
+      "title": "Demonstrate understanding of thermochemical principles and the properties of particles and substances",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91391", "framework": "NCEA", "country": "NZ",
+      "subject": "Chemistry", "level": 3,
+      "title": "Demonstrate understanding of the properties of organic compounds",
+      "credits": 5, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91524", "framework": "NCEA", "country": "NZ",
+      "subject": "Physics", "level": 3,
+      "title": "Demonstrate understanding of mechanical systems",
+      "credits": 6, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Higher-Order Thinking"]
+    },
+    {
+      "id": "AS91525", "framework": "NCEA", "country": "NZ",
+      "subject": "Physics", "level": 3,
+      "title": "Demonstrate understanding of modern physics",
+      "credits": 3, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Higher-Order Thinking", "Making Connections"]
+    },
+    {
+      "id": "AS91526", "framework": "NCEA", "country": "NZ",
+      "subject": "Physics", "level": 3,
+      "title": "Demonstrate understanding of electrical systems",
+      "credits": 6, "assessmentType": "External", "verified": true,
+      "hplAcps": ["Problem-Solving", "Making Connections", "Higher-Order Thinking"]
+    }
+  ]
+}

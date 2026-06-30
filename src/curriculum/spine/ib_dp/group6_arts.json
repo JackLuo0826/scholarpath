@@ -1,0 +1,55 @@
+{
+  "framework": "IB_DP",
+  "group": 6,
+  "note": "IB Diploma Programme Group 6 — The Arts. Students may also take a second subject from Groups 1–5 in place of Group 6. Subjects: Visual Arts, Music, Theatre, Dance, Film. Each assessed by portfolio/process journal plus exhibition, performance, or project.",
+  "topics": [
+    {
+      "id": "IB-VA-T1", "framework": "IB_DP", "subject": "Visual Arts", "group": 6,
+      "topicNumber": 1, "topicTitle": "Comparative Study",
+      "subtopicTitle": "Analysis of artworks from different cultural contexts",
+      "levels": ["SL", "HL"],
+      "description": "SL: analyse and compare at least 3 artworks from at least 2 different artists. HL: at least 4 artworks from at least 3 artists. Students investigate formal and conceptual qualities and the cultural contexts of artworks.",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections", "Open-Mindedness"]
+    },
+    {
+      "id": "IB-VA-T2", "framework": "IB_DP", "subject": "Visual Arts", "group": 6,
+      "topicNumber": 2, "topicTitle": "Process Portfolio",
+      "subtopicTitle": "Development of artistic skills and ideas",
+      "levels": ["SL", "HL"],
+      "description": "SL: 9–18 screens; HL: 13–25 screens. Documents the student's artistic development: experimentation, research, reflection, and skill-building across at least two art-making forms.",
+      "hplAcps": ["Creating and Innovating", "Meta-Thinking", "Intellectual Curiosity"]
+    },
+    {
+      "id": "IB-VA-T3", "framework": "IB_DP", "subject": "Visual Arts", "group": 6,
+      "topicNumber": 3, "topicTitle": "Exhibition",
+      "subtopicTitle": "Independent body of resolved artworks",
+      "levels": ["SL", "HL"],
+      "description": "SL: 4–7 works; HL: 8–11 works. A coherent body of work with a curatorial rationale. Works are physically exhibited and assessed on concept, technical execution, and presentation.",
+      "hplAcps": ["Creating and Innovating", "Strategic Thinking", "Higher-Order Thinking"]
+    },
+    {
+      "id": "IB-MUS-T1", "framework": "IB_DP", "subject": "Music", "group": 6,
+      "topicNumber": 1, "topicTitle": "Exploring Music in Context",
+      "subtopicTitle": "Musical perception and analysis",
+      "levels": ["SL", "HL"],
+      "description": "Students listen to and analyse unfamiliar music from a range of times, places, and cultures. Develop musical perception and the ability to discuss musical elements, contexts, and cultural significance.",
+      "hplAcps": ["Analysing and Evaluating", "Open-Mindedness", "Making Connections"]
+    },
+    {
+      "id": "IB-MUS-T2", "framework": "IB_DP", "subject": "Music", "group": 6,
+      "topicNumber": 2, "topicTitle": "Experimenting with Music",
+      "subtopicTitle": "Composition and creative process",
+      "levels": ["SL", "HL"],
+      "description": "Students experiment with musical composition through a process journal. Develop and refine original music in at least two different musical roles (composition, performance, improvisation).",
+      "hplAcps": ["Creating and Innovating", "Meta-Thinking"]
+    },
+    {
+      "id": "IB-MUS-T3", "framework": "IB_DP", "subject": "Music", "group": 6,
+      "topicNumber": 3, "topicTitle": "Presenting Music",
+      "subtopicTitle": "Performance, presentation, or media music",
+      "levels": ["SL", "HL"],
+      "description": "Students present music through a solo performance, media music composition, or creating a music product. Assessed on technical and expressive qualities relative to the chosen musical context.",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy"]
+    }
+  ]
+}

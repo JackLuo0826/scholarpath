@@ -1,0 +1,105 @@
+{
+  "framework": "ACARA",
+  "version": "Version 9 (2022)",
+  "country": "AU",
+  "subject": "English",
+  "note": "Achievement standards from the Australian Curriculum Version 9 English. Three strands: Language, Literature, Literacy. By individual year level. Verify at australiancurriculum.edu.au.",
+  "objectives": [
+    {
+      "id": "ACARA-ENG-F-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 0, "yearBand": "Foundation",
+      "text": "Listen to and read aloud short, predictable texts with familiar vocabulary; demonstrate concepts of print (left-right, top-bottom); write simple words and sentences using known letters",
+      "hplAcps": ["Making Connections", "Meta-Thinking"]
+    },
+    {
+      "id": "ACARA-ENG-Y1-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 1, "yearBand": "Y1",
+      "text": "Read decodable and predictable texts with increasing fluency; use knowledge of phonics and sight words; create short texts for known purposes using simple language features",
+      "hplAcps": ["Strategic Thinking", "Making Connections"]
+    },
+    {
+      "id": "ACARA-ENG-Y2-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 2, "yearBand": "Y2",
+      "text": "Read a range of texts with fluency and comprehension; use comprehension strategies (predicting, questioning, monitoring); create informative, imaginative, and persuasive texts with basic structure",
+      "hplAcps": ["Reading Actively", "Making Connections"]
+    },
+    {
+      "id": "ACARA-ENG-Y3-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 3, "yearBand": "Y3",
+      "text": "Discuss and compare texts; identify how language choices create meaning and effect; explore how texts reflect social and cultural contexts",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "ACARA-ENG-Y3-2", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 3, "yearBand": "Y3",
+      "text": "Plan, draft, and publish imaginative, informative, and persuasive texts; use appropriate punctuation, vocabulary, and sentence structures for audience and purpose",
+      "hplAcps": ["Creating and Innovating", "Strategic Thinking"]
+    },
+    {
+      "id": "ACARA-ENG-Y4-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 4, "yearBand": "Y4",
+      "text": "Analyse how text structures, language features, and visual elements work together; compare responses to texts from different cultures and perspectives",
+      "hplAcps": ["Analysing and Evaluating", "Open-Mindedness"]
+    },
+    {
+      "id": "ACARA-ENG-Y5-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 5, "yearBand": "Y5",
+      "text": "Explain how authors use language, structure, and visual choices to influence the reader; identify themes and social, moral, and cultural contexts of texts",
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias"]
+    },
+    {
+      "id": "ACARA-ENG-Y5-2", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 5, "yearBand": "Y5",
+      "text": "Produce well-structured texts for a range of purposes and audiences; use complex sentences, paragraphing, and a variety of language features effectively",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy"]
+    },
+    {
+      "id": "ACARA-ENG-Y6-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 6, "yearBand": "Y6",
+      "text": "Analyse how texts are shaped by purpose, audience, and context; compare and contrast the use of language and structure in different text types",
+      "hplAcps": ["Analysing and Evaluating", "Making Connections"]
+    },
+    {
+      "id": "ACARA-ENG-Y7-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 7, "yearBand": "Y7",
+      "text": "Analyse how authors develop character, setting, and themes; evaluate the impact of language choices; discuss multiple perspectives and interpretations",
+      "hplAcps": ["Analysing and Evaluating", "Open-Mindedness", "Higher-Order Thinking"]
+    },
+    {
+      "id": "ACARA-ENG-Y7-2", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 7, "yearBand": "Y7",
+      "text": "Produce texts for different purposes and audiences using sophisticated language features; develop and sustain an argument; review and edit for clarity and effect",
+      "hplAcps": ["Creating and Innovating", "Justifying and Reasoning"]
+    },
+    {
+      "id": "ACARA-ENG-Y8-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 8, "yearBand": "Y8",
+      "text": "Analyse how language, structure, and visual features construct meaning and influence the reader; evaluate the effectiveness of texts for their purpose and context",
+      "hplAcps": ["Analysing and Evaluating", "Evaluating for Bias"]
+    },
+    {
+      "id": "ACARA-ENG-Y9-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 9, "yearBand": "Y9",
+      "text": "Interpret and evaluate texts by analysing how language, form, and context shape meaning and represent ideas; compare perspectives across texts",
+      "hplAcps": ["Higher-Order Thinking", "Evaluating for Bias", "Analysing and Evaluating"]
+    },
+    {
+      "id": "ACARA-ENG-Y9-2", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 9, "yearBand": "Y9",
+      "text": "Create sustained and complex texts for specific purposes and audiences; demonstrate control of grammar, vocabulary, and writing conventions; construct and develop a reasoned argument",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy", "Justifying and Reasoning"]
+    },
+    {
+      "id": "ACARA-ENG-Y10-1", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literature", "level": 10, "yearBand": "Y10",
+      "text": "Critically evaluate texts by analysing how language, structure, and context shape meaning; synthesise ideas from multiple texts; assess the reliability and validity of sources",
+      "hplAcps": ["Higher-Order Thinking", "Evaluating for Bias", "Meta-Thinking"]
+    },
+    {
+      "id": "ACARA-ENG-Y10-2", "framework": "ACARA", "country": "AU",
+      "subject": "English", "strand": "Literacy", "level": 10, "yearBand": "Y10",
+      "text": "Create sophisticated texts that reflect complex ideas and sustained argument; use language with deliberate and precise effect for a specific audience and purpose; self-edit and refine writing",
+      "hplAcps": ["Creating and Innovating", "Precision and Accuracy", "Meta-Thinking"]
+    }
+  ]
+}
