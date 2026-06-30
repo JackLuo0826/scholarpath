@@ -24,3 +24,12 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Local dev utilities and scripts containing secrets
+apply-rls.mjs
+check-student-db.mjs
+link-student.mjs
+migrate-level-assessment.js
+test-assessment-accuracy.mjs
+verify-api.mjs
+test-screenshots/
