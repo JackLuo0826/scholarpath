@@ -192,19 +192,19 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // Mathematics
   if (s.includes('math') || s.includes('maths') || s.includes('numeracy')) {
-    if (nzcLevel.includes('Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
+    if (nzcLevel.startsWith('NZC Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
       return `NZC MATHEMATICS LEVEL 1 CALIBRATION:
 - FOUNDATION (pre-school/entry): Counting objects to 20, recognising numerals, simple patterns
 - DEVELOPING (Year 1-2): Addition/subtraction within 20 using counting strategies; halves and quarters of shapes; non-standard measurement (hand-spans); simple 2D shape names; tally charts
 - ADVANCED (Year 3-4): Place value to 1000; 2-3 digit addition/subtraction; multiplication by 2s, 5s, 10s; standard units (cm, kg, L); time to the quarter-hour`
     }
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC MATHEMATICS LEVEL 2 CALIBRATION:
 - FOUNDATION (Year 1-2 skills): Addition/subtraction within 20; halves and quarters of simple shapes; non-standard measurement; simple number sequences
 - DEVELOPING (Year 3-4 skills): Place value to 1000 (hundreds, tens, ones); addition and subtraction of 2- and 3-digit numbers using place-value strategies; multiplication by 2s, 5s, 10s (working toward all basic facts); fractions of sets and shapes (halves, quarters, thirds, eighths); standard measurement (cm/m, kg, L); time to the quarter-hour; extending number patterns; reading simple tally charts and picture graphs
 - ADVANCED (Year 5-6 skills): All multiplication/division facts to 10×10 with fluency; multiplying 2-digit numbers; decimals to one decimal place; equivalent fractions; perimeter using formulae; 24-hour time; mean of a data set`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC MATHEMATICS LEVEL 3 CALIBRATION:
 - FOUNDATION (Year 3-4 skills): 3-digit addition/subtraction; multiplication by 2s/5s/10s; simple fractions; standard measurement units; time to the quarter-hour
 - DEVELOPING (Year 5-6 skills): All ×/÷ facts to 10×10 fluently; multi-digit multiplication/division algorithms; fractions, decimals (tenths, hundredths), simple percentages; equivalent fractions; area and perimeter formulae; metric conversions; transformations (reflection, rotation, translation); tables, graphs, and patterns; probability as fractions
@@ -245,19 +245,19 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // English
   if (s.includes('english') || s.includes('literacy') || s.includes('reading') || s.includes('writing')) {
-    if (nzcLevel.includes('Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
+    if (nzcLevel.startsWith('NZC Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
       return `NZC ENGLISH LEVEL 1 CALIBRATION:
 - FOUNDATION (pre-school): Letter recognition, initial sounds, simple sight words
 - DEVELOPING (Year 1-2): Phonics decoding of simple words; reading simple decodable texts; writing simple sentences with capital letters and full stops; basic high-frequency word spelling; recognising nouns, verbs in simple sentences
 - ADVANCED (Year 3-4): Reading with inference; writing in paragraphs; multiple text types; complex sentences; speech marks; commas`
     }
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC ENGLISH LEVEL 2 CALIBRATION:
 - FOUNDATION (Year 1-2 skills): Simple sentence construction with capital letter and full stop; recognising basic nouns and verbs; decoding simple words; reading short simple texts literally
 - DEVELOPING (Year 3-4 skills): Reading fiction/non-fiction with inference and making connections; identifying text features (heading, subheading, caption); writing in paragraphs using topic sentences; narrative writing with problem and resolution; simple report and recount writing; using speech marks, commas, and simple conjunctions (but, because, so, when); identifying nouns, verbs, adjectives, adverbs; spelling phonically regular and common words; basic simile and metaphor recognition
 - ADVANCED (Year 5-6 skills): Identifying subordinate clauses and complex sentence structures; persuasive writing with structured arguments; recognising personification, hyperbole, and symbolism; identifying author purpose and point of view; using colons, semicolons, and dashes correctly; writing from multiple perspectives`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC ENGLISH LEVEL 3 CALIBRATION:
 - FOUNDATION (Year 3-4 skills): Reading with inference; paragraph writing; simple narrative; simile and metaphor; speech marks; adjectives and adverbs
 - DEVELOPING (Year 5-6 skills): Reading longer texts and identifying author purpose, bias, and point of view; writing extended paragraphs with evidence and elaboration; persuasive essays with structured arguments (PEEL); correct apostrophes, colons, varied punctuation; figurative language (personification, hyperbole, symbolism); vocabulary in context; audience and register awareness; synthesising information from two sources
@@ -296,15 +296,15 @@ function buildSubjectGuidance(subject, nzcLevel) {
     return `Use appropriate NZC English content for ${nzcLevel}.`
   }
 
-  // Science
-  if (s.includes('science') || s.includes('biology') || s.includes('chemistry') || s.includes('physics')) {
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+  // General Science (Year 1-10 only — Biology, Chemistry, Physics handled separately below)
+  if (s.includes('science') && s !== 'biology' && s !== 'chemistry' && s !== 'physics') {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC SCIENCE LEVEL 2 CALIBRATION:
 - FOUNDATION (Year 1-2 skills): Basic needs of living things (food, water, light, shelter); simple push/pull forces from everyday life; observable weather; floating and sinking; day/night cycle observation
 - DEVELOPING (Year 3-4 skills): Life cycles of diverse animals (butterfly, frog, bird, mammal); plant growth conditions (light, water, warmth, nutrients); how physical features and behaviours help organisms survive (basic adaptation); properties of common materials (hard/soft, waterproof, transparent); push/pull forces and how they change motion, speed, direction; states of matter (solid, liquid, gas) and simple changes (melting, freezing, evaporation); Earth's resources (water cycle, soil, rocks); basic scientific method (predict, observe, record); food chains (producer → consumer)
 - ADVANCED (Year 5-6 skills): Ecosystems and interdependence; food webs; fair testing with controlled variables; classification of living organisms; water cycle in detail; solar system; concept of energy transfer`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC SCIENCE LEVEL 3 CALIBRATION:
 - FOUNDATION (Year 3-4 skills): Life cycles; basic adaptation; push/pull forces; states of matter; food chains; properties of materials; simple scientific method
 - DEVELOPING (Year 5-6 skills): Life processes common to all living things (respiration, reproduction, growth, nutrition); ecosystems and food webs; water cycle; classification of living things; Earth's layers; solar system; properties of light and sound; series and parallel circuits; fair testing (controlling variables, identifying IV/DV); forming evidence-based explanations
@@ -432,13 +432,13 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // History (NZC Social Sciences — Continuity and Change strand)
   if (s === 'history') {
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC HISTORY LEVEL 2 CALIBRATION (Year 3-4):
 - FOUNDATION (Year 1-2 skills): Family history; recognising old vs new objects; sequencing events (before/after/then); simple timelines
 - DEVELOPING (Year 3-4 skills): How and why things change over time in a community (technology, transport, buildings); how people in the past lived differently; significant events and people in local/NZ history; simple cause-and-effect (why did this change happen?); using photographs, artefacts, and oral histories as evidence; the role of Māori and settlers in early NZ history at a simple level; Treaty of Waitangi — who signed it and why (at a basic level)
 - ADVANCED (Year 5-6 skills): Colonisation of NZ and its impacts; why NZ became a British colony; significant NZ historical events (gold rush, early Parliament); comparing different perspectives on historical events`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC HISTORY LEVEL 3 CALIBRATION (Year 5-6):
 - FOUNDATION (Year 3-4 skills): Local/community historical changes; basic cause-and-effect; Treaty of Waitangi basics; using historical evidence
 - DEVELOPING (Year 5-6 skills): Colonisation of NZ — timeline, key events, causes and consequences for Māori and Pākehā; Treaty of Waitangi — key principles, significance, breaches and renegotiation; significant events in NZ history (NZ Wars, women's suffrage 1893, Gold Rush, early immigration); historical perspectives — understanding that people in the past had different viewpoints; use of primary and secondary sources; migration stories to NZ (European, Pacific, Chinese); World Wars — NZ's participation and impact at home
@@ -479,13 +479,13 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // Geography (NZC Social Sciences — Place and Environment strand)
   if (s === 'geography') {
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC GEOGRAPHY LEVEL 2 CALIBRATION (Year 3-4):
 - FOUNDATION (Year 1-2 skills): Immediate local environment; directions (north/south/east/west); simple maps of classroom or school
 - DEVELOPING (Year 3-4 skills): Reading and making simple maps (key/legend, compass rose, scale concept); how people use their local environment; weather patterns and seasons; how the environment affects how people live; basic landforms (mountain, river, coast, plain, hill, valley); how people change the environment (farming, building, deforestation); NZ's location in the Pacific; difference between a town, city, region, and country
 - ADVANCED (Year 5-6 skills): NZ's physical regions; how rivers and coasts are shaped; comparing NZ environments to those of other countries; basic economic geography (primary/secondary/tertiary industries)`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC GEOGRAPHY LEVEL 3 CALIBRATION (Year 5-6):
 - FOUNDATION (Year 3-4 skills): Map reading (legend, scale, compass); landforms; how people change environments; NZ's Pacific location
 - DEVELOPING (Year 5-6 skills): NZ's physical geography — landforms, major rivers, mountains, volcanic plateau, Southern Alps; how volcanic and tectonic activity shapes NZ (Ring of Fire, plate tectonics at basic level); NZ climate zones and how they vary; natural disasters in NZ (earthquakes, volcanoes, tsunamis, floods) and how people respond; comparing NZ environments to Pacific Island nations; primary, secondary, and tertiary industries in NZ; how migration shapes communities; sustainability — how people affect and protect environments
@@ -555,13 +555,13 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // Computing / Digital Technology
   if (s.includes('computing') || s.includes('computer') || s.includes('digital tech') || s.includes('coding') || s.includes('programming')) {
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC DIGITAL TECHNOLOGY LEVEL 2 CALIBRATION (Year 3-4):
 - FOUNDATION (Year 1-2 skills): Using a mouse and keyboard; recognising common devices; taking photos or making simple digital art
 - DEVELOPING (Year 3-4 skills): Algorithms as step-by-step instructions (recipe, directions); creating simple sequences in Scratch or similar block-based tools (move, turn, repeat, wait); understanding loops (repeat a set of instructions); debugging simple errors; binary concept — computers use 1s and 0s; input-output-process model; online safety (personal information, trusted adults, cyberbullying); creating simple digital media (presentation, document, simple animation)
 - ADVANCED (Year 5-6 skills): Conditional statements (if/else); variables; more complex Scratch programs; basic binary counting (0-7 in 3 bits); data and its types (number, text, Boolean)`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC DIGITAL TECHNOLOGY LEVEL 3 CALIBRATION (Year 5-6):
 - FOUNDATION (Year 3-4 skills): Sequences and loops in block coding; input/output model; binary concept; online safety; digital media creation
 - DEVELOPING (Year 5-6 skills): Algorithms with conditionals (if/else) and repetition (while/for loops); variables (storing and updating values); decomposition — breaking problems into smaller parts; tracing through an algorithm manually (dry run); binary numbers (converting between binary and decimal, 0-255); representing data — how text is encoded (ASCII concept); flowcharts as visual algorithm representation; creating interactive programs in Scratch (event handlers, user input); data collection and simple spreadsheet use; cybersecurity basics (strong passwords, phishing, safe browsing)
@@ -596,19 +596,19 @@ function buildSubjectGuidance(subject, nzcLevel) {
 
   // Music (NZC The Arts — Music strand)
   if (s === 'music') {
-    if (nzcLevel.includes('Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
+    if (nzcLevel.startsWith('NZC Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
       return `NZC MUSIC LEVEL 1 CALIBRATION (Year 1-2):
 - FOUNDATION (pre-school): Responding to music (fast/slow, loud/soft); clapping a simple beat; recognising familiar songs
 - DEVELOPING (Year 1-2 skills): Musical elements — beat (steady pulse), rhythm (pattern of long/short sounds), tempo (fast/slow), dynamics (loud/soft — forte/piano), pitch (high/low); performing simple songs and chants; distinguishing between instruments by sound; creating simple soundscapes; ta (crotchet) and ti-ti (quaver pair) rhythm notation in basic form; call and response patterns
 - ADVANCED (Year 3-4 skills): Treble clef note names on lines and spaces (EGBDF, FACE); time signatures (4/4 meaning); quarter rests; naming common instrument families`
     }
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC MUSIC LEVEL 2 CALIBRATION (Year 3-4):
 - FOUNDATION (Year 1-2 skills): Beat, rhythm, tempo, dynamics, pitch; simple rhythm notation (ta, ti-ti); performing songs; instrument families
 - DEVELOPING (Year 3-4 skills): Musical elements in practice — duration (note values: semibreve=4, minim=2, crotchet=1, quaver=½); time signature 4/4 (4 beats per bar); treble clef note reading (lines: EGBDF, spaces: FACE); simple C major scale; dynamics markings (p, mp, mf, f, ff, pp); tempo markings (allegro, andante, adagio); timbre — identifying instruments by sound; texture (thin/thick; melody and accompaniment); creating simple 4-bar rhythmic or melodic patterns; responding to music — describing mood, style, and character; recognising AB and ABA musical form
 - ADVANCED (Year 5-6 skills): Bass clef note reading; major and minor scales; sharp/flat/natural signs; chord recognition (I, IV, V); musical periods (Baroque, Classical, Romantic) at a basic level`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC MUSIC LEVEL 3 CALIBRATION (Year 5-6):
 - FOUNDATION (Year 3-4 skills): Note values; 4/4 time signature; treble clef reading; dynamics and tempo markings; AB/ABA form; instrument timbres
 - DEVELOPING (Year 5-6 skills): Staff notation — treble and bass clef reading; major scales (C, G, D, F); key signatures (up to 2 sharps/flats); time signatures (2/4, 3/4, 4/4); note values including dotted notes and ties; musical form (binary AB, ternary ABA, rondo ABACA, theme and variations); harmonic concepts (major vs minor; tonic, dominant, subdominant chords); musical periods (Baroque, Classical, Romantic — key composers and characteristics); musical devices (sequence, ostinato, syncopation, imitation); analysing music for style, structure, and expressive techniques; composing an 8-bar melody with accompaniment
@@ -634,19 +634,19 @@ NOTE: Spanish in NZ is proficiency-based (Novice → Intermediate → Advanced).
 
   // Te Reo Māori (NZC — Learning Languages and curriculum context)
   if (s.includes('te reo') || s.includes('maori') || s.includes('māori') || s.includes('reo')) {
-    if (nzcLevel.includes('Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
+    if (nzcLevel.startsWith('NZC Level 1') || nzcLevel.includes('Year 1') || nzcLevel.includes('Year 2')) {
       return `NZC TE REO MĀORI LEVEL 1 CALIBRATION (Year 1-2):
 - FOUNDATION: No te reo knowledge; cannot recognise any Māori words
 - DEVELOPING (Year 1-2 skills): Basic greetings (Kia ora, Tēnā koe, Mōrena); farewell (Ka kite anō, Haere rā); numbers 1-10 (tahi, rua, toru, whā, rima, ono, whitu, waru, iwa, tekau); colours (whero-red, kākāriki-green, kōwhai-yellow, mā-white, pango-black, kikorangi-blue); simple body parts (māhunga-head, ringa-hand, waewae-foot, kanohi-face); responding to simple instructions (tū ake — stand up; noho iho — sit down; āe — yes; kāo — no)
 - ADVANCED (Year 3-4 skills): Self-introduction using ko/nō sentence structures; numbers to 20; days of the week (Rāhina-Monday through Rātapu-Sunday); simple descriptive sentences; whanau words`
     }
-    if (nzcLevel.includes('Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
+    if (nzcLevel.startsWith('NZC Level 2') || nzcLevel.includes('Year 3') || nzcLevel.includes('Year 4')) {
       return `NZC TE REO MĀORI LEVEL 2 CALIBRATION (Year 3-4):
 - FOUNDATION (Year 1-2 skills): Basic greetings; numbers 1-10; colours; body parts; simple classroom instructions
 - DEVELOPING (Year 3-4 skills): Ko-sentences for identity (Ko [name] tōku ingoa; Ko [tribe] tōku iwi; Ko [mountain] tōku maunga; Ko [river] tōku awa); Nō-sentences for origin (Nō Tāmaki Mākorau ahau); numbers to 100 (tekau mā tahi...); days of week and months; whanau vocabulary (māmā, pāpā, tuakana, teina, tungāne, tuahine, koro, kui, mokopuna); colour adjectives; simple present tense statements (E... ana ahau — I am...ing; Kei te... ahau — I am...); describing weather; responding to and giving simple instructions; common nouns for food, animals, and places in NZ
 - ADVANCED (Year 5-6 skills): Verb-subject-object sentence structure (basic Māori grammar — VSO order); possessive pronouns (tōku, tōu, tōna); past and future tense markers (I...; Ka...); question words (He aha? He wai? Kei hea?)`
     }
-    if (nzcLevel.includes('Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
+    if (nzcLevel.startsWith('NZC Level 3') || nzcLevel.includes('Year 5') || nzcLevel.includes('Year 6')) {
       return `NZC TE REO MĀORI LEVEL 3 CALIBRATION (Year 5-6):
 - FOUNDATION (Year 3-4 skills): Ko/Nō sentences; numbers to 100; days and months; whanau vocabulary; present tense E...ana; basic nouns
 - DEVELOPING (Year 5-6 skills): Māori sentence structure (VSO — verb first: Ka kai ahau; Kei te mahi ia); past tense (I — I haere ahau ki te kura); future tense (Ka — Ka hoki āpōpō); locative sentences (Kei hea? — where is?; Kei [place] a [person/thing]); possessives — a-class and o-class (tōku/tāku distinction at a basic level); directions (ki te raro, ki runga, ki roto, ki waho); describing people and things with adjectives; question formation (He aha...? He wai...? Nō wai...? Kei hea...? He mea aha...?); numbers with people and things (tekau ngā tamariki); Māori concepts (kaitiakitanga, manaakitanga, whanaungatanga — meaning and use); reading and responding to a short simple te reo passage
