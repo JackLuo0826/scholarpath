@@ -59,15 +59,27 @@ Step 1: Compute tier averages from the scores above:
   developingAvg = average score of the 3 developing questions (Q3-Q5)
   advancedAvg   = average score of the 2 advanced questions (Q6-Q7)
 
-Step 2: Determine level using TIER PERFORMANCE, not just overall average:
-  "foundation": foundationAvg < 60 OR developingAvg < 30
-    → Student has gaps in prerequisite knowledge; needs foundational support
-  "developing": foundationAvg ≥ 60 AND developingAvg 30-69 AND advancedAvg < 50
-    → Student is working at or approaching the expected year level
-  "advanced":   foundationAvg ≥ 70 AND developingAvg ≥ 70 AND advancedAvg 30-79
-    → Student is solid at-level and shows above-level capability
-  "expert":     foundationAvg ≥ 85 AND developingAvg ≥ 85 AND advancedAvg ≥ 70
-    → Student consistently exceeds expectations; working above year level
+Step 2: Determine level using DEVELOPING TIER as the primary diagnostic:
+
+  "expert":     developingAvg ≥ 85 AND advancedAvg ≥ 65
+    → Student consistently operates above year level; mastery of at-level AND strong advanced work
+
+  "advanced":   developingAvg ≥ 70 AND advancedAvg ≥ 30 (but not expert)
+    → Student is solid at year-level AND shows meaningful above-level capability
+
+  "developing": developingAvg ≥ 35 (but not advanced or expert)
+    → Student is working at or approaching year level; may struggle with above-level content
+
+  "foundation": developingAvg < 35
+    → Student has significant gaps at year level; foundational support needed
+
+  DECISION ORDER: Check expert first, then advanced, then developing, then foundation.
+  Use developing tier score as the primary signal. Foundation tier confirms prerequisites but
+  a student who passes developing is at minimum "developing" regardless of foundation score.
+  A student who gets ALL foundation and developing correct (100%) but only 15% on advanced
+  is "developing" (excellent at year level, not yet above it).
+  A student who gets 100% developing and 30%+ advanced is "advanced".
+  A student who gets 85%+ developing and 65%+ advanced is "expert".
 
 Step 3: Compute overallScore as a WEIGHTED average that reflects the tier logic:
   overallScore = (foundationAvg × 0.20) + (developingAvg × 0.50) + (advancedAvg × 0.30)
