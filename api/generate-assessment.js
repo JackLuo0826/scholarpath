@@ -228,6 +228,18 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - DEVELOPING (NCEA Level 1 skills): Algebra (quadratics, exponentials, logarithms); trigonometry (including non-right triangles using sine and cosine rules); geometric reasoning (circle theorems); statistical investigations and inference; network diagrams; sequences and series
 - ADVANCED (NCEA Level 2 skills): Calculus concepts (rates of change, gradient functions); complex algebraic manipulation; statistical literacy (design and analysis of statistical studies)`
     }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA MATHEMATICS LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Quadratics; logarithms; trigonometry (sine and cosine rules); circle theorems; sequences and series; statistical inference
+- DEVELOPING (NCEA Level 2 skills): Calculus (differentiation — product rule, quotient rule, chain rule; integration — definite and indefinite integrals; applications — finding gradients, maxima/minima, area under a curve); algebra (complex numbers — operations, Argand diagram, modulus-argument form; conic sections — circles, parabolas, ellipses, hyperbolas); trigonometry (reciprocal functions; compound and double angle formulae; solving trig equations over a domain); statistics (bivariate data — correlation, regression, coefficient of determination; confidence intervals; hypothesis testing using p-values; normal distribution calculations; sampling methods)
+- ADVANCED (NCEA Level 3 skills): Limits and continuity; integration by parts/substitution; vector algebra; complex plane mapping`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA MATHEMATICS LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Calculus (differentiation with product/quotient/chain rules; definite/indefinite integration; maxima/minima); complex numbers; trigonometric equations; bivariate statistics; confidence intervals
+- DEVELOPING (NCEA Level 3 skills): Calculus in depth (integration by substitution; integration by parts; differential equations — separable, logistic growth; Maclaurin series; rates of change problems); complex numbers (De Moivre's theorem; roots of complex numbers; loci in the Argand diagram); linear algebra (vectors in 3D; dot and cross products; vector equations of lines and planes; matrix operations — determinant, inverse, eigenvalues/eigenvectors concept); probability (probability density functions; expected value E(X) and variance Var(X); standard distributions — binomial, Poisson, normal; combination of random variables); statistics (statistical inference — hypothesis tests for means and proportions; chi-squared test for independence; non-parametric tests)
+- ADVANCED (scholarship/university skills): Real analysis (epsilon-delta definitions); multivariable calculus; abstract algebra; Fourier series`
+    }
     return `Use appropriate NZC mathematics content for ${nzcLevel}, calibrating foundation 1-2 year levels below, developing at level, and advanced 1-2 year levels above.`
   }
 
@@ -262,6 +274,24 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - FOUNDATION (Year 7-8 skills): Multi-paragraph essays; literary techniques (irony, motif, extended metaphor); evaluating texts for bias; complex sentence structures
 - DEVELOPING (Year 9-10 skills): Independent literary criticism with sustained argument; analysis of narrative voice, unreliable narrator, and structural choices; comparing texts for purpose, audience, and context; analysis of propaganda and rhetorical devices (ethos, pathos, logos); writing across diverse genres; independent editing for style, voice, and impact; close reading of unseen texts; semiotics (how images and layout create meaning)
 - ADVANCED (NCEA Level 1 skills): Formal literary essay structure with close textual analysis; evaluation of authorial intent and cultural/historical context; sophisticated vocabulary and syntactic variety`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA ENGLISH LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): Literary criticism essays; rhetorical devices; narrative voice; comparing texts; genre manipulation; independent editing
+- DEVELOPING (NCEA Level 1 skills): Formal literary essay structure (thesis + close textual evidence + analysis + evaluation); analysing language features and their effects in detail (connotation, diction, tone, syntax, form, structure); evaluating texts in context (cultural, social, historical context; author purpose and perspective); writing for specific purposes in formal contexts (essay, report, speech, formal letter); reading visual and multimodal texts (film techniques — close-up, wide shot, soundtrack, editing; graphic texts); comparing two or more texts on a related theme or by the same author
+- ADVANCED (NCEA Level 2 skills): Sustained critical argument about authorial intent and literary merit; intertextuality; sophisticated stylistic analysis; original creative writing with authorial commentary`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA ENGLISH LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Literary essay structure; close textual analysis; evaluating texts in context; writing for specific purposes; visual text analysis; comparing texts
+- DEVELOPING (NCEA Level 2 skills): Extended literary analysis (sustained critical argument over multiple paragraphs with close textual evidence; analysing how writers create meaning through language, structure, and form; examining authorial intent, literary merit, and cultural significance); creative writing (crafting extended narratives, poetry, or scripts with stylistic intentionality and craft commentary); language study in depth (registers and discourse; analysing spoken language; stylistics; sociolinguistics concepts); film and media studies (mise-en-scène, cinematography, editing, sound; genre conventions; representation and ideology; intertextuality); comparing texts across time periods, cultures, or media types
+- ADVANCED (NCEA Level 3 skills): Evaluation of literary theory and critical perspectives; nuanced authorial commentary on own writing; sustained comparison of complex texts; independent research on literary context`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA ENGLISH LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Extended literary analysis; creative writing with commentary; language study; film analysis; comparing texts across time/media
+- DEVELOPING (NCEA Level 3 skills): Literary criticism applying critical theory (feminist reading, Marxist criticism, postcolonial theory, psychoanalytic reading, reader-response theory — understanding and applying these lenses); independent wide reading and synthesis (connecting ideas across multiple literary texts and contexts; identifying themes across a body of work); complex essay writing (nuanced thesis, sustained argument, evaluation of multiple critical perspectives, sophisticated textual evidence); language and power (how language constructs identity and ideology; discourse analysis; representation in media; propaganda techniques); original writing at a sophisticated level (stylistic awareness; voice; form experiments; authorial commentary explaining choices in terms of effect on reader)
+- ADVANCED (university skills): Academic literary essay conventions; postmodern textuality; critical discourse analysis; creative writing portfolio`
     }
     return `Use appropriate NZC English content for ${nzcLevel}.`
   }
@@ -321,6 +351,12 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - DEVELOPING (NCEA Level 2 skills): Cellular biology in depth (organelles at ultrastructure level, cell membranes — fluid mosaic model, active/passive transport, osmosis); cellular respiration (glycolysis, Krebs cycle, electron transport chain in outline); molecular genetics (DNA replication, transcription, translation, mutations, gene regulation); plant adaptation to environment; animal physiology (thermoregulation, osmoregulation, gas exchange in mammals, fish, insects); gene mutation and evolution; population genetics (Hardy-Weinberg)
 - ADVANCED (NCEA Level 3 skills): Human evolution; homeostasis mechanisms; genetic engineering applications; ecological modelling`
     }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA BIOLOGY LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Cell membranes and transport; cellular respiration (glycolysis, Krebs cycle); molecular genetics; animal physiology (thermoregulation, osmoregulation); population genetics (Hardy-Weinberg)
+- DEVELOPING (NCEA Level 3 skills): Human evolution (hominid lineage, comparative anatomy, DNA evidence; cultural vs biological evolution); homeostasis in depth (negative feedback — blood glucose regulation by insulin/glucagon; thermoregulation mechanisms; blood pressure regulation); genetic engineering and biotechnology (recombinant DNA, PCR, gel electrophoresis, CRISPR concept; ethical implications); ecology and ecosystems (energy flow through trophic levels, pyramid of energy; biogeochemical cycles — nitrogen cycle, carbon cycle; population dynamics — logistic growth, carrying capacity; succession); speciation (allopatric vs sympatric; reproductive isolation; evidence from Darwin's finches and other examples)
+- ADVANCED (university/scholarship skills): Complex metabolic pathways; gene expression regulation (lac operon, operons concept); evolutionary mechanisms (genetic drift, bottleneck, founder effect); applied immunology`
+    }
     return `Use appropriate NZC/NCEA Biology content for ${nzcLevel}, covering cell biology, genetics, ecology, and evolution.`
   }
 
@@ -349,6 +385,12 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - FOUNDATION (NCEA Level 1 skills): Wave properties and calculations; nuclear physics; Newton's laws; momentum; series/parallel circuits
 - DEVELOPING (NCEA Level 2 skills): Mechanics in depth (circular motion — centripetal force F=mv²/r; projectile motion; angular momentum; torque and rotational equilibrium); electromagnetism (Faraday's law of induction; transformers; DC generator and motor; magnetic force on current-carrying conductor F=BIL); atomic and nuclear physics (Rutherford model; photoelectric effect; energy levels and emission spectra; E=hf; binding energy and mass-energy equivalence E=mc²); electricity (capacitance; RC circuits; internal resistance)
 - ADVANCED (NCEA Level 3 skills): Mechanical systems (SHM, resonance); electrical systems (AC circuits, impedance); modern physics (special relativity concepts)`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA PHYSICS LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Circular motion; projectile motion; Faraday's law; photoelectric effect; E=hf; capacitance; torque
+- DEVELOPING (NCEA Level 3 skills): Mechanical systems (simple harmonic motion — period, frequency, displacement equations; resonance; damping; rotational motion with moment of inertia I=mr²; angular velocity ω; L=Iω); AC electricity (RMS values; frequency; phasors; inductive and capacitive reactance XL=2πfL, XC=1/2πfC; impedance and resonance in LCR circuits); wave systems (standing waves with open/closed pipe and string conditions; diffraction and interference; double-slit and single-slit experiments; diffraction gratings d sinθ=mλ); modern physics (special relativity — time dilation, length contraction, E=mc²; photoelectric effect; atomic spectra; nuclear reactions; particle physics — quarks, leptons at conceptual level)
+- ADVANCED (scholarship/university skills): Lagrangian mechanics; quantum wave functions; general relativity concepts`
     }
     return `Use appropriate NZC/NCEA Physics content for ${nzcLevel}, covering mechanics, waves, electricity, and modern physics.`
   }
@@ -379,6 +421,12 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - DEVELOPING (NCEA Level 2 skills): Organic chemistry (structure and naming of alkanes, alkenes, alkynes, alcohols, aldehydes, ketones, carboxylic acids, esters, amines; reactions including addition, substitution, oxidation, esterification; structural and optical isomerism); thermochemistry (enthalpy changes, Hess's law, bond enthalpies; standard enthalpy of formation); chemical equilibrium (equilibrium expression Kc; Le Chatelier's principle; effect of temperature, pressure, concentration); bonding and structure in depth (VSEPR, polarity, intermolecular forces)
 - ADVANCED (NCEA Level 3 skills): Spectroscopy (IR, mass spec, NMR interpretation); kinetics (rate laws, Arrhenius equation); nuclear chemistry`
     }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA CHEMISTRY LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Organic chemistry reactions; thermochemistry and Hess's law; equilibrium (Kc and Le Chatelier); VSEPR; structural isomerism
+- DEVELOPING (NCEA Level 3 skills): Spectroscopy (IR spectroscopy — identifying functional groups from absorption peaks; mass spectrometry — molecular ion peak, fragmentation pattern, M/Z ratios; NMR — chemical shift, splitting patterns at conceptual level); chemical kinetics (rate = k[A]^m[B]^n; first-order and second-order rate equations; half-life; Arrhenius equation k=Ae^(-Ea/RT); effect of temperature and catalysts on rate); organic synthesis (multi-step synthesis planning; identifying reagents for functional group interconversion; stereochemistry — chirality, enantiomers, R/S notation); thermodynamics (Gibbs free energy ΔG=ΔH-TΔS; spontaneity; entropy; relationship between ΔG° and equilibrium constant); electrochemistry (standard cell potential; Nernst equation; electrolysis quantitative calculations using Faraday's law)
+- ADVANCED (scholarship/university skills): Molecular orbital theory; reaction mechanisms (SN1, SN2, E1, E2, catalytic cycles); advanced NMR interpretation`
+    }
     return `Use appropriate NZC/NCEA Chemistry content for ${nzcLevel}, covering atomic structure, bonding, reactions, and quantitative chemistry.`
   }
 
@@ -407,6 +455,24 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - FOUNDATION (Year 7-8 skills): NZ Wars; WWI causes; WWII overview; Treaty of Waitangi; historical source analysis
 - DEVELOPING (Year 9-10 skills): WWI in depth (causes — assassination of Franz Ferdinand, system of alliances; trench warfare; key battles; armistice; Treaty of Versailles and its consequences); WWII in depth (rise of Hitler and Nazi Germany; Holocaust; Pacific War; atomic bomb; post-war order); Cold War (origins, key events — Berlin Wall, Cuban Missile Crisis, Korean War, Vietnam War; nuclear arms race; détente and collapse of Soviet Union); decolonisation (independence movements in Africa and Asia; methods — peaceful and armed struggle); NZ in the 20th century (nuclear-free policy, Springbok Tour, Māori renaissance, Treaty settlements)
 - ADVANCED (NCEA Level 1 skills): Writing analytical historical essays; evaluating the reliability and usefulness of historical sources; causation and consequence at a conceptual level`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA HISTORY LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): WWI causes and key events; WWII overview; Cold War basics; NZ in the 20th century; historical source analysis; causation and consequence
+- DEVELOPING (NCEA Level 1 skills): Historical essay writing (structured argument with introduction, body paragraphs using PEEL, conclusion); evaluating historical sources (reliability, usefulness, bias, purpose, perspective); causation in depth (short-term triggers vs long-term underlying causes; multiple causation); NZ history focus topics (Treaty settlements and modern NZ; the Springbok Tour and social division; anti-nuclear policy; Māori renaissance); world history topics (apartheid in South Africa; decolonisation in Africa and Asia; Cuban Missile Crisis; Vietnam War); significance (why certain events matter); change and continuity (what changed, what stayed the same, and why)
+- ADVANCED (NCEA Level 2 skills): Contested history (historiography — how interpretations change over time; why historians disagree; using historians' views as evidence); complex multi-causal analysis; historical parallels and comparisons`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA HISTORY LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Historical essay structure; source evaluation; causation; NZ 20th century history; Cold War; decolonisation; significance; change/continuity
+- DEVELOPING (NCEA Level 2 skills): Historiography (how and why historical interpretations change; competing narratives; using historians as sources); causation with historiographical context; in-depth study of a significant historical event (e.g. the Holocaust — causes, events, consequences, historiographical debates including functionalism vs intentionalism; OR WWII in the Pacific — Pearl Harbor, Hiroshima, Japanese imperialism; OR the Russian Revolution); examining perspectives of different groups (colonisers/colonised, victors/defeated, majority/minority); evaluating long-term consequences of historical events; writing extended essays with nuanced argument
+- ADVANCED (NCEA Level 3 skills): Complex historiographical debate; analysing primary sources from multiple periods; evaluating contradictory historical accounts; research skills`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA HISTORY LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Historiography; extended essay writing; in-depth event study; multiple historical perspectives; evaluating historical consequences
+- DEVELOPING (NCEA Level 3 skills): Complex historiographical analysis (identifying and evaluating major historiographical schools on a topic; e.g. orthodox vs revisionist vs post-revisionist Cold War historians; structuralist vs intentionalist on the Holocaust); research skills (identifying, locating, and evaluating primary sources; annotated bibliography; historical methodology); examining the role of individuals vs structural forces in history; historical inquiry project (thesis-driven; evidence from multiple perspectives; sustained argumentation); historical comparisons (comparing similar events in different contexts — e.g. genocides, revolutions, independence movements); ethical dimensions of history (memory, trauma, reconciliation, reparations)
+- ADVANCED (university skills): Archival research methods; historiographical meta-analysis; oral history methodology; post-colonial historical theory`
     }
     return `Use appropriate NZC/NCEA History content for ${nzcLevel}, focusing on NZ and world history, historical thinking, and source analysis.`
   }
@@ -437,6 +503,18 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - DEVELOPING (Year 9-10 skills): Population geography (population pyramids; birth/death/natural increase rates; demographic transition model — 4 stages; push and pull factors; migration flows); economic development (GDP vs GNI vs HDI; development gap; fair trade and ethical consumption; role of TNCs in developing world); hydrological cycle in detail (infiltration, surface runoff, water table, drainage basins); coastal processes (erosion types — hydraulic action, corrasion, attrition; coastal landforms — cliffs, wave-cut platforms, headlands, bays, spits, tombolos; coastal management strategies); geographic inquiry (developing research questions, collecting and presenting data, evaluating sources)
 - ADVANCED (NCEA Level 1 skills): Statistical analysis of geographic data; geographic concepts (place, space, environment, interconnection, sustainability, scale); applying geographic concepts to case studies`
     }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA GEOGRAPHY LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): Population geography; economic development (HDI); coastal processes; hydrological cycle; geographic inquiry
+- DEVELOPING (NCEA Level 1 skills): Geographic concepts applied in depth (place — how place shapes identity; space — relative vs absolute location, distance decay; environment — natural and built environment interaction; interconnection — how events in one place affect others; sustainability — meeting present needs without compromising future; scale — local to global); natural hazards and their management (earthquake, volcano, tsunami, flood, cyclone — causes, patterns, impacts, responses, management strategies — GeoSmart concept); geographic skills (topographic and thematic map analysis; satellite imagery; GIS; statistical analysis — scatter graphs, Lorenz curves; geographic fieldwork)
+- ADVANCED (NCEA Level 2 skills): Urban geography in depth; glacial and fluvial geomorphology; global environmental issues; development gap and interventions`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA GEOGRAPHY LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Geographic concepts; natural hazards; topographic map skills; GIS; population geography; economic development
+- DEVELOPING (NCEA Level 2 skills): Urban geography (urbanisation trends globally; urban structure models — Burgess concentric zone, Hoyt sector, multiple nuclei; urban issues — traffic congestion, urban heat island, housing, crime; gentrification; suburbanisation and counter-urbanisation; sustainable urban planning — smart growth, transit-oriented development); geomorphology (glacial processes — erosion by abrasion and plucking; glacial landforms — cirques, arêtes, U-valleys, moraines, drumlins; river processes in depth — hydraulic radius, Manning equation concept, hydrographs; coastal landforms and management); climate change (causes, evidence, consequences for different regions; mitigation vs adaptation strategies; IPCC reports; climate justice); global development (causes of development gap; fair trade; debt relief; foreign aid; MDGs/SDGs; role of TNCs and FDI; case studies from Africa, Asia, Pacific)
+- ADVANCED (NCEA Level 3 skills): Geographic research methodology; complex spatial analysis; resource management debates; political geography`
+    }
     return `Use appropriate NZC/NCEA Geography content for ${nzcLevel}, covering physical and human geography, geographic processes, and geographic skills.`
   }
 
@@ -459,6 +537,18 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - FOUNDATION (Year 9-10 skills): Supply and demand; price elasticity; macroeconomic indicators; government fiscal and monetary policy; international trade
 - DEVELOPING (NCEA Level 1 skills): Microeconomics in depth (supply and demand analysis — shifts and movements along curves; consumer and producer surplus; price floors and ceilings and their effects; elasticity — price, income, cross-elasticity; market structures — profit maximisation, barriers to entry); macroeconomics (aggregate demand and supply; economic growth and its measurement; inflation — demand-pull vs cost-push, consequences; unemployment — cyclical, structural, frictional; balance of payments); New Zealand economic context (role of RBNZ; exchange rate effects on exports and imports)
 - ADVANCED (NCEA Level 2 skills): Market failure in depth (externalities, merit goods, public goods, information asymmetry); evaluation of policies (cost-benefit analysis, trade-offs)`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA ECONOMICS LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Supply and demand analysis; consumer/producer surplus; elasticity; market structures; aggregate demand/supply; inflation; unemployment; NZ context
+- DEVELOPING (NCEA Level 2 skills): Market failure in depth (negative and positive externalities — diagram showing social vs private cost/benefit, deadweight loss; public goods — non-excludable, non-rival; merit and demerit goods; information asymmetry; natural monopoly); government intervention (taxes and subsidies — effects on market equilibrium, incidence; price controls — price floors and ceilings with welfare analysis; regulation; nationalisation; public provision; cost-benefit analysis and limitations); trade and development (absolute vs comparative advantage; terms of trade; protectionism instruments — tariffs, quotas, subsidies; WTO; economic integration); income distribution (Gini coefficient; causes of inequality; redistributive policies — progressive taxation, welfare, minimum wage)
+- ADVANCED (NCEA Level 3 skills): Behavioural economics; game theory concepts; developing-country economic growth models; advanced macroeconomic policy trade-offs`
+    }
+    if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
+      return `NCEA ECONOMICS LEVEL 3 (Year 13) CALIBRATION:
+- FOUNDATION (NCEA Level 2 skills): Market failure; government intervention; trade and comparative advantage; income distribution; Gini coefficient; welfare analysis
+- DEVELOPING (NCEA Level 3 skills): Behavioural economics (bounded rationality; heuristics and biases — anchoring, availability, representativeness, loss aversion, present bias; nudge theory; implications for policy design); macroeconomic policy in depth (Phillips curve — short-run vs long-run; NAIRU; monetary policy — inflation targeting, Taylor rule, unconventional policy; fiscal multiplier; crowding out; Ricardian equivalence); international finance (exchange rate systems — fixed, floating, managed; purchasing power parity; capital flows and financial crises; IMF and World Bank roles); economic development (Rostow's stages; import substitution vs export-led growth; dependency theory; sustainable development goals; role of institutions — property rights, rule of law); game theory (Nash equilibrium; prisoner's dilemma; applications to oligopoly, public goods, international negotiations)
+- ADVANCED (university skills): General equilibrium theory; Keynesian vs monetarist debates; financial market models; econometric methods`
     }
     return `Use appropriate NZC/NCEA Economics content for ${nzcLevel}, covering microeconomics, macroeconomics, and the NZ economic context.`
   }
@@ -488,6 +578,18 @@ function buildSubjectGuidance(subject, nzcLevel) {
 - FOUNDATION (Year 7-8 skills): Python basics; binary/hexadecimal; data representation; network components; SQL SELECT; cybersecurity concepts
 - DEVELOPING (Year 9-10 skills): Object-oriented programming (classes and objects, attributes, constructors, methods, encapsulation, inheritance); sorting and searching algorithms (bubble sort, insertion sort, selection sort, linear search, binary search — implementing and comparing efficiency); Big O notation (O(n), O(n²), O(log n)); recursive algorithms (factorial, Fibonacci, towers of Hanoi); 2D arrays and their manipulation; SQL (SELECT with WHERE, ORDER BY, GROUP BY; INSERT; UPDATE; JOIN concept); web development (HTML structure — head/body/headings/paragraphs/links/images; CSS selectors, properties — colour, font, margin, padding, flexbox basics; JavaScript variables, events, DOM manipulation); OSI and TCP/IP network models; public key encryption; hashing; ethical and social implications of AI and data collection
 - ADVANCED (NCEA Level 1 skills): Complex algorithm design; database design (normalisation to 2NF); cybersecurity threats and countermeasures; programming with complex data structures`
+    }
+    if (nzcLevel.includes('Level 6') || nzcLevel.includes('NCEA Level 1') || nzcLevel.includes('Year 11')) {
+      return `NCEA DIGITAL TECHNOLOGY LEVEL 1 (Year 11) CALIBRATION:
+- FOUNDATION (Year 9-10 skills): OOP; sorting/searching algorithms; Big O notation; SQL with JOINs; HTML/CSS/JS basics; OSI model; public key encryption
+- DEVELOPING (NCEA Level 1 skills): Complex algorithm design (designing algorithms for non-trivial problems; pseudocode and flowcharts; algorithm analysis and efficiency; testing and debugging strategies); database design in depth (entity-relationship diagrams; normalisation to 3NF; writing complex SQL queries — subqueries, aggregation, multiple JOINs; data integrity constraints); cybersecurity in depth (types of attacks — malware, ransomware, social engineering, MITM, DDoS; defensive strategies — firewalls, IDS, encryption, 2FA, patch management; ethical hacking concepts); programming project (developing a solution to a real problem using OOP; testing plan; documentation); human-computer interaction (interface design principles — affordance, feedback, consistency; accessibility; user testing)
+- ADVANCED (NCEA Level 2 skills): Agile software development; version control (Git); full-stack web development; AI and machine learning concepts; network security protocols`
+    }
+    if (nzcLevel.includes('Level 7') || nzcLevel.includes('NCEA Level 2') || nzcLevel.includes('Year 12')) {
+      return `NCEA DIGITAL TECHNOLOGY LEVEL 2 (Year 12) CALIBRATION:
+- FOUNDATION (NCEA Level 1 skills): Complex algorithm design; database normalisation to 3NF; SQL subqueries; cybersecurity threats and defenses; OOP programming project; HCI principles
+- DEVELOPING (NCEA Level 2 skills): Software development lifecycle (waterfall, agile — sprints, Scrum, kanban; version control with Git — branching, merging, pull requests; code review); full-stack web development (RESTful APIs — GET/POST/PUT/DELETE; JSON data exchange; front-end frameworks concept; authentication — sessions, JWT; server-side scripting); network infrastructure (VLAN; subnetting and CIDR notation; NAT; routing protocols — RIP, OSPF concept; wireless security — WPA3); AI and machine learning (supervised vs unsupervised learning; training data and overfitting; neural networks at conceptual level; natural language processing; ethical implications of AI); digital forensics and security (evidence collection; log analysis; incident response)
+- ADVANCED (NCEA Level 3 skills): Cloud computing; microservices architecture; advanced machine learning; research into emerging technologies`
     }
     return `Use appropriate NZC/NCEA Digital Technology content for ${nzcLevel}, covering programming, data representation, networks, and cybersecurity.`
   }
