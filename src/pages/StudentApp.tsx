@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   BookOpen, Brain, Send, Flame, Trophy,
   GraduationCap, LogOut, Loader2, Lock, BookMarked, Map, Target, CheckCircle2,
-  ClipboardCheck,
+  ClipboardCheck, Library,
 } from 'lucide-react'
 import KnowledgeCanvas from './KnowledgeCanvas'
 import WeeklyRoadmap from './WeeklyRoadmap'
@@ -11,6 +11,7 @@ import GoalSummary from './GoalSummary'
 import WeeklyActivities from './WeeklyActivities'
 import ExerciseSheet from './ExerciseSheet'
 import LevelAssessment from './LevelAssessment'
+import CurriculumLibrary from './CurriculumLibrary'
 import { useApp } from '../AppContext'
 import type { ChatMessage, WeeklyActivity } from '../types'
 
@@ -59,7 +60,7 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
   )
 }
 
-type Tab = 'today' | 'goals' | 'roadmap' | 'chat' | 'knowledge' | 'progress' | 'assess'
+type Tab = 'today' | 'goals' | 'roadmap' | 'chat' | 'knowledge' | 'progress' | 'assess' | 'library'
 
 interface KnowledgeItem {
   id: string
@@ -301,6 +302,7 @@ export default function StudentApp() {
           { key: 'knowledge',label: 'Knowledge',  icon: BookMarked },
           { key: 'progress', label: 'Progress',   icon: Trophy },
           { key: 'assess',   label: 'Assess Level', icon: ClipboardCheck },
+          { key: 'library',  label: 'Library',      icon: Library },
         ] as const).map(({ key, label, icon: Icon }) => (
           <button
             key={key}
@@ -458,6 +460,16 @@ export default function StudentApp() {
               }
               addMessage(msg)
             }}
+          />
+        )}
+
+        {/* CURRICULUM LIBRARY */}
+        {activeTab === 'library' && (
+          <CurriculumLibrary
+            childAge={childInfo?.age ?? null}
+            childGrade={childInfo?.grade ?? null}
+            apiKey={apiKey}
+            model={model}
           />
         )}
 

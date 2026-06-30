@@ -488,6 +488,47 @@ Submit flow:
   → Upserted to activity_completions table
 ```
 
+### Curriculum Library (Beast Academy + IEW)
+
+Pre-seeded, bite-sized lessons available to any child in a dedicated **Library** tab. Content is not per-child — it is global, shared across all students.
+
+**Curricula seeded (NZ Year 4):**
+
+| Curriculum | Subject | Units | Lessons |
+|---|---|---|---|
+| Beast Academy | Mathematics | 3 (Shape Detectives, Multiplication Quests, Fraction Land) | 15 |
+| IEW | Writing | 3 (Keyword Magic, Dress-Ups, Story Architecture) | 15 |
+
+**Architecture:**
+
+```
+DB table: curriculum_lessons
+  - id (uuid), curriculum ('beast-academy'|'iew'), subject, subject_color
+  - unit_number, unit_title, lesson_number
+  - title, description, content, question, hint
+  - difficulty ('foundation'|'developing'|'advanced'), duration_min
+  - grade ('Year 4'), country ('NZ')
+  - unique(curriculum, unit_number, lesson_number)
+  - RLS: any authenticated user can SELECT
+
+API: GET /api/get-curriculum?grade=Year4&country=NZ
+  - Service-role read from curriculum_lessons
+  - Returns: { curricula: [ { id, label, units: [ { unitNumber, title, lessons[] } ] } ] }
+
+Frontend: src/pages/CurriculumLibrary.tsx
+  - Home: 2 curriculum cards (Beast Academy, IEW Writing)
+  - Drill-down: accordion of units, list of lesson cards
+  - Each lesson opens ExerciseSheet (reuses existing modal + /api/check-answer)
+  - lesson.content is prepended to lesson.question inside ExerciseSheet
+
+Seed: node seed-curriculum.mjs (run once after DB migration)
+Migration: supabase/migrate-curriculum.sql
+```
+
+**Exercise submission:** Curriculum exercises reuse `ExerciseSheet` and `/api/check-answer` but do **not** write to `activity_completions` (no weekStart context). Completions exist in the modal UX only.
+
+---
+
 ### Adaptive Difficulty (Bayesian Knowledge Tracing)
 
 Planned — not yet implemented in code. Will use BKT to replace simple threshold logic in weak-spot detection:

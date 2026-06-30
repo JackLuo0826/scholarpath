@@ -350,6 +350,37 @@ create policy "Student manages own student levels" on public.student_levels
     exists (select 1 from public.children c where c.id = child_id and c.auth_id = auth.uid())
   );
 
+-- ── Curriculum lessons (global, not per-child) ──────────────────────────────
+-- Stores pre-seeded Beast Academy and IEW bite-sized lessons for NZ Year 4.
+-- No child_id — shared across all students. Readable by any authenticated user.
+drop policy if exists "Authenticated reads curriculum" on public.curriculum_lessons;
+
+create table if not exists public.curriculum_lessons (
+  id            uuid primary key default uuid_generate_v4(),
+  curriculum    text not null,       -- 'beast-academy' | 'iew'
+  subject       text not null,       -- 'Mathematics' | 'Writing'
+  subject_color text not null default '#6366f1',
+  unit_number   int  not null,
+  unit_title    text not null,
+  lesson_number int  not null,
+  title         text not null,
+  description   text not null,
+  content       text not null,       -- teaching explanation shown before the exercise
+  question      text not null,       -- the actual exercise prompt
+  hint          text not null,
+  difficulty    text not null check (difficulty in ('foundation', 'developing', 'advanced')),
+  duration_min  int  not null default 15,
+  grade         text not null default 'Year 4',
+  country       text not null default 'NZ',
+  created_at    timestamptz not null default now(),
+  unique(curriculum, unit_number, lesson_number)
+);
+
+alter table public.curriculum_lessons enable row level security;
+
+create policy "Authenticated reads curriculum" on public.curriculum_lessons
+  for select using (auth.role() = 'authenticated');
+
 -- ============================================================
 -- Trigger: auto-create profile on signup
 -- ============================================================
