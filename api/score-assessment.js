@@ -52,6 +52,9 @@ Score each answer 0-100:
 - DO NOT be lenient: vague or approximate answers that don't demonstrate specific knowledge score ≤30
 - A student who shows they attempted but clearly doesn't know the concept scores 10-20, NOT 40-60
 - "isCorrect" = true only if score ≥ 70
+- CORRECT ANSWERS MUST SCORE HIGH: if a student demonstrates the correct method and arrives at the correct answer (with appropriate working), score 90-100 regardless of writing style or brevity. Do NOT reduce a correct answer to 60-70 just because it is concise.
+- For multi-step calculations: correct identification of the approach + correct final answer (with units) = 90-100, even if intermediate steps are compact.
+- For explanations: a factually correct explanation that covers the key concept = 90-100. Do not require elaborate academic language or exhaustive lists of examples for full marks.
 
 ━━━ LEVEL PLACEMENT — USE THIS EXACT LOGIC ━━━
 Step 1: Compute tier averages from the scores above:
