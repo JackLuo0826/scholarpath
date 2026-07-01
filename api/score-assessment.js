@@ -160,8 +160,22 @@ Return ONLY valid JSON with no markdown fences:
 
     const raw = response.content[0].text.trim()
     const start = raw.indexOf('{')
-    const end = raw.lastIndexOf('}')
-    if (start === -1 || end === -1) throw new Error('Invalid JSON response from AI')
+    if (start === -1) throw new Error('Invalid JSON response from AI')
+    // Bracket-counting extractor: finds the matching } for the first {,
+    // ignoring } inside string values. Prevents lastIndexOf picking up stray
+    // braces in any trailing text the model appends after the JSON object.
+    let depth = 0, inString = false, escape = false, end = -1
+    for (let i = start; i < raw.length; i++) {
+      const c = raw[i]
+      if (escape) { escape = false; continue }
+      if (c === '\\' && inString) { escape = true; continue }
+      if (c === '"') { inString = !inString; continue }
+      if (!inString) {
+        if (c === '{') depth++
+        else if (c === '}') { if (--depth === 0) { end = i; break } }
+      }
+    }
+    if (end === -1) throw new Error('Invalid JSON response from AI')
     const result = JSON.parse(raw.slice(start, end + 1))
 
     // Normalise question scores
