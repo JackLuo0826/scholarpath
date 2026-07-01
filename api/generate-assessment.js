@@ -403,7 +403,14 @@ function buildSubjectGuidance(subject, nzcLevel) {
       return `NCEA PHYSICS LEVEL 3 (Year 13) CALIBRATION:
 - FOUNDATION (NCEA Level 2 skills): Circular motion; projectile motion; Faraday's law; photoelectric effect; E=hf; capacitance; torque
 - DEVELOPING (NCEA Level 3 skills): Mechanical systems (simple harmonic motion — period, frequency, displacement equations; resonance; damping; rotational motion with moment of inertia I=mr²; angular velocity ω; L=Iω); AC electricity (RMS values; frequency; phasors; inductive and capacitive reactance XL=2πfL, XC=1/2πfC; impedance and resonance in LCR circuits); wave systems (standing waves with open/closed pipe and string conditions; diffraction and interference; double-slit and single-slit experiments; diffraction gratings d sinθ=mλ); modern physics (special relativity — time dilation, length contraction, E=mc²; photoelectric effect; atomic spectra; nuclear reactions; particle physics — quarks, leptons at conceptual level)
-- ADVANCED (scholarship/university skills): Lagrangian mechanics; quantum wave functions; general relativity concepts`
+- ADVANCED (scholarship/university skills): Lagrangian mechanics; quantum wave functions; general relativity concepts
+DEVELOPING QUESTION GENERATION RULES (critical — follow strictly):
+• Mix CONCEPTUAL questions (explain/describe/derive) with CALCULATION questions — do NOT make all 3 developing questions numerical calculations.
+• If including a calculation question, use CLEAN NUMBERS (whole numbers or simple fractions) so the result is exact. E.g. m=0.5 kg, k=200 N/m gives ω=20 rad/s exactly.
+• Each calculation question must be a SINGLE-STAGE calculation (one formula, substitute, solve) or at most TWO clearly sequential steps. Avoid chaining 3+ formulas.
+• Example good developing question: "Explain why an LCR circuit at resonance has minimum impedance. What is the resonant frequency formula and what happens to XL and XC at resonance?"
+• Example good developing question (calculation): "A mass of 2.0 kg on a spring (k=50 N/m) undergoes SHM. Calculate the period."
+• Avoid: questions that require looking up or memorising multiple sub-formulas before a final calculation.`
     }
     return `Use appropriate NZC/NCEA Physics content for ${nzcLevel}, covering mechanics, waves, electricity, and modern physics.`
   }
@@ -660,8 +667,8 @@ function buildSubjectGuidance(subject, nzcLevel) {
     if (nzcLevel.includes('Level 8') || nzcLevel.includes('NCEA Level 3') || nzcLevel.includes('Year 13')) {
       return `NCEA MUSIC LEVEL 3 (Year 13) CALIBRATION:
 - FOUNDATION (NCEA Level 2 skills): Chromatic harmony; augmented 6th chords; fugal writing; sonata form analysis; serialism; music technology basics; large-scale formal structures
-- DEVELOPING (NCEA Level 3 skills): Post-tonal analytical methods (pitch-class set theory — prime form, interval class vector, set relations; Schenkerian analysis concepts — Ursatz, prolongation, structural levels; spectral analysis of timbre; rhythmic analysis — metric modulation, polyrhythm, complex meter); advanced composition (composing an extended original work for instruments or electronics demonstrating personal voice and technical mastery; orchestration for a variety of ensembles; electroacoustic composition using DAW; writing programme notes explaining compositional intent); music research and scholarship (contextualising a body of work within its historical, cultural, and social setting; engaging with musicological writing; comparing analytical perspectives; presenting findings in essay form); performance at a high level (technical accuracy; musical interpretation; stylistic awareness; memorisation; performance anxiety management)
-- ADVANCED (conservatoire/university skills): Advanced set theory; neo-Riemannian theory; analysis of contemporary scores; writing a musicological dissertation`
+- DEVELOPING (NCEA Level 3 skills): Post-tonal analytical methods (pitch-class set theory — EXPLAIN what prime form and interval class vector MEAN and how they are used; identify whether two sets are related by transposition or inversion; do NOT require full computation of prime form from scratch as this has many valid notational variants that score inconsistently; Schenkerian analysis — explain prolongation and structural levels conceptually; rhythmic analysis — explain metric modulation as a concept and give an example; identify complex meters and polyrhythm in scores); advanced composition (describe compositional intent for an electroacoustic or acoustic work; write programme notes explaining form, texture, and technique; discuss orchestration choices); music research and scholarship (contextualise a composer's or movement's contribution; compare two analytical perspectives; evaluate sources)
+- ADVANCED (conservatoire/university skills): Full prime form computation and interval class vector calculation from an arbitrary pitch set; neo-Riemannian theory transformations (P, L, R on the Tonnetz); analysis of a contemporary score with advanced set-theory terminology; writing a full musicological argument`
     }
     return `Use appropriate NZC Music content for ${nzcLevel}, covering musical elements (pitch, rhythm, dynamics, timbre, texture), notation, theory, performance, composition, and musical history/styles.`
   }

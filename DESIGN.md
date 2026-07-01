@@ -795,10 +795,12 @@ Tested using `test-assessment-accuracy.mjs` (local only, in .gitignore). Simulat
 | Round 2 | 44 | 95% (42/44) | Index-based tier mapping caused Geography/Computing misrouting |
 | Round 3 | 38 | 100% (38/38) | After questionId fix |
 | Round 4 | 32 | 97% (31/32) | One Science Year 8 JSON truncation (max_tokens 3200) |
-| Round 5 | 39  | 97% (38/39) | One Physics Year 13 score-assessment JSON truncation (max_tokens 4096) |
-| Round 6 | 26  | 100% (26/26) | Form 5/6/7 routing, Years 4/6/10, foundation tier, advanced tier — all pass |
-| Round 7 | 18 | 94% (16/17 complete; 1 network error) | max_tokens 8192 confirmed; Geography/Music/Spanish/French/Te Reo Year 13 all pass; Music Year 11 expert fails (D=82%, need 85%) |
-| Round 8 | TBD | Pending | JSON bracket-counting extractor (fixes Math Year 12); Chemistry Year 12 advanced re-calibration; Music Year 11 developing re-calibration |
+| Round 5 | 39 | 100% (39/39) | After bracket-counting JSON fix; previously 97% |
+| Round 6 | 26 | 88% (23/26) | Stochastic: Science Yr4 expert D=80%, Math Yr10 expert/advanced D=67% — scorer too strict on concise-correct answers |
+| Round 7 | 18 | 94% (17/18) | Physics Yr13 expert D=67% (same scorer strictness); all calibration targets pass |
+| Round 8 | 7 | 100% (7/7) | Math Yr12 JSON fix confirmed; Chemistry Yr12 advanced A=50% (was 23%); Music Yr11 expert D=95-100% (was 82%) |
+| Round 9 | 14 | 93% (13/14) | Scoring strictness + getPerfect step-by-step fixed Science Yr4 and Math Yr10; Physics Yr13 expert still stochastic (D=67% when calculation chain errors) |
+| Round 10 | TBD | Pending | Physics Yr13 developing: mix conceptual+calc, clean numbers; Music Yr13 developing: concept-based set theory not full prime form computation |
 
 ### Phase 2 — Adaptive Intelligence (Next)
 - Weak spot analysis: /api/analyze-performance + adaptive /api/generate-weekly
